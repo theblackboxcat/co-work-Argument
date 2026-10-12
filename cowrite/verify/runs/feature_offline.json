@@ -1,0 +1,22 @@
+{
+  "feature_impl": "v3/classifier.py + params.json classifier.weights",
+  "params_version": "3.8",
+  "cross_lang": {
+    "n_S": 1200,
+    "n_genre": 852,
+    "mean_S": 0.1309,
+    "mean_genre": 0.1373,
+    "AUC_S_vs_genre": 0.4921,
+    "AUC_genre_vs_S": 0.5079,
+    "note": "lexical feature mode_score; near 0.5 = inseparable"
+  },
+  "same_lang_zh": {
+    "n_novel": 800,
+    "n_prose": 572,
+    "mean_novel": 0.1529,
+    "mean_prose": 0.1625,
+    "AUC_novel_vs_prose": 0.4596,
+    "AUC_prose_vs_novel": 0.5404,
+    "note": "file-name heuristic split inside corpus_private; aligns with paper same-lang setup"
+  }
+}

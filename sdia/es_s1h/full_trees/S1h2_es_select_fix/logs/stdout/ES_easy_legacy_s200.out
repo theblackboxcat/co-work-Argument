@@ -1,0 +1,40 @@
+===== S1h2 arm=ES_easy_legacy seed=200 lr=0.05 smoke=False tune=False =====
+thresholds_sha256=468defc9af4113c805d0a8836b6aeb57ce409eb782f440530df7f92b44da0885
+  [ES-GRU] gen=  0 best=0.847 mean=0.515 evals=64
+  [ES-GRU] gen= 20 best=0.923 mean=0.542 evals=1344
+  [ES-GRU] gen= 40 best=0.832 mean=0.554 evals=2624
+  [ES-GRU] gen= 60 best=0.788 mean=0.560 evals=3904
+  [ES-GRU] gen= 80 best=0.875 mean=0.579 evals=5184
+  [ES-GRU] gen=100 best=0.815 mean=0.588 evals=6464
+  [ES-GRU] gen=120 best=0.905 mean=0.606 evals=7744
+  [ES-GRU] gen=140 best=0.885 mean=0.609 evals=9024
+  [ES-GRU] gen=160 best=0.875 mean=0.628 evals=10304
+  [ES-GRU] gen=180 best=0.887 mean=0.629 evals=11584
+  [ES-GRU] gen=200 best=0.980 mean=0.657 evals=12864
+  [ES-GRU] gen=220 best=0.893 mean=0.662 evals=14144
+  [ES-GRU] gen=240 best=0.967 mean=0.647 evals=15424
+  [ES-GRU] gen=260 best=0.877 mean=0.659 evals=16704
+  [ES-GRU] gen=280 best=0.943 mean=0.671 evals=17984
+  [ES-GRU] gen=300 best=0.948 mean=0.651 evals=19264
+  [ES-GRU] gen=320 best=0.917 mean=0.687 evals=20544
+  [ES-GRU] gen=340 best=0.925 mean=0.691 evals=21824
+  [ES-GRU] gen=360 best=0.930 mean=0.699 evals=23104
+  [ES-GRU] gen=380 best=0.960 mean=0.711 evals=24384
+  [ES-GRU] gen=400 best=0.988 mean=0.714 evals=25664
+  [ES-GRU] gen=420 best=0.917 mean=0.692 evals=26944
+  [ES-GRU] gen=440 best=0.963 mean=0.704 evals=28224
+  [ES-GRU] gen=460 best=0.962 mean=0.703 evals=29504
+  [ES-GRU] gen=480 best=0.977 mean=0.705 evals=30784
+  [ES-GRU] gen=500 best=0.978 mean=0.700 evals=32064
+  [ES-GRU] gen=520 best=0.958 mean=0.717 evals=33344
+  [ES-GRU] gen=540 best=0.975 mean=0.711 evals=34624
+  [ES-GRU] gen=560 best=0.970 mean=0.717 evals=35904
+  [ES-GRU] gen=580 best=0.983 mean=0.710 evals=37184
+-- mem baseline A N=2 K=[5,10] (train wall 1282s)
+  [memoryless] gen=  0 best=0.598 mean=0.508
+  [memoryless] gen= 20 best=0.595 mean=0.552
+  [memoryless] gen= 40 best=0.598 mean=0.561
+  [memoryless] gen= 60 best=0.583 mean=0.561
+  [memoryless] gen= 80 best=0.590 mean=0.568
+-- eval (leak n_eps x n_rep = 12 x 5)
+WROTE result_arm_ES_easy_legacy_seed200.json pass=True void=False ret=0.990 A=0.575 leak=0.805 wall=1302.0s

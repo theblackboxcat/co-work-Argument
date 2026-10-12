@@ -1,0 +1,40 @@
+===== S1h arm=ES_main seed=200 lr=0.02 smoke=False tune=False =====
+thresholds_sha256=6430a708a3c99372bd20cece37ec3fa4005964f65613399e9f9a5d53423f14d6
+  [ES-GRU-std] gen=  0 best=0.475 mean=0.246 |theta|=8.33 evals=64
+  [ES-GRU-std] gen= 20 best=0.423 mean=0.258 |theta|=12.23 evals=1344
+  [ES-GRU-std] gen= 40 best=0.482 mean=0.252 |theta|=15.31 evals=2624
+  [ES-GRU-std] gen= 60 best=0.617 mean=0.263 |theta|=17.99 evals=3904
+  [ES-GRU-std] gen= 80 best=0.482 mean=0.278 |theta|=20.17 evals=5184
+  [ES-GRU-std] gen=100 best=0.495 mean=0.252 |theta|=22.39 evals=6464
+  [ES-GRU-std] gen=120 best=0.428 mean=0.277 |theta|=24.14 evals=7744
+  [ES-GRU-std] gen=140 best=0.455 mean=0.270 |theta|=25.95 evals=9024
+  [ES-GRU-std] gen=160 best=0.470 mean=0.264 |theta|=27.52 evals=10304
+  [ES-GRU-std] gen=180 best=0.468 mean=0.285 |theta|=29.19 evals=11584
+  [ES-GRU-std] gen=200 best=0.458 mean=0.287 |theta|=30.73 evals=12864
+  [ES-GRU-std] gen=220 best=0.468 mean=0.294 |theta|=31.88 evals=14144
+  [ES-GRU-std] gen=240 best=0.523 mean=0.339 |theta|=33.16 evals=15424
+  [ES-GRU-std] gen=260 best=0.518 mean=0.321 |theta|=34.44 evals=16704
+  [ES-GRU-std] gen=280 best=0.677 mean=0.364 |theta|=35.52 evals=17984
+  [ES-GRU-std] gen=300 best=0.810 mean=0.510 |theta|=36.60 evals=19264
+  [ES-GRU-std] gen=320 best=0.812 mean=0.580 |theta|=38.02 evals=20544
+  [ES-GRU-std] gen=340 best=0.872 mean=0.605 |theta|=38.99 evals=21824
+  [ES-GRU-std] gen=360 best=0.823 mean=0.608 |theta|=39.94 evals=23104
+  [ES-GRU-std] gen=380 best=0.800 mean=0.626 |theta|=41.17 evals=24384
+  [ES-GRU-std] gen=400 best=0.908 mean=0.647 |theta|=42.30 evals=25664
+  [ES-GRU-std] gen=420 best=0.900 mean=0.696 |theta|=43.27 evals=26944
+  [ES-GRU-std] gen=440 best=0.892 mean=0.711 |theta|=44.32 evals=28224
+  [ES-GRU-std] gen=460 best=0.865 mean=0.709 |theta|=45.53 evals=29504
+  [ES-GRU-std] gen=480 best=0.863 mean=0.702 |theta|=46.33 evals=30784
+  [ES-GRU-std] gen=500 best=0.872 mean=0.695 |theta|=47.20 evals=32064
+  [ES-GRU-std] gen=520 best=0.852 mean=0.693 |theta|=48.10 evals=33344
+  [ES-GRU-std] gen=540 best=0.893 mean=0.715 |theta|=49.21 evals=34624
+  [ES-GRU-std] gen=560 best=0.887 mean=0.710 |theta|=50.03 evals=35904
+  [ES-GRU-std] gen=580 best=0.915 mean=0.730 |theta|=50.81 evals=37184
+-- mem baseline A N=4 K=[30,70] (train wall 1426s)
+  [memoryless] gen=  0 best=0.530 mean=0.253
+  [memoryless] gen= 20 best=0.387 mean=0.239
+  [memoryless] gen= 40 best=0.518 mean=0.278
+  [memoryless] gen= 60 best=0.473 mean=0.272
+  [memoryless] gen= 80 best=0.475 mean=0.263
+-- eval (leak n_eps x n_rep = 12 x 5)
+WROTE result_arm_ES_main_seed200.json pass=False void=False ret=0.731 A=0.215 leak=0.288 wall=1457.8s

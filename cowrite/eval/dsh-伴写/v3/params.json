@@ -1,0 +1,169 @@
+{
+  "_comment": "hy4 可调旋钮全集（执行文档 §5.3）。除这些之外不要改别的——§5.4 禁止碰模型本身、作者原文、作者侧的交互动作（写作区行为／输入处理／光标处理；2026-09-20 由「前端」收窄至此，只读非模态卡片除外），以及 D2、D7、D9 的存在本身。护栏见 ratchet_lock.guard，由 v3/ratchet.py 在候选补丁落地前执行。",
+  "version": "3.8",
+  "jev": {
+    "_desc": "外部判定层接入（local-jev → Ollama qwen2:7b，:8791）。默认关：关着一次 HTTP 都不发，行为与没有它完全一致。开着也默认只看不改（mode=advisory），verdict 只追加进 v3/logs/jev.jsonl。要真拦，mode=block + 对应 block_*。服务不在／超时一律放行（失败开放），绝不因为外部服务挂了让她少看到东西。回炉默认 action=rewrite（带禁令重写一次，与 opening/verbatim 护栏同款），不默认沉默——沉默会打断她，且与 D9、author_final_veto 相抵。",
+    "enabled": false,
+    "path": "%DSH_ROOT%\\local-jev",
+    "mode": "advisory",
+    "timeout": 30,
+    "block_recall": false,
+    "block_writing": false,
+    "block_writing_action": "rewrite",
+    "threshold": 0.7,
+    "log": true,
+    "status_ttl": 60
+  },
+  "_v38": "【C11 正式撤销】「不报告接收动作」这条从代码里彻底撤出：metrics.CIVILITY_PATTERNS 不再包含它（移入 RETIRED_CIVILITY_PATTERNS，仅供历史语料复算），judge.py 的 C_TEXT 与文明度模板也移除了它。依据：22 条作者标注里命中「我读到…」的两条全部被接受，其中一条她还写「会立刻接着写」——禁令的效度依据不成立。撤销后「我读到」的频率问题（v3.1a 12 条里 1 条、v3.2 6 条里 2 条）改由 metrics.habit_hit() 查**频率**而非句式。同时：注意力各状态的建议延迟（CODING 20／PLANNING 8／STUCK 12／POLISHING 15 秒）接入前端触发时序，见 web/index.html 的 fire()。",
+  "_v32a": "v32 批 6 条标注（与非P 批前 6 段一一对应）回来之后：配对比较显示**改好 1 条、改坏 1 条，净收益 0**。新增 S4（引入原文里没有的人）——来自她明确点名的「额外引入了不存在人物，属于额外脑补」；新增主条款第 5 条（不许把轻的动作拆成心理博弈）。**结论：改提示词这条路已经不产出东西了**——下一步要么加生成后的模型判定，要么接受这个错误率。",
+  "_v32": "按 22 条作者标注重调：唯一有解释力的轴是「读的深度」——她判太弱/太强/不对，全都是因为输出在她写的文本之外拿了东西进来。硬拦截从 3 条砍到 1 条（只留 C9 中英混杂）；C11/C6/C7/C1/C5 全部降为软记录（命中即接受）；新增三条软信号 S1/S2/S3（见 metrics.SOFT_PATTERNS），其中 S1|S2 命中即非接受（4/4），任一软信号覆盖全部 7 条负面。详见 logs/标注分析.md。",
+  "_v31": "文明化重构：反馈从「给方向/给方案」改为「朋友式开放式讨论」。新增 C1–C5 文明条款（说我/承认不确定/不评价/只问真问题/给退路），D8 由「强制三方向」反转为「不列方案清单」。",
+  "classifier": {
+    "_desc": "7 个特征打 0–1 分，加权求和得 mode_score。阈值随拟合迭代调整。",
+    "weights": {
+      "causal_density": 0.15,
+      "action_sensory_ratio": 0.15,
+      "goal_sentence": 0.2,
+      "time_deixis": 0.1,
+      "sentence_length_var": 0.1,
+      "external_conflict": 0.2,
+      "closure_tendency": 0.1
+    },
+    "threshold": {
+      "P_max": 0.3,
+      "M_max": 0.7
+    },
+    "_note": "score < P_max → P；P_max..M_max → M；> M_max → S。初始粗糙，靠进化校准。"
+  },
+  "bans": {
+    "_desc": "强度取值：strict / partial / loose / na（不适用）。D2、D7、D9 跨模式严格，不得削弱。",
+    "P": {
+      "D1_new_external_event": "strict",
+      "D2_object_not_explained": "strict",
+      "D3_character_arc": "strict",
+      "D4_causal_stitching": "strict",
+      "D5_emotion_adjective": "strict",
+      "D6_closure": "strict",
+      "D7_literary_cliche": "strict",
+      "D8_three_options": true,
+      "D9_no_flow_interrupt": "strict",
+      "D10_no_full_paragraph": "strict"
+    },
+    "M": {
+      "D1_new_external_event": "loose",
+      "D2_object_not_explained": "strict",
+      "D3_character_arc": "loose",
+      "D4_causal_stitching": "partial",
+      "D5_emotion_adjective": "strict",
+      "D6_closure": "loose",
+      "D7_literary_cliche": "strict",
+      "D8_three_options": true,
+      "D9_no_flow_interrupt": "strict",
+      "D10_no_full_paragraph": "partial"
+    },
+    "S": {
+      "D1_new_external_event": "na",
+      "D2_object_not_explained": "strict",
+      "D3_character_arc": "na",
+      "D4_causal_stitching": "na",
+      "D5_emotion_adjective": "loose",
+      "D6_closure": "na",
+      "D7_literary_cliche": "strict",
+      "D8_three_options": true,
+      "D9_no_flow_interrupt": "strict",
+      "D10_no_full_paragraph": "na"
+    }
+  },
+  "civility": {
+    "_desc": "C1–C5 文明条款（v3.1）。来源：SIGIR'24 Civility taxonomy（Manners / Emotional Intelligence / Patience）+《云酒与猫猫_深度对话》的对话姿态。judge.py 的 judge_civility 逐条打分。",
+    "C1_say_I": "说我，不指你。用「我读到/我在想」，不用「你这里/你应该」。",
+    "C2_admit_uncertainty": "（已修订）只在输出断言文本意思/作者意图时才检查不确定标记；只给联想、提问、极短反应时判 na。",
+    "C3_no_evaluation": "不评价。不说好/不好、有力/薄弱、成功/失败。",
+    "C4_real_question": "只问真问题。不问检测性的「你想表达什么/这段的作用是什么」。",
+    "C5_give_exit": "给退路。作者可以什么都不回，不回应不构成失礼。",
+    "C6_not_line_by_line": "不逐句批改。最多引原文一处，引了也不解释。三处以上引原文即违规。",
+    "C7_no_verdict_wording": "不用判词。「这不是…而是…」「…的地方」「处理得…」「有力/成熟/克制」一律违规。",
+    "C8_no_authoring_voice": "不替作者定调。不说「你写的是…」「它不是在…是在…」，不把叙述者当作者。",
+    "frozen_note": "C1–C5 与 D2/D7/D9 同属文明底线，hy4 不得为了提高接受率而削弱。",
+    "C11_no_reception_report": "（v3.8 已撤销，从代码撤出）原为禁用「我读到/我看到 X…」整个句式。v3.1a 硬禁 → v3.2 降为软记录 → v3.8 彻底移出检测面（metrics 移入 RETIRED_CIVILITY_PATTERNS，judge 的 C_TEXT 也已移除）。理由：22 条标注里命中该句式的两条全部被接受，其中一条她写了「会立刻接着写」——频率低不等于有害，当初把统计上罕见当成了读者不接受。频率问题改由 metrics.habit_hit() 管。",
+    "C12_give_own_not_echo": "不给自己的版本就等于没接话。禁止复述／同义转述作者的措辞回去；必须给出独立的东西。**v3.2 修订**：这一条只在「接受」意义上成立，不适用时判 na——复述并确认她埋下的机关是被接受的读法之一。",
+    "C13_one_move": "一次只做一个动作。同时做「接住+读法+好奇」＝独白，不是接话。",
+    "S1_invented_motive": "（v3.2 新增，软）不给动作安原文没有的动机。「真正驱动的是…」「为了对抗无力感」。命中即非接受（2/2）。",
+    "S2_abstract_emotion": "（v3.2 新增，软）不用抽象情绪词代替具体质感。命中即非接受（3/3）。",
+    "S3_new_entity": "（v3.2 新增，软）不引入原文没有的名词性喻体。「像一对老了的舞伴」「像某种被遗忘的图腾」。**噪声大**——因为「重排已有元素的关系」会被误伤，只当提示。",
+    "S4_invented_person": "（v3.2a 新增，软）**不许引入原文里没有的人**。她的段落里只有「我」，输出里就不能冒出「她／他」。她的原话：「批注额外引入了不存在人物，属于额外脑补。」只查指向**角色动作**的第三人称，指作者的「她写的是……」放过。",
+    "_soft_note": "S1–S3 不触发重写。脚本分不清「引入新东西」和「把已有元素的关系说清楚」，一个会误伤的硬规则比没有规则更坏。"
+  },
+  "policy": {
+    "_desc": "每种模式的输出形态（§铁律二）与长度上限。**v3.2 注**：标注显示字数与接受率无关（≤60 字的负面率 20%、>120 字的 25%，整体 32%），所以 max_chars 是提示不是硬截——它的作用是防「发小作文」，不是质量判据。真正的风险是**太强/不对**，而那通常发生在话多的时候。",
+    "P": {
+      "form": "open_remark",
+      "_form_desc": "对话式：一次一个动作（递自己的东西／替她说短／真问题／说卡住／极短一句）。不成文、不列清单、不输出模式标记。",
+      "max_chars": 110
+    },
+    "M": {
+      "form": "open_remark_plus_one_line",
+      "_form_desc": "对话式；可递一句候选，像递过去不像交稿。",
+      "max_chars": 140
+    },
+    "S": {
+      "form": "open_remark_plus_one_line",
+      "_form_desc": "同上。",
+      "max_chars": 160
+    }
+  },
+  "sampling": {
+    "temperature": 0.3,
+    "top_p": 1.0,
+    "max_tokens": 2048,
+    "thinking": "disabled"
+  },
+  "experience": {
+    "_desc": "§3 体验层参数。delay_sec＝作者停笔多少秒后才出现建议。",
+    "delay_sec": 8,
+    "auto_collapse_on_typing": true,
+    "visual_mark_inserted": true,
+    "insert_requires_explicit_accept": true
+  },
+  "ratchet_lock": {
+    "_desc": "禁止触碰的东西，改动前必须作者点头。由 v3/ratchet.py 在候选补丁落地前强制校验：触碰即拒绝，并把拒绝写进 v3/logs/棘轮审计.jsonl（只追加）。手工改动拦不住，靠 --seal 封存指纹 + --audit 比对漂移检出。",
+    "frozen": [
+      "D2_object_not_explained",
+      "D7_literary_cliche",
+      "D9_no_flow_interrupt",
+      "author_final_veto"
+    ],
+    "forbidden_files": [
+      "作者原文",
+      "模型本身",
+      "作者侧交互动作（写作区行为／输入处理／光标处理）"
+    ],
+    "allowed_ui": [
+      "只读、非模态的说明卡片（策略提案说明、变更留痕）",
+      "四条硬约束须同时满足：非模态／只读／可忽略／低频"
+    ],
+    "note": "接受率不进目标函数；目标为「负面率降 · 违规零 · 独立写作比例不降」（§5.4、§6）。",
+    "guard": {
+      "_desc": "机器可读映射，由 v3/ratchet.py 读。上面每一条的**名字必须逐字一致**地出现在这里，缺一项 --audit 就报配置错误——否则那一条又变回只在文档里的护栏。路径一律相对项目根。",
+      "frozen_targets": {
+        "D2_object_not_explained": ["bans.*.D2_object_not_explained"],
+        "D7_literary_cliche": ["bans.*.D7_literary_cliche"],
+        "D9_no_flow_interrupt": ["bans.*.D9_no_flow_interrupt"],
+        "author_final_veto": ["*author*veto*", "*author*confirmation*", "*auto_apply*"]
+      },
+      "frozen_files": ["v3/bans.py", "v3/metrics.py"],
+      "forbidden_globs": {
+        "作者原文": ["*.docx", "*.doc", "*.wps", "*作者原文*", "*原稿*"],
+        "模型本身": ["*.safetensors", "*.gguf", "*.ckpt", "*.pt", "*lora*/*", "*finetune*/*", "*adapters/*"],
+        "作者侧交互动作（写作区行为／输入处理／光标处理）": ["web/**"]
+      },
+      "ui_kind_allowed": {
+        "web/**": ["ui-readonly-card"]
+      },
+      "immutable_keys": ["_comment", "ratchet_lock"],
+      "immutable_prefixes": ["_v"],
+      "max_changes_per_round": 2
+    }
+  },
+  "_v31a": "接住重构：禁用「我读到X…」整个句式（真实聊天 23660 条中「我读到」出现 1 次，0.004%）；改为一次只做一个动作；P 模式上限 180→110。新增 C11–C13。"
+}

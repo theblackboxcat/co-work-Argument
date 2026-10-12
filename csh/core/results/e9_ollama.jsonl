@@ -1,0 +1,1 @@
+{"arm": "E9", "model": "qwen2:7b", "group": "A", "style": "zh", "k": 2, "n_probe": 8, "acc_median": 0.125, "acc_min": 0.0, "acc_max": 0.25, "accs": [0.125, 0.25, 0.0], "C_eff3": 24, "depth": 3, "tau": 0.6, "metric": "ICL threshold k*", "ts": "2026-10-05 20:14:02"}

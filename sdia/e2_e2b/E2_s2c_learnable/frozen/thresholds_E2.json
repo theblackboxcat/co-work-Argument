@@ -1,0 +1,185 @@
+{
+  "schema": "thresholds_E2_s2c_learnable_v1",
+  "frozen_at": "2026-10-11T17:40:00+08:00",
+  "experiment_id": "E2_s2c_learnable",
+  "note": "NEW preregister E2_s2c_learnable. Transplant G_RL-GRU (return-std A2C, no goal labels) into S2c pressure world. Label L2-self · 通用门控架构档. NOT S3 gate-only; S3 stays CLOSED. R1–R6 from E2_方案评估 + Ollie 2026-10-11. Thresholds frozen BEFORE science. Tune ONLY on 100–103. VOID denom=8 NEVER shrink. Skip ES by default.",
+  "label": "L2-self · 通用门控架构档（§2.1.5.1 第 3 档）",
+  "forbid_claims": [
+    "系统发现",
+    "无先验",
+    "进化不可达",
+    "内化涌现",
+    "自己长出门",
+    "E2 PASS = L3 / 原 L3",
+    "S2c C = 发现"
+  ],
+  "parent_experiments": [
+    "S1g_clean_confirm",
+    "S2c_necessity_pressure",
+    "Dx2_leak_ruler",
+    "S1f2_rl_fix",
+    "S1h2_es_select_fix"
+  ],
+  "s2c_thresholds_sha256": "ae27a0231cde17e6ea91c3d79b7dace930e7f72a643636dcefd1465f396ac4bb",
+  "s1g_thresholds_sha256": "9b77a4a5d3885418f3714152a11c4c5ee7319c51fac4484d56a2210941444ea4",
+  "dx2_thresholds_sha256": "133a119d95f64533a4fae035dad3d2ad8a29a9e99cee83501e2e1245b817ce8c",
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "separate_from_authoritative_S2": true,
+  "s3_status": "CLOSED",
+  "stance": "A",
+  "env": {
+    "H": 8,
+    "W": 8,
+    "T": 120,
+    "tox": 2.5,
+    "food_rate": 0.6,
+    "gem_rate": 0.55,
+    "food_cap": 16,
+    "gem_cap": 14,
+    "n_food_init": 8,
+    "n_gem_init": 7,
+    "n_obstacles_frac": 0.03,
+    "K_switch_range": [30, 70],
+    "cue_only_at_switch": true,
+    "no_clock_channel": true,
+    "coh_w": 0,
+    "fitness": "(n_valuable - tox*n_other)/T",
+    "navigator": "frozen_Phase1_foraging",
+    "evolve": "goal_module_only",
+    "resources": ["food", "gem"],
+    "chosen_by_ruler": "8x8_tox2.5",
+    "source": "frozen S2c settings (no re-ruler)"
+  },
+  "seeds": [200, 205, 210, 211, 212, 216, 218, 219],
+  "tune_seeds": [100, 101, 102, 103],
+  "tune_rule": "Tune ONLY on tune_seeds 100-103; NEVER tune on science seeds (Dx2 clean list).",
+  "seed_source": "Dx2 clean list (sha 22263a4f…573f6); transferred into S2c world; leak VOID with N=2-adapted line",
+  "leak_probe": {
+    "n_eps": 12,
+    "n_rep": 5,
+    "window": 5,
+    "probe_seed_formula": "science_seed + 10007 + i * 100003",
+    "N_goals": 2,
+    "chance_theoretical": 0.5,
+    "void_line_mode": "A_empirical + 0.10 (fallback chance+0.10)",
+    "dx2_heritage_line_N4": 0.35,
+    "note": "R2 leak line 0.35 is Dx2 N=4 calibration. S2c N=2 chance=0.5 → isomorphic VOID uses A_emp+0.10 (≈0.60 when A_emp≈0.5). Denom=8 unchanged. Never weaken."
+  },
+  "arms": {
+    "G_RL_GRU": {
+      "role": "MAIN_learnable_gated_arch_transplant",
+      "optimizer": "A2C_REINFORCE_return_only_S1f2_return_standardized",
+      "architecture": "GRUCell",
+      "ladder_rung": "GRU_通用门控架构",
+      "l2_variant": "L2-self",
+      "no_goal_labels": true,
+      "N_pref": 2,
+      "hidden": 32,
+      "lr": 0.001,
+      "epochs_max": 800,
+      "episodes_per_epoch": 16,
+      "entropy_coef": 0.01,
+      "value_coef": 0.5,
+      "gamma": 0.99,
+      "early_stop_return": 0.05,
+      "log_every_epochs": 50,
+      "group_pass_rule": ">=7/8",
+      "budget": "x1_aligned_S1g_G_RL_GRU",
+      "fix_note": "Per-episode standardize MC returns (S1f2 fix); no goal labels; action=preference over {food,gem}; nav frozen"
+    },
+    "C_handwritten": {
+      "role": "positive_control_designer_register",
+      "kind": "hand_gate",
+      "pop": 36,
+      "gens": 100,
+      "K_eval": 8,
+      "label": "设计者指定的目标寄存器（门控接线索通道）",
+      "ladder_rung": "C_指定通道"
+    },
+    "A_memoryless": {
+      "role": "negative_baseline",
+      "kind": "memoryless",
+      "pop": 36,
+      "gens": 100,
+      "K_eval": 8
+    },
+    "ES_GRU": {
+      "optional": true,
+      "default": "SKIP",
+      "note": "Optional only if using S1h2-fixed code; default skip to save budget"
+    }
+  },
+  "MAIN": ["G_RL_GRU"],
+  "budget": {
+    "pop_AC": 36,
+    "gens_AC": 100,
+    "K_eval_train": 8,
+    "n_eps_accept": 100,
+    "n_eps_A_void": 80,
+    "probe_every_gens": 20
+  },
+  "acceptance_per_seed": {
+    "C1_margin_over_memoryless": 0.11372499999999999,
+    "C1_absolute_return": 0.03728125,
+    "C2_decode_acc_min": 0.75,
+    "C2_chance_N2": 0.5,
+    "C3_flip_within_steps": 8,
+    "C3_flip_rate_min": 0.7,
+    "C4pp": {
+      "name": "C4″ Dx1 自身码本·定向",
+      "n_eps": 48,
+      "n_eps_centroid": 40,
+      "n_eps_codebook_heldout": 20,
+      "bootstrap_B": 2000,
+      "codebook_bal_acc_min": 0.75,
+      "dwf_min": 0.2,
+      "dwf_ci_lo_gt": 0.0,
+      "V_drop_frac_min": 0.3,
+      "every_max_frac_of_sparse": 0.5
+    },
+    "C5_no_stability_terms": ["||ds||", "s_variance", "s_stability", "coh_w"],
+    "C6_removal_segment_len_factor": 2,
+    "C6_removal_return_min": 0.026096875,
+    "source": "S2c ruler calibration (frozen; not re-tuned on science)"
+  },
+  "C7_strict": {
+    "for_C_handwritten": {
+      "continue_gens": 220,
+      "probe_every": 20,
+      "rule": "最后 3 个 probe 中 ≥2 个同时 C2.pass ∧ C3.pass"
+    },
+    "for_G_RL_GRU": {
+      "mode": "frozen_weight_retention_probes",
+      "n_probes": 12,
+      "rule": "末 3 个 probe 中 ≥2 个同时 C2.pass ∧ C3.pass",
+      "note": "梯度臂无进化续训；冻结权重多探针保持 = 严格 C7 同构"
+    },
+    "disclaimer": "任务强加的记忆被保持 ≠ 自设目标"
+  },
+  "void_rules": {
+    "A_return_gt": 0.03728125,
+    "C2_leak_over_line": "VOID",
+    "VOID_never_counts_as_FAIL": true,
+    "denom_always": 8,
+    "forbid_shrink_denom": true
+  },
+  "group_pass_min_seeds": 7,
+  "group_pass_of": 8,
+  "group_pass_note": "预注册约定；须报 Wilson CI；VOID 不计 FAIL 但分母不缩",
+  "routing": {
+    "G_RL_GRU_ge_7_8_and_C_ok": "E2 PASS（L2-self · 通用门控架构档，S2c 加压世界）→ S3 仍 CLOSED；STOP after 报告",
+    "G_RL_GRU_lt_7_8": "E2 FAIL（可学习 GRU 未在加压世界过线）→ STOP；不开 S3",
+    "C_fail": "阳控败 → 实验完整性 VOID",
+    "STOP": "STOP after 报告；DO NOT open S3"
+  },
+  "half_autonomy_note": "optional DOC ONLY; no bypass of G0",
+  "forbid": [
+    "weaken leak void line",
+    "shrink VOID denominator below 8",
+    "tune on science seeds",
+    "open S3",
+    "claim 无先验 / 系统发现 / 进化不可达",
+    "run ES by default",
+    "rewrite authoritative S2 verdict"
+  ]
+}

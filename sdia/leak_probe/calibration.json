@@ -1,0 +1,16 @@
+{
+  "n_eps": 12,
+  "n_rep": 5,
+  "sd_median_single": 0.04389628143324542,
+  "se_at_choice": 0.01963101384883973,
+  "alternatives_n_eps": {
+    "24": {
+      "sd_median": 0.03269137265534855,
+      "n_rep_for_se": 3
+    },
+    "48": {
+      "sd_median": 0.02176750516817158,
+      "n_rep_for_se": 2
+    }
+  }
+}

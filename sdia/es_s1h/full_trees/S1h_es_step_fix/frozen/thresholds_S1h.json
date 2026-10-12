@@ -1,0 +1,143 @@
+{
+  "schema": "thresholds_S1h_es_step_fix_v1",
+  "experiment_id": "S1h_es_step_fix",
+  "status": "frozen",
+  "frozen_at": "2026-10-11T15:55:00+08:00",
+  "note": "NEW preregister S1h_es_step_fix (not quiet revision of S1g). Only change vs S1g ES_GRU: ES update rule (legacy lr*sigma*g -> standard (lr/sigma)*g) + lr chosen on tune seeds 100-103 by pre-written rule. Acceptance C1-C6 identical to S1g (reuse S1e sha). Leak VOID N=4 uses Dx2 probe (mean>0.35). N=2 easy-ruler rules inherited verbatim from S1f2 RL_easy. VOID denom=8 NEVER shrink. Seeds = Dx2 clean list. STOP after report; do NOT auto-open E2.",
+  "s1e_thresholds_sha256_reused_for_identical_acceptance": "412e0001b9ff90ea86710ed16e325ea66dac5080f1d4cfd1972caa7408298c74",
+  "s1g_thresholds_parent": "S1g_clean_confirm/frozen/thresholds_S1g.json",
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "env": {
+    "N_goals_default": 4,
+    "K_switch_range_accept": [30, 70],
+    "T": 200,
+    "cue_only_at_switch": true,
+    "no_clock_channel": true,
+    "coh_w": 0
+  },
+  "seeds": [200, 205, 210, 211, 212, 216, 218, 219],
+  "tune_seeds": [100, 101, 102, 103],
+  "tune_rule": "Tune ONLY lr of standard-step arms, ONLY on tune seeds 100-103, ONLY over lr_grid, ONLY by lr_selection_rule. NEVER tune on science seeds.",
+  "lr_grid": [0.005, 0.01, 0.02, 0.05],
+  "lr_grid_note": "per-coordinate step ~ lr/(sigma*sqrt(n)) = lr*1.5625 -> {0.008, 0.016, 0.031, 0.078}; Salimans 2017 Adam lr 0.01 ~ 0.01/coord; legacy S1g step ~0.0005/coord",
+  "lr_selection_rule": "Run ES_main (N=4,K[30,70]) on tune seeds 100-103 for each lr in lr_grid at full budget. Pick lr with highest mean greedy eval return (C1 return, 16 eps) over the 4 tune seeds. If top two within 0.02: prefer more tune-seed all_pass; then smaller lr. Chosen lr applies to BOTH ES_main and ES_easy (shared optimizer setting; easy is NOT tuned separately).",
+  "leak_probe": {
+    "n_eps": 12,
+    "n_rep": 5,
+    "window": 5,
+    "probe_seed_formula": "seed + 10007 + i * 100003",
+    "void_if_mean_gt": 0.35,
+    "source": "Dx2_leak_ruler (inherited from S1g unchanged)"
+  },
+  "acceptance_N2_inherited_from_S1f2_RL_easy": {
+    "C2_chance": 0.5,
+    "C2_leak_max": 0.95,
+    "A_return_gt_void": 0.72,
+    "C2_leak_void_enabled": false,
+    "source": "S1f2_rl_fix thresholds RL_easy.acceptance_N2 (tuned on seed 100 in S1f; unchanged here)"
+  },
+  "arms": {
+    "ES_easy": {
+      "role": "ES_sanity_ruler_easy (gates ES_main interpretation)",
+      "optimizer": "OpenAI_ES_standard_step",
+      "step_rule": "standard",
+      "architecture": "GRU_numpy_policy",
+      "N": 2, "k_lo": 5, "k_hi": 10,
+      "hidden": 32, "pop_sigma": 0.08, "lr": 0.02,
+      "n_workers": 64, "generations": 600, "K_eval": 3, "total_param_evals_target": 38400,
+      "acceptance_N2": {"C2_chance": 0.5, "C2_leak_max": 0.95, "A_return_gt_void": 0.72, "C2_leak_void_enabled": false},
+      "group_pass_rule": ">=7/8",
+      "must_pass_else_VOID_ES_main_interpretation": true,
+      "l2_variant": "L2-self", "no_goal_labels": true
+    },
+    "ES_main": {
+      "role": "MAIN_ES_same_GRU_same_budget_as_S1g",
+      "optimizer": "OpenAI_ES_standard_step",
+      "step_rule": "standard",
+      "architecture": "GRU_numpy_policy",
+      "ladder_rung": "GRU_通用门控架构",
+      "N": 4, "k_lo": 30, "k_hi": 70,
+      "hidden": 32, "pop_sigma": 0.08, "lr": 0.02,
+      "n_workers": 64, "generations": 600, "K_eval": 3, "total_param_evals_target": 38400,
+      "group_pass_rule": ">=7/8",
+      "l2_variant": "L2-self", "no_goal_labels": true
+    },
+    "ES_easy_legacy": {
+      "role": "DIAGNOSTIC_legacy_step_on_easy (paired with ES_easy: same init/noise stream); not a gate",
+      "optimizer": "OpenAI_ES_S1g_legacy_step",
+      "step_rule": "s1g_legacy",
+      "architecture": "GRU_numpy_policy",
+      "N": 2, "k_lo": 5, "k_hi": 10,
+      "hidden": 32, "pop_sigma": 0.08, "lr": 0.05,
+      "n_workers": 64, "generations": 600, "K_eval": 3, "total_param_evals_target": 38400,
+      "acceptance_N2": {"C2_chance": 0.5, "C2_leak_max": 0.95, "A_return_gt_void": 0.72, "C2_leak_void_enabled": false},
+      "group_pass_rule": "report only"
+    }
+  },
+  "acceptance_per_seed": {
+    "C1_margin_over_memoryless": 0.25,
+    "C1_absolute_return": 0.7,
+    "C2_decode_acc_min": 0.75,
+    "C2_chance_N4": 0.25,
+    "C2_leak_max_N4": 0.35,
+    "C2_leak_window": 5,
+    "C3_flip_within_steps": 3,
+    "C3_flip_rate_min": 0.7,
+    "C4pp_toy": {
+      "name": "C4″_toy 自身码本·定向",
+      "sparse_return_drop_min": 0.3,
+      "R_same_min": 0.55,
+      "every_drop_max_frac_of_sparse": 0.5,
+      "n_eps": 16
+    },
+    "C5_no_stability_terms": ["||ds||", "s_variance", "s_stability", "coh_w"],
+    "C6_removal_segment_len_factor": 2,
+    "C6_removal_return_min": 0.6
+  },
+  "group_pass_min_seeds": 7,
+  "group_pass_of": 8,
+  "void_rules": {
+    "A_return_gt_N4": 0.4,
+    "C2_leak_mean_over_line": "VOID",
+    "denom_always": 8,
+    "forbid_shrink_denom": true,
+    "forbid_weaken_leak_line": true
+  },
+  "MAIN": ["ES_main"],
+  "routing": {
+    "ES_easy_lt_7_8": "ES implementation/optimizer still not a valid ruler -> VOID the whole ES line (incl. ES_main); do NOT read ES_main as negative; legacy-family negatives (S1e ES/Nov/Bald, S1g ES_GRU) stay with caveat",
+    "ES_easy_ge_7_8_AND_ES_main_ge_7_8": "Evolution (same GRU, same budget, fixed step) reaches L2-self on toy. 'BPTT vs evolution' axis is NOT clean -> downgrade to 'gradient vs evolution: no difference at this budget' / sample-efficiency note. Legacy ES-family negatives (S1e ES, Nov, Bald) become suspect -> list for re-run (not auto-run).",
+    "ES_easy_ge_7_8_AND_ES_main_lt_7_8": "Fixed ES is a valid ruler but fails main at matched budget -> 'BPTT vs evolution' axis gets clean support AT THIS BUDGET. Wording: '同预算下进化未达' ; still FORBIDDEN: '进化不可达' (no budget sweep).",
+    "ES_easy_legacy": "report only: if legacy fails easy while fixed passes, step bug was load-bearing for earlier ES negatives",
+    "STOP": "STOP after report. Do NOT auto-open E2, S3, Nov/Bald re-runs."
+  },
+  "stance": "A",
+  "forbid": [
+    "weaken C2_leak_max_N4=0.35",
+    "shrink VOID denominator below 8",
+    "tune on science seeds",
+    "tune anything other than lr over lr_grid",
+    "auto-open E2",
+    "claim '进化不可达' or '无先验原理不可达'"
+  ],
+  "parent_experiments": ["S1g_clean_confirm", "Dx2_leak_ruler", "S1f2_rl_fix"],
+  "code_change": {
+    "file": "code/s1h_es_gru.py (new; s1g_es_gru.py kept verbatim for legacy arm)",
+    "change": "theta += (lr/sigma) * eps^T f_std / n  (was lr*sigma*...)",
+    "why": "legacy step = sigma^2 = 0.0064x standard (~1/156); per-coordinate move ~0.0005/gen"
+  },
+  "rng": "np.random.default_rng([seed, arm_stream]); arm_stream ES_main=1, ES_easy=ES_easy_legacy=2 (S1g used salted hash(arm))",
+  "tune_log": [
+    {
+      "at": "2026-10-11T15:51:07+08:00",
+      "seeds": [100, 101, 102, 103],
+      "arm": "ES_main",
+      "grid_result_mean_C1_return": {"0.005": 0.251, "0.01": 0.481, "0.02": 0.638, "0.05": 0.626},
+      "grid_result_tune_all_pass": {"0.005": "0/4", "0.01": "0/4", "0.02": "0/4", "0.05": "0/4"},
+      "rule_application": "top two 0.02 (0.638) and 0.05 (0.626) within 0.02 -> all_pass tie 0/4 -> smaller lr",
+      "selected_lr": 0.02,
+      "note": "tune100 lr0.02: C1/C2/C3/C6 pass, C4pp fail; draft thresholds sha before freeze 454d24c1eee25b933785426a4ca68c4285e22b8ebfd1c2052cf1a0dfd7d6083e",
+      "never_on_science_seeds": true
+    }
+  ]
+}

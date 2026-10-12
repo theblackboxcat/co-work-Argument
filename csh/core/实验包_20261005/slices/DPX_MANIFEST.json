@@ -1,0 +1,104 @@
+{
+  "experiment": "DPX",
+  "n_slices": 12,
+  "n_jobs": 18,
+  "total_cost_hours": 2.78,
+  "slices": [
+    {
+      "slice": "DPX_slice00",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 1135.6,
+      "est_hours": 0.32,
+      "runner": "run_slice.py --spec slices/DPX_slice00.json"
+    },
+    {
+      "slice": "DPX_slice01",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 1135.6,
+      "est_hours": 0.32,
+      "runner": "run_slice.py --spec slices/DPX_slice01.json"
+    },
+    {
+      "slice": "DPX_slice02",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 983.1,
+      "est_hours": 0.27,
+      "runner": "run_slice.py --spec slices/DPX_slice02.json"
+    },
+    {
+      "slice": "DPX_slice03",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 983.1,
+      "est_hours": 0.27,
+      "runner": "run_slice.py --spec slices/DPX_slice03.json"
+    },
+    {
+      "slice": "DPX_slice04",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 890.2,
+      "est_hours": 0.25,
+      "runner": "run_slice.py --spec slices/DPX_slice04.json"
+    },
+    {
+      "slice": "DPX_slice05",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 890.2,
+      "est_hours": 0.25,
+      "runner": "run_slice.py --spec slices/DPX_slice05.json"
+    },
+    {
+      "slice": "DPX_slice06",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 685.7,
+      "est_hours": 0.19,
+      "runner": "run_slice.py --spec slices/DPX_slice06.json"
+    },
+    {
+      "slice": "DPX_slice07",
+      "experiment": "DPX",
+      "n_jobs": 1,
+      "cost_seconds": 685.7,
+      "est_hours": 0.19,
+      "runner": "run_slice.py --spec slices/DPX_slice07.json"
+    },
+    {
+      "slice": "DPX_slice08",
+      "experiment": "DPX",
+      "n_jobs": 2,
+      "cost_seconds": 630.2,
+      "est_hours": 0.18,
+      "runner": "run_slice.py --spec slices/DPX_slice08.json"
+    },
+    {
+      "slice": "DPX_slice09",
+      "experiment": "DPX",
+      "n_jobs": 2,
+      "cost_seconds": 630.2,
+      "est_hours": 0.18,
+      "runner": "run_slice.py --spec slices/DPX_slice09.json"
+    },
+    {
+      "slice": "DPX_slice10",
+      "experiment": "DPX",
+      "n_jobs": 3,
+      "cost_seconds": 676.5,
+      "est_hours": 0.19,
+      "runner": "run_slice.py --spec slices/DPX_slice10.json"
+    },
+    {
+      "slice": "DPX_slice11",
+      "experiment": "DPX",
+      "n_jobs": 3,
+      "cost_seconds": 676.5,
+      "est_hours": 0.19,
+      "runner": "run_slice.py --spec slices/DPX_slice11.json"
+    }
+  ]
+}

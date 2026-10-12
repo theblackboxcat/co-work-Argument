@@ -1,0 +1,24 @@
+{
+  "experiment": "E6X",
+  "n_slices": 2,
+  "n_jobs": 216,
+  "total_cost_hours": 2.59,
+  "slices": [
+    {
+      "slice": "E6X_slice00",
+      "experiment": "E6X",
+      "n_jobs": 108,
+      "cost_seconds": 4665.6,
+      "est_hours": 1.3,
+      "runner": "run_slice.py --spec slices/E6X_slice00.json"
+    },
+    {
+      "slice": "E6X_slice01",
+      "experiment": "E6X",
+      "n_jobs": 108,
+      "cost_seconds": 4665.6,
+      "est_hours": 1.3,
+      "runner": "run_slice.py --spec slices/E6X_slice01.json"
+    }
+  ]
+}

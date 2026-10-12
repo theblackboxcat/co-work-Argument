@@ -1,0 +1,120 @@
+{
+  "experiment": "E6",
+  "n_slices": 14,
+  "n_jobs": 270,
+  "total_cost_hours": 8.09,
+  "slices": [
+    {
+      "slice": "E6_slice00",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2071.0,
+      "est_hours": 0.58,
+      "runner": "run_slice.py --spec slices/E6_slice00.json"
+    },
+    {
+      "slice": "E6_slice01",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2071.0,
+      "est_hours": 0.58,
+      "runner": "run_slice.py --spec slices/E6_slice01.json"
+    },
+    {
+      "slice": "E6_slice02",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2071.0,
+      "est_hours": 0.58,
+      "runner": "run_slice.py --spec slices/E6_slice02.json"
+    },
+    {
+      "slice": "E6_slice03",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2071.0,
+      "est_hours": 0.58,
+      "runner": "run_slice.py --spec slices/E6_slice03.json"
+    },
+    {
+      "slice": "E6_slice04",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2071.0,
+      "est_hours": 0.58,
+      "runner": "run_slice.py --spec slices/E6_slice04.json"
+    },
+    {
+      "slice": "E6_slice05",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2071.0,
+      "est_hours": 0.58,
+      "runner": "run_slice.py --spec slices/E6_slice05.json"
+    },
+    {
+      "slice": "E6_slice06",
+      "experiment": "E6",
+      "n_jobs": 20,
+      "cost_seconds": 2120.0,
+      "est_hours": 0.59,
+      "runner": "run_slice.py --spec slices/E6_slice06.json"
+    },
+    {
+      "slice": "E6_slice07",
+      "experiment": "E6",
+      "n_jobs": 20,
+      "cost_seconds": 2120.0,
+      "est_hours": 0.59,
+      "runner": "run_slice.py --spec slices/E6_slice07.json"
+    },
+    {
+      "slice": "E6_slice08",
+      "experiment": "E6",
+      "n_jobs": 20,
+      "cost_seconds": 2120.0,
+      "est_hours": 0.59,
+      "runner": "run_slice.py --spec slices/E6_slice08.json"
+    },
+    {
+      "slice": "E6_slice09",
+      "experiment": "E6",
+      "n_jobs": 20,
+      "cost_seconds": 2120.0,
+      "est_hours": 0.59,
+      "runner": "run_slice.py --spec slices/E6_slice09.json"
+    },
+    {
+      "slice": "E6_slice10",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2052.0,
+      "est_hours": 0.57,
+      "runner": "run_slice.py --spec slices/E6_slice10.json"
+    },
+    {
+      "slice": "E6_slice11",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2052.0,
+      "est_hours": 0.57,
+      "runner": "run_slice.py --spec slices/E6_slice11.json"
+    },
+    {
+      "slice": "E6_slice12",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2061.5,
+      "est_hours": 0.57,
+      "runner": "run_slice.py --spec slices/E6_slice12.json"
+    },
+    {
+      "slice": "E6_slice13",
+      "experiment": "E6",
+      "n_jobs": 19,
+      "cost_seconds": 2061.5,
+      "est_hours": 0.57,
+      "runner": "run_slice.py --spec slices/E6_slice13.json"
+    }
+  ]
+}

@@ -1,0 +1,1 @@
+{"cell": "Thighovl", "arm": "depth_scan", "test_kind": "Thighovl", "train_kind": "typed", "depth": 3, "overlap": 5, "n_rel": 6, "n_train": 14000, "seed": 5, "acc": 1.0, "steps": 437, "vocab": 31, "tok": 46, "branch_tr": 2.0, "branch_te": 2.0, "C3_tr": 24, "C3_te": 24, "Ceff_tr": 24, "Ceff_te": 13, "secs": 29.0, "_slice": "DPX_slice01", "_exp": "DPX"}

@@ -1,0 +1,217 @@
+{
+  "schema": "thresholds_S1g_clean_confirm_v1",
+  "frozen_at": "2026-10-11T14:07:49+08:00",
+  "experiment_id": "S1g_clean_confirm",
+  "note": "NEW preregister S1g_clean_confirm (not quiet revision of S1f2). Seeds FROZEN from Dx2 clean list. Acceptance C1–C6 identical to S1e/S1f2 (reuse S1e sha). Leak VOID uses Dx2 calibrated probe n_eps=12×n_rep=5 (mean>0.35→VOID). VOID denom=8 NEVER shrink. Thresholds frozen BEFORE science run. Tune ONLY on 100-103. STOP after report; do NOT auto-open E2.",
+  "s1e_thresholds_sha256_reused_for_identical_acceptance": "412e0001b9ff90ea86710ed16e325ea66dac5080f1d4cfd1972caa7408298c74",
+  "s1f2_thresholds_sha256_code_parent": "0639d7581e0934eb34a56bfd9273f6a1ed5e0e62aaf761ea9e8d3b8e1af9442b",
+  "dx2_thresholds_sha256": "133a119d95f64533a4fae035dad3d2ad8a29a9e99cee83501e2e1245b817ce8c",
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "env": {
+    "N_goals_default": 4,
+    "K_switch_range_accept": [
+      30,
+      70
+    ],
+    "T": 200,
+    "cue_only_at_switch": true,
+    "no_clock_channel": true,
+    "coh_w": 0
+  },
+  "seeds": [
+    200,
+    205,
+    210,
+    211,
+    212,
+    216,
+    218,
+    219
+  ],
+  "tune_seeds": [
+    100,
+    101,
+    102,
+    103
+  ],
+  "tune_rule": "Tune ONLY on tune_seeds 100-103; NEVER tune on science seeds (Dx2 clean list).",
+  "leak_probe": {
+    "n_eps": 12,
+    "n_rep": 5,
+    "window": 5,
+    "probe_seed_formula": "science_seed + 10007 + i * 100003",
+    "void_if_mean_gt": 0.35,
+    "source": "Dx2_leak_ruler calibrated (SE_target 0.02)",
+    "note": "VOID decision uses mean over n_rep; single i0 historical probe recorded but not decisive"
+  },
+  "arms": {
+    "A_memoryless": {
+      "role": "C1_VOID_baseline",
+      "kind": "memoryless",
+      "N": 4,
+      "pop": 36,
+      "gens": 100,
+      "K_eval": 3,
+      "k_lo": 30,
+      "k_hi": 70,
+      "cloud": false
+    },
+    "C_handwritten": {
+      "role": "positive_control_designer_register",
+      "kind": "hand_gate",
+      "N": 4,
+      "pop": 36,
+      "gens": 100,
+      "K_eval": 3,
+      "k_lo": 30,
+      "k_hi": 70,
+      "label": "设计者指定的目标寄存器（门控接线索通道）",
+      "ladder_rung": "C_指定通道",
+      "cloud": false
+    },
+    "G_RL_GRU": {
+      "role": "MAIN_learnable_gated_arch",
+      "optimizer": "A2C_REINFORCE_return_only_S1f2_return_standardized",
+      "architecture": "GRUCell",
+      "code_parent": "S1f2_rl_fix/code/s1e_gru_rl.py fixed",
+      "ladder_rung": "GRU_通用门控架构",
+      "N": 4,
+      "k_lo": 30,
+      "k_hi": 70,
+      "hidden": 32,
+      "lr": 0.001,
+      "epochs_max": 800,
+      "episodes_per_epoch": 16,
+      "entropy_coef": 0.01,
+      "value_coef": 0.5,
+      "gamma": 0.99,
+      "early_stop_return": 0.85,
+      "log_every_epochs": 50,
+      "group_pass_rule": ">=7/8",
+      "l2_variant": "L2-self",
+      "no_goal_labels": true,
+      "budget": "x1_same_as_S1f2_RL_x1",
+      "fix_note": "Per-episode standardize MC returns (S1f2 fix); no goal labels"
+    },
+    "G_RL_RNN": {
+      "role": "MAIN_learnable_ungated_arch_contrast",
+      "optimizer": "A2C_REINFORCE_return_only_S1f2_return_standardized",
+      "architecture": "RNNCell_tanh_no_gates",
+      "ladder_rung": "RNN_无先验",
+      "N": 4,
+      "k_lo": 30,
+      "k_hi": 70,
+      "hidden": 32,
+      "lr": 0.001,
+      "epochs_max": 800,
+      "episodes_per_epoch": 16,
+      "entropy_coef": 0.01,
+      "value_coef": 0.5,
+      "gamma": 0.99,
+      "early_stop_return": 0.85,
+      "log_every_epochs": 50,
+      "group_pass_rule": ">=7/8",
+      "l2_variant": "L2-self",
+      "no_goal_labels": true,
+      "budget": "x1_same_as_S1f2_RL_x1",
+      "note": "Same A2C/h/lr/epochs as G_RL_GRU; only remove gates (tanh RNN)"
+    },
+    "ES_GRU": {
+      "role": "optional_included_OpenAI_ES_on_GRU",
+      "optimizer": "OpenAI_ES",
+      "architecture": "GRU_numpy_policy",
+      "ladder_rung": "GRU_通用门控架构",
+      "N": 4,
+      "k_lo": 30,
+      "k_hi": 70,
+      "hidden": 32,
+      "pop_sigma": 0.08,
+      "lr": 0.05,
+      "n_workers": 64,
+      "generations": 600,
+      "K_eval": 3,
+      "total_param_evals_target": 38400,
+      "group_pass_rule": ">=7/8",
+      "l2_variant": "L2-self",
+      "no_goal_labels": true,
+      "optional": true,
+      "note": "optional-included; OpenAI-ES on GRU weights (policy path); matched S1e ES eval budget"
+    }
+  },
+  "acceptance_per_seed": {
+    "C1_margin_over_memoryless": 0.25,
+    "C1_absolute_return": 0.7,
+    "C2_decode_acc_min": 0.75,
+    "C2_chance_N4": 0.25,
+    "C2_leak_max_N4": 0.35,
+    "C2_leak_window": 5,
+    "C3_flip_within_steps": 3,
+    "C3_flip_rate_min": 0.7,
+    "C4pp_toy": {
+      "name": "C4″_toy 自身码本·定向",
+      "sparse_return_drop_min": 0.3,
+      "R_same_min": 0.55,
+      "every_drop_max_frac_of_sparse": 0.5,
+      "n_eps": 16
+    },
+    "C5_no_stability_terms": [
+      "||ds||",
+      "s_variance",
+      "s_stability",
+      "coh_w"
+    ],
+    "C6_removal_segment_len_factor": 2,
+    "C6_removal_return_min": 0.6
+  },
+  "group_pass_min_seeds": 7,
+  "group_pass_of": 8,
+  "void_rules": {
+    "A_return_gt_N4": 0.4,
+    "C2_leak_mean_over_line": "VOID",
+    "denom_always": 8,
+    "forbid_shrink_denom": true,
+    "forbid_weaken_leak_line": true
+  },
+  "MAIN": [
+    "G_RL_GRU",
+    "G_RL_RNN"
+  ],
+  "ladder": {
+    "confirmed": "2026-10-11",
+    "order": [
+      "C_指定通道",
+      "Nov_指定统计量",
+      "GRU_通用门控架构",
+      "RNN_无先验"
+    ],
+    "note": "Nov not re-run this round (S1f_nov_rate 2/8 FAIL; stop replicas)"
+  },
+  "routing": {
+    "both_GRU_and_RNN_ge_7_8": "claim L2-self 无先验档 (RNN rung); gates not necessary on this toy",
+    "only_GRU_ge_7_8": "claim 通用门控架构档; annotate gate prior; NOT pure L2-self 无先验",
+    "both_fail": "revisit leak / measurement — do NOT claim principle failure from this segment alone",
+    "C_fail": "positive control broken → VOID experiment integrity",
+    "STOP": "STOP after report. Do NOT auto-open E2 unless learnable arm ≥7/8 AND user already authorized E2.",
+    "E2_gate": "requires ≥7/8 on a learnable arm AND explicit user authorization — neither auto"
+  },
+  "stance": "A",
+  "forbid": [
+    "weaken C2_leak_max_N4=0.35",
+    "shrink VOID denominator below 8",
+    "tune on science seeds",
+    "auto-open E2",
+    "claim designer-wired C as discovery",
+    "claim Nov as system discovery"
+  ],
+  "parent_experiments": [
+    "Dx2_leak_ruler",
+    "S1f2_rl_fix"
+  ],
+  "code_fix_inherited": {
+    "from": "S1f2",
+    "fixes": [
+      "per-episode MC return standardization in A2C",
+      "c4pp/C3 k_lo/k_hi passthrough"
+    ]
+  }
+}

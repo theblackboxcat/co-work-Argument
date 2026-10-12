@@ -1,0 +1,38 @@
+{
+  "selected_config_id": "ceil_lr1e3",
+  "rows": [
+    {
+      "config_id": "ceil_lr1e3",
+      "n_present": 2,
+      "n_seeds": 2,
+      "n_MAIN_accept": 1,
+      "n_C4iii_pass": 1,
+      "n_permeability_pattern": 1,
+      "mean_G_return": 0.0541875
+    },
+    {
+      "config_id": "ceil_lr5e4",
+      "n_present": 2,
+      "n_seeds": 2,
+      "n_MAIN_accept": 0,
+      "n_C4iii_pass": 0,
+      "n_permeability_pattern": 1,
+      "mean_G_return": 0.020500000000000004
+    }
+  ],
+  "rule": [
+    "1. Score each config on tune seeds used: n_MAIN_accept (C1–C6∧C7), then n_C4iii_pass, then mean G return",
+    "2. Prefer higher score; ties → prefer ceil_lr1e3 (E2 lr)",
+    "3. Science MUST use selected config; must be ≤ budget_ceiling",
+    "4. Minimum tune: run both grid ids on seeds 100 and 101 (102/103 optional if wall allows); never science seeds"
+  ],
+  "selected_row": {
+    "config_id": "ceil_lr1e3",
+    "n_present": 2,
+    "n_seeds": 2,
+    "n_MAIN_accept": 1,
+    "n_C4iii_pass": 1,
+    "n_permeability_pattern": 1,
+    "mean_G_return": 0.0541875
+  }
+}

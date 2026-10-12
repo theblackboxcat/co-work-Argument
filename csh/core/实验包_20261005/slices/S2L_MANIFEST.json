@@ -1,0 +1,104 @@
+{
+  "experiment": "S2L",
+  "n_slices": 12,
+  "n_jobs": 152,
+  "total_cost_hours": 1.81,
+  "slices": [
+    {
+      "slice": "S2L_slice00",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 556.2,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice00.json"
+    },
+    {
+      "slice": "S2L_slice01",
+      "experiment": "S2L",
+      "n_jobs": 12,
+      "cost_seconds": 535.5,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice01.json"
+    },
+    {
+      "slice": "S2L_slice02",
+      "experiment": "S2L",
+      "n_jobs": 12,
+      "cost_seconds": 535.5,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice02.json"
+    },
+    {
+      "slice": "S2L_slice03",
+      "experiment": "S2L",
+      "n_jobs": 12,
+      "cost_seconds": 535.5,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice03.json"
+    },
+    {
+      "slice": "S2L_slice04",
+      "experiment": "S2L",
+      "n_jobs": 12,
+      "cost_seconds": 535.5,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice04.json"
+    },
+    {
+      "slice": "S2L_slice05",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice05.json"
+    },
+    {
+      "slice": "S2L_slice06",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice06.json"
+    },
+    {
+      "slice": "S2L_slice07",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice07.json"
+    },
+    {
+      "slice": "S2L_slice08",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice08.json"
+    },
+    {
+      "slice": "S2L_slice09",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice09.json"
+    },
+    {
+      "slice": "S2L_slice10",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice10.json"
+    },
+    {
+      "slice": "S2L_slice11",
+      "experiment": "S2L",
+      "n_jobs": 13,
+      "cost_seconds": 546.4,
+      "est_hours": 0.15,
+      "runner": "run_slice.py --spec slices/S2L_slice11.json"
+    }
+  ]
+}

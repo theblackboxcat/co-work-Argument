@@ -1,0 +1,24 @@
+{
+  "experiment": "S2L",
+  "n_slices": 2,
+  "n_jobs": 320,
+  "total_cost_hours": 1.69,
+  "slices": [
+    {
+      "slice": "S2L_slice00",
+      "experiment": "S2L",
+      "n_jobs": 160,
+      "cost_seconds": 3041.6,
+      "est_hours": 0.84,
+      "runner": "run_slice.py --spec slices/S2L_slice00.json"
+    },
+    {
+      "slice": "S2L_slice01",
+      "experiment": "S2L",
+      "n_jobs": 160,
+      "cost_seconds": 3041.6,
+      "est_hours": 0.84,
+      "runner": "run_slice.py --spec slices/S2L_slice01.json"
+    }
+  ]
+}

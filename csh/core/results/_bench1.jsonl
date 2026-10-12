@@ -1,0 +1,1 @@
+{"arm": "S2_latin", "surface": "alien", "block_slot": 7, "surface_index": 5, "n_rel": 6, "n_train": 6500, "seed": 2, "acc": 1.0, "steps": 203, "vocab": 225, "tok": 46, "secs": 236.3, "_slice": "_bench1", "_exp": "S2L"}

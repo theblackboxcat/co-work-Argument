@@ -1,0 +1,182 @@
+[
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   5,
+   6500,
+   5
+  ],
+  "cost": 227.5
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   5,
+   8500,
+   5
+  ],
+  "cost": 251.8
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   3,
+   14000,
+   5
+  ],
+  "cost": 1135.6
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   5,
+   6500,
+   5
+  ],
+  "cost": 227.5
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   5,
+   8500,
+   5
+  ],
+  "cost": 251.8
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   3,
+   14000,
+   5
+  ],
+  "cost": 1135.6
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   4,
+   4000,
+   5
+  ],
+  "cost": 420.9
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   5,
+   5000,
+   5
+  ],
+  "cost": 209.3
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   4,
+   14000,
+   5
+  ],
+  "cost": 983.1
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   4,
+   4000,
+   5
+  ],
+  "cost": 420.9
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   5,
+   5000,
+   5
+  ],
+  "cost": 209.3
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   4,
+   14000,
+   5
+  ],
+  "cost": 983.1
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   5,
+   4000,
+   5
+  ],
+  "cost": 197.2
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   3,
+   8500,
+   5
+  ],
+  "cost": 685.7
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   3,
+   11000,
+   5
+  ],
+  "cost": 890.2
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   5,
+   4000,
+   5
+  ],
+  "cost": 197.2
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   3,
+   8500,
+   5
+  ],
+  "cost": 685.7
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "Thighovl",
+   3,
+   11000,
+   5
+  ],
+  "cost": 890.2
+ }
+]

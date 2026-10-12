@@ -1,0 +1,75 @@
+第三方组件与许可
+============================================================
+这个包里随分发的第三方组件，出处与许可证。改这个包之前先读一遍，
+尤其是 openviking 那一行——它是 AGPL。
+
+------------------------------------------------------------
+一、应用本体用到的（app\web\lib\）
+
+  Quill 2.0.3                      BSD-3-Clause
+    https://quilljs.com  ·  (c) 2017-2024 Slab, (c) 2014 Jason Chen,
+    (c) 2013 salesforce.com
+    富文本编辑器。许可证全文见 licenses\quill-LICENSE.txt。
+    另：它自己声明要带一个 quill.js.LICENSE.txt（内嵌依赖的许可汇总），
+    vendored 的那份原本漏了，这里补上，见 licenses\quill-js-LICENSE.txt。
+
+  JSZip 3.10.1                     MIT 或 GPLv3（双许可，二选一）
+    https://stuartk.com/jszip  ·  (c) 2009-2016 Stuart Knightley
+    读写 .docx / .epub（两者本来就是 zip）。这里按 MIT 用。
+    许可证全文见 licenses\jszip-LICENSE.markdown。
+
+  Turndown 7.2.0                   MIT
+    https://github.com/mixmark-io/turndown
+    HTML → Markdown。许可证全文见 licenses\turndown-LICENSE.txt。
+
+  这三份原本只有库文件本身，许可证文本是补进来的——BSD 与 MIT 都要求
+  随分发保留版权声明，只放代码不放声明是不合规的。
+
+
+二、运行时用到的（runtime\）
+
+  CPython 3.13.14                  PSF License Agreement
+    https://www.python.org
+    官方许可证全文随解释器一起走：runtime\python\LICENSE.txt。
+    这个包默认内嵌的是本机已有的 3.13.14（cpython 官方构建），
+    它自带 vcruntime140.dll / vcruntime140_1.dll，不依赖系统装 VC 运行库。
+
+
+三、记忆层（两种打包方式，看这个包属于哪一种）
+
+  openviking 0.4.20                **AGPL-3.0**
+    https://pypi.org/project/openviking/
+    火山引擎出的记忆层。
+
+      · 默认打包：包里不带，安装脚本用 pip 从 PyPI 现装。
+      · --embed-ov 打包：整个 venv 就在 runtime\ov\ 里，装的时候免联网。
+
+    ⚠ 为什么特别标出来：AGPL 是传染性的。自己一个人用没问题；
+    一旦要把这个包（或装了记忆层之后的整个目录）分发、或者把它当作
+    一个网络服务给别人用，AGPL 的义务就落到分发者/服务提供者头上——
+    至少要提供对应源码。如果将来要把伴写做成在线服务，这一条必须先
+    处理：要么开放源码，要么不用 openviking（应用本体对记忆层是
+    优雅降级，本来就可以不装）。
+
+  openviking 拖进来的依赖（litellm、numpy、llama_cpp、twisted、
+  volcengine 系列 SDK 等）各有自己的许可证。默认打包时，pip 会把它们
+  的声明落在 runtime\ov\Lib\site-packages\*\dist-info\LICENSE 里；
+  --embed-ov 打包时这些文件跟着 venv 一起走，就在同一个位置。这里
+  不逐一列。体积构成：litellm 76 MB、lark_oapi 50 MB、llama_cpp 31 MB、
+  numpy 约 51 MB，剩下大头是几十个 volcengine SDK——加起来 1.1 GB。
+
+  BAAI bge-small-zh-v1.5           MIT
+    https://huggingface.co/BAAI/bge-small-zh-v1.5
+    记忆层用的中文嵌入模型。包里带的是它的 gguf 量化版
+    （assets\models\bge-small-zh-v1.5-f16.gguf，46 MB），安装时被摆到
+    %USERPROFILE%\.cache\openviking\models\。
+    MIT 允许再分发，但版权声明要保留——上面 assets\models\ 里那个
+    『这是哪儿来的.txt』就是干这个的，别删。
+    （不带这个模型也行，用 --no-model 打包即可；代价是目标机首次启动
+    记忆层要能连上 HuggingFace，国内通常连不上，表现是"一直没反应"。）
+
+
+四、没有随包分发的
+
+  语料、对照实验记录、记忆数据、API key——见 说明.txt 第八节。
+  它们要么有版权，要么是私人的，不跟着这个包走。

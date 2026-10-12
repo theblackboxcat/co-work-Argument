@@ -1,0 +1,192 @@
+[
+ {
+  "experiment": "E6",
+  "args": [
+   2,
+   "en",
+   3000,
+   1
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   2,
+   "relperm",
+   3000,
+   3
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   2,
+   "entperm",
+   4000,
+   1
+  ],
+  "cost": 106.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   2,
+   "relperm",
+   5000,
+   1
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   2,
+   "en",
+   6500,
+   3
+  ],
+  "cost": 153.5
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   2,
+   "entperm",
+   6500,
+   5
+  ],
+  "cost": 153.5
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "en",
+   2000,
+   1
+  ],
+  "cost": 68.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "entperm",
+   2000,
+   3
+  ],
+  "cost": 68.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "en",
+   3000,
+   5
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "relperm",
+   4000,
+   3
+  ],
+  "cost": 106.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "en",
+   5000,
+   3
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "entperm",
+   5000,
+   5
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   3,
+   "entperm",
+   6500,
+   1
+  ],
+  "cost": 153.5
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   4,
+   "relperm",
+   2000,
+   5
+  ],
+  "cost": 68.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   4,
+   "en",
+   3000,
+   1
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   4,
+   "entperm",
+   3000,
+   3
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   4,
+   "en",
+   4000,
+   5
+  ],
+  "cost": 106.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   4,
+   "entperm",
+   5000,
+   1
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E6",
+  "args": [
+   4,
+   "relperm",
+   6500,
+   3
+  ],
+  "cost": 153.5
+ }
+]

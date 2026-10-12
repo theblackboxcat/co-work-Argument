@@ -1,0 +1,119 @@
+{
+  "schema": "s1h2_arm_result_v1",
+  "arm": "ES_easy_legacy",
+  "seed": 200,
+  "N": 2,
+  "k_lo": 5,
+  "k_hi": 10,
+  "step_rule": "s1g_legacy",
+  "lr": 0.05,
+  "sigma": 0.08,
+  "thresholds_file_hash": "468defc9af4113c805d0a8836b6aeb57ce409eb782f440530df7f92b44da0885",
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "fitness_source_hash": "0aea3c91b0d47b080b7e54bb6187d15a00ea842c4e55c79f2633554ade93836d",
+  "A_return": 0.575,
+  "A_return_S1g_record": null,
+  "A_void_line": 0.72,
+  "void_env_A_ceiling": false,
+  "seed_void": false,
+  "pass": true,
+  "eval": {
+    "kind": "gru",
+    "return": {
+      "mean": 0.9896875,
+      "std": 0.00695268608165219,
+      "n": 16
+    },
+    "C1": {
+      "pass": true,
+      "return": 0.9896875,
+      "mem_return": 0.575,
+      "margin": 0.25,
+      "abs": 0.7
+    },
+    "C2": {
+      "pass": true,
+      "decode_acc": 1.0,
+      "threshold": 0.75
+    },
+    "C2_leak": {
+      "samples": [
+        0.8157635467980295,
+        0.7825661116552399,
+        0.8068627450980392,
+        0.8139079333986288,
+        0.8076545632973503
+      ],
+      "mean": 0.8053509800494576,
+      "sd": 0.01330775294703488,
+      "n_eps": 12,
+      "n_rep": 5,
+      "max": 0.95,
+      "void_enabled": false,
+      "void": false
+    },
+    "C3": {
+      "pass": true,
+      "flip_rate": 1.0,
+      "threshold": 0.7,
+      "n_trials": 40
+    },
+    "C4pp": {
+      "pass": true,
+      "R_same_sparse": 1.0,
+      "R_opp_sparse": 0.13375,
+      "drop_sparse": 0.86625,
+      "R_same_every": 1.0,
+      "R_opp_every": 1.0,
+      "drop_every": 0.0,
+      "thr_drop": 0.3,
+      "thr_R_same": 0.55,
+      "thr_every_frac": 0.5
+    },
+    "C5": {
+      "pass": true,
+      "note": "fitness_task_only; no stability terms in source"
+    },
+    "C6": {
+      "pass": true,
+      "return": 0.8991071428571429,
+      "threshold": 0.6
+    },
+    "void_leak": false,
+    "all_pass": true
+  },
+  "evo": {
+    "best_fit_train": 1.0,
+    "evals": 38400,
+    "hist_len": 600,
+    "optimizer": "OpenAI_ES",
+    "no_goal_labels": true,
+    "pop_mean_first": 0.5146354166666667,
+    "pop_mean_last": 0.7193750000000001,
+    "pop_mean_max": 0.7579427083333333,
+    "hist_tail": [
+      {
+        "gen": 597,
+        "best": 0.9783333333333334,
+        "mean": 0.7209635416666667,
+        "evals": 38272
+      },
+      {
+        "gen": 598,
+        "best": 0.945,
+        "mean": 0.7174218750000001,
+        "evals": 38336
+      },
+      {
+        "gen": 599,
+        "best": 0.9516666666666665,
+        "mean": 0.7193750000000001,
+        "evals": 38400
+      }
+    ]
+  },
+  "wall_s": 1301.9575605392456,
+  "role": "DIAGNOSTIC_legacy_step_on_easy (paired with ES_easy: same init/noise stream); not a gate",
+  "tune": false,
+  "smoke": false
+}

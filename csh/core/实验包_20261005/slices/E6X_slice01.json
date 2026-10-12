@@ -1,0 +1,62 @@
+[
+ {
+  "experiment": "E6X",
+  "args": [
+   2,
+   "relperm",
+   8500,
+   2
+  ],
+  "cost": 84.0
+ },
+ {
+  "experiment": "E6X",
+  "args": [
+   2,
+   "en",
+   14000,
+   2
+  ],
+  "cost": 137.6
+ },
+ {
+  "experiment": "E6X",
+  "args": [
+   3,
+   "entperm",
+   8500,
+   2
+  ],
+  "cost": 84.0
+ },
+ {
+  "experiment": "E6X",
+  "args": [
+   3,
+   "relperm",
+   14000,
+   2
+  ],
+  "cost": 137.6
+ },
+ {
+  "experiment": "E6X",
+  "args": [
+   4,
+   "en",
+   11000,
+   2
+  ],
+  "cost": 108.3
+ },
+ {
+  "experiment": "E6X",
+  "args": [
+   4,
+   "entperm",
+   14000,
+   2
+  ],
+  "cost": 137.6
+ }
+]

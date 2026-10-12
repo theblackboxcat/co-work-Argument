@@ -1,0 +1,44 @@
+{
+  "machine": 1,
+  "generated": "2026-10-06 13:12",
+  "n_slices": 5,
+  "n_jobs": 34,
+  "est_hours": 1.01,
+  "tasks": [
+    {
+      "experiment": "DPX",
+      "slice": "DPX_slice00",
+      "spec": "slices/DPX_slice00.json",
+      "n_jobs": 1,
+      "est_hours": 0.32
+    },
+    {
+      "experiment": "E6X",
+      "slice": "E6X_slice09",
+      "spec": "slices/E6X_slice09.json",
+      "n_jobs": 7,
+      "est_hours": 0.21
+    },
+    {
+      "experiment": "DPX",
+      "slice": "DPX_slice07",
+      "spec": "slices/DPX_slice07.json",
+      "n_jobs": 1,
+      "est_hours": 0.19
+    },
+    {
+      "experiment": "S2L",
+      "slice": "S2L_slice11",
+      "spec": "slices/S2L_slice11.json",
+      "n_jobs": 13,
+      "est_hours": 0.15
+    },
+    {
+      "experiment": "S2L",
+      "slice": "S2L_slice03",
+      "spec": "slices/S2L_slice03.json",
+      "n_jobs": 12,
+      "est_hours": 0.15
+    }
+  ]
+}

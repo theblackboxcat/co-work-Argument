@@ -1,0 +1,252 @@
+{
+  "schema": "thresholds_E2b_c4pp_permeability_v1",
+  "frozen_at": "2026-10-11T18:28:00+08:00",
+  "experiment_id": "E2b_c4pp_permeability",
+  "note": "NEW preregister E2b. Question ONLY: C4″(iii) cue-permeability = budget/sample-efficiency OR structural under continuous observation for gated GRU? Two mutually exclusive paths A/B. Acceptance UNCHANGED from E2. S3 CLOSED. No optimizer tournament. Run on BOX.",
+  "parent_experiment": "E2_s2c_learnable",
+  "parent_thresholds_sha256": "aada78fb99cfa28fcb1ce5cd0d634fb24022a6fe941dfc14a15338625f0a4179",
+  "label": "L2-self · 通用门控架构档（§2.1.5.1 第 3 档）· C4″(iii) 渗透性诊断",
+  "question": "C4″(iii) cue-permeability under continuous observation: budget/sample-efficiency (Path A) OR structural write-ok/hold-fail for gated GRU (Path B)?",
+  "e2_prior_verdict": "E2 G_RL_GRU 1/8 FAIL; dominant fail C4″(iii) 6/8 (sparse directional OK, every-cue dwf not suppressed); write-ok/hold-fail under continuous cue",
+  "forbid_claims": [
+    "系统发现",
+    "无先验",
+    "进化不可达",
+    "内化涌现",
+    "自己长出门",
+    "E2b PASS = 开 S3",
+    "半自主已证实",
+    "内部自治已失败",
+    "削弱 C4″ / 改验收过门"
+  ],
+  "claim_constraints_half_autonomy": {
+    "note": "DOC ONLY claim constraints in plan; NOT experimental arms; NOT bypass",
+    "designer_scaffold_column": [
+      "GRU 架构先验",
+      "训练预算 / early_stop / lr（本实验可调的样本效率杠杆）",
+      "冻结 Phase1 导航",
+      "C 阳控 = 设计者接线寄存器"
+    ],
+    "unretractable_world_commitment_column": [
+      "S2c 8×8 tox=2.5 资源/毒性景观",
+      "切换损失（Stance A 世界动力学）",
+      "cue_only_at_switch 训练分布（稀疏线索）"
+    ],
+    "diagnostic_not_commitment": "C4″ every-cue 探针 = 连续观察诊断条件，不是训练分布改写，也不是半自主臂",
+    "forbid": "不得把脚手架成功写成发现；不得把世界承诺写成内部自治失败；半自主备忘不构成本实验旁路"
+  },
+  "s3_status": "CLOSED",
+  "stance": "A",
+  "separate_from_authoritative_S2": true,
+  "acceptance_unchanged_from_E2": true,
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "env": {
+    "H": 8,
+    "W": 8,
+    "T": 120,
+    "tox": 2.5,
+    "food_rate": 0.6,
+    "gem_rate": 0.55,
+    "food_cap": 16,
+    "gem_cap": 14,
+    "n_food_init": 8,
+    "n_gem_init": 7,
+    "n_obstacles_frac": 0.03,
+    "K_switch_range": [30, 70],
+    "cue_only_at_switch": true,
+    "no_clock_channel": true,
+    "coh_w": 0,
+    "fitness": "(n_valuable - tox*n_other)/T",
+    "navigator": "frozen_Phase1_foraging",
+    "evolve": "goal_module_only",
+    "resources": ["food", "gem"],
+    "source": "frozen S2c / E2 settings (identical; no re-ruler)"
+  },
+  "seeds": [200, 205, 210, 211, 212, 216, 218, 219],
+  "tune_seeds": [100, 101, 102, 103],
+  "tune_rule": "Tune ONLY on tune_seeds 100-103; NEVER on science seeds. Limited grid below. Acceptance NEVER tuned.",
+  "leak_probe": {
+    "n_eps": 12,
+    "n_rep": 5,
+    "window": 5,
+    "probe_seed_formula": "science_seed + 10007 + i * 100003",
+    "N_goals": 2,
+    "chance_theoretical": 0.5,
+    "void_line_mode": "A_empirical + 0.10 (fallback chance+0.10)",
+    "dx2_heritage_line_N4": 0.35,
+    "note": "Identical to E2 R2. Denom=8. Never weaken."
+  },
+  "e2_baseline_budget": {
+    "epochs_max": 800,
+    "episodes_per_epoch": 16,
+    "lr": 0.001,
+    "entropy_coef": 0.01,
+    "early_stop_return": 0.05,
+    "early_stop_min_epoch": 50,
+    "max_episodes_nominal": 12800
+  },
+  "budget_ceiling": {
+    "epochs_max": 1600,
+    "episodes_per_epoch": 32,
+    "lr_default": 0.001,
+    "entropy_coef_default": 0.01,
+    "early_stop_return": 0.10,
+    "early_stop_min_epoch": 400,
+    "max_episodes_nominal": 51200,
+    "vs_e2_episode_budget_factor": 4.0,
+    "note": "Pre-registered CEILING. Path B only eligible after science at this ceiling (or selected tune config ≤ ceiling). No optimizer tournament."
+  },
+  "tune_grid": [
+    {
+      "id": "ceil_lr1e3",
+      "epochs_max": 1600,
+      "episodes_per_epoch": 32,
+      "lr": 0.001,
+      "entropy_coef": 0.01,
+      "early_stop_return": 0.10,
+      "early_stop_min_epoch": 400
+    },
+    {
+      "id": "ceil_lr5e4",
+      "epochs_max": 1600,
+      "episodes_per_epoch": 32,
+      "lr": 0.0005,
+      "entropy_coef": 0.01,
+      "early_stop_return": 0.10,
+      "early_stop_min_epoch": 400
+    }
+  ],
+  "tune_selection_rule": [
+    "1. Score each config on tune seeds used: n_MAIN_accept (C1–C6∧C7), then n_C4iii_pass, then mean G return",
+    "2. Prefer higher score; ties → prefer ceil_lr1e3 (E2 lr)",
+    "3. Science MUST use selected config; must be ≤ budget_ceiling",
+    "4. Minimum tune: run both grid ids on seeds 100 and 101 (102/103 optional if wall allows); never science seeds"
+  ],
+  "arms": {
+    "G_RL_GRU": {
+      "role": "MAIN_cue_permeability_budget_or_structure",
+      "optimizer": "A2C_REINFORCE_return_only_S1f2_return_standardized",
+      "architecture": "GRUCell",
+      "ladder_rung": "GRU_通用门控架构",
+      "l2_variant": "L2-self",
+      "no_goal_labels": true,
+      "N_pref": 2,
+      "hidden": 32,
+      "gamma": 0.99,
+      "value_coef": 0.5,
+      "log_every_epochs": 50,
+      "group_pass_rule": ">=7/8",
+      "budget_source": "selected from tune_grid ≤ budget_ceiling",
+      "fix_note": "Same algorithm as E2; only budget/lr/entropy within pre-registered grid"
+    },
+    "C_handwritten": {
+      "role": "positive_control_integrity",
+      "kind": "hand_gate",
+      "reuse_from_E2": true,
+      "reuse_path": "E2_s2c_learnable/genes/gene_seed*_C.npz",
+      "note": "Identical env+seeds+thresholds acceptance; E2 already C 8/8. Re-eval genes for integrity OR cite E2 C integrity if bit-identical load."
+    },
+    "A_memoryless": {
+      "role": "negative_baseline_leak_and_C1",
+      "kind": "memoryless",
+      "reuse_from_E2": true,
+      "reuse_path": "E2_s2c_learnable/genes/gene_seed*_A.npz",
+      "note": "Load E2 A genes; re-evaluate returns/leak for VOID line (cheap)."
+    }
+  },
+  "MAIN": ["G_RL_GRU"],
+  "budget": {
+    "pop_AC": 36,
+    "gens_AC": 100,
+    "K_eval_train": 8,
+    "n_eps_accept": 100,
+    "n_eps_A_void": 80,
+    "probe_every_gens": 20
+  },
+  "acceptance_per_seed": {
+    "C1_margin_over_memoryless": 0.11372499999999999,
+    "C1_absolute_return": 0.03728125,
+    "C2_decode_acc_min": 0.75,
+    "C2_chance_N2": 0.5,
+    "C3_flip_within_steps": 8,
+    "C3_flip_rate_min": 0.7,
+    "C4pp": {
+      "name": "C4″ Dx1 自身码本·定向",
+      "n_eps": 48,
+      "n_eps_centroid": 40,
+      "n_eps_codebook_heldout": 20,
+      "bootstrap_B": 2000,
+      "codebook_bal_acc_min": 0.75,
+      "dwf_min": 0.2,
+      "dwf_ci_lo_gt": 0.0,
+      "V_drop_frac_min": 0.3,
+      "every_max_frac_of_sparse": 0.5,
+      "unchanged_from_E2": true
+    },
+    "C5_no_stability_terms": ["||ds||", "s_variance", "s_stability", "coh_w"],
+    "C6_removal_segment_len_factor": 2,
+    "C6_removal_return_min": 0.026096875,
+    "source": "E2/S2c ruler calibration COPIED UNCHANGED; not re-tuned"
+  },
+  "C7_strict": {
+    "for_C_handwritten": {
+      "continue_gens": 220,
+      "probe_every": 20,
+      "rule": "最后 3 个 probe 中 ≥2 个同时 C2.pass ∧ C3.pass",
+      "reuse_E2_result_ok": true
+    },
+    "for_G_RL_GRU": {
+      "mode": "frozen_weight_retention_probes",
+      "n_probes": 12,
+      "rule": "末 3 个 probe 中 ≥2 个同时 C2.pass ∧ C3.pass"
+    },
+    "disclaimer": "任务强加的记忆被保持 ≠ 自设目标"
+  },
+  "void_rules": {
+    "A_return_gt": 0.03728125,
+    "C2_leak_over_line": "VOID",
+    "VOID_never_counts_as_FAIL": true,
+    "denom_always": 8,
+    "forbid_shrink_denom": true
+  },
+  "group_pass_min_seeds": 7,
+  "group_pass_of": 8,
+  "permeability_pattern": {
+    "name": "write_ok_hold_fail_under_continuous_cue",
+    "definition": "C4″ i_directional==true AND iii_specific==false (sparse write/directional OK; every-cue dwf not suppressed to ≤0.5×sparse)",
+    "report_per_seed": true
+  },
+  "paths": {
+    "A_efficiency": {
+      "condition": "After science at selected config ≤ budget_ceiling: MAIN G (C1–C6∧C7) ≥7/8 AND C integrity OK",
+      "verdict": "E2 1/8 was budget/sample-efficiency; C4″(iii) cue-permeability solvable by more train budget (within ceiling)",
+      "implies": "NOT structural hold-fail at this ladder rung under continuous observation (at this ceiling)"
+    },
+    "B_structural": {
+      "condition": "Science at ceiling-selected config: MAIN G <7/8 AND C integrity OK AND among non-VOID failing seeds, majority (≥半数失败籽) match permeability_pattern (i∧¬iii)",
+      "verdict": "Structural: gated tier writes (directional) but does not hold/suppress under continuous cue observation within pre-registered budget ceiling",
+      "implies": "E2 write-ok/hold-fail survives budget↑; not explained as mere sample-efficiency within ceiling"
+    },
+    "inconclusive_other_fail": {
+      "condition": "MAIN G <7/8 but permeability_pattern does NOT dominate failing seeds (e.g. mostly C1/C6/codebook without i∧¬iii)",
+      "verdict": "Budget↑ did not unlock group pass; failure mode shifted or mixed — NOT clean Path A or B; STOP; no S3; no threshold weaken"
+    }
+  },
+  "routing": {
+    "path_A": "E2b Path A (efficiency) → STOP; S3 CLOSED; no S3",
+    "path_B": "E2b Path B (structural hold-fail) → STOP; S3 CLOSED; no S3",
+    "inconclusive": "E2b inconclusive_other_fail → STOP; S3 CLOSED",
+    "C_integrity_fail": "实验完整性 VOID",
+    "STOP": "STOP after 报告；DO NOT open S3；DO NOT optimizer tournament"
+  },
+  "forbid": [
+    "weaken C4″ or any acceptance threshold",
+    "shrink VOID denominator below 8",
+    "tune on science seeds",
+    "open S3",
+    "optimizer tournament / architecture search",
+    "claim 无先验 / 系统发现 / 半自主已证实",
+    "exceed budget_ceiling",
+    "rewrite authoritative S2 verdict"
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "n_shards": 6,
+  "seeds": 6,
+  "total_remaining": 72,
+  "shards": [
+    {
+      "shard": "depth_shard0",
+      "spec": "results/shards/depth_shard0.json",
+      "n_jobs": 12,
+      "cost_proxy": 216000,
+      "by_depth": {
+        "5": 12
+      },
+      "by_cell": {
+        "TT": 3,
+        "TU": 3,
+        "Thighovl": 3,
+        "Tlowovl": 3
+      },
+      "n_range": [
+        11000,
+        20000
+      ]
+    },
+    {
+      "shard": "depth_shard1",
+      "spec": "results/shards/depth_shard1.json",
+      "n_jobs": 12,
+      "cost_proxy": 216000,
+      "by_depth": {
+        "5": 12
+      },
+      "by_cell": {
+        "TT": 3,
+        "TU": 3,
+        "Thighovl": 3,
+        "Tlowovl": 3
+      },
+      "n_range": [
+        11000,
+        20000
+      ]
+    },
+    {
+      "shard": "depth_shard2",
+      "spec": "results/shards/depth_shard2.json",
+      "n_jobs": 12,
+      "cost_proxy": 216000,
+      "by_depth": {
+        "5": 12
+      },
+      "by_cell": {
+        "TT": 3,
+        "TU": 3,
+        "Thighovl": 3,
+        "Tlowovl": 3
+      },
+      "n_range": [
+        11000,
+        20000
+      ]
+    },
+    {
+      "shard": "depth_shard3",
+      "spec": "results/shards/depth_shard3.json",
+      "n_jobs": 12,
+      "cost_proxy": 216000,
+      "by_depth": {
+        "5": 12
+      },
+      "by_cell": {
+        "TT": 3,
+        "TU": 3,
+        "Thighovl": 3,
+        "Tlowovl": 3
+      },
+      "n_range": [
+        11000,
+        20000
+      ]
+    },
+    {
+      "shard": "depth_shard4",
+      "spec": "results/shards/depth_shard4.json",
+      "n_jobs": 12,
+      "cost_proxy": 216000,
+      "by_depth": {
+        "5": 12
+      },
+      "by_cell": {
+        "TT": 3,
+        "TU": 3,
+        "Thighovl": 3,
+        "Tlowovl": 3
+      },
+      "n_range": [
+        11000,
+        20000
+      ]
+    },
+    {
+      "shard": "depth_shard5",
+      "spec": "results/shards/depth_shard5.json",
+      "n_jobs": 12,
+      "cost_proxy": 216000,
+      "by_depth": {
+        "5": 12
+      },
+      "by_cell": {
+        "TT": 3,
+        "TU": 3,
+        "Thighovl": 3,
+        "Tlowovl": 3
+      },
+      "n_range": [
+        11000,
+        20000
+      ]
+    }
+  ]
+}

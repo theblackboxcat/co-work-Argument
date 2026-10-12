@@ -1,0 +1,152 @@
+{
+  "experiment": "E10",
+  "n_slices": 18,
+  "n_jobs": 300,
+  "total_cost_hours": 12.77,
+  "slices": [
+    {
+      "slice": "E10_slice00",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2576.6,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice00.json"
+    },
+    {
+      "slice": "E10_slice01",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2576.6,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice01.json"
+    },
+    {
+      "slice": "E10_slice02",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2576.6,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice02.json"
+    },
+    {
+      "slice": "E10_slice03",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2576.6,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice03.json"
+    },
+    {
+      "slice": "E10_slice04",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2576.6,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice04.json"
+    },
+    {
+      "slice": "E10_slice05",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2576.6,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice05.json"
+    },
+    {
+      "slice": "E10_slice06",
+      "experiment": "E10",
+      "n_jobs": 16,
+      "cost_seconds": 2508.9,
+      "est_hours": 0.7,
+      "runner": "run_slice.py --spec slices/E10_slice06.json"
+    },
+    {
+      "slice": "E10_slice07",
+      "experiment": "E10",
+      "n_jobs": 16,
+      "cost_seconds": 2508.9,
+      "est_hours": 0.7,
+      "runner": "run_slice.py --spec slices/E10_slice07.json"
+    },
+    {
+      "slice": "E10_slice08",
+      "experiment": "E10",
+      "n_jobs": 16,
+      "cost_seconds": 2508.9,
+      "est_hours": 0.7,
+      "runner": "run_slice.py --spec slices/E10_slice08.json"
+    },
+    {
+      "slice": "E10_slice09",
+      "experiment": "E10",
+      "n_jobs": 16,
+      "cost_seconds": 2508.9,
+      "est_hours": 0.7,
+      "runner": "run_slice.py --spec slices/E10_slice09.json"
+    },
+    {
+      "slice": "E10_slice10",
+      "experiment": "E10",
+      "n_jobs": 16,
+      "cost_seconds": 2508.9,
+      "est_hours": 0.7,
+      "runner": "run_slice.py --spec slices/E10_slice10.json"
+    },
+    {
+      "slice": "E10_slice11",
+      "experiment": "E10",
+      "n_jobs": 16,
+      "cost_seconds": 2508.9,
+      "est_hours": 0.7,
+      "runner": "run_slice.py --spec slices/E10_slice11.json"
+    },
+    {
+      "slice": "E10_slice12",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2575.4,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice12.json"
+    },
+    {
+      "slice": "E10_slice13",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2575.4,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice13.json"
+    },
+    {
+      "slice": "E10_slice14",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2575.4,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice14.json"
+    },
+    {
+      "slice": "E10_slice15",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2575.4,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice15.json"
+    },
+    {
+      "slice": "E10_slice16",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2575.4,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice16.json"
+    },
+    {
+      "slice": "E10_slice17",
+      "experiment": "E10",
+      "n_jobs": 17,
+      "cost_seconds": 2575.4,
+      "est_hours": 0.72,
+      "runner": "run_slice.py --spec slices/E10_slice17.json"
+    }
+  ]
+}
