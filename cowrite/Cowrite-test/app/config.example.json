@@ -1,0 +1,28 @@
+{
+  "_说明": "模型接入配置。这个文件不必手改：打开网页 → 设置 → 选服务商、填 key，写回的就是它。api_key 留空 = 离线演示模式（不发任何网络请求，用内置的离线引擎出牌）。",
+
+  "provider": "deepseek",
+  "base_url": "https://api.deepseek.com",
+  "model": "deepseek-chat",
+  "api_key": "",
+
+  "_provider_可选": [
+    "dots3",
+    "deepseek",
+    "openai",
+    "anthropic",
+    "moonshot",
+    "zhipu",
+    "ollama",
+    "custom-openai",
+    "custom-anthropic"
+  ],
+
+  "_key_env": "api_key 留空时，会去读对应服务商的环境变量：DEEPSEEK_API_KEY / OPENAI_API_KEY / ANTHROPIC_API_KEY / MOONSHOT_API_KEY / ZHIPU_API_KEY / DOTS3_API_KEY。走环境变量的话，key 就不必落在文件里。",
+
+  "_ollama": "本机跑完全不出网：provider 填 ollama，base_url http://127.0.0.1:11434/v1，model 填你 pull 过的模型名。Ollama 不校验 key，这里随便填个非空字符串即可。",
+
+  "_自定义": "provider 选 custom-openai 或 custom-anthropic 时，base_url 与 model 必须自己填。前者说话说 /chat/completions（vLLM、One-API、LM Studio、公司内网网关都算），后者说 /v1/messages。",
+
+  "_协议": "协议差异只在 providers.py 一处，别在这里手写协议细节。"
+}

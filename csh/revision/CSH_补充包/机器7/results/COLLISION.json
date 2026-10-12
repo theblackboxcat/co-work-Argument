@@ -1,0 +1,788 @@
+{
+ "n_rel": 6,
+ "depth": 3,
+ "n_probe": 400,
+ "geometry": {
+  "zh": {
+   "n_tokens": 28,
+   "n_isolated": 4,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.0,
+   "degree_distinct_values": 3,
+   "density": 0.42857142857142855,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 6,
+   "mean_color_class": 3.142857142857143,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 1,
+     "len_max": 1,
+     "len_mean": 1.0,
+     "sample": [
+      "甲",
+      "乙",
+      "丙",
+      "丁",
+      "戊",
+      "己"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 1,
+     "len_max": 1,
+     "len_mean": 1.0,
+     "sample": [
+      "含",
+      "先",
+      "动",
+      "移",
+      "近",
+      "指"
+     ]
+    },
+    "pool_id": 99949509
+   },
+   "tokens_sample": [
+    "。",
+    "丁",
+    "丑",
+    "丙",
+    "乙",
+    "先",
+    "则",
+    "动",
+    "午",
+    "卯",
+    "含",
+    "壬"
+   ]
+  },
+  "en": {
+   "n_tokens": 28,
+   "n_isolated": 4,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.0,
+   "degree_distinct_values": 3,
+   "density": 0.42857142857142855,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 6,
+   "mean_color_class": 3.142857142857143,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 2,
+     "len_max": 3,
+     "len_mean": 2.4444444444444446,
+     "sample": [
+      "e0",
+      "e1",
+      "e2",
+      "e3",
+      "e4",
+      "e5"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 4,
+     "len_max": 6,
+     "len_mean": 5.166666666666667,
+     "sample": [
+      "inside",
+      "before",
+      "acts",
+      "moves",
+      "near",
+      "points"
+     ]
+    },
+    "pool_id": 98312951
+   },
+   "tokens_sample": [
+    ".",
+    "acts",
+    "before",
+    "e0",
+    "e1",
+    "e10",
+    "e11",
+    "e12",
+    "e13",
+    "e14",
+    "e15",
+    "e16"
+   ]
+  },
+  "lisp": {
+   "n_tokens": 27,
+   "n_isolated": 3,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.444444444444445,
+   "degree_distinct_values": 3,
+   "density": 0.4609053497942387,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 5,
+   "mean_color_class": 3.259259259259259,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 2,
+     "len_max": 3,
+     "len_mean": 2.4444444444444446,
+     "sample": [
+      "v0",
+      "v1",
+      "v2",
+      "v3",
+      "v4",
+      "v5"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 2,
+     "len_max": 3,
+     "len_mean": 2.8333333333333335,
+     "sample": [
+      "in",
+      "pre",
+      "act",
+      "mov",
+      "adj",
+      "pnt"
+     ]
+    },
+    "pool_id": 29501095
+   },
+   "tokens_sample": [
+    "(",
+    ")",
+    "act",
+    "adj",
+    "in",
+    "mov",
+    "pnt",
+    "pre",
+    "q",
+    "v0",
+    "v1",
+    "v10"
+   ]
+  },
+  "math": {
+   "n_tokens": 28,
+   "n_isolated": 4,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.0,
+   "degree_distinct_values": 3,
+   "density": 0.42857142857142855,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 6,
+   "mean_color_class": 3.142857142857143,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 3,
+     "len_max": 4,
+     "len_mean": 3.4444444444444446,
+     "sample": [
+      "x_0",
+      "x_1",
+      "x_2",
+      "x_3",
+      "x_4",
+      "x_5"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 1,
+     "len_max": 1,
+     "len_mean": 1.0,
+     "sample": [
+      "∈",
+      "<",
+      "→",
+      "↦",
+      "≈",
+      "⇒"
+     ]
+    },
+    "pool_id": 32001460
+   },
+   "tokens_sample": [
+    "->",
+    ";",
+    "<",
+    "Q",
+    "x_0",
+    "x_1",
+    "x_10",
+    "x_11",
+    "x_12",
+    "x_13",
+    "x_14",
+    "x_15"
+   ]
+  },
+  "code": {
+   "n_tokens": 27,
+   "n_isolated": 3,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.444444444444445,
+   "degree_distinct_values": 3,
+   "density": 0.4609053497942387,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 5,
+   "mean_color_class": 3.259259259259259,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 2,
+     "len_max": 3,
+     "len_mean": 2.4444444444444446,
+     "sample": [
+      "n0",
+      "n1",
+      "n2",
+      "n3",
+      "n4",
+      "n5"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 3,
+     "len_max": 4,
+     "len_mean": 3.8333333333333335,
+     "sample": [
+      "in_",
+      "pre_",
+      "act_",
+      "mov_",
+      "adj_",
+      "pnt_"
+     ]
+    },
+    "pool_id": 28273766
+   },
+   "tokens_sample": [
+    ")",
+    ";",
+    "act_",
+    "adj_",
+    "in_",
+    "mov_",
+    "n0",
+    "n1",
+    "n10",
+    "n11",
+    "n12",
+    "n13"
+   ]
+  },
+  "alien": {
+   "n_tokens": 28,
+   "n_isolated": 4,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.0,
+   "degree_distinct_values": 3,
+   "density": 0.42857142857142855,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 6,
+   "mean_color_class": 3.142857142857143,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 3,
+     "len_max": 3,
+     "len_mean": 3.0,
+     "sample": [
+      "sim",
+      "tep",
+      "dut",
+      "der",
+      "das",
+      "sup"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 3,
+     "len_max": 3,
+     "len_mean": 3.0,
+     "sample": [
+      "dop",
+      "ket",
+      "tot",
+      "rum",
+      "sap",
+      "mud"
+     ]
+    },
+    "pool_id": 70715179
+   },
+   "tokens_sample": [
+    ">",
+    "Q",
+    "dam",
+    "das",
+    "dep",
+    "der",
+    "dop",
+    "dut",
+    "ket",
+    "kup",
+    "mud",
+    "pop"
+   ]
+  },
+  "relperm": {
+   "n_tokens": 28,
+   "n_isolated": 4,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.0,
+   "degree_distinct_values": 3,
+   "density": 0.42857142857142855,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 6,
+   "mean_color_class": 3.142857142857143,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 2,
+     "len_max": 3,
+     "len_mean": 2.4444444444444446,
+     "sample": [
+      "e0",
+      "e1",
+      "e2",
+      "e3",
+      "e4",
+      "e5"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 4,
+     "len_max": 6,
+     "len_mean": 5.166666666666667,
+     "sample": [
+      "moves",
+      "inside",
+      "near",
+      "points",
+      "acts",
+      "before"
+     ]
+    },
+    "pool_id": 98312951
+   },
+   "tokens_sample": [
+    ".",
+    "acts",
+    "before",
+    "e0",
+    "e1",
+    "e10",
+    "e11",
+    "e12",
+    "e13",
+    "e14",
+    "e15",
+    "e16"
+   ]
+  },
+  "entperm": {
+   "n_tokens": 28,
+   "n_isolated": 4,
+   "degree_min": 0.0,
+   "degree_max": 17.0,
+   "degree_mean": 12.0,
+   "degree_distinct_values": 3,
+   "density": 0.42857142857142855,
+   "spectral_norm": 16.999999999999996,
+   "n_colors": 6,
+   "mean_color_class": 3.142857142857143,
+   "color_imbalance": 0.1771694214876033,
+   "pool": {
+    "ent": {
+     "n": 18,
+     "distinct": 18,
+     "len_min": 2,
+     "len_max": 3,
+     "len_mean": 2.4444444444444446,
+     "sample": [
+      "e5",
+      "e0",
+      "e10",
+      "e14",
+      "e13",
+      "e11"
+     ]
+    },
+    "rel": {
+     "n": 6,
+     "distinct": 6,
+     "len_min": 4,
+     "len_max": 6,
+     "len_mean": 5.166666666666667,
+     "sample": [
+      "inside",
+      "before",
+      "acts",
+      "moves",
+      "near",
+      "points"
+     ]
+    },
+    "pool_id": 98312951
+   },
+   "tokens_sample": [
+    ".",
+    "acts",
+    "before",
+    "e0",
+    "e1",
+    "e10",
+    "e11",
+    "e12",
+    "e13",
+    "e14",
+    "e15",
+    "e16"
+   ]
+  }
+ },
+ "legitimacy": {
+  "relperm_vs_zh": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "relperm_vs_en": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "relperm_vs_lisp": {
+   "all_equal": false,
+   "per_key": {
+    "n_tokens": false,
+    "degree_max": true,
+    "degree_mean": false,
+    "density": false,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": false
+   },
+   "n_tokens": [
+    28,
+    27
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "relperm_vs_math": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "relperm_vs_code": {
+   "all_equal": false,
+   "per_key": {
+    "n_tokens": false,
+    "degree_max": true,
+    "degree_mean": false,
+    "density": false,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": false
+   },
+   "n_tokens": [
+    28,
+    27
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "relperm_vs_alien": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "entperm_vs_zh": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "entperm_vs_en": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "entperm_vs_lisp": {
+   "all_equal": false,
+   "per_key": {
+    "n_tokens": false,
+    "degree_max": true,
+    "degree_mean": false,
+    "density": false,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": false
+   },
+   "n_tokens": [
+    28,
+    27
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "entperm_vs_math": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "entperm_vs_code": {
+   "all_equal": false,
+   "per_key": {
+    "n_tokens": false,
+    "degree_max": true,
+    "degree_mean": false,
+    "density": false,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": false
+   },
+   "n_tokens": [
+    28,
+    27
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  },
+  "entperm_vs_alien": {
+   "all_equal": true,
+   "per_key": {
+    "n_tokens": true,
+    "degree_max": true,
+    "degree_mean": true,
+    "density": true,
+    "spectral_norm": true,
+    "color_imbalance": true,
+    "n_colors": true
+   },
+   "n_tokens": [
+    28,
+    28
+   ],
+   "spectral": [
+    17.0,
+    17.0
+   ]
+  }
+ },
+ "pool_of_arm": {
+  "zh": 99949509,
+  "en": 98312951,
+  "lisp": 29501095,
+  "math": 32001460,
+  "code": 28273766,
+  "alien": 70715179,
+  "relperm": 98312951,
+  "entperm": 98312951
+ },
+ "pool_groups": {
+  "99949509": [
+   "zh"
+  ],
+  "98312951": [
+   "en",
+   "relperm",
+   "entperm"
+  ],
+  "29501095": [
+   "lisp"
+  ],
+  "32001460": [
+   "math"
+  ],
+  "28273766": [
+   "code"
+  ],
+  "70715179": [
+   "alien"
+  ]
+ },
+ "mean_acc": {
+  "code": 0.428875,
+  "alien": 0.374625,
+  "en": 0.48187499999999994,
+  "entperm": 0.5118750000000001,
+  "lisp": 0.37762500000000004,
+  "math": 0.3642500000000001,
+  "relperm": 0.48075,
+  "zh": 0.37124999999999997
+ },
+ "corr_with_acc": {
+  "n_tokens": 0.21208844899764975,
+  "degree_mean": -0.21208844899764978,
+  "degree_max": NaN,
+  "density": -0.2120884489976497,
+  "spectral_norm": NaN,
+  "color_imbalance": 1.111443925123088e-15,
+  "n_colors": 0.21208844899764975,
+  "mean_color_class": -0.2120884489976498
+ },
+ "en_pool_arms": [
+  "en",
+  "relperm",
+  "entperm"
+ ],
+ "en_pool_mean_acc": 0.4915,
+ "other_pool_mean_acc": 0.383325
+}

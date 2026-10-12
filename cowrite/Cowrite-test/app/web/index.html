@@ -1,0 +1,4040 @@
+<!DOCTYPE html>
+<html data-page-node-id="uGeQ4crv5aNDXbAlE1u1mX" lang="zh-CN">
+<head data-page-node-id="6dTs2YHpnBHleYi8A55JAt">
+<script data-page-node-id="0FRJgtj9o6S8e3wyXTZP6v" src="/page/page_comm/inject.js"></script>
+<meta data-page-node-id="JByJUteGznqwqpSIUcxXmO" charset="utf-8">
+<meta data-page-node-id="mcfng6FFtdozTtjwgznK8S" content="width=device-width,initial-scale=1" name="viewport">
+<title data-page-node-id="5ShIppIof5VFJ1WvF42dna" data-pnid-children="o7fcdUKLkbElRoRkTPr746">伴写 demo · 非定向伴写</title>
+<style data-page-node-id="2qN1YKWsjuaviCBuExkHic" data-pnid-children="bcHDnuTkay6P9OvynNfRAZ">
+  :root{
+    --bg:#f7f7f5; --panel:#ffffff; --line:#e2e0da; --text:#2c2c2a;
+    --muted:#6b6a66; --accent:#0f6e56; --accent-bg:#e1f5ee;
+    --warn:#8a5a00; --warn-bg:#faeeda; --muted-bg:#f1efe8;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);
+       font:14px/1.7 -apple-system,"Segoe UI","Microsoft YaHei",sans-serif;
+       /* 整页一屏：header / 模型设置栏各占各的，main 吃剩下的全部高度。
+          原来写死 height:calc(100vh - 53px)，只算了 header 没算模型栏——
+          模型栏一展开，main 就被顶下去一截，写作区底部的那条栏（目录、
+          字数、召回记忆）正好落到屏幕外面，"存在但看不见"。 */
+       display:flex;flex-direction:column;height:100vh}
+  header{display:flex;align-items:center;gap:14px;padding:10px 16px;
+         background:var(--panel);border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .brand{font-weight:500}
+  .tag{font-size:12px;padding:2px 8px;border-radius:10px;background:var(--muted-bg);color:var(--muted)}
+  .tag.on{background:var(--accent-bg);color:var(--accent)}
+  .spacer{flex:1}
+  select,button{font:inherit;padding:5px 10px;border:1px solid var(--line);
+                border-radius:7px;background:var(--panel);color:var(--text);cursor:pointer}
+  button:hover{border-color:var(--muted)}
+  button:disabled{opacity:.45;cursor:not-allowed}
+  main{display:grid;grid-template-columns:1fr 380px;gap:14px;padding:14px;
+       flex:1;min-height:0}   /* min-height:0 不写的话 grid 项撑不破 flex，底栏还是会被顶出去 */
+  @media (max-width:900px){main{grid-template-columns:1fr;height:auto;flex:none}}
+  /* 文学视图：右栏宽度**可拖**。原来写死 380px，应答区被卡在一半宽里，
+     长表格和长引文都没法看。拖的是中间这条缝，宽度记在本地，下次进来还是这样。 */
+  #litmain{grid-template-columns:1fr 7px var(--litw,380px);gap:0 0}
+  #litmain > .write{margin-right:7px}
+  .litgrip{cursor:col-resize;background:transparent;border-radius:4px;position:relative}
+  /* 缝要**看得见**——全透明的话它就在那儿，可没人知道能拖。 */
+  .litgrip::after{content:"";position:absolute;left:2px;top:14px;bottom:14px;width:3px;
+                  border-radius:3px;background:var(--line)}
+  .litgrip:hover::after,.litgrip.on::after{background:var(--accent)}
+  @media (max-width:900px){
+    #litmain{grid-template-columns:1fr;gap:14px}
+    #litmain > .write{margin-right:0}
+    .litgrip{display:none}
+  }
+  /* position:relative 是**必需**的，不是修饰：.write 与 main 都没声明 position，
+     缺了它抽屉的包含块会变成视口、直接跑到页面左上角。加上之后 .write 同时是
+     包含块与裁剪祖先，而抽屉是内缩定位（left:0）、落在盒内 → 不会被裁掉。 */
+  .write{display:flex;flex-direction:column;background:var(--panel);
+         border:1px solid var(--line);border-radius:10px;overflow:hidden;
+         position:relative}
+  .write textarea,.write .ql-container{flex:1;border:0;outline:0;resize:none;padding:18px 20px;
+                  font:15px/1.9 "Songti SC","SimSun",serif;color:var(--text);background:transparent}
+  .write .ql-container{padding:0;overflow-y:auto}
+  .write .ql-editor{padding:18px 20px;font:15px/1.9 "Songti SC","SimSun",serif;
+                    min-height:100%;line-height:1.9}
+  /* 切章条：只在"大书按章开窗口"时出现，普通文档一行都不占。
+     它必须**看得见**——窗口化之后编辑区里只有一章，没有这条，
+     她会以为自己的稿子只剩这么点。这一条就是"你看到的是第几章"。 */
+  .chapbar{display:flex;align-items:center;gap:8px;padding:6px 10px;
+           border-bottom:1px solid var(--line);background:var(--panel);
+           font-size:11.5px;color:var(--muted)}
+  .chapbar button{padding:1px 8px;font-size:12px}
+  .chapbar .ct{color:var(--text);font-size:12px;overflow:hidden;
+               text-overflow:ellipsis;white-space:nowrap;max-width:38%}
+  .chapbar .ctip{margin-left:auto;font-size:11px;color:var(--muted)}
+  .write .ql-editor p{margin:0 0 .1em}
+  .write .ql-editor.ql-blank::before{color:#b6b3ab;font-style:normal;left:20px;right:20px}
+  /* ── 目录抽屉 ──
+     按钮不占顶栏（那儿已经塞了约 12 个控件）：目录是**正文的属性**，不是全局动作，
+     放编辑区自己的 .bar 里，两边视图位置也一致，且与将来的顶栏重组零冲突。
+     圆角写 var(--r-lg, 10px)：--r-lg 是 P3 tokens 要定的名字，现在还没有，
+     回退值 10px 正是 R18 核实的那一档（全仓圆角只有 4/7/10），所以零视觉变化。
+     写死的话，将来调 --r-lg 时抽屉会与 .write 脱开一条缝——那种缝只在暗色下看得见。 */
+  /* z-index 7 < 底栏的 8：抽屉展开时会盖住写作区左下角那个「目录」按钮，
+     原来只能刷新页面才能收回来。让底栏压在抽屉之上，按钮就一直点得到；
+     代价是抽屉底部会被压住一条，所以用 padding-bottom 给它让出位置。
+     另外抽屉自己也带「收起」、Esc 也能关 —— 三条退路，任意一条都能出来。 */
+  .tocdrawer{position:absolute;left:0;top:0;bottom:0;width:260px;z-index:7;
+             background:var(--panel);border-right:1px solid var(--line);
+             border-radius:var(--r-lg,10px) 0 0 var(--r-lg,10px);
+             transform:translateX(-100%);transition:transform .18s ease;
+             overflow-y:auto;padding:0 0 46px}
+  .tocdrawer.on{transform:translateX(0);box-shadow:6px 0 18px rgba(0,0,0,.07)}
+  .toc-head{position:sticky;top:0;z-index:1;display:flex;align-items:center;gap:8px;
+            padding:7px 10px;background:var(--panel);
+            border-bottom:1px solid var(--line);font-size:11.5px;color:var(--muted)}
+  .toc-head .toc-hn{margin-left:auto}
+  .toc-close{padding:1px 7px;font-size:11px}
+  #tocbtn{position:relative;padding:2px 8px;font-size:11px}
+  #tocflag{position:absolute;top:1px;right:1px;width:5px;height:5px;
+           border-radius:50%;background:var(--accent)}
+  .ql-editor h1,.ql-editor h2,.ql-editor h3,
+  .ql-editor h4,.ql-editor h5,.ql-editor h6{scroll-margin-top:12px}
+  /* 高亮是**浮层**，不是给标题加 class。往可编辑区里增删 class 会惊动 Quill
+     的变更观察器，它顺势同步一次选区 → 触发 selectionchange → 伴写探针以为
+     "她动了一下"，8 秒后又弹一次建议。浮层不动正文，也不会被存进稿子里。 */
+  .toc-flash{position:fixed;pointer-events:none;z-index:60;border-radius:3px;
+             background:rgba(15,110,86,.13);box-shadow:0 0 0 1px rgba(15,110,86,.28);
+             animation:tocflash 1.2s ease-out forwards}
+  @keyframes tocflash{0%{opacity:0}12%{opacity:1}70%{opacity:1}100%{opacity:0}}
+  .toc-list{list-style:none;margin:0;padding:0}
+  .toc-item{display:flex;align-items:flex-start;gap:2px;padding:0 8px}
+  /* 不在当前章的条目（大书窗口化）。点它会先翻章，所以颜色要让出来——
+     不标记的话她点一条就被送到别处，会以为自己点错了。 */
+  .toc-other .toc-link{color:var(--muted)}
+  .toc-other .toc-link::after{content:"↷";font-size:9px;margin-left:3px;opacity:.7}
+  .toc-link{flex:1;display:block;font-size:12.5px;line-height:1.7;color:var(--text);
+            text-decoration:none;padding:2px 4px;border-radius:4px;
+            overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .toc-link:hover{background:var(--muted-bg)}
+  .toc-item[aria-current] .toc-link{color:var(--accent);background:var(--accent-bg)}
+  .toc-fold{flex:none;width:14px;height:20px;line-height:20px;border:0;background:none;
+            padding:0;color:var(--muted);font-size:9px;cursor:pointer}
+  .toc-empty{padding:10px 14px;font-size:12px;color:var(--muted)}
+  .toc-acts{padding:0 14px;display:flex;flex-direction:column;gap:6px}
+  .toc-acts button{font-size:11.5px;padding:3px 8px}
+  .toc-guess{padding:8px 14px;font-size:12px;color:var(--muted)}
+  .toc-guess-h{margin-bottom:6px}
+  .toc-guess-row{display:flex;align-items:center;gap:8px;padding:2px 0}
+  .toc-guess-row span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .toc-note{padding:6px 12px;margin:0 8px 8px;font-size:11px;color:var(--warn);
+            background:var(--warn-bg);border-radius:5px;line-height:1.6}
+  /* 排版工具条：都在本地生效，不发请求——改的是她自己的稿子，不属于模型的事 */
+  .fmtbar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;padding:7px 10px;
+          border-bottom:1px solid var(--line);background:#fbfaf7;font-size:12px}
+  .fmtbar .sep{width:1px;height:18px;background:var(--line);margin:0 2px}
+  .fmtbar select,.fmtbar button,.fmtbar input[type=color]{
+          font:inherit;font-size:12px;border:1px solid var(--line);background:#fff;
+          color:var(--text);border-radius:5px;padding:2px 6px;cursor:pointer}
+  .fmtbar button:hover,.fmtbar select:hover{border-color:var(--accent);color:var(--accent)}
+  .fmtbar button.on{border-color:var(--accent);color:#fff;background:var(--accent)}
+  .fmtbar input[type=color]{width:26px;height:22px;padding:0;border:1px solid var(--line)}
+  .fmtbar .fb-note{color:var(--muted);margin-left:auto}
+  /* sticky 是被一本整本排进来的书逼出来的：编辑区比屏幕高时，这条栏会被顶到
+     视口外面——目录、字数、召回记忆全都"存在但看不见"，得滚到底才摸得到。
+     而目录恰恰是人在开头才想点的东西。钉住之后内容从它底下过，要自己的底色。 */
+  /* z-index 8：压在目录抽屉（7）之上，抽屉展开时「目录」按钮仍然点得到 */
+  .write .bar{position:sticky;bottom:0;z-index:8;background:var(--panel);
+              padding:7px 14px;border-top:1px solid var(--line);
+              font-size:12px;color:var(--muted);display:flex;gap:12px;align-items:center}
+  .write .bar .ttsbtn{background:transparent;border:1px solid var(--line);
+              border-radius:6px;font-size:12px;line-height:1;padding:4px 8px;
+              color:var(--accent);cursor:pointer;transition:background .15s, opacity .15s}
+  .write .bar .ttsbtn:hover{background:var(--line)}
+  .write .bar .ttsbtn:disabled{opacity:.5;cursor:default}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;
+         display:flex;flex-direction:column;overflow:hidden}
+  .panel .head{padding:10px 14px;border-bottom:1px solid var(--line);
+               font-size:12px;color:var(--muted);display:flex;align-items:center;gap:8px}
+  .cards{flex:1;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:10px}
+  .card{border:1px solid var(--line);border-radius:9px;padding:11px 13px;background:#fff}
+  .card.solid{border-left:3px solid var(--accent)}
+  .card.dashed{border-left:3px dashed #b9b6ac}
+  .card.muted{background:#faf9f6;border-left:3px solid #cfccc3}
+  .card .t{font-size:12px;color:var(--muted);margin-bottom:5px;display:flex;gap:8px;align-items:center}
+  /* 层标记：A 思路 / B 结构 / C 情节 / ⊘ 沉默 */
+  .lv{display:inline-flex;align-items:center;justify-content:center;
+      min-width:20px;height:19px;padding:0 6px;border-radius:4px;
+      font-size:11.5px;font-weight:600;line-height:1;letter-spacing:.5px;
+      border:1px solid transparent;flex:none}
+  .lv-A{background:#efeaf7;color:#5b3fa8;border-color:#ddd3f0}
+  .lv-B{background:#e6f2ee;color:#1f6f5c;border-color:#cfe6de}
+  .lv-C{background:#fbf0e0;color:#8a5a10;border-color:#f0e0c4}
+  .lv-X{background:#f2f1ed;color:#8a877e;border-color:#e2dfd7}
+  .card.lvline-A{border-left:3px solid #5b3fa8}
+  .card.lvline-B{border-left:3px solid #1f6f5c}
+  .card.lvline-C{border-left:3px solid #c98a1e}
+  .card.lvline-X{border-left:3px dashed #cfccc3}
+  .card .b{font-size:13.5px;line-height:1.75}
+  .card .acts{margin-top:9px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .card .acts button{font-size:12px;padding:3px 9px}
+  .card .acts .rw{border-color:#d8d4c8}
+  .card .acts .rw:hover{border-color:var(--accent);color:var(--accent)}
+  .card .acts .rw.on{border-color:var(--accent);color:var(--accent);background:#fdfaf3}
+  .card .rn{margin-top:7px;font-size:11.5px;color:var(--muted)}
+  .card.busy{opacity:.55}
+  /* 「你自己说」：四个按钮之外的兜底。四个都不对味的时候，她可以自己措辞。 */
+  .card .sayrow{display:flex;gap:6px;margin-top:8px}
+  .card .sayrow input{flex:1;min-width:0;font:inherit;font-size:12px;padding:4px 9px;
+                      border:1px solid var(--line);border-radius:7px;background:#fcfcfb;color:var(--text)}
+  .card .sayrow input:focus{outline:0;border-color:var(--accent)}
+  .card .sayrow button{font-size:12px;padding:3px 10px}
+  /* 对话栏：不挂在任何一张卡片上的那一路，可以连着说好几轮 */
+  .talk{border-top:1px solid var(--line);background:#fcfcfb;display:flex;flex-direction:column}
+  .talk .th{padding:8px 13px;font-size:12px;color:var(--muted);cursor:pointer;
+            display:flex;align-items:center;gap:8px;user-select:none}
+  .talk .th:hover{color:var(--accent)}
+  .talk .th .tog{font-size:11px;color:var(--muted)}
+  .talk .log{max-height:260px;overflow:auto;padding:0 13px;display:flex;flex-direction:column;gap:8px}
+  .talk .log:empty{display:none}
+  .talk .msg{font-size:12.5px;line-height:1.75;padding:7px 10px;border-radius:8px;white-space:pre-wrap}
+  .talk .msg.her{background:var(--muted-bg);align-self:flex-end;max-width:88%}
+  .talk .msg.me{background:#fff;border:1px solid var(--line);max-width:96%}
+  .talk .row{display:flex;gap:6px;padding:9px 13px}
+  .talk .row input{flex:1;min-width:0;font:inherit;font-size:12.5px;padding:5px 10px;
+                   border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--text)}
+  .talk .row input:focus{outline:0;border-color:var(--accent)}
+  .talk .row button{font-size:12px;padding:4px 11px}
+  .talk.folded .log,.talk.folded .row{display:none}
+  details{margin-top:8px}
+  summary{font-size:12px;color:var(--muted);cursor:pointer}
+  .ev{margin-top:7px;padding:7px 9px;background:var(--muted-bg);border-radius:6px;
+      font-size:12px;color:var(--muted);line-height:1.6}
+  .ev b{color:var(--text);font-weight:500}
+  .empty{padding:26px 16px;text-align:center;color:var(--muted);font-size:13px;line-height:1.9}
+  .dot{width:7px;height:7px;border-radius:50%;background:#cfccc3;display:inline-block}
+  .dot.live{background:var(--accent)}
+  .note{padding:11px 14px;background:var(--warn-bg);border-bottom:1px solid var(--line);
+        font-size:12.5px;color:var(--warn);line-height:1.7}
+  /* ---------- P / M / S 选择条 ----------
+     为什么改成按钮：《工程路径与技术回顾》§四.18 量出来，
+     分类器在两套对照语料上的 AUC 是 0.523（0.5＝抛硬币），
+     它分不出这段是问题驱动还是故事驱动。那就不该由它定——由她定。 */
+  .modebar{display:flex;align-items:center;gap:5px;padding:8px 13px;
+           border-bottom:1px solid var(--line);background:#fcfcfb}
+  .modebar .lb{font-size:11.5px;color:var(--muted);margin-right:2px}
+  .modebar .mb{position:relative;font-size:12px;padding:3px 10px;
+               border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--muted)}
+  .modebar .mb:hover{border-color:var(--accent);color:var(--accent)}
+  .modebar .mb.on{border-color:var(--accent);color:var(--accent);
+                  background:var(--accent-bg);font-weight:500}
+  /* 悬停说明。不用原生 title：它出现得慢、不能换行、样式也没法调。 */
+  .modebar .mb .tip{display:none;position:absolute;left:0;top:calc(100% + 7px);z-index:40;
+                    width:290px;padding:10px 12px;border:1px solid var(--line);
+                    border-radius:9px;background:#fff;color:var(--text);
+                    font-size:12px;line-height:1.75;text-align:left;font-weight:400;
+                    box-shadow:0 6px 22px rgba(0,0,0,.13);cursor:default}
+  .modebar .mb:hover .tip{display:block}
+  .modebar .mb .tip b{display:block;margin-bottom:3px;color:var(--accent);font-weight:500}
+  .modebar .mb .tip i{display:block;margin-top:6px;font-style:normal;
+                      color:var(--muted);font-size:11.5px}
+  /* ---------- 全文剖面 ----------
+     载入长文后先通读一遍的结果。它不是一张"伴写卡片"，
+     所以挂在卡片区外面，不参与 render 的重写。 */
+  .prof{border-bottom:1px solid var(--line);background:#fbfaf7}
+  .prof .ph{padding:8px 13px;font-size:12px;color:var(--muted);
+            display:flex;align-items:center;gap:8px}
+  .prof .ph button{font-size:11px;padding:1px 8px}
+  .prof .pb{padding:0 13px 11px;font-size:12.5px;line-height:1.8;
+            white-space:pre-wrap;max-height:230px;overflow:auto}
+  .prof.ready .ph{color:var(--accent)}
+  .prof.error .ph{color:var(--warn)}
+  .prof.building .ph{color:var(--muted)}
+
+  /* 模型设置条：默认收起。它不是主界面的一部分——
+     换模型是**偶尔一次**的动作，不该长期占着写作区上方的位置。 */
+  .models{display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+          padding:10px 14px;border-bottom:1px solid var(--line);
+          font-size:12px;color:var(--text)}
+  .models label{display:inline-flex;align-items:center;gap:5px;color:var(--muted)}
+  .models select,.models input{font:inherit;font-size:12px;padding:3px 6px;
+          border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--text)}
+  .models input[type=text]{width:210px}
+  .models input[type=password]{width:190px}
+  .models .hintline{flex-basis:100%;color:var(--muted);font-size:11px;line-height:1.6}
+  .models .res{flex-basis:100%;font-size:11px}
+  .models .res.ok{color:var(--ok,#2e7d52)}
+  .models .res.bad{color:var(--warn)}
+
+  /* 视图切换：伴写 / 文学。两个视图气质相反，所以**标签要常驻在顶上**——
+     让你随时知道自己在哪一边，以及这一边写进的是哪个记忆区。 */
+  .viewsw{display:inline-flex;border:1px solid var(--line);border-radius:6px;
+          overflow:hidden;margin-left:10px}
+  .viewsw .vs{font:inherit;font-size:12px;padding:4px 12px;border:0;
+              background:#fff;color:var(--muted);cursor:pointer}
+  .viewsw .vs + .vs{border-left:1px solid var(--line)}
+  .viewsw .vs.on{background:var(--accent);color:#fff}
+  .viewsw .vs:hover:not(.on){color:var(--text)}
+
+  /* 文学工作台：输出是成篇的 markdown。
+     这里**不能**用 pre-wrap——那是给纯文本留换行的，一旦渲染成 HTML
+     就会和标签自己的间距叠成双倍空行。 */
+  .litout .empty{color:var(--muted);font-size:12px;line-height:1.8}
+  .litout .body{word-break:break-word;font-size:13px;line-height:1.85;padding:2px 2px 8px}
+  .litout .body h1,.litout .body h2,.litout .body h3,.litout .body h4{
+    margin:.9em 0 .45em;line-height:1.45;font-weight:600}
+  .litout .body h1{font-size:16px}
+  .litout .body h2{font-size:15px;border-bottom:1px solid var(--line);padding-bottom:4px}
+  .litout .body h3{font-size:14px}
+  .litout .body h4{font-size:13px;color:var(--muted)}
+  .litout .body p{margin:.5em 0}
+  .litout .body ul,.litout .body ol{margin:.5em 0;padding-left:1.5em}
+  .litout .body li{margin:.25em 0}
+  .litout .body blockquote{margin:.6em 0;padding:.25em 0 .25em .85em;
+    border-left:3px solid var(--line);color:var(--muted)}
+  .litout .body code{background:var(--muted-bg);padding:1px 4px;border-radius:4px;
+    font:12px/1.65 ui-monospace,Consolas,monospace}
+  .litout .body pre{background:var(--muted-bg);padding:9px 11px;border-radius:7px;
+    overflow:auto;margin:.6em 0;white-space:pre-wrap}
+  .litout .body pre code{background:none;padding:0}
+  .litout .body hr{border:0;border-top:1px solid var(--line);margin:1em 0}
+  .litout .body a{color:var(--accent)}
+  .litout .body strong{font-weight:600}
+  /* 会话串 */
+  .litturn{border:1px solid var(--line);border-radius:9px;padding:10px 12px;background:#fff}
+  .litturn.me{background:#faf9f6;border-color:#e8e5dc}
+  .litturn .who{font-size:11px;color:var(--muted);margin-bottom:5px}
+  .litturn.me .who{color:#8a8880}
+  .litturn .body{padding:0}
+  .toolsused{margin-top:8px;display:flex;flex-wrap:wrap;gap:5px}
+  .toolsused span{font-size:10.5px;padding:1px 8px;border-radius:9px;
+    background:var(--accent-bg);color:var(--accent);cursor:help}
+  .litout .meta{color:var(--muted);font-size:11px;border-top:1px dashed var(--line);
+                padding-top:6px;margin-top:8px}
+  .litout .err{color:var(--warn);font-size:12px;line-height:1.7}
+  /* 对话框 + 工具开关 */
+  .litsay{display:flex;gap:6px;padding:9px 12px;border-top:1px solid var(--line);background:#fcfcfb}
+  .litsay input{flex:1;min-width:0;font:inherit;font-size:12px;padding:5px 9px;
+    border:1px solid var(--line);border-radius:7px;background:#fff;color:var(--text)}
+  .litsay input:focus{outline:0;border-color:var(--accent)}
+  .litsay button{font-size:12px;padding:4px 12px;white-space:nowrap}
+  /* 工具清单：原来常驻在应答框**下面**，把应答区压掉一半——
+     她要的是"滚动时用整个右边窗口"。所以收进顶部那条状态栏里，
+     点「工具」才展开；收起时它一个像素都不占，应答区吃满整个右栏。 */
+  #litmain .panel .head{position:relative}
+  .littools{position:absolute;top:calc(100% + 6px);right:12px;z-index:35;
+    width:340px;max-height:min(60vh,430px);overflow:auto;display:none;
+    flex-direction:column;gap:6px;padding:10px 12px;font-size:11px;color:var(--muted);
+    background:var(--panel);border:1px solid var(--line);border-radius:9px;
+    box-shadow:0 6px 20px rgba(0,0,0,.09)}
+  .littools.on{display:flex}
+  .littools label{display:flex;gap:6px;align-items:flex-start;cursor:pointer;line-height:1.5}
+  .littools .tl{line-height:1.7}
+  .littools .tl b{color:var(--accent);font-weight:600}
+  .littools .th{font-size:11px;color:var(--muted);padding-bottom:2px}
+  .toolbtn{font-size:11px;padding:2px 8px}
+  .toolbtn.on{border-color:var(--accent);color:var(--accent);background:var(--accent-bg)}
+  /* 一轮回答下面的「放进左边」：读到的东西要能直接变成材料，
+     不然还得手动复制一遍——那一步是纯损耗。 */
+  .litturn .putrow{margin-top:7px;display:flex;gap:8px;align-items:center}
+  .litturn .putrow button{font-size:11px;padding:2px 9px}
+  .litturn .putrow .pd{font-size:11px;color:var(--muted)}
+  /* 导出菜单：导入有按钮，导出也得有——文件进得来就得出得去 */
+  .expwrap{position:relative;display:inline-flex}
+  .expmenu{position:absolute;top:calc(100% + 5px);right:0;z-index:30;display:none;
+    min-width:196px;background:var(--panel);border:1px solid var(--line);
+    border-radius:9px;box-shadow:0 6px 20px rgba(0,0,0,.09);padding:6px}
+  .expmenu.on{display:block}
+  .expmenu .eh{font-size:11px;color:var(--muted);padding:4px 8px 6px}
+  /* 导出什么：左边那一份是她的稿子，会话那一份是过程。
+     两边都可能分别是要带走的东西，所以让她自己挑，不替她定。 */
+  .expmenu .expsrc{border-bottom:1px solid var(--line);padding:0 0 4px;margin-bottom:4px}
+  .expmenu .expsrc label{display:flex;align-items:center;gap:7px;
+    padding:5px 8px;border-radius:6px;font-size:12px;color:var(--text);cursor:pointer}
+  .expmenu .expsrc label:hover{background:var(--muted-bg)}
+  .expmenu .expsrc input{margin:0;accent-color:var(--accent)}
+  .expmenu .expsrc label input:disabled ~ span{color:var(--muted)}
+  .expmenu .expsrc label:has(input:disabled){cursor:default}
+  .expmenu .expsrc label:has(input:disabled):hover{background:none}
+  /* 文件名自己填、最终名先看见：写下去之前就知道这一份叫什么 */
+  .expmenu .expfile{display:flex;gap:8px;align-items:center;
+    border-bottom:1px solid var(--line);margin:0 0 4px;padding:2px 8px 6px}
+  .expmenu .expfile input[type=text],.expmenu .expfile input:not([type]){
+    flex:1;min-width:0;font:inherit;font-size:12px;padding:3px 6px;
+    border:1px solid var(--line);border-radius:5px;background:#fff;color:var(--text)}
+  .expmenu .expfile input:focus{outline:none;border-color:var(--accent)}
+  .expmenu .expfile .expd{display:flex;gap:5px;align-items:center;
+    font-size:11px;color:var(--muted);white-space:nowrap;cursor:pointer}
+  .expmenu .expfile .expd input{margin:0;accent-color:var(--accent)}
+  .expmenu .expfn{font-size:10.5px;color:var(--muted);line-height:1.5;
+    padding:2px 8px 5px;word-break:break-all}
+  .expmenu button{display:block;width:100%;text-align:left;border:0;background:none;
+    padding:6px 8px;border-radius:6px;font-size:12px;color:var(--text)}
+  .expmenu button:hover{background:var(--muted-bg);color:var(--accent)}
+  .expmenu button:disabled{opacity:.42;cursor:default}
+  .expmenu button:disabled:hover{background:none;color:var(--text)}
+  .expmenu .hintline{margin:6px 8px 2px;font-size:10.5px;line-height:1.6}
+  .dot.busy{background:var(--accent)}
+  .dot.on{background:var(--ok,#2e7d52)}
+  .dot.bad{background:var(--warn)}
+
+/* ---------------- 测试版采集面板（**只在 Cowrite-test 上有**） ---------------- */
+#probepanel{position:fixed;right:14px;bottom:14px;width:392px;max-height:74vh;
+  background:#fbf9f4;border:1px solid #d8d0c0;border-radius:9px;z-index:60;
+  font:12px/1.62 ui-monospace,SFMono-Regular,Menlo,monospace;color:#3a352c;
+  box-shadow:0 6px 26px rgba(0,0,0,.16);display:none;flex-direction:column}
+#probepanel.on{display:flex}
+#probepanel .ph{display:flex;align-items:center;gap:8px;padding:8px 10px;
+  border-bottom:1px solid #e3ddd0;background:#f3efe6;cursor:pointer;
+  border-radius:9px 9px 0 0}
+#probepanel .ph b{font-size:12px;letter-spacing:.4px}
+#probepanel .ph .x{margin-left:auto;cursor:pointer;color:#8a8274;padding:0 4px}
+#probepanel .pb{padding:8px 10px;overflow:auto;flex:1}
+#probepanel .stat{font-size:11px;color:#6b6456;margin-bottom:7px;line-height:1.7}
+#probepanel .stat b{color:#3a352c}
+#probepanel .row{border-top:1px solid #ece6da;padding:7px 0}
+#probepanel .row .meta{font-size:10px;color:#938b7c;margin-bottom:3px}
+#probepanel .row .body{font-size:11.5px;color:#4a4438;margin-bottom:5px;
+  max-height:64px;overflow:auto;white-space:pre-wrap;word-break:break-all}
+#probepanel .btns{display:flex;gap:5px;flex-wrap:wrap}
+#probepanel .btns button{font:11px/1.4 inherit;padding:3px 8px;cursor:pointer;
+  background:#fff;border:1px solid #cec6b4;border-radius:5px;color:#3a352c}
+#probepanel .btns button:hover{background:#f0ece0}
+#probepanel .btns button.on{background:#3a352c;color:#fbf9f4;border-color:#3a352c}
+#probepanel .ft{padding:6px 10px;border-top:1px solid #e3ddd0;display:flex;
+  gap:6px;align-items:center;font-size:10.5px;color:#8a8274}
+#probepanel .ft button{font:10.5px/1.4 inherit;padding:2px 7px;cursor:pointer;
+  background:#fff;border:1px solid #cec6b4;border-radius:4px}
+#probetab{position:fixed;right:14px;bottom:14px;z-index:59;cursor:pointer;
+  font:11.5px/1.5 ui-monospace,monospace;padding:5px 11px;background:#3a352c;
+  color:#fbf9f4;border-radius:7px;box-shadow:0 3px 14px rgba(0,0,0,.2)}
+/* 沉默那一行：只加一句可点的小字，**不构成卡片** */
+#silbar{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:3px;
+  font-size:11px;color:#8a8274}
+#silbar button{font:10.5px/1.4 inherit;padding:1px 6px;cursor:pointer;
+  background:#fff;border:1px solid #d5cdbb;border-radius:4px;color:#5a5344}
+#silbar button:hover{background:#f0ece0}
+#silbar button.on{background:#5a5344;color:#fff;border-color:#5a5344}
+
+
+/* ---- 盲评面板（§7 其四）：按场景配对、随机序、填 s(g,p) ---- */
+#blindpanel{position:fixed;inset:0;background:rgba(28,25,20,.55);z-index:80;
+  display:none;align-items:center;justify-content:center}
+#blindpanel.on{display:flex}
+#blindbox{width:min(880px,94vw);max-height:88vh;background:#fbf9f4;
+  border:1px solid #cfc7b5;border-radius:11px;overflow:hidden;display:flex;
+  flex-direction:column;box-shadow:0 18px 60px rgba(0,0,0,.4)}
+#blindbox .bh{padding:12px 16px;border-bottom:1px solid #e3ddd0;background:#f3efe6}
+#blindbox .bh b{font:600 14px/1.5 inherit}
+#blindbox .bh .x{float:right;cursor:pointer;color:#8a8274}
+#blindbox .bb{padding:12px 16px;overflow:auto;flex:1;
+  font:12.5px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace}
+.pair{border:1px solid #e0d9c9;border-radius:8px;padding:10px 12px;margin-bottom:11px;
+  background:#fff}
+.pair .sc{font-size:11px;color:#8a8274;margin-bottom:7px}
+.pair .g{border-left:3px solid #c9c0ac;padding:5px 0 5px 10px;margin-bottom:6px;
+  white-space:pre-wrap;word-break:break-word}
+/*⚠ 这里原本有两条：.pair .g.pos 与 .pair .g.neg（绿/红边线）。
+   它们**运行时不可见**，因为渲染 .g 时从不加这两个 class——
+   但它们是一道潜伏的泄露通道：§7 其四 的全部效力建立在
+   「形态标签在盲评里不可见」这一层隐藏上，而将来任何人补一行
+   classList.add('pos')（看起来只是想让接受的那条变绿）就会当场
+   把形态暴露给作者，盲评失效、数据作废、那一节要重做。
+   它不会自己发作，所以也不会有人发现。
+   2026-10-08 删除；视觉零变化（.g 的默认边线本就是 #c9c0ac）。 */
+.pair .g .ord{font-size:10px;color:#a09888;margin-right:6px}
+.pair .row2{display:flex;gap:7px;align-items:center;margin-top:7px;flex-wrap:wrap}
+.pair input[type=text]{flex:1;min-width:180px;font:11.5px/1.5 inherit;padding:4px 7px;
+  border:1px solid #d5cdbb;border-radius:5px;background:#fdfcf9}
+.pair input.s{width:74px;flex:none;text-align:right}
+.pair button{font:11.5px/1.5 inherit;padding:4px 11px;cursor:pointer;background:#fff;
+  border:1px solid #cec6b4;border-radius:5px}
+.pair button.on{background:#3a352c;color:#fbf9f4;border-color:#3a352c}
+.pair .done{font-size:10.5px;color:#7a9a6e}
+#blindfoot{padding:9px 16px;border-top:1px solid #e3ddd0;display:flex;gap:8px;
+  align-items:center;font-size:11px;color:#8a8274;background:#f3efe6}
+  #blindfoot button{font:11.5px/1.5 inherit;padding:4px 11px;cursor:pointer;background:#fff;
+  border:1px solid #cec6b4;border-radius:5px}
+
+  /* ---- 配对行：接 / 不接 成对出现（2026-10-07） ----
+     §7 其四要的是**采纳率的组间差**。原来每条只有一个「接」按钮，
+     author_feedback 于是永远只写 trial_accepted，rejected 恒为 0，
+     分母里没有"不接受" ⇒ 采纳率恒为 100%，组间差恒为 0（分析器已就此报警）。
+     「不接」必须和「接」一样好按，否则那个数还是假的：
+     让拒绝多花哪怕一次额外操作，收集到的就偏向接受。 */
+  .pbtns{display:inline-flex}
+  .pbtns button{border-radius:0;padding:4px 10px}
+  .pbtns button:first-child{border-radius:5px 0 0 5px}
+  .pbtns button:last-child{border-radius:0 5px 5px 0}
+  .pbtns button + button{border-left:0}
+  .pbtns button:hover{z-index:1;border-color:#a09888}
+  /* 拒采用警示色（--warn 系），别用强调色：这是"拦下来了"，不是"做了什么" */
+  .pair button.no.on{background:#8a5a00;color:#fbf9f4;border-color:#8a5a00}
+  .pair button.on{background:#3a352c;color:#fbf9f4;border-color:#3a352c}
+  /* p 是「你随后写的那一段」——是段落，不是一行。
+     原来用单行 input，粘贴带换行的文字会被压成一坨，
+     而换行恰恰是"接下来写成什么样"的一部分。 */
+  .pair textarea.pbox{display:block;width:100%;margin-top:7px;resize:vertical;
+    font:11.5px/1.65 inherit;padding:5px 8px;color:inherit;
+    border:1px solid #d5cdbb;border-radius:6px;background:#fdfcf9}
+  .pair textarea.pbox:focus{outline:0;border-color:#7a9a6e}
+  .jrow{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+  .jrow .jl{font-size:11px;color:#8a8274;min-width:34px}
+  .pair .done{font-size:10.5px;color:#7a9a6e}
+  /* 窄屏：面板写死 392px，在手机宽度上右边会出屏。
+     取 100vw 减左右各 14px 的边距，屏幕多窄都装得下。 */
+  @media (max-width:560px){
+    #probepanel{width:calc(100vw - 28px);right:14px;max-height:70vh}
+    #blindbox{width:96vw;max-height:92vh}
+    .jrow .jl{min-width:0}
+  }
+  /* 焦点可见：键盘走查时这两个浮层里的按钮没有可见焦点环，
+     按 Tab 过去不知道自己在哪。统一在这两处补，不逐个控件改。 */
+  #blindpanel button:focus-visible,
+  #probepanel button:focus-visible,
+  #probetab:focus-visible{outline:2px solid #7a9a6e;outline-offset:2px}
+
+
+/* 防回归守卫：本页**不得**出现 .g.pos / .g.neg 或它们的 classList 写法。
+   加进去等于在盲评里泄露形态标签。见上面那段注释。 */
+</style>
+<link data-page-node-id="Kv0cqIvGLx5SeYqWFrqJPc" href="lib/quill.snow.css" rel="stylesheet">
+</head>
+<body data-page-node-id="1VQpFdINdyZTj7l8aA7CO5">
+
+<header data-page-node-id="aY5Wts9rRiytZyaAUTxqjT">
+  <span data-page-node-id="TPTxAYfwA96k6PmgrMNwaf" class="brand"><!--pnid:xuZ4B5Bl8lm9b72k0cNXOx-->伴写 demo</span>
+  <div data-page-node-id="7iyAIDSMyDXkthcizRMvxG" class="viewsw" id="viewsw">
+    <button data-page-node-id="qDirTO6waxYPSeEKdu143w" class="vs on" data-view="write" title="写作时从旁接话：只举证，不定向，不确定就沉默"><!--pnid:T3STILddowgSc0neQhyhpu-->伴写</button>
+    <button data-page-node-id="EhN2IPSUjLyAlUJEzw20t4" class="vs" data-view="lit" title="处理已有的文学材料：拆文、审稿、素材整理、短篇/散文/翻译"><!--pnid:V2Ams6EG8IO0j2tUWAr1Hh-->文学</button>
+  </div>
+  <span data-page-node-id="P8xAScxkk9TEA76EBZuReu" class="tag" id="mode"><!--pnid:DInbjL8PLHlfp9iAqahqRp-->—</span>
+  <span data-page-node-id="QGX7YKWqLsn0sSrsWE8NY8" class="tag" id="scope"><!--pnid:zFlRLdrIzJRygnyUmLZ3yU-->读取范围：—</span>
+  <span data-page-node-id="fuUSkeiWSHwDJrpylIu3Vz" class="spacer"></span>
+  <button data-page-node-id="EvEnTP5mCmlnqrcuiptjWC" id="open"><!--pnid:aNKymccXMJubf6O7t05FIA-->打开文件</button>
+  <input data-page-node-id="VbuqKzaYMDIwWP9VR1c47O" accept=".txt,.md,.docx,.markdown,.epub" id="file" type="file" style="display:none">
+  <span data-page-node-id="h0k9vBg0czrZGhW6uEompQ" class="expwrap">
+    <button data-page-node-id="nxQyKUHtJTxnIsZsWFLHMh" id="exportbtn" title="导出到浏览器的下载文件夹"><!--pnid:eiC2r0rnzcVu0lJar6kZRa-->导出</button>
+    <div data-page-node-id="RryTCza0WF0cyZzrOPyHan" class="expmenu" id="expmenu">
+      <div data-page-node-id="heaB7yRJOrY9yV1zptMHiN" class="eh" id="exph"><!--pnid:BnwI8hlzVs5kIV8V3QYHgX-->导出</div>
+      <div data-page-node-id="oqXJm209AkWp1VPn9VU364" class="expsrc" id="expsrc">
+        <label data-page-node-id="g9xzU6GqCgvme1X5UvjKKN"><input data-page-node-id="esSQmvTQxbn8HqiLVF32uu" checked name="expsrc" type="radio" value="doc">
+          <span data-page-node-id="0v1d2Dszuok8ZBuftgOetb" id="expsrcd"><!--pnid:ptLoFrSMIJRxiYIiyyl3cA-->左边（稿子）</span></label>
+        <label data-page-node-id="6uLQ3yr8MhlhwwrQkqF7Hw"><input data-page-node-id="LiTmuUWXQYDOg15gw8pqgI" name="expsrc" type="radio" value="log">
+          <span data-page-node-id="6Tfx5eH7nny2AjQVYb7kel" id="expsrcl"><!--pnid:9reRr7QdwsEnzJv4PDPEf8-->会话（含来回）</span></label>
+      </div>
+      <div data-page-node-id="xeqDW96qjG201QkXfSfnVw" class="expfile">
+        <input data-page-node-id="Ou9LgOdBEaA3bUeVQoVs7G" id="expname" placeholder="文件名（不用写日期）" spellcheck="false" title="这一栏会记住；留空就退回「文稿」">
+        <label data-page-node-id="bDUm1ka5ib46gkYHBH9qbs" class="expd"><input data-page-node-id="k4fFJSkNzzgwNh6xTqX6VC" checked id="expdate" type="checkbox"><!--pnid:FkzrGjFSszyuXj9mUfmDfJ-->带日期</label>
+      </div>
+      <div data-page-node-id="lQ4ySWj9DVI0z9V2n2Ql2F" class="expfn" id="expfn"><!--pnid:SVzbFsgcgVsVqDhwzYuZIH-->文稿</div>
+      <button data-page-node-id="28wYlk7IumhzebNd15XG8T" data-fmt="docx"><!--pnid:NtdTkrX7mJZ5yTAch2LwOS-->Word（.docx）</button>
+      <button data-page-node-id="Kab0UYXr0a4vhH2LjFTCtO" data-fmt="md"><!--pnid:UCyUt8JaEmlVh3dNB6P200-->Markdown（.md）</button>
+      <button data-page-node-id="QOMoKXUTasTywg9EtDpD4h" data-fmt="txt"><!--pnid:dLGJs3nCJJvB2jJ0z7AUih-->纯文本（.txt）</button>
+      <button data-page-node-id="obdJwiuhymbXWJMGd8XuZ8" data-fmt="epub"><!--pnid:GbgWsnXmnzP9z9YsQrOlHw-->电子书（.epub）</button>
+      <div data-page-node-id="Br1RYFOVlcDSGHqLHVRCo8" class="hintline" id="expires" style="display:none"></div>
+      <div data-page-node-id="6QdE0chH2PvCnwzzzzUZjn" class="hintline"><!--pnid:AoqAMjoMcqtcFMmF6ZznLK-->会存到浏览器的下载文件夹。这个页面<b data-page-node-id="PQKqHiJLNJ8c8Gqry6inqM"><!--pnid:sfEqoZmND8THOMdL6LZxgH-->不替你保管</b><!--pnid:41HjzRFdTJLEq5vAVRWcys-->——
+        它只是把你写的东西交还给你。</div>
+    </div>
+  </span>
+  <span data-page-node-id="Oui3ZpDo7WgRH8zlMkSHJ0" class="tag" id="doc"><!--pnid:SQARy5khbpJHIZk8j46uXG-->未载入文档</span>
+  <label data-page-node-id="ASYQ8apaWjY4zwLnQDIWRU" style="font-size:12px; color:var(--muted)"><!--pnid:EXbMSBgkhf3RnIDK2zlFjQ-->位置
+    <input data-page-node-id="SNliKOKZbmFrUbxfkbivM6" id="sec" title="作者自定义的位置标记，会原样传给模型作为语境（可留空）" value="—" style="width:74px; font:inherit; font-size:12px; padding:2px 5px; border:1px solid var(--line); border-radius:5px; background:#fff; color:var(--text)">
+  </label>
+  <button data-page-node-id="AECo83vL7VoJJJtYPFmZS0" id="ask"><!--pnid:XtNYUQCyyoVS3K23FCj6JV-->立即伴写</button>
+  <button data-page-node-id="M7gBEFY6Zc9fwrPlAV2Okl" id="pause"><!--pnid:weUHiECKZglFDEC7C3dBzH-->暂停</button>
+  <button data-page-node-id="45pgo3G3MEYrH7Fb1sB65U" id="modelbtn" title="换一家模型（默认 dots3）"><!--pnid:sYrLwNge3gYtxhjSdEuYM1-->模型：—</button>
+</header>
+
+<div data-page-node-id="FtY6BfUbHxQgh9J40RhnPS" class="panel" style="border-radius:0; border-left:0; border-right:0; border-top:0">
+  <div data-page-node-id="G6jLmEcqObaq6zloS5RTeI" class="note" id="note" style="display:none"></div>
+  <div data-page-node-id="7GJ1Lmjbj4b1zPvONLG9Da" class="models" id="modelbar" style="display:none">
+    <label data-page-node-id="ScAL36RP36oC9GfrP4TNDt"><!--pnid:dwfTMdc73feCmseAxBOTN6-->后端
+      <select data-page-node-id="drJsNX4W4L5HIZhIGCRxwk" id="mprov"></select>
+    </label>
+    <label data-page-node-id="kdpb48qyAzEBIovHu3L8Yw"><!--pnid:CRLLR8duhOMtytbh7gCVCV-->端点 <input data-page-node-id="oGyCxEvXqPY9N7CNZ8MmQG" id="mbase" placeholder="base_url" type="text"></label>
+    <label data-page-node-id="CUTwwwm1CT07ASeQk2roMG"><!--pnid:2LR2qed4a3RpEjUuUozuq3-->模型 <input data-page-node-id="yD8KZo3eK2W5ZcGHx14uFW" id="mmodel" placeholder="model" type="text"></label>
+    <label data-page-node-id="F5xa2Hzr0Kyki29s113CNn"><!--pnid:MhuUnoOlInNBNmXrbl21FI-->Key <input data-page-node-id="N7StYtkwNV46Gs5yUPHgqa" id="mkey" placeholder="留空＝沿用现在的" type="password"></label>
+    <button data-page-node-id="zLrwv2ZE0nCS758wLZzlJT" id="mtest"><!--pnid:De2NVFvxZZsYeqjxmOYy1v-->测试连接</button>
+    <button data-page-node-id="V4eOgSPAi3CQsgJpGZGrdk" id="msave"><!--pnid:O3lP0Uw0qNLJn19vXLyLZ3-->保存</button>
+    <div data-page-node-id="JNvwZrH7q1bRIbZ9lUiomu" class="hintline" id="mhint"></div>
+    <div data-page-node-id="GVaZL9Vzj0Om6rOy4tCS9B" class="res" id="mres"></div>
+    <div data-page-node-id="gn6AUl8chDuWOQ476ngiCl" class="hintline"><!--pnid:a57R7V856Txj9fjyaOjtkO-->
+      能换的是<b data-page-node-id="6eazZTkyewxi7LQocQM7hr"><!--pnid:zNZtQz3S0jYRQ0AEQyXucY-->用哪家模型</b><!--pnid:EPXv3iEEFe9oYbEOYpEHtH-->；temperature 0.3 与「关闭思考块」由系统策略定，不在这里开放——
+      那两个值是伴写质量和实验可复现的前提，随手调会让论文里的对照全部失效。
+    </div>
+  </div>
+</div>
+
+<main data-page-node-id="8xnAsA6JYlkRK6MvliQZfC" id="writemain">
+  <section data-page-node-id="RuUc1om05zkcSU8iSTy7eb" class="write">
+    <div data-page-node-id="ooaKw1qJSiSAp0guufm0Pg" class="fmtbar" id="fmtbar">
+      <select data-page-node-id="SKg523ahmeKRxAuu4PdVNh" data-block id="fb-block" title="段落样式">
+        <option data-page-node-id="kaaIDcszu9gnTfqCAbQnTf" value="p"><!--pnid:RoJ1FYcAdOWlSYcks7OPV7-->正文</option>
+        <option data-page-node-id="68M1cbyzj79FRHNKJ4O6Qs" value="h1"><!--pnid:g3Zm3LdngVaP0RQlPnFhH7-->一级标题</option>
+        <option data-page-node-id="OgCChvj9Oxmy6HyLMSB7ZR" value="h2"><!--pnid:gX6FIxpJRfvwxODp3OlU8N-->二级标题</option>
+        <option data-page-node-id="hEY022wxB2xgHJ2TLvSZy6" value="h3"><!--pnid:OXsVAdwaFn1ZkLbGnq5g1O-->三级标题</option>
+        <option data-page-node-id="Y6OhNvGiASlH9KTH0RpgJQ" value="quote"><!--pnid:c5ptwPYLCHN3zzBx0w4SV3-->引用</option>
+      </select>
+      <select data-page-node-id="64VWmGiAibvbtZImbBth1w" data-size id="fb-size" title="字号">
+        <option data-page-node-id="y7WVa22shF3i8xbQ4sYg0E" value><!--pnid:Tt0V9PIyz4ufzq9SNxRWdF-->字号</option>
+        <option data-page-node-id="s53n1C02qJ5IHs4NrQzRP4" value="10px"><!--pnid:kRabfTenXa6HfpPULBKhhw-->10</option><option data-page-node-id="ZzwOYL3N8v5w4i34ndjKbI" value="10.5pt"><!--pnid:4RTLQyW24lkOEg1tf94yfW-->10.5（五号）</option>
+        <option data-page-node-id="JpN16qsXVr46OQ47QjjNPc" value="12pt"><!--pnid:fakFc1ZJ0ozDSvkjSTX6Fr-->12（小四）</option><option data-page-node-id="54yJ4fOle2Ozxp5cq5hMdX" value="14px"><!--pnid:fQvx2dfkgVgeARsSkctbEw-->14</option>
+        <option data-page-node-id="ruLURMBFr8FXnSJ5sLajoD" value="16px"><!--pnid:xJEZ91rgEl3231glre9yui-->16</option><option data-page-node-id="jUhPjOP7xlHgQg5t3ucn2F" value="18px"><!--pnid:CeqI6yYpcA7ij22GyYxZZk-->18</option>
+        <option data-page-node-id="AArIr8R5U9LKhj4moaZM6P" value="22px"><!--pnid:Fy37hHUXe8Nu3ZHIrOLnYo-->22</option><option data-page-node-id="wAN4hMJCRNe5BCXOIeL0Sq" value="28px"><!--pnid:7u7egD6f7SB3PBNJHRU4Oc-->28</option>
+        <option data-page-node-id="uwmyLwHp6gususgpZZhzYL" value><!--pnid:t1ZaBgLaOZHwmyEKuarXW6-->默认</option>
+      </select>
+      <button data-page-node-id="jqbnJOMwz9M9fUlREuJIwt" data-fmt="bold" title="加粗"><b data-page-node-id="CRAS1YvyCb0jDm8QpXsJmP"><!--pnid:LaUZGajRwjDkEUM3ihaAHv-->B</b></button>
+      <button data-page-node-id="RdEqNhRhr2hy3ls0pel2hY" data-fmt="italic" title="斜体"><i data-page-node-id="MgDW0HTBoXXaT5BdRDQrQ8"><!--pnid:0K8Uragi9NOWrYZQhJsd1p-->I</i></button>
+      <button data-page-node-id="98KoixHDsrfLRU8hlQCjV8" data-fmt="underline" title="下划线"><u data-page-node-id="GVUEIUM0WMKe0BWWnXPqPT"><!--pnid:ue0k9tJJpUbYnEFUoI4ujs-->U</u></button>
+      <button data-page-node-id="eTRpPJIl1EFiTIK2CGrWa9" data-fmt="strike" title="删除线"><s data-page-node-id="6mffcxZtruRcjHUBBpipXW"><!--pnid:jGkn60B1yNBdsPNP8iSzib-->S</s></button>
+      <span data-page-node-id="wdHK58CGSGgc8Z7Zwfdlx3" class="sep"></span>
+      <button data-page-node-id="5q4UBDgaAy95v5Ilxo8cer" data-al="left" title="左对齐"><!--pnid:K9JrDsqFP79CCJJSxf7sJz-->左</button>
+      <button data-page-node-id="Fif46Mue8X72osTBx9vGxU" data-al="center" title="居中"><!--pnid:uekrJm1LI3PvErhi7zPJlk-->中</button>
+      <button data-page-node-id="vxEQE29bfLotnH5TlEebW7" data-al="right" title="右对齐"><!--pnid:dNGly29ZqLZhpGOetPrHgs-->右</button>
+      <button data-page-node-id="d20I9E7uktwzCBMyFadCCE" data-al="justify" title="两端对齐"><!--pnid:g6KRZhCuW4YHJEHvhjVB14-->两端</button>
+      <span data-page-node-id="O7UgrJoVcld1MWGQJZzPfM" class="sep"></span>
+      <select data-page-node-id="sExI3LcKcpeqzfzRnp3pmT" id="fb-lh" title="行距">
+        <option data-page-node-id="agpNzOHCrQQaiFgZLn0qVl" value><!--pnid:Ted1RFj8lBuzIz5yE43vF1-->行距</option>
+        <option data-page-node-id="GwzmPN7vcHww7e5Ys78ItX" value="1.0"><!--pnid:8fmaJVayeQIY7BotcESjM2-->1.0</option><option data-page-node-id="xTvXce8KCZbVwROo2K2IFU" value="1.15"><!--pnid:CiKz7DfsSmtYvGz7bcn4Nu-->1.15</option>
+        <option data-page-node-id="SXN98Wb91B3MtntC0ustV0" value="1.5"><!--pnid:jRTqelmSAtMuAHCRKNQ5fl-->1.5</option><option data-page-node-id="RGUXhd2K4gYvQmQQPVdoQd" value="2.0"><!--pnid:OYCgP3vre9ocDVeWLXQlqA-->2.0</option>
+        <option data-page-node-id="BDhhikhEMxjfarsVxCGxUD" value="3.0"><!--pnid:Ew9oK3YcZB90Owaa5STUGF-->3.0</option>
+      </select>
+      <input data-page-node-id="meuSAMuRRTlAETfvUYJzZO" id="fb-color" title="字体颜色" type="color" value="#000000">
+      <span data-page-node-id="fACCPhkF5PPfnjkcRY8TNB" class="sep"></span>
+      <button data-page-node-id="HrmPkCjTOzkyu6PFpaYF65" id="fb-page" title="纸张 / 页边距 / 栏数"><!--pnid:83LnRMLnEdRefEwxAdlfkn-->页面设置</button>
+      <span data-page-node-id="y7MOpUiTyC6brENhD761Jf" class="fb-note"><!--pnid:CXBuvrXk6j1CUCJ2dP9DIA-->只改你看到的版式，导出 DOCX 时一并带走</span>
+    </div>
+    <div data-page-node-id="wULaFUiyDs1x6esiZ3SAgd" class="chapbar" id="chapbar" style="display:none">
+      <button data-page-node-id="Rxl9pTaJcaUMZDOfaxgJ80" id="chapprev" title="上一章 —— 只翻编辑区，不会改你的字"><!--pnid:0kW5Ahf0XIjrAR19B7j0cM-->‹ 上一章</button>
+      <span data-page-node-id="7LKFCyc3ePqkRwONij11iE" id="chapinfo"><!--pnid:TS30p76G2wPCD0XoM4y8tY-->第 1/1 章</span>
+      <span data-page-node-id="SO8QrHUgv8Axvm2oON43ZA" class="ct" id="chaptitle"></span>
+      <button data-page-node-id="4hd3w7EmQDPTrlWl4st50B" id="chapnext" title="下一章"><!--pnid:UH0uS1ea3jvggqWQquXd7w-->下一章 ›</button>
+      <span data-page-node-id="2yuQZ9XPYAIzr1udztzKCO" class="ctip"><!--pnid:dEsxmuWufkr797qZlhXn6n-->大书按章打开：编辑区只装当前章，探针与导出仍看全文</span>
+    </div>
+    <div data-page-node-id="TMWI8sfbYjwkk6boxsKnju" id="ta"></div>
+    <div data-page-node-id="BGZ0SQcxiee7aNvgeJ61Vp" class="tocdrawer" id="tocdrawer"></div>
+    <div data-page-node-id="3IPZG6tKYfPblL90TxLCcd" class="bar">
+      <button data-page-node-id="dk7m3tmsjtwAqojyZvQ5xw" id="tocbtn" title="正文的目录：点一下展开，点标题跳过去。只滚屏，不动你的光标"><!--pnid:agw24FpH603zULqCWGZaBM-->目录 · <span data-page-node-id="RsXHnzaIH9TGhWPkCdsmgC" id="tocn"><!--pnid:NUsbOGn8UTycIE1hVKqwWs-->0</span><i data-page-node-id="tUheWjblGvxdnK2qmdtBg8" id="tocflag" style="display:none"></i></button>
+      <span data-page-node-id="QCws1MChEnABIOJjvPTIjx" id="count"><!--pnid:UBtwXWK79FeT5DcJx4emOf-->0 字</span>
+      <span data-page-node-id="54B4UOAWPL3D2KUZ4NqSgR" id="hint"><!--pnid:36AWmzUqY1YKP6XBUW0owc-->停止输入 8 秒后触发</span>
+      <span data-page-node-id="xgb1bFR1yZOKtNM41PfxTK" id="iniwrap" title="谁来决定该不该出声。甲＝规则阈值（旧版）；乙＝规则阈值＋整篇上下文；丙＝连" 说不说"都交给模型。切了立刻生效，不用重启。" style="display:flex; align-items:center; gap:3px; font-size:11px; color:var(--muted)"><!--pnid:nUEWr1koef5dbggJnI0zZH-->
+        谁决定说不说：
+        <button data-page-node-id="oociiN177weiEZPbBZpZOt" class="ini" data-ini="jia" style="font-size:11px; padding:1px 7px; border-radius:5px"><!--pnid:c34iBClvhhGkoNiQ42CsrZ-->甲 规则</button>
+        <button data-page-node-id="CkSxqBJoaFAqjzdSZpRgq3" class="ini" data-ini="yi" style="font-size:11px; padding:1px 7px; border-radius:5px"><!--pnid:2J95oKkf30YT06K94hsjpu-->乙 半</button>
+        <button data-page-node-id="aVDdqpOzZnIpCJEtPw6f0Q" class="ini" data-ini="bing" style="font-size:11px; padding:1px 7px; border-radius:5px"><!--pnid:g5xaIgGiUYYVCD5LP7UP7f-->丙 放权</button>
+      </span>
+      <span data-page-node-id="Pwet6WrNqL7elj2mMh5VTz" class="spacer" style="flex:1"></span>
+      <button data-page-node-id="q4YqiUhFiNvOyvMEdvwZu1" id="memrecall" title="把记忆里相关的东西取回来，挂在提示词前面" style="font-size:11px; padding:2px 8px"><!--pnid:TIrpmZFzHKKeqnvUWjS8iH-->召回记忆</button>
+      <button data-page-node-id="6zv6NQozQ6B7cVajS2D0rJ" id="memreview" title="这一 Part 写完了：让它复盘、提炼、写进记忆库" style="font-size:11px; padding:2px 8px"><!--pnid:lH3yWEFTl1DTTRpuad4Git-->这一 Part 写完</button>
+    </div>
+  </section>
+
+  <aside data-page-node-id="rY0Op6BVYeS3mYq7zYshUR" class="panel">
+    <div data-page-node-id="D9vFIQtoBhuRplkIUUccGo" class="head">
+      <span data-page-node-id="gZTw358y8yMURg5kEW3Mws" class="dot" id="dot"></span>
+      <span data-page-node-id="ZGAxF37QYwQBNhg67kV9q6" id="pstate"><!--pnid:D4aHvp1bYamr9SvTPmLEYi-->待命</span>
+
+<!--pnid:N0amPRT2ashTiRd1G9mg9W--><!-- ===== 测试版采集面板（**只在 Cowrite-test 上有**，发行版无此块） ===== -->
+<div data-page-node-id="UEQMSy2N3IYt4PihmtFMyQ" id="probetab" title="打开采集面板"><!--pnid:icLCId9P8bs1xUj2nHkBfo-->探针 ▸</div>
+<div data-page-node-id="Z641wXdccfEO91pSSWEhe0" id="probepanel">
+  <div data-page-node-id="x6cFfUoXO6nA7gm1xVGjmf" class="ph" id="probehead">
+    <b data-page-node-id="NULtkL7WgDh4aa0qCCbcVm"><!--pnid:paufYAHHJ4m3AXrt0UzlQ7-->探针 · 采集</b><span data-page-node-id="FJ2s1a6E1GCwDwupd6uS53" style="color:#8a8274; font-size:10.5px"><!--pnid:YPocaYDNJfjG5gX7hslI63-->沉默 / 模式 / 试验</span>
+    <span data-page-node-id="X4mhz5tcbthZ0rew2Ejca6" class="x" id="probeclose"><!--pnid:0rO1IdoAzdTgyWIOIooQw0-->✕</span>
+  </div>
+  <div data-page-node-id="yKEyE8LLMWHYP9T91iz01f" class="pb" id="probebody">
+    <div data-page-node-id="VqzPARzFyHL5VuLWZD3CTM" class="stat" id="probestat"><!--pnid:B6aK7T45OEdQtCBV7E6BPM-->读取中…</div>
+    <div data-page-node-id="zm4gx0DbbpPWn7WYLYNtIH" id="probelist"></div>
+  </div>
+  <div data-page-node-id="4ErDU6SVVAjaNkvkWDvSNO" class="ft" id="probefoot">
+    <button data-page-node-id="3PMNrhBockOnRB1RRO0Mal" id="probeonlyun"><!--pnid:OzXkvCfkzKT21WbYKd55h4-->只看未标注</button>
+    <button data-page-node-id="0BgtVvAdCElBhWutcNLWcz" id="probereload"><!--pnid:Fi3oCAjd0QQClKHAdjM3N5-->刷新</button>
+    <span data-page-node-id="P8KarbC9a0d11ZyLyixpEl" id="probemsg" style="margin-left:auto"></span>
+  </div>
+</div>
+      <span data-page-node-id="JCwmXna7rpxQWP7THB6Ol5" class="spacer"></span>
+      <span data-page-node-id="pLylGcqQBrcE9GmCP89ucS"><!--pnid:NfxAkmg6OPfl7anrSSeeZy-->伴写面板 · 不写入正文</span>
+    </div>
+    <div data-page-node-id="x4QSmiDQnVFWa1IamYJOq6" class="modebar" id="modebar">
+      <span data-page-node-id="7YTIkt9UEo4AByMBMX0H9F" class="lb"><!--pnid:qAC1UM0g28VjbX3Clf480G-->这段是</span>
+      <button data-page-node-id="Jk3Z3wabc0semqalov1lEU" class="mb on" data-mode><!--pnid:QN9v9ZN6X9qHUsIDYqngCx-->自动
+        <span data-page-node-id="KqrEtPjNJFQsrozAHwCxAN" class="tip"><b data-page-node-id="KNDy2sXlWBtckdVuISGor3"><!--pnid:FMNvu0BWuzfL88ZoLXz6wQ-->自动（分类器猜）</b><!--pnid:q1jovOV62srWwIqYyzOTck-->让脚本按七个词表特征去判。
+          <i data-page-node-id="DXGzPFSajaBLcB2TOhOgA6"><!--pnid:yg1dNckrHlsFldHOiaLpNb-->实测分不准：两套对照语料 AUC 0.523，等于抛硬币。不建议用。</i></span>
+      </button>
+      <button data-page-node-id="CmT5piA9nIptWhaRrLBw01" class="mb" data-mode="P"><!--pnid:hYJfBAFAwftgHAnRXizepL-->P 问题驱动
+        <span data-page-node-id="C3r0EASiNEeKaN9heQjJSH" class="tip"><b data-page-node-id="Xwt74zMMeTdYXeZ5N6AoxC"><!--pnid:WTPWZYMELhus82MkoV9Jyx-->P · 问题驱动</b><!--pnid:2yR1w6SUxssdan9XTaKo08-->文本不问「接下来会发生什么」，它让张力悬着：靠重复、变奏、环绕推进，答案留在文本里，不落地。
+          <i data-page-node-id="VnGw34LoHp33jb37NiAoPR"><!--pnid:PKOPyIQclbSr5ig1xcm4X3-->这时的读法不要急着收口，不要替它下结论、不要把每一段都翻译成「讲了什么」。跟着它的环绕走。</i></span>
+      </button>
+      <button data-page-node-id="b0FmMnMkms33ZGvQ90ivG0" class="mb" data-mode="M"><!--pnid:mj2nZQyysCGwV7OfF1JwPx-->M 混合
+        <span data-page-node-id="3VOrxAd5s96eKWH3N80UoA" class="tip"><b data-page-node-id="WTXwzGhJmkf7huDO1L0Wr7"><!--pnid:aobHSQwqXh9eHWENhxBjd4-->M · 混合</b><!--pnid:9wwyfZSngx2OuqI89z4wZA-->情节在推进，但保持现代主义质感，不滑向商业腔。有事件，也有余留在事件之外的东西。
+          <i data-page-node-id="aPmW2AmAYY5vIbbqtF7hRC"><!--pnid:WZaFr5XCeJQqKbeOUyrH7n-->最难的一种：两头都不能偏。既不能只盯情节把它读浅，也不能抛开情节往上拔。</i></span>
+      </button>
+      <button data-page-node-id="1pPThStJVcb4qSdFHv4wIh" class="mb" data-mode="S"><!--pnid:Ct61qGb7gN3tY3UXiORgdF-->S 故事驱动
+        <span data-page-node-id="tv616HBBmNio7uF82Sqh0M" class="tip"><b data-page-node-id="35gKI9uAiVWOSfXKvfPJA8"><!--pnid:DMBidLcMliSQ55KOqkG3i0-->S · 故事驱动</b><!--pnid:PmMr5Dfp333m8uNu6kDUMJ-->有目标、有因果、有时间线。写了什么事，事情往哪儿去，是清楚的。
+          <i data-page-node-id="QG3f0kgbwQ284DA1MnCALv"><!--pnid:qWVJnO06VrrbENAKXa2U8e-->这时要克制过度解读：它已经在往前走了，别拦下来问它「到底在说什么」。跟着因果走就行。</i></span>
+      </button>
+    </div>
+    <div data-page-node-id="Q97FubPC8YzsJ2zpD1gx4I" class="cards" id="cards">
+      <div data-page-node-id="MrAetR4civWdNpAknGFAm7" class="empty"><!--pnid:vfNgK0ojVuf1wbJVwyo1NC-->这里只呈现证据、出处与沉默。<br data-page-node-id="S0wCfBD473gjhYrd1VDcIt"><!--pnid:zvgxmXm0e3KfdkyisnjYjq-->它不会替你写任何一个字。</div>
+    </div>
+    <div data-page-node-id="wQL9Hv5rAQkTzXgyklNe2X" class="talk folded" id="talk">
+      <div data-page-node-id="CroTJtF8Ijn7s5yjOWTG3h" class="th" id="talkhead"><!--pnid:NQEYNVLCb1bQqwm1Juugrl-->直接跟它说 <span data-page-node-id="7rX04kRuMR79rEB7o0dZlb" class="tog"><!--pnid:NQvYtcIU2WnRE1GdFH7F9H-->（展开）</span>
+        <span data-page-node-id="frH5fU52UHFJ7CBTsxlzvj" class="spacer"></span><span data-page-node-id="W0A7JiThOML4jh5CZ4eAZe" style="font-size:11px"><!--pnid:v2rDKzlT0KqlptDAYpHyzQ-->不经过那四个按钮</span>
+      </div>
+      <div data-page-node-id="tQKK9U1Nzj6cG22H9YcFWx" class="log" id="talklog"></div>
+      <div data-page-node-id="s6JDcYrXu2PfAMJim04Qim" class="row">
+        <input data-page-node-id="sobzy109Zxj6cQ17zFM3Qd" id="talkin" placeholder="想让它改什么、想问什么，直接说。它会照做——包括平时不给的东西。">
+        <button data-page-node-id="2PnxCttMRr1JC6DgiWOA4J" id="talksend"><!--pnid:stjVB0qRb0snbaYVNiKIzr-->发送</button>
+      </div>
+    </div>
+  </aside>
+</main>
+
+<!--pnid:WsjOEaXEjpGjqFvpkUgihA--><!-- ── 文学工作台 ──────────────────────────────────────────────
+     与伴写是**相反**的两种姿态：伴写不替作者定向、不确定就沉默；
+     这里要下判断，但每一条判断都必须举证到原文。
+     两者写进**不同的记忆区**（伴写→小说·伴写，这里→通用文学），
+     否则"下判断"的手会去污染伴写的语气。 -->
+<main data-page-node-id="rfJugs9PSTI3mK3Pwi5Wf7" id="litmain" style="display:none">
+  <section data-page-node-id="zDYNRHBF3QQPZ8I25KQtLE" class="write">
+    <!--pnid:K9scmt4i7hbBTGoKbjTBXq--><!-- 精简工具条：只有「写作时用得到」的那几样。字号/颜色/行距/页面设置的
+         语义是「排版跟着 docx 走」，材料框不需要——照搬只会把那条挤的复制一遍。
+         块样式含 h1-h3：目录面板在文学视图靠它才有东西可列（护栏 4）。 -->
+    <div data-page-node-id="hN2CXTyoo89AJJySfhcLzM" class="fmtbar" id="lfmtbar">
+      <select data-page-node-id="WptetjfF0HtJRN2Df657c4" data-block title="段落样式">
+        <option data-page-node-id="Dj07Pkd4nP1zYjaeen1F5l" value="p"><!--pnid:01YOl3gI0tBachvJiGnSNL-->正文</option><option data-page-node-id="DA0iOoNBijYqG3mlnnY6C6" value="h1"><!--pnid:6qqObPyxvKNBAtJek3ly5z-->标题一</option>
+        <option data-page-node-id="Iip0lrl18VacatwuT4VcMe" value="h2"><!--pnid:VpDigJyyfUxLpHEbDCeX0q-->标题二</option><option data-page-node-id="vyaXfUeUCPuoelqDyqqepH" value="h3"><!--pnid:0DP1K8ToHvXtfy1H6kKekY-->标题三</option>
+        <option data-page-node-id="NKr42O9c0MRqRlfqnXQVvX" value="quote"><!--pnid:DTuuinyNDiPQmCsLsgE3Qr-->引用</option>
+      </select>
+      <span data-page-node-id="Tr3Sp21mS1GIwHiFxcu73O" class="sep"></span>
+      <button data-page-node-id="pxDMqz3J19Lxr08zg60yLc" data-fmt="bold" title="加粗"><b data-page-node-id="rbDQOeLJDltAhAyNJVpvFR"><!--pnid:Lll3rC75irXKfAj3GERc1j-->B</b></button>
+      <button data-page-node-id="0dzo3ET2h15Taq4wQcF1w0" data-fmt="italic" title="斜体"><i data-page-node-id="d8q4NfWgCsnGs8G064s5Zt"><!--pnid:bz991zm9gDQCzF3teAJRff-->I</i></button>
+      <button data-page-node-id="fGgtgJigjCZF2x6sF0MgPV" data-fmt="underline" title="下划线"><u data-page-node-id="BoiJvJrgkscODBJv0YSDYD"><!--pnid:wgccriU0dvXQVWKRRoErBH-->U</u></button>
+      <span data-page-node-id="oskc33Eh40lv6to35JA0SW" class="sep"></span>
+      <button data-page-node-id="c22evOwwUFrxXBPebNtKPv" data-list="bullet" title="无序列表"><!--pnid:CnhPtf3t8h4Fhg1m6prhHT-->• 列表</button>
+      <button data-page-node-id="6XQ2VhSQrK8XAzeRW5jPpj" data-list="ordered" title="有序列表"><!--pnid:ZuTeYOX5OYPTUCdACAJ86f-->1. 列表</button>
+      <span data-page-node-id="lLGI1OesXSm6SoAEIU9mOt" class="fb-note"><!--pnid:hZ9r4b3hn9D4E8le55zKaq-->材料框的排版同样跟着导出走（docx / epub）</span>
+    </div>
+    <div data-page-node-id="9OQT37PMPB2qzzsSVCWUWK" class="chapbar" id="litchapbar" style="display:none">
+      <button data-page-node-id="8KUWNcO0IYuyJFcpn521PI" id="litchapprev" title="上一章 —— 只翻材料编辑区，不会改你的字"><!--pnid:kCrFqHqbAEmS94XT06W9gg-->‹ 上一章</button>
+      <span data-page-node-id="oPQt1itzWlD0tOPX0Rbg3Z" id="litchapinfo"><!--pnid:4jvkTBwyTrNAjKHdAC9Gkd-->第 1/1 章</span>
+      <span data-page-node-id="jIgUz2wKeQXu1YLgmjy7w5" class="ct" id="litchaptitle"></span>
+      <button data-page-node-id="zR7jVBLZhu5BobjQMuW5BK" id="litchapnext" title="下一章"><!--pnid:YNND1bg6gHtuQMVEB5KKG1-->下一章 ›</button>
+      <span data-page-node-id="3ZnwJnsbMhj2jXiYDjndPU" class="ctip"><!--pnid:K0bpWu8wJ6GtdVI349tD8z-->带目录材料按章打开：编辑区只装当前章，处理与导出仍看全文</span>
+    </div>
+    <div data-page-node-id="6NokqJCbzzFzGDOTVGbe0a" id="lta"></div>
+    <div data-page-node-id="rcab515olFJJo3yiIuD7kx" class="bar">
+      <span data-page-node-id="DMI1Y1C6KmzBEsufiSYbz1" id="lcount"><!--pnid:7T5t5GhhYXxveP09nGT0Gt-->0 字</span>
+      <button data-page-node-id="lttsbtn" id="lttsbtn" type="button" class="ttsbtn"
+              title="把编辑框文本发给 DeepSeek 网页端朗读（第一次会要求登录）">🔊 朗读</button>
+      <span data-page-node-id="W9QXh27WmdF2fEohE44wkM" class="spacer"></span>
+      <span data-page-node-id="nkWzFAHb9rLgZKFUE7mlm6" id="lread" title="后台逐章阅读全文并建立可用于后续对话的全书记忆" style="font-size:11px; color:var(--muted)"><!--pnid:fZ4Cdu2I4ETX9h6Mt2PiZD-->全文阅读：未开始</span>
+      <span data-page-node-id="u7U09D1ZPFoXR5VYpmDcQ6" id="lws" style="font-size:11px; color:var(--muted)"><!--pnid:hPcKVRuCknOoH4BbVRboho-->记忆区：通用文学</span>
+    </div>
+  </section>
+
+  <div data-page-node-id="4s6zHSuuxUvTGd5JdPRjI9" class="litgrip" id="litgrip" title="拖动调整右边这一栏的宽度"></div>
+
+  <aside data-page-node-id="WqN16E6iltegda9pGh9oFF" class="panel">
+    <div data-page-node-id="9U7woF4G6GogtKhAfzrr8N" class="head">
+      <span data-page-node-id="1lebqVp3GFq9KMJ8u0PlGN" class="dot" id="ldot"></span>
+      <span data-page-node-id="htKDCDSegkS5YpzV94JvtE" id="lstate"><!--pnid:I0ONBR68o02k0VdvzCYiSz-->待命</span>
+      <span data-page-node-id="jExxxFKBWj9oIzEPsZdb6Q" class="spacer"></span>
+      <button data-page-node-id="bKMZMZwexxuKJVOHRyMaRu" class="toolbtn" id="litoolbtn" title="它能用什么、这次用了什么"><!--pnid:6Cf8REj2iF1dFuL9cejvnx-->工具</button>
+      <span data-page-node-id="ABe87xuAkyM7176VcMz99J"><!--pnid:cn9N8WE6YtQtfbi11DMGl5-->文学工作台 · 不跑伴写策略</span>
+      <!--pnid:xSWG2dqEh8sIygq9ypkxXf--><!-- 工具清单挂在这儿（绝对定位的浮层），不占应答区的高度 -->
+      <div data-page-node-id="oJD8Tpy1QK4JaMItn3LzvM" class="littools" id="litoolbox">
+        <div data-page-node-id="XgUT4AG40ypCfKBpQhtX7u" class="th"><!--pnid:XrbURvaHD7kYPpXcBvtyEt-->它会这些（要用再勾）</div>
+        <!--pnid:gOtMpp2NxRoppBwrmI2nA7--><!-- 默认**不勾**（2026-09-20 改）。
+             原来默认是勾着的，于是每做一件事——包括拆文、审稿这种纯对着
+             眼前材料做功的活——它都会先想"要不要上网查一下"。实测后果：
+             一次本该 50 秒的拆文变成好几轮、好几分钟，中间还不回话，
+             看起来就是页面卡住了。**工具是备用能力，不是默认姿势。** -->
+        <label data-page-node-id="N3QN7MEkkNKqWQjRBMpzYL"><input data-page-node-id="Vi4Yt5Xu9aUlzj2ZTOs9HU" id="littools" type="checkbox">
+          <span data-page-node-id="0ulS7laDgDkdGkHhbEDrpm"><!--pnid:FpoGKG3fE2RjZtcIyxIztD-->让它去查：<b data-page-node-id="g63KIDxgWV2Z9TMw8J2auF"><!--pnid:O9BensoNcezSTnTRQxqdZU-->上网</b><!--pnid:h6X9vpzPNO8aPBXjdI9YyM--> · <b data-page-node-id="6XsPuJGEyIZ4wAZKxJrY3o"><!--pnid:zu9o3YT2HkZTUiDWSxYuNt-->GitHub</b><!--pnid:UtYbL2ULSkvLQQVHKHdDFe--> · <b data-page-node-id="JqI68E4lGNmMrv60AydsmH"><!--pnid:H53Ew5ZKIuiKsLYpantuFg-->本机的 skill</b><!--pnid:7wzKPCyGEcRBq5aNq44516--> · <b data-page-node-id="4zE9QZa86LtMxhEo3ksTRF"><!--pnid:3n0z5tLx2BaWK0gjCiKzJP-->LOFTER</b></span></label>
+        <span data-page-node-id="RbtzUjGpT6ovgMGRmzzjwM" class="tl" id="littoollist"></span>
+        <span data-page-node-id="CVYPdZwl4lTNRhZ1NTea42" class="tl" style="color:var(--muted)">
+          <a data-page-node-id="uvbOOjV2L9o05rZYVOFS4h" href="#" id="litclear" style="color:var(--muted)"><!--pnid:IbP9xgbkqfhqFttSwQa19I-->清空这一串</a>
+        </span>
+      </div>
+    </div>
+    <div data-page-node-id="IUN03HwS7A4czsHPrOfnXq" class="modebar" id="litbar"></div>
+    <div data-page-node-id="M6C6BzQB9cg5glpL5wRZ2u" class="cards litout" id="litout">
+      <div data-page-node-id="roRCGB2Lx8ZFMlGL0yHIt9" class="empty"><!--pnid:VZm2eLjU04suRPU0stn6Kz-->选一个动作，或者直接在下面说你要什么。<br data-page-node-id="UuKyLPzmT17hwXtpj8IxmZ"><!--pnid:uJSHkOOwCLvbVTHfnP99hp-->
+        它下判断，但每一条都要举证到原文；查到东西会标出是查了哪儿。</div>
+    </div>
+    <div data-page-node-id="RHx0uPYhQ7tzy28Xkc4ypT" class="litsay">
+      <input data-page-node-id="QZY5dF5Gn5VbAcefNyKaPB" id="litsay" placeholder="直接说你要什么…（Enter 发送，Shift+Enter 换行）">
+      <button data-page-node-id="aQzSMbTUcw97k77vaixjus" id="litsend"><!--pnid:HV3auPOtnBG3n2zxGWyTb8-->说</button>
+    </div>
+    <div data-page-node-id="exfz8TyifIi17XNzB64qLT" class="hintline"><!--pnid:y7HlZ9WiOG5S6JG5LMFxar-->
+      这一页写进的是<b data-page-node-id="fcCI66f6zwpaC3i04TxYWN"><!--pnid:1jDv69AWCLcasNEJHTdisz-->通用文学</b><!--pnid:5o61bhQxmtkk6DiTu1osJj-->区，和伴写那区是<b data-page-node-id="XboVJf11w6hvQahLQ4cqk1"><!--pnid:RWZMDgu1FFotgUzercjU5I-->分开的两棵树</b><!--pnid:2059811IlcxrBUQZu9pBxQ-->——
+      连索引都不共用。所以在这里学到的东西不会跑到伴写嘴里去，
+      反过来也一样。
+    </div>
+  </aside>
+</main>
+
+<!--pnid:hlsqVzoGS4spXKPik4tIYm--><!-- 本地依赖，一个 CDN 都没有：断网也能用，文件也不出本机 -->
+<script data-page-node-id="odIUGpH4dGwUw52zQPlm9E" src="lib/jszip.min.js"></script>
+<script data-page-node-id="BpJslcAc53pcCbk9HIQaxc" src="dist/docx-writer.js"></script>
+<script data-page-node-id="LJU5YYd96invBaJKpDOmX6" src="lib/quill.js"></script>
+<script data-page-node-id="1EJIKcEBtGQlM1ssr58b7R" src="lib/turndown.js"></script>
+<!--pnid:RnbKMmTqDPn7Kjb9M5BifU--><!-- heading-core 必须排在 epub-core 之前：epub-core 的 headingsFromHtml / nestHeadings
+     现在是它的 re-export，缺了它 epub-core 加载时就抛（依赖方向单向，TC-4） -->
+<script data-page-node-id="jhlyIp2nSjspy9oxs8EYbV" src="dist/heading-core.js"></script>
+<script data-page-node-id="nakEu332G1Dg11wOzSBl1N" src="dist/epub-core.js"></script>
+<script data-page-node-id="wQrfhJo9wCoULkkjhxjnNu" src="dist/lit-memory-core.js"></script>
+<script data-page-node-id="mYw7Hxgk6f3v3ns52pp4e0" src="dist/lit-memory-panel.js"></script>
+<script data-page-node-id="HnOueSaVBvTwqlD333FayK" src="dist/toc-panel.js"></script>
+<script data-page-node-id="h0uxjOaj2QesH7Re8pn6Ao" src="dist/export-core.js"></script>
+<script data-page-node-id="Qh7MWXY9ph37mDu8bgw16Y" src="dist/doc-core.js"></script>
+<script data-page-node-id="mIXxRCQbmGPJwbVadsrp0O" src="dist/editor-core.js"></script>
+<script data-page-node-id="iPrrIQaEN0cWEeiA6pF4wr" data-pnid-children="C8Tfv9l7GwMu1iiL9kTF1u">
+// 第二个参数是这次功能移植加的：弹出来的对话框要在自己那棵树里找元素，
+// 原来的一参版本对已有调用一行不用改。
+const $ = (s, r) => (r || document).querySelector(s);
+const cards = $('#cards'), secSel = $('#sec');
+
+/* ─────────────────────────────────────────────────────────────
+   写作区换了地基：`<textarea>` → Quill 富文本。
+   页面上到处是 `ta.value` / `ta.selectionStart` / `ta.addEventListener`
+   （29 处），那些是伴写链路的血管：探针、通读、语境切片、插入、导出。
+   逐个改过去等于把整套链路重写一遍——所以做法是**造一个跟 textarea 长得一样的
+   替身**：实现同样的那几个属性和方法，底下接到 Quill。这样老代码一行不用动，
+   出错的面也从"整条链路"缩到"这一块替身"。
+
+   替身只负责三件事：
+   · value      ←→ quill 的纯文本 `getText()`（模型拿到的始终是纯文本）
+   · selection  ←→ 光标位置（selection-change 时就更新，失焦后仍记得最后位置）
+   · 事件       ←→ 'input' 走 quill 的 text-change，其余键盘鼠标事件转发给编辑区 DOM
+   ───────────────────────────────────────────────────────────── */
+const TA_HOST = $('#ta');
+
+/* ═══ 文档模型：大书按章开窗口 ═══════════════════════════════════════════
+   起因是她导入一本四十万字的 epub，整个系统卡住、鼠标都开始漂。
+   实测（真实时钟，2MB / 80 万字 / 126 章）：
+     整本塞进编辑区 → setRichDoc 一次 **1109ms**，之后**每敲一个字 77ms**
+     （1 万多个 DOM 节点全量重排）。导入时卡死，之后一直卡。
+
+   治法不是优化 Quill，是换掉文档的家：真正的文档住在这个模型里，
+   编辑区只是它的**一个窗口**——只装当前章。她打字只回写当前章；
+   全文只在探针 / 导出 / 复盘真要的时候才重组一次。
+
+   ⚠️ 12 万字是**硬边界**，不是一个调参旋钮：
+      · 以下（含她的小说 5.3 万字）走**老路**——整本进编辑区，
+        行为与从前一字不差。老路是体验最好的那条路。
+      · 以上才窗口化，而窗口化是**为不卡付的代价**：目录要跨章跳、
+        编辑区看不到全貌、光标位置要换算成全文坐标。
+      · 所以调这个数之前先问：涨了会让多少本书掉进"代价"那一侧？
+   声明放在编辑器之前，是因为 ta 的 onText 回调会读它——虽然回调只在
+   打字时才跑（那时整个脚本早求值完了），但这种"靠时序侥幸"的东西
+   不该留给下一个人去验。 */
+const DOC = window.DocModel ? window.DocModel.create({chunkChars: 30000}) : null;
+const LIT_DOC = window.DocModel ? window.DocModel.create({chunkChars: 30000}) : null;
+const WIN_THRESHOLD = 120000;
+const WIN_CHUNK = 30000;       // 没有标题的大文件，按这个字数硬切一段
+let WINDOWED = false;          // 写作区当前文档是不是按章开了窗口
+let LIT_WINDOWED = false;      // 文学材料是否按章开窗口（与写作区各存一份）
+let switching = false;         // 正在换章：这期间的 text-change 不许回写，
+let litSwitching = false;      // 文学材料换章期间同样不许回写
+                               // 否则新章的内容会被当成本章内容盖回去
+let chapSwitchedAt = 0;        // 换章的时刻，见下面的 flippingPage()
+
+/* 「这一下是不是我们在替她翻页？」
+   换章要把整块内容换掉（setRichDoc），而 Quill 换内容会顺带惊动三个信号源：
+     · text-change  → 伴写侧那条 `input` 监听 → touch()（**同步**，就在 setRichDoc 里面）
+     · focus        → ta 的 focus 监听 → touch()（setSelection 会把编辑器拉回焦点，同步）
+     · selectionchange → 异步派发，轮到它的时候 switching 早就落回 false 了
+   三处都表示"编辑区动过"，但都不是她动的。判据收在这一处，
+   不然每加一个信号源就要再补一道门——上一版就是这么漏掉同步那条的。
+   150ms 的短窗是给异步那条用的：她不可能在翻页后 150ms 内就在写。 */
+function flippingPage() {
+  return switching || (Date.now() - chapSwitchedAt < 150);
+}
+
+/* 两个实例的 formats 必须一致（P1 护栏 4）：给文学侧一个更窄的白名单，
+   目录面板在文学视图会直接死掉——没有 h 标签就没有目录，而且不报错。 */
+const EDITOR_FORMATS = ['bold','italic','underline','strike','header','blockquote',
+                        'align','color','size','list','indent','link'];
+
+/* 伴写侧编辑器。原来是手写的替身单例，现在换成 EditorController——
+   返回形状逐字段一致，下面 29 处 `ta.*` 老调用一行没动。
+   onText 里引用 PAGE_SETUP 没有时序问题：创建在 const 声明之前也没关系，
+   回调只在**她打字时**才跑，那时整个脚本早就求值完了。 */
+const ta = EditorController.create({
+  host: TA_HOST,
+  countEl: $('#count'),
+  formats: EDITOR_FORMATS,
+  placeholder: '在这里写，或者先点右上角「打开文件」把已有稿子载入进来（支持 .txt / .md / .docx / .epub）。\n'
+    + '停下 8 秒后，右侧会给出伴写——只举证，不续写，不预测。',
+  onText() {
+    PAGE_SETUP.__dirty = true;
+    // 行距是对整篇的，写在编辑区根元素上，编辑时就能看见
+    ta.quill.root.style.lineHeight = PAGE_SETUP.lineSpacing || 1.15;
+    markfmt();
+    /* 窗口化时只回写**当前章**，一页字而已——全文一个字都不碰。
+       字数也走每章缓存的加法（DOC.chars()），不是全文 getText：
+       这一句就是"每敲一个字 77ms"降到个位数的那个开关。 */
+    if (WINDOWED) {
+      commitChapter();
+      setCountFor(DOC.chars());
+    }
+  }
+});
+let quill = ta.quill;    // 兼容别名：initToc / tocEd / markfmt 等老引用仍指向伴写实例
+
+/* 旧全局函数保留为薄封装——它们在几十个地方被调用，改成转发比逐个改安全 */
+function caretIndex() { return ta.caretIndex(); }
+function setDocText(v) { ta.value = v; }
+function insertDocText(v) { ta.append(v); }
+function setRichDoc(html) { ta.setRichDoc(html); }
+let paused = false, timer = null, busy = false, lastKey = '', ignored = new Set();
+/* P / M / S 由她自己选，不由分类器定。
+   理由写在样式注释里：分类器在两套对照语料上 AUC 0.523，等于抛硬币。
+   存 localStorage 是因为这是个**长期判断**——她对自己在写什么有稳定认知，
+   不该每次刷新重选。 */
+let curMode = localStorage.getItem('bans_mode') || '';
+let lastGenMode = curMode;
+if (!['', 'P', 'M', 'S'].includes(curMode)) curMode = '';
+
+document.querySelectorAll('#modebar .mb').forEach(b => {
+  b.classList.toggle('on', b.dataset.mode === curMode);
+  b.onclick = () => {
+    curMode = b.dataset.mode;
+    lastGenMode = curMode;
+    localStorage.setItem('bans_mode', curMode);
+    document.querySelectorAll('#modebar .mb')
+      .forEach(x => x.classList.toggle('on', x.dataset.mode === curMode));
+    if (ta.value.trim()) { lastKey = ''; run(); }   // 已写了东西就立刻按新模式重来
+  };
+});
+
+/* 测试版：作者每次点P/M/S 都落盘。
+   §7 其一要测的就是「作者能否稳定地自标」，而重测信度必须跨会话——
+   localStorage 换机器就丢，所以另走接口。用**捕获阶段**监听而不是改上面的
+   onclick：原逻辑一个字不动，采集只是旁路听一下。 */
+document.getElementById('modebar').addEventListener('click', (e) => {
+  const b = e.target.closest('.mb');
+  if (!b) return;
+  const m = (b.dataset.mode || '').toUpperCase();
+  if (!['P', 'M', 'S'].includes(m)) return;
+  fetch('/api/probe/pick', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      mode: m, source: '作者手选',
+      text_len: (ta && ta.value ? ta.value.length : 0),
+      text_head: (ta && ta.value ? ta.value.slice(0, 120) : '')
+    })
+  }).catch(() => {});   // 采集失败不许打断模式切换
+}, true);   // 捕获阶段：先于原有的 onclick 落下
+
+/* ---------- 注意力信号采集（光标 / 击键 / 停顿位置）----------
+   依据：写作过程研究里，停顿的**位置**比长度更有信息量——
+   句末/段末的停顿＝在规划下一个单位；句中的停顿＝低层语言编码（不该打断）；
+   停顿之后的删改＝作者在做修订与评价（不要抢着评价）。
+   这里只采集，判断交给后端 v3/attention.py。 */
+const TRACK = {lastInputAt: Date.now(), lastOffset: 0, events: []};
+function note(type, offset, from) {
+  TRACK.events.push({t: Date.now(), type: type, offset: offset, from: from || offset});
+  if (TRACK.events.length > 400) TRACK.events = TRACK.events.slice(-200);
+}
+function attentionSignals() {
+  const now = Date.now(), W = 30000;
+  const recent = TRACK.events.filter(x => now - x.t <= W);
+  const pos = ta.selectionStart ?? ta.value.length;
+  const before = ta.value.slice(0, pos), after = ta.value.slice(pos);
+  const ch = before.slice(-1);
+  const atSentenceEnd = /[。！？；…!?;]/.test(ch) || /\n\s*$/.test(before);
+  /* 段末 = 光标正落在**段落边界**上（她刚敲了回车，正要起一段）。
+     ⚠️ 这里**不许**再写 `|| after.trim() === ''`。那一句说的是"光标后面没有字符"
+     ＝"在编辑区末尾"，是**没有下文**，不是**这一段写完了**。两者被 `||` 并成一件之后：
+       文末 → 段末恒真 → at_end 恒真 → 规则 5（句中的 CODING）被跳过 → 一律出声；
+       中间 → 只剩"光标前一个字符是不是标点"在起作用 → 停在句中就沉默。
+     结果就是"伴写只在文末才可能出现"，而写作恰恰是非线性的（先写结尾再回头补中间）。
+     实测对照见《工程路径与技术回顾》§48。 */
+  const atParagraphEnd = /\n\s*$/.test(before);
+  const midSentence = !atSentenceEnd && before.trim() !== '' && !/\n\s*$/.test(before);
+  const jumps = recent.filter(x => x.type === 'jump');
+  const lastJump = jumps.length ? jumps[jumps.length - 1] : null;
+  /* 下面是**全文坐标**，不是编辑区坐标。窗口化之后编辑区只有一章，
+     照搬 ta.value.length 会让后端以为整篇只有一页。
+     句末、段末、句中那三个判断仍然用当前章（段落不会跨章），是对的。 */
+  const docCh = (WINDOWED && DOC) ? DOC.chars() : ta.value.length;
+  const curOff = (WINDOWED && DOC) ? DOC.offsetIn(DOC.index, pos) : pos;
+  /* 光标**之后**还有多少字（全文）——这是"线性 / 非线性"唯一的分水岭。
+     原来 `after` 只被用来测一次 `=== ''`，之后就扔了：系统因此从来没有
+     "她是在文末往下写，还是在中间补"这个概念。 */
+  const afterChars = Math.max(0, docCh - curOff);
+  /* 光标之后、**到下一个空行为止**还有没有字。这一项配合 after_chars 把
+     "她不在文末"再分成两种，动作不一样：
+       有 → 后面那段文字紧挨着她光标（她在**一段的内部**，这一段后面还有它自己的话）；
+       没有 → 光标正压在段落分隔上，后面跟的是**另一段**（她站在两段之间）。
+     ⚠️ 注意"第三段的开头"属于**前一种**：那时 after 一直通到第三段末尾，
+     整段都是她后面已有的字。别按"光标前有没有字"去理解。 */
+  const afterInPara = after.split(/\n\s*\n/)[0].trim() !== '';
+  /* 章：探针也得知道她在第几章。后端会把它写进事实块（describe 那边是
+     现场事实，章是"这一处落在整篇的哪里"那一类）。
+     前端只**报事实**，判定仍在后端——见 setChapters 那段注释。 */
+  const paraNo = cursorParaNo();
+  const chap = chapterOfNo(paraNo);
+  const sel = selectionPayload(ta);
+  const selLen = Math.max(0, sel.length || 0);
+  return {
+    pause_ms: now - TRACK.lastInputAt,
+    at_sentence_end: atSentenceEnd,
+    at_paragraph_end: atParagraphEnd,
+    mid_sentence: midSentence,
+    edits_recent: recent.filter(x => x.type === 'edit').length,
+    jumps_recent: jumps.length,
+    chars_recent: recent.filter(x => x.type === 'type').length,
+    moved_up: !!lastJump && lastJump.from > lastJump.offset + 8,
+    doc_chars: docCh,
+    cursor_offset: curOff,
+    after_chars: afterChars,
+    after_in_para: afterInPara,
+    para_no: paraNo,
+    chapter_no: chap ? chap.no : 0,
+    chapter_title: chap ? chap.title : '',
+    has_selection: selLen > 0,
+    selection_start: sel.start,
+    selection_end: sel.end,
+    selection_chars: selLen
+  };
+}
+ta.addEventListener('input', (e) => {
+  const isDel = e.inputType && /delete/i.test(e.inputType);
+  note(isDel ? 'edit' : 'type', ta.selectionStart);
+  TRACK.lastInputAt = Date.now();
+  TRACK.lastOffset = ta.selectionStart;
+  posBoxSoon();          // 段数变了 → 位置框可能要换章
+});
+ta.addEventListener('keydown', (e) => {
+  if (e.key === 'Backspace' || e.key === 'Delete') note('edit', ta.selectionStart);
+});
+document.addEventListener('selectionchange', () => {
+  if (document.activeElement !== ta) return;
+  const p = ta.selectionStart ?? 0;
+  /* 换章也要把 lastOffset 顺势挪到新位置（不挪的话，下一次真实的光标移动会被
+     当成一次横跨整篇的"跳"）。但**不记事件**：这不是她跳了一下，是我们的翻页。 */
+  if (!flippingPage() && Math.abs(p - TRACK.lastOffset) > 8) note('jump', p, TRACK.lastOffset);
+  TRACK.lastOffset = p;
+  posBoxSoon();          // 光标动了 → 位置框跟着走（她报的正是这格不动）
+});
+
+/* ---------- 状态 ----------
+   这一段必须是个**能被再叫一次**的函数，不能写成一发子弹出膛就不管的
+   fetch。原来只有页面加载时问一次，于是出现这个 bug（2026-09-19 实测）：
+   她在设置里填好 Key、点了保存、服务器那边**确实已经在线**，可横幅照旧
+   写着"离线演示"、黄条照旧挂着——因为没有任何人再去问过一遍。
+   服务端 `/api/status` 是每次现读 config.json 的，它不缓存；
+   是前端把它当成一次性的了。
+   保存成功之后（见下面 #msave）必须重跑一次，横幅才对得上事实。 */
+/* 主导权档位。**声明必须放在这里**：下面 refreshStatus() 是立即执行的，
+   而它要读 INITIATIVE——`let` 有 TDZ，声明放到后面会当场抛错。
+   （定义在下面「主导权档位」那一节；函数声明会提升，变量不会。） */
+let INITIATIVE = 'bing';
+
+function refreshStatus() {
+  return fetch('/api/status').then(r => r.json()).then(s => {
+    $('#mode').textContent = s.online ? '真实模型 · ' + s.model : '离线演示';
+    $('#mode').classList.toggle('on', !!s.online);
+    if (s.initiative && s.initiative !== INITIATIVE) {
+      INITIATIVE = s.initiative;
+      paintInitiative();
+    }
+    // 在线了就把黄条收掉。只设 display:block 不设 none 的话，
+    // 接上模型之后那句"当前为离线演示"会一直赖在页面上。
+    if (!s.online) {
+      $('#note').style.display = 'block';
+      $('#note').innerHTML = '当前为<b>离线演示</b>：不发任何网络请求，用本地规则引擎演出机制' +
+        '（双证门槛 / 四档沉默 / 不裁定）。' +
+        '要接真实模型，点右上角「模型」选一家、填上 Key，不用重启。';
+    } else {
+      $('#note').style.display = 'none';
+    }
+    return s;
+  }).catch(() => null);
+}
+refreshStatus();
+
+/* ---------- 模型后端：换哪家，不换怎么问 ----------
+   这里只开放「用哪个模型」。temperature 与「关不关思考块」由 v3 的策略参数
+   定死——它们是伴写质量与实验可复现的前提，开放给随手调，
+   论文里那些对照就都不成立了。想改请改 v3/params.json 并留痕。 */
+const M = {prov: $('#mprov'), base: $('#mbase'), model: $('#mmodel'),
+           key: $('#mkey'), hint: $('#mhint'), res: $('#mres'),
+           btn: $('#modelbtn'), bar: $('#modelbar')};
+let PROVIDERS = [];
+
+function mstate(txt, good) {
+  M.res.textContent = txt || '';
+  M.res.className = 'res' + (txt ? (good ? ' ok' : ' bad') : '');
+}
+
+function mfill(p) {
+  const meta = PROVIDERS.find(x => x.id === (p || M.prov.value)) || {};
+  if (meta.id && !meta.id.startsWith('custom-')) {
+    M.base.value = meta.base_url || '';
+    M.model.value = meta.model || '';
+  } else if (meta.id) {
+    M.base.value = ''; M.model.value = '';
+  }
+  M.hint.textContent = meta.hint || '';
+}
+
+fetch('/api/providers').then(r => r.json()).then(d => {
+  PROVIDERS = d.providers || [];
+  M.prov.innerHTML = PROVIDERS
+    .map(p => '<option value="' + p.id + '">' + p.label + '</option>').join('');
+  return fetch('/api/config');
+}).then(r => r.json()).then(c => {
+  M.prov.value = c.provider || '';
+  M.base.value = c.base_url || '';
+  M.model.value = c.model || '';
+  showProto(c.provider, c.api);
+  M.btn.textContent = '模型：' + (c.configured
+    ? (c.model || c.provider)
+    : '未配置');
+});
+
+/* 把「这家说的是哪种协议」显出来。
+   为什么值得占一行字：伴写只认两种协议，而后端与端点**必须同属一种**。
+   端点填的是 Anthropic 口径的，后端却选着 OpenAI 口径的那家，
+   说话就发到 /chat/completions 上去，对方回 404——而这里不说的话，
+   页面上看不出任何异常，只能等到伴写时才撞上。 */
+function showProto(pid, api) {
+  const meta = PROVIDERS.find(x => x.id === pid) || {};
+  const a = api || meta.api || '';
+  M.hint.textContent = (meta.hint ? meta.hint + '　' : '') +
+    '当前按「' + (a || '?') + '」协议说话。';
+}
+
+M.prov.onchange = () => {
+  mfill(M.prov.value);
+  showProto(M.prov.value);
+  mstate('');
+};
+
+M.btn.onclick = () => {
+  const show = M.bar.style.display === 'none';
+  M.bar.style.display = show ? '' : 'none';
+  if (show) mstate('');
+};
+
+$('#mtest').onclick = () => {
+  mstate('正在测试…', true);
+  fetch('/api/test', {method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({provider: M.prov.value, base_url: M.base.value,
+                          model: M.model.value, api_key: M.key.value})})
+    .then(r => r.json())
+    .then(d => mstate(d.msg, d.ok))
+    .catch(e => mstate('测试请求失败：' + e, false));
+};
+
+$('#msave').onclick = () => {
+  fetch('/api/config', {method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({provider: M.prov.value, base_url: M.base.value,
+                          model: M.model.value, api_key: M.key.value})})
+    .then(r => r.json())
+    .then(d => {
+      if (d.error) { mstate('保存失败：' + d.error, false); return; }
+      // 服务端现在会顺手探一次活：存下来但连不通就带 warn 回来，
+      // 别再给她一个绿色的「已保存」然后伴写时才发现打不通。
+      if (d.warn) { mstate('已保存，但有问题：' + d.warn, false); }
+      else { mstate('已保存。' + (d.api_key_masked ? '当前 Key：' + d.api_key_masked : ''), true); }
+      M.btn.textContent = '模型：' + (d.configured ? M.model.value : '未配置');
+      M.key.value = '';
+      // 保存完必须**重新问一遍状态**：横幅与黄条读的是 /api/status，
+      // 不重问就会停在保存前那一版上（这正是 2026-09-19 那个"填了 Key
+      // 还是显示离线演示"的来历）。
+      refreshStatus();
+    })
+    .catch(e => mstate('保存请求失败：' + e, false));
+};
+
+/* ---------- 触发：两段，分开 ----------
+   停笔一会儿该不该出声，是**两件事**，不能合成一件：
+
+     ① 「她动了一下」——打字、删改、挪光标、点一下。
+        这时做的只有一件事：把去抖定时器重挂一遍（8 秒探针）。
+     ② 探针到点——**这时候才问注意力**。
+
+   为什么必须分开（2026-09-16 的第二次修正）：
+   上一版把「问注意力」放在 ① 里。可 ① 发生的那一刻 pause_ms≈0
+   （她刚敲了一下键盘），注意力据此必然回「正在编码、别出声」——
+   于是探针根本没挂上。表现就是她说的那句：**停 8 秒毫无动静，
+   必须点按钮才出回答**。根因不是节流写错，是**在错误的时刻做了判断**：
+   「停了多久」这个量，只有到点了才有意义。
+   所以现在到点再问，问完：说 → 出声；不说 → 由状态决定要不要再探。
+
+   另外：**光标移动也算「她动了一下」**——她挪光标不动键盘时，
+   原来永远不触发（只有 input 会调）。 */
+/* ---------- 主导权档位：甲 / 乙 / 丙 ----------
+   她要的是"先试体感、再决定回退成甲乙还是采纳丙"，所以这一档
+   必须**当场可切**——要是切一次得重启服务，那就不叫试体感了。
+   （`INITIATIVE` 的声明在 refreshStatus 上面，那里是立即执行点。） */
+function paintInitiative() {
+  document.querySelectorAll('#iniwrap .ini').forEach(b => {
+    const on = b.dataset.ini === INITIATIVE;
+    b.style.background = on ? 'var(--accent-bg)' : 'var(--panel)';
+    b.style.color = on ? 'var(--accent)' : 'var(--muted)';
+    b.style.border = '1px solid ' + (on ? 'var(--accent)' : 'var(--line)');
+    b.style.cursor = 'pointer';
+  });
+}
+document.querySelectorAll('#iniwrap .ini').forEach(b => {
+  b.onclick = async () => {
+    const want = b.dataset.ini;
+    try {
+      const r = await fetch('/api/initiative', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({initiative: want})
+      });
+      const d = await r.json();
+      if (d.error) { $('#hint').textContent = '切换失败：' + d.error; return; }
+      INITIATIVE = d.initiative;
+      paintInitiative();
+      lastAskPrint = '';      // 换了档位，之前问过的指纹作废
+      $('#hint').textContent = '已切到「' + INITIATIVE
+        + '」——下一次伴写就按它走（丙＝它自己决定说不说）';
+    } catch (e) { $('#hint').textContent = '切换失败：' + e; }
+  };
+});
+/* 初始也要涂一次：服务端本来就是 bing 时，refreshStatus 里那个
+   `s.initiative !== INITIATIVE` 不成立，不会调到这里来——
+   结果就是"当前是丙"没有高亮，她看不出自己在哪一档。 */
+paintInitiative();
+
+/* 场景指纹：**同一处不要反复问**。
+   文本 + 光标位置 + 停顿档（每 20 秒一档）。
+   停顿档必须在内：她停 5 秒和停 45 秒，对模型是两件不同的事
+   （后者才谈得上"卡住"），所以那是一次**新的**问，不是重复问。 */
+let lastAskPrint = '';
+function scenePrint(sig, text) {
+  const band = Math.floor((sig.pause_ms || 0) / 20000);
+  return (text || '').slice(0, 200) + '|' + (sig.cursor_offset || 0) + '|' + band;
+}
+
+/* 丙的自问上限。没有它，她一直不动、它就一直自问自答——
+   而"问一次"是要花一次模型调用的。
+   注意这三条都是**成本**约束，不是内容约束：什么时候不该说话，
+   仍然是模型的判断。 */
+const ASK_MAX = 3;            // 一次停顿里最多问它几次
+const ASK_REPROBE_SEC = 22;   // 隔这么久再问（略大于 20，确保跨过一个停顿档）
+const ASK_FIRST = 5;          // 丙：停 5 秒就把现场交给它。比甲/乙的 8 秒早——
+                              // 说不说既然是它定，那早点问、让它早点判，
+                              // 比让它干等一个本来就不是为它设的阈值好。
+let asksThisPause = 0;
+
+let probeTimes = 0;
+const PROBE_FIRST = 8;    // 秒：任何一次动静之后，先等这么久再判（= PLANNING 的建议延迟）
+const PROBE_MAX   = 2;    // 最多复探几次，防止无休止地等下去
+// 复探间隔不再写死——用后端随状态一起回的 delay_sec：
+//   CODING 20 / PLANNING 8 / STUCK 12 / POLISHING 15 / 终止态（REVIEWING·NOT_STARTED）0。
+
+function armTimer(sec) {
+  clearTimeout(timer);
+  timer = setTimeout(fire, Math.max(0.5, sec) * 1000);
+}
+
+function touch() {                    // 「她动了一下」
+  // VIEW 门（护栏 1）：输入类隐式触发只属于伴写视图。文学视图里敲材料
+  // 不该拉起伴写。静默 return 在这里是对的——没有按钮、没有用户意图被违背。
+  // （run() 是引擎，**不**加这个闸：加了它，文学视图点「立即伴写」就成了哑按钮。）
+  if (typeof VIEW !== 'undefined' && VIEW !== 'write') return;
+  TRACK.lastInputAt = Date.now();     // 停顿从此刻重新算
+  /* 换章（setRichDoc）会连带 text-change / focus 走到这里。那不是"她动了一下"，
+     探针不该因此重新计时——12 秒后弹出来的建议，是在回应一个并不存在的动静。
+     ⚠️ 判据不能只用 `switching`：那条是给**回写**用的，setRichDoc 一返回它就落回
+        false，而 text-change 是同步在它里面跑的、selectionchange 是异步在它之后跑的。
+        统一走 flippingPage()。 */
+  if (flippingPage()) return;
+  if (paused || busy) return;
+  probeTimes = 0;
+  asksThisPause = 0;              // 她动了一下 → 丙的自问配额重新开始
+  clearTimeout(timer);
+  $('#hint').textContent = '… 等待你停下';
+  armTimer(INITIATIVE === 'bing' ? ASK_FIRST : PROBE_FIRST);
+}
+
+async function fire() {               // 探针到点：现在问注意力才有意义
+  if (paused || busy) return;
+
+  /* 丙：不再问"该不该出声"，直接把现场交给模型——**说不说是它的活**。
+     这里只做一个资源判断：这一处刚问过就不再问（scenePrint 指纹），
+     免得她停着不动时反复掏同一个问题。
+     注意这不是"替它判断该不该说"——问不问是成本，说不说是内容，
+     两件事分得很清。 */
+  if (INITIATIVE === 'bing') {
+    if (asksThisPause >= ASK_MAX) return;      // 这一轮问够了
+    const cc0 = cursorContext();
+    const t0 = (cc0.cur || ta.value).trim();
+    if (!t0) return;
+    const pr = scenePrint(attentionSignals(), t0);
+    if (pr === lastAskPrint) {
+      // 同一个"档"刚问过：还停着就等下一档再问（停顿变长＝一个新的事实）
+      armTimer(ASK_REPROBE_SEC);
+      return;
+    }
+    lastAskPrint = pr;
+    asksThisPause++;
+    await run({ask: true});
+    // 她还停着的话，过一会儿带着"停了更久"这个**新的事实**再问一次。
+    // 上限 ASK_MAX：不然她一直不动，它就会一直自问自答。
+    if (asksThisPause < ASK_MAX) armTimer(ASK_REPROBE_SEC);
+    return;
+  }
+
+  let d = null;
+  try {
+    const r = await fetch('/api/attention', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({signals: attentionSignals()})
+    });
+    d = await r.json();
+  } catch (e) { /* 拿不到就照常出声 */ }
+  if (!d || d.available === false) { run(); return; }   // v3 没开 → 保持旧行为
+
+  // 这个状态的建议延迟（秒）。注意 0 是**终止态**的合法取值，不能和"没给"混为一谈，
+  // 所以先判断 typeof 是不是 number，再取值。
+  const delay = (typeof d.delay_sec === 'number') ? d.delay_sec : PROBE_FIRST;
+
+  if (d.speak) {
+    // 说话状态也要够到**它自己的**建议延迟：后端回显的 pause_ms 若还不够，先补齐再出声。
+    // （POLISHING=15 秒——她在打磨时别急着开口；STUCK=12 秒通常停够了、早已满足。）
+    const pausedMs = d.signals ? Number(d.signals.pause_ms) : NaN;
+    if (!isNaN(pausedMs) && pausedMs < delay * 1000 && probeTimes < PROBE_MAX) {
+      probeTimes++;
+      $('#hint').textContent = '… ' + (d.name || '再看一会儿');
+      armTimer(delay - pausedMs / 1000);
+      return;
+    }
+    run(); return;
+  }
+
+  /* 不说，不是故障——这是设计里最重要的一种输出。但分两种：
+     · CODING（句中，建议延迟 20 秒）还有可能变成 STUCK（停更久就会）→
+       按**它自己的建议延迟**再探；
+     · REVIEWING / NOT_STARTED（延迟 0）是终止态，再等也没用 → 就此安静，
+       等下一次「她动了一下」自然重来。 */
+  if (delay > 0 && probeTimes < PROBE_MAX) {
+    probeTimes++;
+    $('#hint').textContent = '… ' + (d.name || '再看一会儿');
+    armTimer(delay);
+    return;
+  }
+  $('#hint').textContent = '⊘ ' + (d.name || '沉默') + '——不打扰';
+}
+
+ta.addEventListener('input', () => {
+  /* 字数条在窗口化时归 onText 里的 setCountFor(DOC.chars()) 管——那边写的是**全文**。
+     这条监听注册在 onText **之后**，照 ta.value.length 再写一次，字数条当场退回
+     **本章**字数（实测：全文 106710 字被打成 340 字）。所以只留老路这一支。 */
+  if (!WINDOWED) $('#count').textContent = ta.value.length + ' 字';
+  touch();
+});
+// 挪光标 / 点一下 / 松手——都算"她动了一下"，都要重新计时
+['keyup', 'click', 'mouseup', 'focus'].forEach(ev =>
+  ta.addEventListener(ev, () => touch()));
+document.addEventListener('selectionchange', () => {
+  // 「是不是我们在替她翻页」不在这里判——交给 touch() 里的 flippingPage()。
+  // 三处触发源（text-change / focus / selectionchange）共用那一个判据，
+  // 各写各的门就一定会漏掉一条（上一版就漏了同步的 text-change）。
+  // 替身对象永远不等于 activeElement，**真正获得焦点的是它底下的那个可编辑 div**
+  if (ta.root && document.activeElement === ta.root) touch();
+});
+/* E10：暂停的四个指示器**只有这一处**可以写。原来三个地方各写一部分——
+   视图切换那处把 paused 一并改掉，于是切个视图按钮就显示「已暂停」，
+   探针其实还活着：状态与可见表现对不上（R16：视图切换不得改变 paused）。 */
+function syncPause() {
+  $('#pause').textContent = paused ? '已暂停' : '暂停';
+  $('#dot').classList.toggle('live', !paused);
+  $('#pstate').textContent = paused ? '已暂停' : '待命';
+  // 丙下这句要照实说：它等的是"问一次"的间隔，不是"说话"的阈值。
+  $('#hint').textContent = paused ? '已暂停'
+    : (INITIATIVE === 'bing'
+       ? '停止输入 ' + ASK_FIRST + ' 秒后，把这一处交给它看一眼'
+       : '停止输入 ' + PROBE_FIRST + ' 秒后触发');
+}
+$('#pause').onclick = () => {
+  paused = !paused;
+  syncPause();
+  if (paused) clearTimeout(timer);
+  else touch();
+};
+$('#ask').onclick = () => { clearTimeout(timer); run(); };
+
+/* ---------- 打开文件：把原文载入写作区，并让后端能检索到 ----------
+   电子书（.epub）在这里读，**不求后端**：它是个 zip + 一堆 xhtml，
+   JSZip 和 EpubCore 都是本地文件，剥出来就行；后端拿到的仍是纯文本，
+   和载入一份 .txt 走的是同一条路——探针、通读、伴写一句都不用改。 */
+async function readEpub(f) {
+  if (!window.JSZip || !window.EpubCore) throw new Error('电子书支持没加载成功');
+  const zip = await window.JSZip.loadAsync(await f.arrayBuffer());
+  const book = await window.EpubCore.parseBook(zip);
+  let html = '', parts = [], chars = 0, n = 0;
+  const list = [];        // 一章一块 [{title, html}]：大书要按它开窗口，见「文档模型」
+  const MAX = 800000;                       // 八百万字的小说我也拦不住，别把自己卡死
+  for (let i = 0; i < book.spine.length && chars < MAX; i++) {
+    let ch;
+    try { ch = await window.EpubCore.loadChapter(book, i); } catch (e) { continue; }
+    // 图片丢掉：loadChapter 会给它建 objectURL，几百张图就是几百个收不回去的句柄，
+    // 换来的只是一本小说里的插图——不值。
+    const body = (ch.html || '')
+      .replace(/<img\b[^>]*>/gi, '')
+      .replace(/<svg[\s\S]*?<\/svg>/gi, '');
+    /* 丢完就把句柄还回去。原来只删 <img> 标签、不 revoke，句柄一直挂着——
+       实测一本 2MB 的书建了 12 个 blob URL（1MB）再没人释放。 */
+    if (ch.refs && ch.refs.length) {
+      ch.refs.forEach(r => { try { URL.revokeObjectURL(r.objectUrl); } catch (e) { } });
+    }
+    const hd = (ch.headings || [])[0];
+    const title = (ch.item && ch.item.title) || (hd && hd.text) || ('第 ' + (n + 1) + ' 节');
+    const one = htmlToText(body);
+    if (!one) continue;
+    // 章节正文常常自带一个 <h1>，这时再补一个标题就成了"第一章 雨"印两遍。
+    // 判断方式是看正文的**开头**是不是就是那行标题。
+    const flat = h => (h || '').replace(/\s+/g, '');
+    const starts = hd && flat(one).indexOf(flat(hd.text)) === 0;
+    let seg = body;
+    if (!starts) {
+      seg = '<h1>' + esc(title) + '</h1>' + body;
+      parts.push(title + '\n\n' + one);
+    } else {
+      parts.push(one);
+    }
+    html += seg;
+    list.push({title: title, html: seg});
+    chars += one.length; n++;
+  }
+  if (!n) throw new Error('这本电子书里没读出正文');
+  return {html: html, text: parts.join('\n\n\n'), chapters: n,
+          list: list, title: book.title || ''};
+}
+
+// HTML → 纯文本。要保留段落：块标签换成换行，否则所有字粘成一坨，
+// 后端的"分段"也就分不出段了。
+function htmlToText(html) {
+  let s = (html || '')
+    .replace(/<(script|style)[\s\S]*?<\/\1>/gi, '')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<\/(p|div|h[1-6]|li|tr|blockquote)>/gi, '\n')
+    .replace(/<[^>]+>/g, '');
+  s = s.replace(/&nbsp;/g, ' ').replace(/&amp;/g, '&').replace(/&lt;/g, '<')
+       .replace(/&gt;/g, '>').replace(/&quot;/g, '"').replace(/&#39;/g, "'");
+  return s.replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+}
+
+$('#open').onclick = () => $('#file').click();
+$('#file').onchange = async (e) => {
+  const f = e.target.files[0]; if (!f) return;
+  $('#doc').textContent = '读取中…';
+  try {
+    let body, rich = '', list = null, big = false;
+    if (/\.epub$/i.test(f.name)) {
+      const bk = await readEpub(f);
+      rich = bk.html;
+      list = bk.list;
+      big = bk.text.length > WIN_THRESHOLD;
+      /* 大书**别**先整本排进编辑区：那一次 setRichDoc 实测 1109ms 硬阻塞，
+         正是"导入就卡死"的那一下。小的照旧排（老路体验最好），
+         大的先只记住分章，等下面统一开窗口。 */
+      if (big) {
+        $('#doc').textContent = '读到 ' + bk.chapters + ' 节 · ' + bk.text.length
+          + ' 字，按章打开…';
+      } else if (VIEW === 'write') {
+        $('#doc').textContent = '读到 ' + bk.chapters + ' 节，正在排进去…';
+        // 先排进编辑区（保住章节标题和加粗），再拿排好的纯文本喂后端——
+        // 这样后端眼里的文档和她屏幕上看到的是**同一份**，不会各说各话。
+        setRichDoc(rich);
+      }
+      body = {name: (bk.title || f.name.replace(/\.epub$/i, '')),
+              text: (big || VIEW === 'lit') ? bk.text : quillText()};
+    } else if (/\.docx$/i.test(f.name)) {
+      const buf = new Uint8Array(await f.arrayBuffer());
+      let s = ''; for (let i = 0; i < buf.length; i++) s += String.fromCharCode(buf[i]);
+      body = {name: f.name, b64: btoa(s)};
+    } else {
+      body = {name: f.name, text: await f.text()};
+    }
+    body.view = VIEW;
+    const r = await fetch('/api/doc', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+    const d = await r.json();
+    if (d.error) { $('#doc').textContent = '失败：' + d.error; return; }
+    /* 换了一份稿子 → 上一份的"已送过"记录整个作废。
+       不清的话，新稿里凡与旧稿某段 hash 相同的段落都不会再送正文，
+       服务端手里那段就是**上一篇的文字**——比没有更坏。见 §49。 */
+    sentH = new Set();
+    $('#doc').textContent = d.meta.name + ' · ' + d.meta.paragraphs + ' 段 / ' + d.meta.chars + ' 字';
+    $('#doc').classList.add('on');
+    // 章表来自后端（唯一真源）。位置框、探针、"读取范围"三处都用它。
+    setChapters(d.meta.chapters);
+    watchFullread();
+    expNameSync(d.meta.name);
+    // 文学视图下，文件是**要被处理的材料**，不进伴写的文档库、
+    // 也不触发通读剖面——那边是另一棵树，别让它看见这份材料。
+    if (VIEW === 'lit') {
+      // rich 在这里**已经算出来了**，原来却被丢掉、把富文本压平成纯文本——
+      // 同一本 epub 在伴写侧有章节标题和加粗、在文学侧成了一坨字。
+      // 修法不是把两个视图并成一份文档（那是 T-11 的既有隔离），只是不再压平。
+      const litSource = rich || textToHtml(d.text);
+      if (enterLitWindowed({list: list, rich: litSource, text: d.text})) {
+        lset('已按章载入材料，选一个动作', '');
+      } else {
+        leaveLitWindowed();
+        lta.setRichDoc(litSource);
+        lta.refreshCount();
+        lset('已载入材料，选一个动作', '');
+      }
+      watchFullread();
+      return;
+    }
+
+    /* 到这儿是伴写侧，两种进法：
+       ① epub 大书——分章信息已经在手（spine），直接按它开窗口；
+       ② txt / docx 大文件——内容刚由服务端回来，按标题切、切不动就按字数切。
+       小的两个都走老路：整本进编辑区。老路是体验最好的那条路。 */
+    let opened = false;
+    $('#hint').textContent = '已载入，正在通读全文…';
+    if (big) {
+      opened = enterWindowed({list: list, text: d.text});
+    } else if (!rich && (d.text || '').length > WIN_THRESHOLD) {
+      opened = enterWindowed({text: d.text});
+    }
+    if (opened) {
+      /* 窗口化时服务端拿到的仍是**全文**（body 已经带了 bk.text），
+         所以伴写、通读、召回看到的东西跟从前一样，只是编辑区变小了。 */
+      $('#hint').textContent = '已按章打开 · 编辑区只装当前章，探针与导出仍看全文';
+    } else {
+      leaveWindowed();
+      // rich 时编辑区里已经是排好的样子，不能再设一次——`ta.value=` 会调 setText，
+      // 等于把刚排好的章节标题和加粗全洗掉。这里只同步字数给下面的探针看。
+      if (!rich) ta.value = d.text;          // ← 原文进写作区，伴写从此看得到
+    }
+    setCountFor(WINDOWED ? DOC.chars() : quillText().length);
+    lastKey = '';
+    watchProfile();                            // ← 后台在通读，好了就显示剖面
+  } catch (err) { $('#doc').textContent = '失败：' + err; }
+};
+
+/* ---------- 全文剖面 ----------
+   只给"和当前段落最相关的几段"，模型就是在盲人摸象：读不出整篇的调性、
+   读不出反复出现的东西、读不出已经建立的呼应。
+   所以载入之后后端先通读一遍，这里负责把它显示出来。 */
+let profTimer = null;
+async function watchProfile() {
+  clearInterval(profTimer);
+  showProfileCard('building', '正在通读全文…', '');
+  profTimer = setInterval(async () => {
+    let d;
+    try { d = await (await fetch('/api/profile')).json(); }
+    catch (e) { return; }
+    if (d.status === 'ready') {
+      clearInterval(profTimer);
+      showProfileCard('ready', '全文剖面 · ' + (d.doc_chars || 0) + ' 字',
+                      d.text, +new Date(d.built_at * 1000));
+    } else if (d.status === 'error') {
+      clearInterval(profTimer);
+      showProfileCard('error', '剖面没读成', d.err || '模型没返回内容');
+    } else if (d.status === 'empty') {
+      clearInterval(profTimer);
+      showProfileCard('error', '剖面没读成', '文档是空的，或者没有更长的段落。');
+    }
+  }, 2000);
+}
+
+function showProfileCard(kind, title, body, when) {
+  let el = document.getElementById('profilecard');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'profilecard';
+    // 挂在 #cards **外面**：render() 会重写 cards.innerHTML，挂里面会被冲掉。
+    cards.parentElement.insertBefore(el, cards);
+  }
+  const t = when ? ' · ' + when.toLocaleTimeString().slice(0, 5) : '';
+  el.className = 'prof ' + kind;
+  el.innerHTML = '<div class="ph">' + esc(title + t) +
+    (kind === 'ready' ? '<span class="spacer"></span><button id="reprof">重新读一遍</button>' : '') +
+    '</div><div class="pb">' + (body ? esc(body) : '') + '</div>';
+  if (kind === 'ready') {
+    document.getElementById('reprof').onclick = async () => {
+      await fetch('/api/profile', {method: 'POST'});
+      watchProfile();
+    };
+  }
+}
+
+// 启动时若后端已有文档，直接取回；剖面若已就绪或还在读，也一并显示
+fetch('/api/doc').then(r => r.json()).then(d => {
+  if (d.text) {
+    ta.value = d.text;
+    sentH = new Set();      // 页面重开：让第一次同步把整篇重送一遍（见 §49）
+    $('#doc').textContent = d.meta.name + ' · ' + d.meta.paragraphs + ' 段 / ' + d.meta.chars + ' 字';
+    $('#doc').classList.add('on');
+    setChapters(d.meta.chapters);   // 重开页面：章表也得跟着回来
+    watchFullread();                // 页面重开：把已有全书记忆状态接回来
+    $('#count').textContent = ta.value.length + ' 字';
+    fetch('/api/profile').then(r => r.json()).then(p => {
+      if (p.status === 'pending' || p.status === 'building') watchProfile();
+      else if (p.status === 'ready') showProfileCard('ready', '全文剖面 · ' +
+        (p.doc_chars || 0) + ' 字', p.text, +new Date(p.built_at * 1000));
+    }).catch(() => {});
+  }
+});
+
+/* ---------- 选区：把起点、终点和原文一起交给后端 ----------
+   selectionStart / selectionEnd 已经由 EditorController 保留；窗口化时
+   编辑区坐标必须换成全文坐标，否则后端会把“第 2 段里的选区”误认成
+   “全篇第 2 段”。原文同时随请求发送，避免服务端对 trim/窗口边界做猜测。
+*/
+function selectionPayload(ed) {
+  const localStart = Math.max(0, ed.selectionStart ?? 0);
+  const localEnd = Math.max(localStart, ed.selectionEnd ?? localStart);
+  let start = localStart, end = localEnd;
+  if (ed === ta && WINDOWED && DOC) {
+    start = DOC.offsetIn(DOC.index, localStart);
+    end = DOC.offsetIn(DOC.index, localEnd);
+  } else if (ed === lta && LIT_WINDOWED && LIT_DOC) {
+    start = LIT_DOC.offsetIn(LIT_DOC.index, localStart);
+    end = LIT_DOC.offsetIn(LIT_DOC.index, localEnd);
+  }
+  const all = ed.value.slice(localStart, localEnd);
+  /* 选区不做静默截断：服务端只把展示块压到安全长度，实际动作仍按完整选区分片。 */
+  return {start: start, end: end, length: Math.max(0, end - start),
+          text: all, truncated: false};
+}
+
+/* ---------- 取光标所在段与其前一段 ---------- */
+function cursorContext() {
+  const pos = ta.selectionStart ?? ta.value.length;
+  const before = ta.value.slice(0, pos);
+  const after = ta.value.slice(pos);
+  const head = before.split(/\n\s*\n/);
+  const cur = (head[head.length - 1] || '') + (after.split(/\n\s*\n/)[0] || '');
+  const prev = head.length >= 2 ? head[head.length - 2] : '';
+  return {cur: cur.trim(), prev: prev.trim()};
+}
+
+/* ---------- 光标锚点：把"她停在哪儿"做成一张位置图 ----------
+   为什么单独做它：上面那个 `cursorContext()` 拼出当前段的时候，
+   **把光标在段内的位置丢掉了**——送出去的只是一段文本，模型无从知道
+   她是停在段中间、句末，还是段落开头。
+
+   而"放权"之后最容易出的偏差恰恰就是这个：它跑去谈全篇里最值得谈的
+   地方，不看她在写哪儿。
+   （这不是猜的：CHI 2026 那篇 collaborative document editing 的实测结论是
+   "跨文档的主动干预接受率远低于用户发起的"，参与者被 document-wide 的
+   AI 干预搞得认知过载；作者的解法正是**用光标 / 视口这些注意力信号
+   来调节主动性**，且"焦点内"的直接给、"全文性"的降级成按需拉取。）
+
+   所以这里把光标显式标出来，再由后端放在提示词的**最前面**。 */
+function cursorAnchor() {
+  const clip = (s, n) => (s.length <= n ? s : (s.slice(0, n) + '…（略）…'));
+  const pos = ta.selectionStart ?? ta.value.length;
+  const before = ta.value.slice(0, pos);
+  const after = ta.value.slice(pos);
+  const pre = clip((before.split(/\n\s*\n/).pop() || '').trim(), 900);
+  const post = clip((after.split(/\n\s*\n/)[0] || '').trim(), 900);
+  /* 章名**不在这里拼**（2026-09-20 改）。后端会用**整篇段号**自己算一份——
+     窗口化时它看的是全文坐标，比这里准；两边都拼的话，模型会读到连着两行
+     说同一件事（实测就是这样）。**位置只有一个真源，就是后端。**
+     这一份只管"光标前后原文"——那才是后端看不到的东西。 */
+  return '（光标前）' + (pre || '（这一段从这里开始）') + '\n'
+    + '⟨这里⟩ ← 她就停在这个位置\n'
+    + '（光标后）' + (post || '（这一段到这里就完了）');
+}
+
+/* ---------- 请求 ---------- */
+/* ================= 测试版采集面板（**外挂，不改伴写本体**） =================
+   它做三件事，与论文的四组检验一一对应：
+     1) 沉默的精确率/召回  ->  事后回放标「该沉默／其实想听／本来没什么可说」
+     2) 作者自标 P/M/S 的信度 ->  每次点模式都落盘（localStorage 换机器会丢）
+     3) 「伤害」的效应差    ->  扩张/收敛两型搭话随机序盲评
+   **它不改变 ⊘ 的行为**：沉默时本体仍然不渲染卡片，这里只多一行可点的小字。 */
+const SILENT_KINDS = [['silent_right', '该沉默'], ['silent_wrong', '其实想听'],
+                      ['silent_had_nothing', '本来没什么可说']];
+/* 出声侧的两个选项**不是新增任务，是补上同一个 2x2 的另一格**：
+   标了沉默算得出精确率，标了出声才算得出召回率（§7 其二要的是两个数）。*/
+const SPOKE_KINDS = [['should_have_spoken', '该说话'], ['should_have_silent', '本该沉默']];
+const KIND_BTNS = { silence: SILENT_KINDS, spoke: SPOKE_KINDS };
+let probeOnlyUn = false, probeRows = [], lastSilenceEid = null;
+
+async function probeApi(path, body) {
+  const r = await fetch('/api/probe/' + path, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body || {})
+  });
+  return r.json();
+}
+
+function probeMsg(t) {
+  const el = document.getElementById('probemsg');
+  el.textContent = t || '';
+  if (t) setTimeout(() => { el.textContent = ''; }, 2600);
+}
+
+async function probeStat() {
+  const d = await probeApi('stats');
+  const el = document.getElementById('probestat');
+  if (d.error) { el.innerHTML = '<b>采集外挂未载入</b>（' + (d.error || '') + '）'; return; }
+  const pc = v => (v === null || v === undefined ? '—' : (v * 100).toFixed(1) + '%');
+  const m = d.matrix || {};
+  el.innerHTML =
+    '探针到点 <b>' + d.probe_to_point + '</b> ｜ 沉默 <b>' + d.silence +
+    '</b>（未标 ' + (d.silence_unlabeled || 0) + '）｜ 出声 <b>' + d.spoke +
+    '</b>（未标 ' + (d.spoke_unlabeled || 0) + '）<br>' +
+    '精确率 <b>' + pc(d.precision) + '</b> ｜ 召回率 <b>' + pc(d.recall) + '</b>' +
+    ' ｜ 2×2 TP <b>' + (m.TP || 0) + '</b> FP <b>' + (m.FP || 0) +
+    '</b> FN <b>' + (m.FN || 0) + '</b> TN <b>' + (m.TN || 0) + '</b>' +
+    (d.bad_lines ? ' ｜ <span style="color:#a33">坏行 ' + d.bad_lines + '</span>' : '');
+}
+
+async function probeLoad() {
+  const d = await probeApi('list', { limit: 60, unlabeled: probeOnlyUn ? 1 : 0 });
+  probeRows = d.rows || [];
+  const box = document.getElementById('probelist');
+  if (!probeRows.length) { box.innerHTML = '<div class="stat">还没有事件。</div>'; return; }
+  const ICON = { silence: '⊘', spoke: '♪', probe_to_point: '·', mode_pick: 'M', probe_trial: 'T' };
+  box.innerHTML = probeRows.map(r => {
+    const fb = r.author_feedback;
+    const btns = (KIND_BTNS[r.kind] || [['', '—']]).map(([k, t]) =>
+      '<button data-eid="' + r.event_id + '" data-fb="' + k + '"' +
+      (fb === k ? ' class="on"' : '') + '>' + t + '</button>').join('');
+    const body = r.kind === 'silence' ? (r.reason || '（没给理由）')
+      : r.kind === 'probe_trial' ? (r.g_text || '')
+      : (r.text_head || r.preview || '');
+    return '<div class="row"><div class="meta">' + (ICON[r.kind] || '?') + ' ' +
+      r.kind + ' · ' + (r.ts || '') + ' · ' + (r.mode || r.trial_kind || '') +
+      (r.attn_state ? ' · ' + r.attn_state : '') + '</div>' +
+      '<div class="body">' + String(body).replace(/[<>&]/g, c =>
+        ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c])) + '</div>' +
+      '<div class="btns">' + btns + '</div></div>';
+  }).join('');
+  box.querySelectorAll('button[data-eid]').forEach(b => {
+    b.onclick = async () => {
+      const fb = b.dataset.fb;
+      if (!fb) return;
+      const d2 = await probeApi('annotate', { event_id: b.dataset.eid, author_feedback: fb });
+      if (d2.error) probeMsg('没存上：' + d2.error);
+      else { probeMsg('已记：' + fb); probeStat(); probeLoad(); }
+    };
+  });
+}
+
+/* 沉默那一行下方挂三个可点小字。**这不是卡片**——
+   本体的"沉默不渲染卡片"在测试版里原样保留。 */
+function probeSilBar(eid, why) {
+  const hint = document.getElementById('hint');
+  if (!hint) return;
+  const bar = document.createElement('div');
+  bar.id = 'silbar';
+  bar.innerHTML = '<span>该沉默？</span>' + SILENT_KINDS.map(([k, t]) =>
+    '<button data-eid="' + eid + '" data-fb="' + k + '">' + t + '</button>').join('');
+  hint.parentNode.insertBefore(bar, hint.nextSibling);
+  bar.querySelectorAll('button').forEach(b => {
+    b.onclick = async () => {
+      const d = await probeApi('annotate', { event_id: b.dataset.eid, author_feedback: b.dataset.fb });
+      probeMsg(d.error ? ('没存上：' + d.error) : ('已记：' + b.textContent));
+      bar.remove();
+      probeStat(); if (document.getElementById('probepanel').classList.contains('on')) probeLoad();
+    };
+  });
+}
+
+/* 面板开合 */
+document.getElementById('probetab').onclick = () => {
+  const p = document.getElementById('probepanel');
+  p.classList.add('on');
+  document.getElementById('probetab').style.display = 'none';
+  probeStat(); probeLoad();
+};
+document.getElementById('probeclose').onclick = () => {
+  document.getElementById('probepanel').classList.remove('on');
+  document.getElementById('probetab').style.display = '';
+};
+document.getElementById('probehead').onclick = (e) => {
+  if (e.target.id === 'probeclose') return;
+  const b = document.getElementById('probepanel').classList.contains('on');
+  document.getElementById('probeclose').onclick.click();
+  if (!b) document.getElementById('probetab').onclick();
+};
+document.getElementById('probeonlyun').onclick = () => {
+  probeOnlyUn = !probeOnlyUn;
+  document.getElementById('probeonlyun').classList.toggle('on', probeOnlyUn);
+  probeLoad();
+};
+document.getElementById('probereload').onclick = () => { probeStat(); probeLoad(); };
+
+/* 作者每次点 P/M/S 都落盘——§7 其一要测的就是这个能不能稳定。
+   localStorage 换机器就丢，而重测信度必须跨会话，所以走接口。 */
+const _origModeClick = null;   // 下面用事件委托，不改原来的 onclick
+
+async function run(opts) {
+  const ask = !!(opts && opts.ask);   // 丙：这是"问它一次"，不是"让它说话"
+  const cc = cursorContext();
+  const text = (cc.cur || ta.value).trim();
+  const prev = cc.prev;
+  if (!text) { $('#hint').textContent = '还没有内容'; return; }
+  // 节流：同一段落不重复（丙的复问由 scenePrint 指纹管，不走这一条）
+  if (!ask && text === lastKey) { $('#hint').textContent = '这段已经伴写过'; return; }
+  lastKey = text;
+  busy = true;
+  $('#dot').classList.add('live');
+  $('#pstate').textContent = '伴写中…';
+  $('#hint').textContent = ask ? '问它一次…' : '请求中…';
+  $('#scope').textContent = '读取范围：§' + secSel.value + ' · 当前段落';
+  try {
+    const r = await fetch('/api/cowrite', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text, prev, section: secSel.value,
+                            mode: curMode, attention: attentionSignals(),
+                            anchor: cursorAnchor(),
+                            selection: selectionPayload(ta),
+                            recall: memTakeRecall()})
+    });
+    const d = await r.json();
+    lastGenMode = curMode;   // 记下这次用的模式，渲染时挂到卡片上
+    render(d);
+  } catch (e) {
+    cards.innerHTML = '<div class="empty">请求失败：' + e + '<br>确认 server.py 正在运行。</div>';
+  }
+  busy = false;
+  probeTimes = 0;       // 出过一次声之后重新计数：下一次停顿从头再判
+  syncPause();          // 暂停态照实说。原来这里无条件写"停止输入 8 秒后触发"，
+                        // 暂停中跑完一次，提示就撒了谎（E10 的另一处成因）
+  // 丙：把 render 写的"它看过了：…"还回去——syncPause 刚把它覆盖掉了，
+  // 而那行字是"它在判断"唯一看得见的地方。
+  if (hintAfter) { $('#hint').textContent = hintAfter; hintAfter = ''; }
+}
+
+/* ---------- 渲染 ---------- */
+function esc(s){return (s||'').replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}
+
+const LAYER_TIP = {
+  'A': '思路性 · 回映不命名：把你自己的词并置还给你，不给主题命名',
+  'B': '结构性 · 指位置不给方案：只说文档里已经存在的位置事实',
+  'C': '情节性 · 核自洽不预测：只核对已写下的因果，绝不猜接下来',
+  '⊘': '主动沉默：判不出或无可依据，这是判断不是故障',
+};
+
+/* ---------- 重写按钮 ----------
+   这四个不是"调参"，是她对一个具体输出的判断，所以点一下就等于一条标注——
+   记进埋点，和她在反馈表里手填的是同一件事，成本低得多。
+   「给点思路」不一样：它暂时解除"不定向"，因为那是她主动开口要的。 */
+const RW = [
+  {k: 'too_heavy',  t: '太重',      h: '我在你的文本之外拿了东西进来 → 删掉，只说看见的'},
+  {k: 'too_light',  t: '太轻',      h: '我用抽象情绪替掉了那股更硬的东西 → 说出具体的'},
+  {k: 'no_novelty', t: '没有新东西', h: '这句换到任何一段都成立 → 换成只属于这里的'},
+  {k: 'give_ideas', t: '给点思路',   h: '你要我就给：2–3 个方向，不替你选（只这一次）'},
+];
+
+/* run() 收尾会调 syncPause()，而 syncPause 会往 #hint 写"停止输入 8 秒后触发"。
+   丙之下 render 刚写进去的"它看过了：…"会被那一句抹掉——
+   而那行字是"放权"唯一看得见的证据。所以在这里存一下，收尾时还回去。 */
+let hintAfter = '';
+
+function render(d) {
+  const all = (d.cards || []);
+
+  /* 丙：它自己决定不说话。
+     不渲染卡片（她上一批还留着、正在看），只把**它的理由**写进探针行。
+     这是"放权"能被她感知到的唯一方式：它得说得出它看过。
+     说不说归它，但"看过没有"不能也变成一个黑箱。 */
+  const silent = all.find(c => c.type === 'withhold' && c.verdict === 'no');
+  if (silent) {
+    const why = String(silent.body || '').trim();
+    hintAfter = '⊘ 它看过了，没说话：' + (why ? why.slice(0, 70) : '（没给理由）');
+    $('#hint').textContent = hintAfter;
+    $('#pstate').textContent = '它决定不说';
+    // 测试版：在这个提前 return 之前挂一行可点小字。
+    // **本体的「沉默不渲染卡片」原样保留** —— 这里只多一行，不构成卡片。
+    if (silent.probe_event_id) {
+      try { probeSilBar(silent.probe_event_id, why); } catch (e) {}
+    } else {
+      // 埋点没拿到 id（外挂没载入，或采集失败）：面板里仍能事后看到这条
+      if (typeof probeStat === 'function') probeStat();
+    }
+    return;
+  }
+
+  const list = all.filter(c => !ignored.has(sig(c)));
+  if (!list.length) {
+    cards.innerHTML = '<div class="empty">⊘₀ · 我没有任何可核的依据，所以我不说话。<br>' +
+      '<span style="font-size:12px">（沉默是判断，不是故障。）</span></div>';
+    return;
+  }
+  cards.innerHTML = list.map(c => {
+    const id = sig(c);
+    let ev = '';
+    if (c.evidence && c.evidence.length) {
+      ev = '<details><summary>出处 ' + c.evidence.length + ' 条</summary>' +
+        c.evidence.map(e => '<div class="ev"><b>' + esc(e.ref) + '</b><br>' + esc(e.text || '') + '</div>').join('') +
+        '</details>';
+    }
+    const lv = c.layer || '';
+    const cls = lv === '⊘' ? 'X' : (lv || '');
+    const badge = lv
+      ? '<span class="lv lv-' + cls + '" title="' + esc(LAYER_TIP[lv] || '') + '">' + esc(lv) + '</span>'
+      : '';
+    const rws = RW.map(r =>
+      '<button class="rw" data-rw="' + r.k + '" title="' + esc(r.h) + '">' + esc(r.t) + '</button>'
+    ).join('');
+    // data-mode：这一批卡片是用哪个模式生成的。重写时要沿用同一个，
+    // 否则她中途换了模式，旧卡片会被按新口径改——那就串了。
+    return '<div class="card ' + (c.level || 'solid') + (cls ? ' lvline-' + cls : '') +
+      '" data-mode="' + esc(lastGenMode) + '">' +
+      '<div class="t">' + badge + '<span>' + esc(c.title || '') + '</span>' +
+      (d.mode && d.mode !== 'offline' ? '<span>· ' + esc(d.mode) + '</span>' : '') + '</div>' +
+      '<div class="b">' + esc(c.body || '') + '</div>' + ev +
+      '<div class="rn"></div>' +
+      '<div class="acts">' + rws +
+      '<button data-ig="' + esc(id) + '">忽略</button></div>' +
+      '<div class="sayrow">' +
+      '<input class="say" placeholder="或者你自己说（回车发送）">' +
+      '<button class="saygo">说</button></div>' +
+      '</div>';
+  }).join('');
+  cards.querySelectorAll('[data-ig]').forEach(b => b.onclick = () => {
+    ignored.add(b.dataset.ig);
+    b.closest('.card').remove();
+    if (!cards.querySelector('.card'))
+      cards.innerHTML = '<div class="empty">已全部忽略。</div>';
+  });
+  cards.querySelectorAll('[data-rw]').forEach(b => b.onclick = () => rewrite(b));
+  /* 「你自己说」：四个预设按钮之外的兜底。它存在的理由是——
+     预设永远只有四种，而她想说的话不止四种。 */
+  cards.querySelectorAll('.saygo').forEach(b => b.onclick = () => {
+    const inp = b.closest('.card').querySelector('.say');
+    sayIt(b.closest('.card'), inp.value);
+  });
+  cards.querySelectorAll('.say').forEach(inp => {
+    inp.onkeydown = e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault();
+        sayIt(inp.closest('.card'), inp.value); }
+    };
+  });
+}
+
+/* 卡片内「你自己说」：拿她自己打的这句话去重写这一条 */
+async function sayIt(card, words) {
+  words = (words || '').trim();
+  if (!words) return;
+  const bodyEl = card.querySelector('.b');
+  const prevOut = bodyEl.textContent.trim();
+  const cc = cursorContext();
+  const text = (cc.cur || ta.value).trim();
+  if (!text) { card.querySelector('.rn').textContent = '已经离开这一段了，没法重写。'; return; }
+  card.classList.add('busy');
+  card.querySelectorAll('button,input').forEach(x => x.disabled = true);
+  card.querySelector('.rn').textContent = '… 照你说的重来';
+  try {
+    const r = await fetch('/api/rewrite', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text, prev: cc.prev, section: secSel.value,
+                            kind: 'free', free: words, prev_output: prevOut,
+                            mode: (card.dataset.mode || curMode) || null,
+                            recall: memTakeRecall()})
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    const nb = (d.cards && d.cards[0] && d.cards[0].body) || '';
+    if (!nb) throw new Error('没有给出新的一版。');
+    bodyEl.textContent = nb;
+    card.querySelector('.rn').textContent = '照你说的改了 · 还能再说';
+  } catch (e) {
+    card.querySelector('.rn').textContent = '没成：' + e.message;
+  } finally {
+    card.classList.remove('busy');
+    card.querySelectorAll('button,input').forEach(x => x.disabled = false);
+  }
+}
+
+/* ---------- 对话栏：不挂在任何一张卡片上的那一路 ----------
+   跟上面那条的区别：卡片内那一路永远是"改这一条"，
+   这一路她可以问任何事——问一句"你刚才那句凭什么这么说"也行。 */
+const talk = $('#talk'), talklog = $('#talklog'), talkin = $('#talkin');
+let talkHist = [];
+
+$('#talkhead').onclick = () => {
+  talk.classList.toggle('folded');
+  $('#talkhead .tog').textContent = talk.classList.contains('folded') ? '（展开）' : '（收起）';
+  if (!talk.classList.contains('folded')) talkin.focus();
+};
+
+function talkMsg(who, text) {
+  const d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.textContent = text;
+  talklog.appendChild(d);
+  talklog.scrollTop = talklog.scrollHeight;
+  return d;
+}
+
+async function talkSend() {
+  const words = talkin.value.trim();
+  if (!words) return;
+  const cc = cursorContext();
+  const text = (cc.cur || ta.value).trim();
+  if (!text) { talkMsg('me', '（先在左边写点什么，或者把光标停在某一段上——不然我不知道你说的是哪儿。）'); return; }
+  talkin.value = '';
+  talkMsg('her', words);
+  const pending = talkMsg('me', '…');
+  $('#talksend').disabled = true;
+  try {
+    const r = await fetch('/api/rewrite', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text, prev: cc.prev, section: secSel.value,
+                            kind: 'free', free: words, history: talkHist,
+                            mode: curMode || null, recall: memTakeRecall()})
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    const nb = (d.cards && d.cards[0] && d.cards[0].body) || '';
+    pending.textContent = nb || '（它没说出话来。）';
+    talkHist.push({who: 'her', text: words}, {who: 'me', text: nb});
+  } catch (e) {
+    pending.textContent = '没成：' + e.message;
+  } finally {
+    $('#talksend').disabled = false;
+    talkin.focus();
+    talklog.scrollTop = talklog.scrollHeight;
+  }
+}
+$('#talksend').onclick = talkSend;
+talkin.onkeydown = e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); talkSend(); } };
+
+/* 按了某个重写按钮：拿当前段落 + 刚才那条输出，重来一次 */
+async function rewrite(btn) {
+  const card = btn.closest('.card');
+  const kind = btn.dataset.rw;
+  const bodyEl = card.querySelector('.b');
+  const prevOut = bodyEl.textContent.trim();
+  if (!prevOut) return;
+  const cc = cursorContext();
+  const text = (cc.cur || ta.value).trim();
+  if (!text) { card.querySelector('.rn').textContent = '已经离开这一段了，没法重写。'; return; }
+  card.classList.add('busy');
+  card.querySelectorAll('button').forEach(x => x.disabled = true);
+  card.querySelector('.rn').textContent = '… 按「' + btn.textContent + '」重写';
+  /* 出错也要复位：早年这里用 return 提前退出，busy 没摘掉、按钮一直禁用，
+     卡片会永久卡在"重写中"。所以收尾统一放 finally。 */
+  try {
+    const r = await fetch('/api/rewrite', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({text, prev: cc.prev, section: secSel.value,
+                            kind: kind, prev_output: prevOut,
+                            mode: (card.dataset.mode || curMode) || null,
+                            recall: memTakeRecall()})
+    });
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    const nb = (d.cards && d.cards[0] && d.cards[0].body) || '';
+    if (!nb) throw new Error('没有给出新的一版。');
+    bodyEl.textContent = nb;
+    card.querySelector('.rn').textContent = '已按「' + (d.label || btn.textContent) + '」重写 · 还能再按一次';
+    card.querySelectorAll('[data-rw]').forEach(x => x.classList.toggle('on', x.dataset.rw === kind));
+  } catch (e) {
+    card.querySelector('.rn').textContent = '重写失败：' + e.message;
+  } finally {
+    card.classList.remove('busy');
+    card.querySelectorAll('button').forEach(x => x.disabled = false);
+  }
+}
+function sig(c){ return (c.type||'') + '|' + (c.title||'') + '|' + (c.body||'').slice(0,40); }
+
+/* ---------- 视图切换：伴写 / 文学 ----------
+   两个视图气质相反（一个不给方向，一个要下判断），
+   所以切换时**连记忆区一起换**——这件事必须在界面上看得见，
+   否则"写到哪一区去了"只有后端知道。 */
+let VIEW = 'write';
+$('#viewsw').onclick = (e) => {
+  const b = e.target.closest('.vs'); if (!b) return;
+  const v = b.dataset.view; if (v === VIEW) return;
+  VIEW = v;
+  document.querySelectorAll('#viewsw .vs').forEach(x => x.classList.toggle('on', x === b));
+  $('#writemain').style.display = v === 'write' ? '' : 'none';
+  $('#litmain').style.display   = v === 'lit'   ? '' : 'none';
+  /* 目录按钮和抽屉是**两个视图共用的一套**（不是各做一份），所以随着视图搬过去。
+     不搬的话文学视图里压根没有「目录」可点：按钮和抽屉都住在 #writemain 里，
+     切走就一起 display:none 了——而 tocEd 明明已经按视图路由到 lta，
+     等于路修好了、入口没开。搬元素而不是复制一份，是为了只有一个 TocPanel
+     实例、一个徽标（#tocn）、一个状态，不会出现"这边的目录关了那边还开着"。 */
+  moveTocTo(v);
+  /* 位置框跟着视图换源：cursorParaNo() 按 VIEW 路由到 ta / lta，
+     不刷的话切过去还显示上一个编辑器的章——位置框说的是谎话，
+     比不显示更糟。 */
+  posBoxUpdate();
+  // 切走时把停表收掉：别在文学视图里还计时"她 8 秒没打字"。
+  // 但 **paused 不动**（R16）——原来这里顺手 paused=true，切回来又置 false，
+  // 于是她明明按了暂停、切个视图就被静默取消（或者反过来显示"已暂停"实际活着）。
+  // 视图维度与暂停维度是两回事：隔离由 touch() 的 VIEW 门承担，不靠这个布尔。
+  if (timer) clearTimeout(timer);
+  syncPause();
+};
+
+/* ---------- 文学工作台 ----------
+   它下判断，但每一条都要举证到原文。写进**通用文学**区，不碰伴写那棵。
+   材料框与伴写同一个地基（EditorController），但**不是同一份文档**：
+   两个视图各存各的稿子、互不覆盖——这是有意设计（回归点 T-11），别"顺手"合并。
+   probe 不传：文学侧没有探针，touch 根本不该被材料框的输入拉起来（护栏 3）。 */
+const lta = EditorController.create({
+  host: $('#lta'),
+  countEl: $('#lcount'),
+  formats: EDITOR_FORMATS,          // 与伴写侧一致：窄了目录就死（护栏 4）
+  placeholder: '把材料贴进来，或者点右上角「打开文件」载入一份。\n\n'
+    + '这一页是**处理已有的文学材料**，不是在旁边搭话：\n'
+    + '  拆文   —— 拆成带编号、白描、实体、原文锚点的最小单元\n'
+    + '  审稿   —— 每条判断都落到具体字句上，说清为什么是问题\n'
+    + '  素材   —— 归档去重标来源，来源比整理结果重要\n'
+    + '  写作   —— 短篇 / 散文 / 翻译，守那四条语言规矩\n\n'
+    + '它下判断，但不空口下：原文没给的，写「原文未明确」，不推断填空。',
+  onText() {
+    markfmt($('#lfmtbar'), lta);
+    /* 文学材料窗口化后，编辑区只装当前章；每次输入只回写这一章，
+       与写作区同一套 DocModel，不用把几十万字重新塞回 Quill。 */
+    if (LIT_WINDOWED && LIT_DOC && !litSwitching) {
+      LIT_DOC.commit(LIT_DOC.index, lta.html(), lta.value);
+      $('#lcount').textContent = LIT_DOC.chars() + ' 字';
+    }
+  }
+});
+const litout = $('#litout');
+let litBusy = false;
+let LIT_MSGS = [];      // 会话历史 [{role:'user'|'assistant', content}]，由前端带着走
+
+/* 字数原来在这里手写了一个 input 监听——现在由控制器的 countEl 统一驱动，
+   更新代码全站只剩 refreshCount 一处（分叉点 5）。 */
+
+function lset(state, cls) {
+  $('#lstate').textContent = state;
+  $('#ldot').className = 'dot' + (cls ? ' ' + cls : '');
+}
+const PH = '\u0001';                      // 占位符的哨兵，正文里不会出现
+
+/* markdown → HTML。**顺序要紧**：先转义，再摘代码块，最后才转强调，
+   否则代码里的 * 会被当成加粗，模型输出的 <> 会变成真的标签。 */
+function md(src) {
+  const codes = [], inl = [];
+  let s = esc(src || '');
+  s = s.replace(/```[^\n]*\n?([\s\S]*?)```/g, (m, c) => {
+    codes.push(c.replace(/\n$/, '')); return PH + 'C' + (codes.length - 1) + PH;
+  });
+  s = s.replace(/`([^`\n]+?)`/g, (m, c) => {
+    inl.push(c); return PH + 'I' + (inl.length - 1) + PH;
+  });
+  s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+       .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g,
+                '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  const lines = s.split('\n'), out = [];
+  let buf = [];
+  const flush = () => { if (buf.length) { out.push('<p>' + buf.join('<br>') + '</p>'); buf = []; } };
+  for (let i = 0; i < lines.length;) {
+    const ln = lines[i], t = ln.trim();
+    let m;
+    if (new RegExp('^' + PH + 'C\\d+' + PH + '$').test(t)) {
+      flush(); out.push('<pre><code>' + t + '</code></pre>'); i++; continue;
+    }
+    if ((m = t.match(/^(#{1,4})\s+(.*)$/))) {
+      flush(); const l = m[1].length;
+      out.push('<h' + l + '>' + m[2] + '</h' + l + '>'); i++; continue;
+    }
+    if (/^(-{3,}|\*{3,}|_{3,})$/.test(t)) { flush(); out.push('<hr>'); i++; continue; }
+    // 注意：esc() 已经把 > 转成了 &gt;，所以引用块要认 &gt;，不是 >
+    if (/^&gt;/.test(t)) {
+      flush(); const q = [];
+      while (i < lines.length && /^&gt;\s?/.test(lines[i])) {
+        q.push(lines[i].replace(/^&gt;\s?/, '')); i++;
+      }
+      out.push('<blockquote>' + q.join('<br>') + '</blockquote>'); continue;
+    }
+    if (/^\s*[-*+]\s+/.test(ln)) {
+      flush(); const it = [];
+      while (i < lines.length && /^\s*[-*+]\s+/.test(lines[i])) {
+        it.push(lines[i].replace(/^\s*[-*+]\s+/, '')); i++;
+      }
+      out.push('<ul>' + it.map(x => '<li>' + x + '</li>').join('') + '</ul>'); continue;
+    }
+    if (/^\s*\d+[.)]\s+/.test(ln)) {
+      flush(); const it = [];
+      while (i < lines.length && /^\s*\d+[.)]\s+/.test(lines[i])) {
+        it.push(lines[i].replace(/^\s*\d+[.)]\s+/, '')); i++;
+      }
+      out.push('<ol>' + it.map(x => '<li>' + x + '</li>').join('') + '</ol>'); continue;
+    }
+    if (!t) { flush(); i++; continue; }
+    buf.push(ln); i++;
+  }
+  flush();
+  return out.join('\n')
+    .replace(new RegExp(PH + 'I(\\d+)' + PH, 'g'), (m, k) => '<code>' + inl[+k] + '</code>')
+    .replace(new RegExp(PH + 'C(\\d+)' + PH, 'g'), (m, k) => codes[+k]);
+}
+
+function lscroll() { litout.scrollTop = litout.scrollHeight; }
+function lwipe() { litout.innerHTML = ''; LIT_MSGS = []; }
+function escAttr(s) { return esc(s).replace(/"/g, '&quot;'); }
+function toolsOn() { return !!$('#littools').checked; }
+
+// 一轮对话（或一次动作的结果）追加到串尾。查过什么挂在下面，看得见。
+function lturn(who, html, opts) {
+  opts = opts || {};
+  const d = document.createElement('div');
+  d.className = 'litturn' + (who === 'me' ? ' me' : '');
+  d.innerHTML = '<div class="who">' + (who === 'me' ? '我' : '它') + '</div>' +
+                '<div class="body">' + html + '</div>';
+  if (opts.tools && opts.tools.length) {
+    d.insertAdjacentHTML('beforeend', '<div class="toolsused">' + opts.tools.map(t =>
+      '<span title="' + escAttr(JSON.stringify(t.args || {})) + '">' + esc(t.name) + '</span>'
+    ).join('') + '</div>');
+  }
+  if (opts.meta) d.insertAdjacentHTML('beforeend', '<div class="meta">' + esc(opts.meta) + '</div>');
+  // 「放进左边」：它读回来的东西要能直接变成材料，不用她再手动复制一遍。
+  // 只有它说的那一轮才有——我说的那句没什么好放的。
+  //
+  // 两个键，因为**原文和答复不是一回事**：抓一篇 LOFTER 文章时，
+  // 「原文」是文章本身，「答复」是它对文章的转述。她要加工的是前者。
+  if (who !== 'me') {
+    const cands = [];
+    (opts.toolraw || []).forEach(t => {
+      if (t && t.text && t.text.trim()) cands.push(['原文 · ' + t.name, t.text]);
+    });
+    if (opts.raw && opts.raw.trim()) cands.push(['这一轮的答复', opts.raw]);
+    if (cands.length) {
+      const row = document.createElement('div');
+      row.className = 'putrow';
+      const note = document.createElement('span');
+      note.className = 'pd';
+      cands.forEach(c => {
+        const b = document.createElement('button');
+        b.textContent = '放进左边：' + c[0];
+        b.onclick = () => lput(c[1], note, {html: md(c[1])});
+        row.appendChild(b);
+      });
+      row.appendChild(note);
+      d.appendChild(row);
+    }
+  }
+  litout.appendChild(d); lscroll();
+  return d;
+}
+
+// 把这一轮的内容添进左边的材料框。空的就放进去，不空就接着写——
+// 「添加」是累加，不是替换：攒好几篇做素材整理时，替换会把前面的抹掉。
+// opts.html 传渲染好的 HTML（md() 的产物）：原来只拿纯文本，模型的标题、
+// 加粗、列表到这里全被抹平——md() 明明已经渲染出来了，却在最后一米扔掉。
+function lput(raw, noteEl, opts) {
+  const t = (raw || '').trim();
+  const html = opts && opts.html;
+  if (!t && !html) return;
+  const had = lta.value.trim().length > 0;
+  if (html) {
+    /* 累加：格式留住。断行由 appendHtml 自己负责（它先补一个 \n，
+       否则新内容会粘到最后一段里）。
+       这里原来写的是 '<hr>' + html —— 横线**根本不会出现**：这份 Quill 没有
+       divider blot，<hr> 被静默吃掉。它不是"少了条分隔线"这种小瑕疵：
+       吃掉的同时连断行也没了，两次「放进左边」的内容粘成一整段，
+       导出和目录里才看得出来（本该两段的正文变成一段）。
+       要视觉分隔就补一个空段（lta.append('\n')），别指望 <hr>。 */
+    if (had) { lta.append('\n'); lta.appendHtml(html); }
+    else lta.setRichDoc(html);
+  } else {
+    if (had) lta.append('\n\n' + t);
+    else lta.value = t;
+  }
+  lta.refreshCount();
+  if (noteEl) {
+    noteEl.textContent = had ? '已接到材料框后面（' + t.length + ' 字）' : '已放进材料框（' + t.length + ' 字）';
+    setTimeout(() => { noteEl.textContent = ''; }, 4000);
+  }
+}
+
+function lmeta(d, label) {
+  let scope = '';
+  if (d.mat_mode === 'chunked') scope = ' · 全文分 ' + (d.input_chunks || 1) + ' 片处理';
+  else if (d.mat_mode === 'retrieval') scope = ' · 相关段落检索';
+  return label + ' · ' + (d.sec || '?') + ' 秒 · ' + (d.text || '').length + ' 字' +
+    scope + (d.selection_used ? ' · 针对选区' : '') +
+    (d.tools_used && d.tools_used.length ? ' · 查了 ' + d.tools_used.length + ' 次' : '') +
+    (d.saved ? ' · 已记进「通用文学」区' : ' · 没记进记忆（区不可用，不影响这次）');
+}
+
+async function litpost(body) {
+  const r = await fetch('/api/lit', {
+    method: 'POST', headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify(body)
+  });
+  return await r.json();
+}
+
+// 动作按钮与工具清单都由后端给，不在前端写死——加一个只改一处
+fetch('/api/lit').then(r => r.json()).then(d => {
+  $('#litbar').innerHTML =
+    '<span class="lb">做</span>' +
+    (d.actions || []).map(a =>
+      '<button class="mb" data-act="' + a.id + '">' + a.label + '</button>').join('');
+  $('#lws').textContent = '记忆区：' + (d.ws === 'literary' ? '通用文学' : (d.ws || '—'));
+  $('#littoollist').innerHTML = (d.tools || [])
+    .map(t => '<b>' + esc(t.id) + '</b> ' + esc(t.desc)).join('<br>');
+  $('#litbar').onclick = (e) => {
+    const b = e.target.closest('[data-act]'); if (b) litrun(b);
+  };
+}).catch(e => { $('#litbar').innerHTML = '<span class="lb">动作清单没读到：' + e + '</span>'; });
+
+/* ---------- 全文阅读状态 ----------
+   分章显示解决的是“界面只装一章”，不等于模型只读一章。后台按章建全书记忆，
+   这里把她看得见的状态如实显示出来。 */
+let fullreadTimer = null;
+function paintFullread(d) {
+  const el = $('#lread'); if (!el) return;
+  const st = d && d.status || 'empty';
+  const pct = (d && d.coverage_pct) || 0;
+  if (st === 'ready') {
+    el.textContent = '全文已读 · ' + (d.doc_chars || 0) + ' 字 / ' + (d.chapters || 0) + ' 章';
+    el.title = '已建立全书记忆（' + (d.memory_chars || 0) + ' 字），后续对话会带这份记忆';
+    el.style.color = 'var(--accent)';
+  } else if (st === 'building') {
+    el.textContent = '正在读全文 · ' + pct + '%（' + (d.covered_parts || 0) + '/' + (d.total_parts || 0) + ' 片）';
+    el.title = '后台正在逐章阅读全文，完成后模型会获得全文阅读记忆';
+    el.style.color = 'var(--warn)';
+  } else if (st === 'pending') {
+    el.textContent = '全文阅读：排队中'; el.style.color = 'var(--warn)';
+  } else if (st === 'stale') {
+    el.textContent = '全文阅读：记忆待更新'; el.style.color = 'var(--warn)';
+  } else if (st === 'offline') {
+    el.textContent = '全文阅读：模型未配置'; el.style.color = 'var(--warn)';
+  } else if (st === 'error') {
+    el.textContent = '全文阅读：失败'; el.title = d.err || ''; el.style.color = 'var(--warn)';
+  } else {
+    el.textContent = '全文阅读：未开始'; el.style.color = 'var(--muted)';
+  }
+}
+async function refreshFullread() {
+  try {
+    const d = await (await fetch('/api/fullread')).json();
+    paintFullread(d);
+    return d;
+  } catch (e) {
+    paintFullread({status: 'error', err: String(e)});
+    return null;
+  }
+}
+function watchFullread() {
+  if (fullreadTimer) clearInterval(fullreadTimer);
+  refreshFullread();
+  fullreadTimer = setInterval(async () => {
+    const d = await refreshFullread();
+    if (d && ['ready', 'stale', 'error', 'offline', 'empty'].includes(d.status)) {
+      clearInterval(fullreadTimer); fullreadTimer = null;
+    }
+  }, 1000);
+}
+$('#lread').onclick = async () => {
+  if (!litText().trim() || /全文已读/.test($('#lread').textContent || '')) return;
+  await fetch('/api/fullread', {method: 'POST'});
+  watchFullread();
+};
+// ---- 四个固定动作
+async function litrun(btn) {
+  if (litBusy) return;
+  const text = litText().trim();
+  if (!text) {
+    lset('还没有材料', '');
+    lturn('it', '<div class="empty">先把材料贴进来，或者点右上角「打开文件」载入一份。</div>');
+    return;
+  }
+  litBusy = true;
+  const act = btn.dataset.act, label = btn.textContent;
+  document.querySelectorAll('#litbar .mb').forEach(x => x.classList.toggle('on', x === btn));
+  lset('正在' + label + '…', 'busy');
+  const ph = lturn('它', '<div class="empty" id="litph">正在' + label + '…</div>');
+  /* 秒表。**这不是装饰**：拆一份长材料要写几千字，实测一两分钟。
+     原来那行"正在拆文…"是死的——一秒、三十秒、两分钟长得一模一样，
+     只能看出"没反应"。有了秒表，等就是等，不是卡。 */
+  const lt0 = Date.now();
+  const tick = setInterval(() => {
+    const s = Math.round((Date.now() - lt0) / 1000);
+    const msg = '正在' + label + '… ' + s + ' 秒'
+      + (s >= 25 ? '（在写，别关页面）' : '');
+    lset(msg, 'busy');
+    const el = document.getElementById('litph');
+    if (el) el.textContent = msg;
+  }, 1000);
+  try {
+    const d = await litpost({action: act, text: text, tools: toolsOn(),
+                             selection: selectionPayload(lta),
+                             chapter: litChapterInfo(), intent: label});
+    if (!d.ok) {
+      lset('没做成 · ' + (d.sec || '?') + ' 秒', 'bad');
+      ph.innerHTML = '<div class="err">' + esc(d.err || d.error || '不知道为什么失败了')
+        + '</div><div style="margin-top:6px;font-size:12px;color:var(--muted)">'
+        + '等了 ' + (d.sec || '?') + ' 秒。<b>立刻回</b>＝配置或协议不对；'
+        + '<b>等满好几分钟才回</b>＝端点不通或太慢。</div>';
+      return;
+    }
+    lset(label + ' · ' + (d.sec || '?') + ' 秒', 'on');
+    ph.innerHTML = '';
+    if (d.mat_truncated) {
+      // 材料被砍了必须说。不说的话，她看它只拆了前一半，会以为是它读漏了。
+      lturn('它', '<div class="err">材料一共 ' + (d.mat_chars || '?')
+        + ' 字，这次只送进去了前一部分。要处理后面的，把材料分几段来。</div>');
+    }
+    lturn('它', md(d.text || ''),
+          {tools: d.tools_used, meta: lmeta(d, label), raw: d.text, toolraw: d.tool_raw});
+    ph.remove();
+    // 动作也算一轮，接在会话里——"先拆完再接着问"才连得上
+    LIT_MSGS.push({role: 'user',
+                   content: '（我让你' + label + '，材料是：「' + text.slice(0, 160) + '」）'});
+    const histReply = d.action === 'xiezuo'
+      ? ('（已按全文翻译，输出 ' + ((d.text || '').length) + ' 字；完整译文保留在本轮答复中，不塞回后续对话上下文。）')
+      : (d.text || '');
+    LIT_MSGS.push({role: 'assistant', content: histReply});
+  } catch (e) {
+    lset('失败 · ' + Math.round((Date.now() - lt0) / 1000) + ' 秒', 'bad');
+    ph.innerHTML = '<div class="err">' + esc(e) + '</div>';
+  } finally {
+    clearInterval(tick);
+    litBusy = false;
+  }
+}
+
+// ---- 自由对话：复杂需求直接说，不用非得套进四个按钮里
+async function litsay() {
+  if (litBusy) return;
+  const v = $('#litsay').value.trim();
+  if (!v) return;
+  $('#litsay').value = '';
+  lturn('我', md(v));
+  LIT_MSGS.push({role: 'user', content: v});
+  litBusy = true;
+  lset('正在想…', 'busy');
+  const ph = lturn('它', '<div class="empty" id="litph">正在想…</div>');
+  const lt0 = Date.now();
+  const tick = setInterval(() => {
+    const s = Math.round((Date.now() - lt0) / 1000);
+    const msg = '正在想… ' + s + ' 秒' + (s >= 25 ? '（在写，别关页面）' : '');
+    lset(msg, 'busy');
+    const el = document.getElementById('litph');
+    if (el) el.textContent = msg;
+  }, 1000);
+  try {
+    const d = await litpost({action: 'chat', messages: LIT_MSGS,
+                             text: litText().trim(), tools: toolsOn(),
+                             selection: selectionPayload(lta),
+                             chapter: litChapterInfo(), intent: v});
+    if (!d.ok) {
+      lset('没做成 · ' + (d.sec || '?') + ' 秒', 'bad');
+      ph.innerHTML = '<div class="err">' + esc(d.err || d.error || '不知道为什么失败了') + '</div>';
+      LIT_MSGS.pop();          // 这句没答上来，别留在历史里带歪下一轮
+      return;
+    }
+    lset((d.action === 'xiezuo' ? '全文翻译' : '答完了') + ' · ' + (d.sec || '?') + ' 秒', 'on');
+    ph.innerHTML = '';
+    lturn('它', md(d.text || ''),
+          {tools: d.tools_used, meta: lmeta(d, d.label || '对话'), raw: d.text, toolraw: d.tool_raw});
+    ph.remove();
+    const histReply = d.action === 'xiezuo'
+      ? ('（已按全文翻译，输出 ' + ((d.text || '').length) + ' 字；完整译文保留在本轮答复中，不塞回后续对话上下文。）')
+      : (d.text || '');
+    LIT_MSGS.push({role: 'assistant', content: histReply});
+  } catch (e) {
+    lset('失败 · ' + Math.round((Date.now() - lt0) / 1000) + ' 秒', 'bad');
+    ph.innerHTML = '<div class="err">' + esc(e) + '</div>';
+    LIT_MSGS.pop();
+  } finally {
+    clearInterval(tick);
+    litBusy = false;
+  }
+}
+
+$('#litsend').onclick = litsay;
+$('#litsay').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); litsay(); }
+});
+$('#litclear').onclick = (e) => {
+  e.preventDefault();
+  lwipe();
+  lset('待命', '');
+  lturn('it', '<div class="empty">这一串清掉了。<br>它下判断，但每一条都要举证到原文。</div>');
+};
+
+/* ---------- 工具清单：收进状态栏，点开才占地方 ----------
+   它原来常驻在应答框下面，把应答区压掉一半。收起来之后应答区吃满整个右栏；
+   想知道它能干什么、这次用了什么，点一下「工具」。 */
+$('#litoolbtn').onclick = (e) => {
+  e.stopPropagation();
+  const open = $('#litoolbox').classList.toggle('on');
+  $('#litoolbtn').classList.toggle('on', open);
+};
+$('#litoolbox').onclick = (e) => e.stopPropagation();
+document.addEventListener('click', () => {
+  $('#litoolbox').classList.remove('on');
+  $('#litoolbtn').classList.remove('on');
+});
+
+/* ---------- 右栏宽度可拖 ----------
+   写死的 380px 容不下长引文和表格。拖中间那条缝就行，宽度记在本地，
+   下次进来还是这个宽度——不然每次都要重新拖一遍。 */
+const LITW_KEY = 'lit.rightw';
+const litmainEl = $('#litmain');
+try {
+  const saved = parseInt(localStorage.getItem(LITW_KEY) || '', 10);
+  if (saved >= 300) litmainEl.style.setProperty('--litw', saved + 'px');
+} catch (e) {}
+(() => {
+  const g = $('#litgrip');
+  let dragging = false;
+  g.addEventListener('mousedown', (e) => {
+    dragging = true;
+    g.classList.add('on');
+    document.body.style.cursor = 'col-resize';
+    document.body.style.userSelect = 'none';
+    e.preventDefault();
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!dragging) return;
+    const r = litmainEl.getBoundingClientRect();
+    let w = r.right - e.clientX - 10;
+    w = Math.min(Math.max(w, 300), Math.max(320, r.width - 340));
+    litmainEl.style.setProperty('--litw', w + 'px');
+  });
+  window.addEventListener('mouseup', () => {
+    if (!dragging) return;
+    dragging = false;
+    g.classList.remove('on');
+    document.body.style.cursor = '';
+    document.body.style.userSelect = '';
+    const w = parseInt(getComputedStyle(litmainEl).getPropertyValue('--litw'), 10);
+    try { if (w) localStorage.setItem(LITW_KEY, w); } catch (e) {}
+  });
+})();
+
+/* ---------- 导出：进得来，就得出得去 ----------
+   只有"导入"没有"导出"的写作工具是缺一块的——等于把稿子扣在页面上。
+   而且这里**没有云端草稿、没有历史版本**，刷新一下就没了，出口更不能少。
+
+   导出两份东西，让她自己挑——**不要替她定哪份是正文**：
+   · 左框（稿子）：写作区全文 / 文学的材料框。她攒在那儿的就是成稿；
+   · 会话（含来回）：她说的话加上它答的话。**这是过程，不是她的稿子**，
+     所以默认不导出它——默认落在"稿子"上。
+
+   两个视图各自记住自己上次选的是哪份（两边内容不一样，串台会误导），
+   哪份是空的就把那一项变灰；选中的那份空了自动落到另一份上。 */
+const EXPM = $('#expmenu');
+
+/* 名字怎么起：
+   基础名[-位置][-类型][-日期]
+
+   · 基础名她自己填，记进 localStorage（两个视图各记各的）；
+     没载入文件也不用退回"文稿"那种没人认识的名字——那等于明天打开文件
+     夹先猜哪份是哪份。**写了东西就该有个名字。**
+   · 位置复用顶栏那个"位置"输入框：它本来就是传给模型当语境的标记，
+     和文件名里的位置是一回事，没有理由让她填两遍。
+   · 类型：写作区不带（它是稿子本体，越短越好）；会话是过程，要说清。
+   · 日期默认带：改一版存一次，靠文件名自己排时间，不用 Win 出 "(1)"。 */
+const EXPN_KEY = {write: 'lit_expname_write', lit: 'lit_expname_lit'};
+let expAuto = '';      // 上次自动填进去的名字（判断"要不要跟着新文件换"用）
+
+/* 作者：docx 与 epub 都从这里取，不许各自再写一个字面量。
+   为什么要拎出来：docx-writer.js:328 读的是 opts.author，而这边原先传的是
+   creator——键名对不上，opts.author 恒为 undefined，被 `|| ''` 悄悄兜住，
+   于是每个导出的 docx 里 <dc:creator> 都是空标签，全链路一声不响。
+   只有打开 Word 的"文件→信息"才看得见。填错不报错的东西，就得靠命名一次
+   来防止第二次填错。负责人已拍板不开作者输入框，所以这个值就是"我"。 */
+const EXP_AUTHOR = '我';
+
+function stamp() {
+  const d = new Date(), p = n => String(n).padStart(2, '0');
+  return '' + d.getFullYear() + p(d.getMonth() + 1) + p(d.getDate());
+}
+
+function loadedName() {
+  const t = ($('#doc').textContent || '').split(' · ')[0].trim();
+  if (!t || /^未载入|^读取中|^失败/.test(t)) return '';
+  return t.replace(/\.(txt|md|markdown|docx|epub)$/i, '');
+}
+
+function expBase() {
+  return ($('#expname').value || '').trim().replace(/\.(txt|md|markdown|docx|epub)$/i, '') || '文稿';
+}
+
+function expLoadName() {
+  const el = $('#expname');
+  if ((el.value || '').trim()) return;
+  let v = '';
+  try { v = localStorage.getItem(EXPN_KEY[VIEW]) || ''; } catch (e) {}
+  el.value = v || loadedName() || '';
+  expAuto = el.value;
+}
+
+// 换了一份稿子进来，名字跟着走——**她自己手填过就不动**。
+// 判断依据是这个输入框里现在是空的、还是上次自动填进去的那个名字。
+function expNameSync(fname) {
+  const el = $('#expname');
+  if (!el) return;
+  const v = (fname || '').trim().replace(/\.(txt|md|markdown|docx)$/i, '');
+  if (!v || /^未载入|^读取中|^失败/.test(v)) return;
+  const cur = (el.value || '').trim();
+  if (cur && cur !== expAuto) return;
+  el.value = v; expAuto = v;
+  try { localStorage.setItem(EXPN_KEY[VIEW], v); } catch (e) {}
+}
+
+// 文件名里不能有的字符一律换掉。这串必须跟服务端 server.py 的 _safe_name
+// 保持一致——不然预览里是 `/`、落盘是 `_`，等于没预览。
+function expClean(s) {
+  return (s || '').replace(/[\\/:*?"<>|\r\n\t]+/g, '_');
+}
+
+function expName(kind) {
+  const parts = [expBase()];
+  const sec = (secSel.value || '').trim();
+  if (sec && sec !== '—') parts.push(sec);   // § 留着：`-§7` 比 `-7` 清楚
+  if (kind) parts.push(kind);
+  if ($('#expdate').checked) parts.push(stamp());
+  // 服务端最多取 60 字（_safe_name），这里先截同一刀，预览才等于实收。
+  return expClean(parts.join('-')).replace(/^[\s.]+|[\s.]+$/g, '').slice(0, 60);
+}
+
+// 拼出要带走的东西。没有就返回 null，三个格式键随之变灰。
+// 来源是她选的：src='doc' 左框（她攒下来的稿子/材料），src='log' 会话（来回的过程）。
+/* R24 的字段契约（唯一真源是 P1 方案 §4.5，这里只写落地形态，不复述裁定过程）：
+   text  纯文本，喂服务端与 txt 导出。**不得换成 markdown**（RL-2 红线）。
+   name  带装饰的文件名主干 = expName(kind) 的结果，含 § 位置标记与日期后缀。
+   title 裸名 = expBase()，已剥掉 .txt/.md/.markdown/.docx/.epub 后缀，供 docx 与
+         epub 的 dc:title。**必填**：expBase() 有 '文稿' 兜底，四条路径都不会给空串。
+   n     已格式化的显示串（「1234 字」/「8 段」/「12 句」），不是数字——消费方不再自己拼。
+   markdown  该 text 是否 markdown，决定走不走 Turndown。
+   html  序列化字符串，**write×doc 与 lit×doc 两条都有**（E3 修复后）。
+         不得是 DOM/Delta，**不得预补 heading id**（L10 硬约束，id 由 export-core 切章时用 nextIndex 补）。
+   kind  **R24 删除**。它仍作为 expName 的【入参】保留（用来算 name），只是不再暴露成字段。
+         消费点已归零（lucy grep 证过，我复核过：expRefresh 里 `$('#expfn').textContent`
+         那行已改读 `p.name`；expDo 里 `{title: p.name, author: EXP_AUTHOR, …}` 那行
+         待 lucy 改读 `p.title` —— S-2 的次序是「我先、她后一行」）→ 删了不会有人读不到。
+   ⚠️ 约束 4：name 与 title **必须同刻取**。expBase() 读的是 #expname 的**活值**，
+      而文件末尾 `$('#expname').addEventListener('input', …)` 每敲一个字就刷一次。
+      本函数是**同步**的，expName(kind) 内部那次 expBase() 与我这次之间没有任何
+      await / 回调 / 让出点 → 两次读到同一个值，结构上不可能出现
+      「文件名是新名、dc:title 是旧名」。**禁止**在这两行之间插入 await、setTimeout、
+      或任何读 UI 的后处理。（expDo 里那个 await 之所以安全，正因为它读的是这里
+      留下的 p 快照，不重算 —— 那条理由 lucy 已经写在 `{title: p.name…}` 下面了。）
+   ⚠️ 别顺手删 talkSend / rewrite 那三处请求体里的 `kind:`（`kind: 'free'` 两处、
+      `kind: kind` 一处，都在 `fetch('/api/…')` 的 body 里）—— 那是**发给模型的请求体字段**，
+      同名不同物，删了就碰 RL-2（改变模型输入格式分布，那是实验条件）。
+      `lit-memory-core.js` 里的 c.kind（plot/character/foreshadow/…）也是另一回事，无关。
+   📌 本注释刻意**不引行号**，只引标识符：这一段是本轮编辑最密集的区域，
+      行号在三次提交内就漂了 20 行（我第一版引的 6 个行号全过期了，已改）。
+      标识符 + grep 是稳定的锚，行号不是。 */
+function expPayload(src) {
+  if (VIEW === 'lit') {
+    if (src === 'doc') {
+      const fullText = litText(), fullHtml = litHtml();
+      if (!fullText.trim()) return null;
+      /* 文学材料窗口化后导出必须走全文出口，不能只导当前章。
+         E3 的约束仍在：rich HTML 尽量原样交出去，不从纯文本现编。 */
+      return {text: fullText, html: fullHtml, name: expName('材料'),
+              title: expBase(), markdown: false,
+              n: fullText.length + ' 字'};
+    }
+    const turns = LIT_MSGS.filter(m => m && m.content && m.content.trim());
+    if (!turns.length) return null;
+    const body = turns.map(m =>
+      (m.role === 'user' ? '## 我\n\n' : '## 它\n\n') + m.content.trim()).join('\n\n');
+    return {text: body, name: expName('会话'), title: expBase(), markdown: true,
+            n: turns.length + ' 段'};
+  }
+  if (src === 'doc') {
+    if (VIEW === 'write') {
+      const html = docHtml();
+      if (!quillText().trim()) return null;
+      return {html: html, text: quillText(), name: expName(''), title: expBase(), markdown: false,
+              n: quillText().replace(/\s+/g, '').length + ' 字'};
+    }
+    /* DV-6：这里原来还挂着一个「非 write 的材料」分支（3 行），已按裁定删除、**不合并**。
+       它不可达的依据是穷举：VIEW 只有两个取值（`#viewsw` 里恰好两个 data-view，
+       初值 `let VIEW = 'write'`），而上面 expPayload 开头那个 `if (VIEW === 'lit')`
+       已经把 lit 整个 return 掉了 → 走到这里 VIEW 必为 'write'。
+       ⚠️ 删掉之后，这条穷举性就**承重**了：`$('#viewsw').onclick` 里的 `VIEW = v`
+          不校验 v（v 直接来自按钮的 dataset.view）。一旦将来多出第三个 data-view，
+          `expPayload('doc')` 会**静默落到下面的会话分支**，把对话当成稿子交出去
+          （比报错更坏）。加第三个视图时必须回来改这里。
+          实测（对照基线取 c00e40a 的 blob，即 E12 之后 DV-6 之前）：
+          可达域 VIEW∈{write,lit} × src∈{doc,log} × 4 种内容形状 = **16 个形状零差异**；
+          不可达域（假想第三个 VIEW 值）**9/24 个形状会变** —— 旧版给材料 6 个、
+          给 null 3 个，新版一律落到「对话」或 null。差异**只**出现在 src='doc'，
+          且新版在任何假想 VIEW 下都不可能再产出材料 payload（分支确实删干净了）。
+       留着它就是留一个 E3 成因（同一语义两处写法，迟早只改一处）。 */
+  }
+  /* E12 / S-11 的可见修复（nat seq=78 §1.7：这一半 100% 归 tom）。
+     谓词与 `expAvail()` 里那行 `talkHist.some(m => m && (m.text || '').trim())`
+     **逐字同形** —— 两边不许各写各的判据（INV-A / S-12），否则会出现
+     「按钮亮着、payload 却是 null」这种谁都不认账的缝。
+     空条目的来路见那里：模型没答上来时占位文案只进 DOM，talkHist 存的是 text:''
+     → 不过滤，产物里就多出一个个空的 `## 它`，n 也跟着虚报。
+     可达性（8 场景对照实验实测，旧源码取自 d7f3ab4 的 blob）：只有 **me 侧 nb=''**
+     这一个形状可达 —— talkSend 里 `const nb = (d.cards && …) || ''` 那个兜底给的，
+     her 侧被它开头的 `if (!words) return` 挡死；
+     「条目全空」不可达 —— 那是 nat seq=78 §1.7 撤回的形状，别拿它当验收对象。
+     ⚠️ 形状后果，**不是缺陷，别"修"**：滤掉空回复后会出现两个连续的 `## 我`
+        （她问了、模型没答、她又问）。这比留一个空的 `## 它` 诚实 —— 确实没有回复可显示。
+     ⚠️ 为什么就地过滤，而不是把这段抽成 logPayload()：抽函数属于 §4.5 那张骨架，
+        它跟着 E5 拆文件一起落；现在抽会顺手把**未裁**的轴 A（countChars 去空白）
+        带进这条路径 —— 那是替 nat 做了 R37/V-3 的裁定。就地过滤在两种裁法下都零返工。 */
+  const turns = talkHist.filter(m => m && (m.text || '').trim());
+  if (!turns.length) return null;
+  const body = turns.map(m =>
+    (m.who === 'her' ? '## 我\n\n' : '## 它\n\n') + (m.text || '').trim()).join('\n\n');
+  return {text: body, name: expName('对话'), title: expBase(), markdown: true,
+          n: turns.length + ' 句'};
+}
+
+// 当前选的来源。两个视图各自留着自己的选择——两边内容不一样，串台会误导。
+let EXPSRC = {write: 'doc', lit: 'doc'};
+
+/* TC-8：expAvail() 是 expPayload 判空谓词的【故意的】廉价投影，
+   不许被「消除重复」成 !!expPayload(src)。
+   INV-A：expAvail()[src] === (expPayload(src) !== null)　→ 验收 S-12。
+   破 INV-A 的用户可见症状是「单选钮可选，但所有格式按钮都灰」。
+
+   为什么不能简化 —— 成本理由，下面是实测计数，不是风格偏好：
+   它挂在 #expname 的每一次击键上，而且击键路径上有【两个】调用点
+   （expRefresh → expsrc() → expAvail()，以及 expRefresh 自己再调一次）。
+   把「敲一个字」＝调一次 expRefresh() 装进 harness 数出来：
+
+       场景              docHtml  quillText  expPayload   灰按钮数
+       写作区有内容         1         3          1            0
+       换成 !!expPayload    3         9          5            0    ← +2 / +6 / +4
+
+   docHtml 与 getSemanticHTML 是 1:1（见文件末尾那个函数），所以简化等于
+   每敲一个字多 2 次全文序列化 + 6 次全文提取；而 expPayload('doc') 自己
+   就调 quillText() 三次（判空、text、n 的字数），这是 6 而不是 2 的原因。
+   ⚠️ 最右边那一列【两种写法完全相同】：简化不改变任何一个按钮的灰亮，
+      它只是把同样的行为换成 3–5 倍的成本 —— 所以这不是取舍，是纯亏。
+   → 本轮唯一被批准的必要重复（P-SINGLE 的例外）。
+   ⚠️ 也不要拿它去顶 expPayload：给它新增消费点时，必须同时确认 S-12 覆盖到。 */
+function expAvail() {
+  return {
+    doc: VIEW === 'lit' ? !!lta.value.trim() : !!ta.value.trim(),
+    // E12：伴写侧改成数「有内容的条数」，与文学侧那个 .some(...) 同形。
+    // 空条目是这么来的：模型没答上来时，`:1227` 的占位文案「（它没说出话来。）」
+    // 只进了 DOM，talkHist 里存的是 text:'' → 导出就多出一个个空的 `## 它`。
+    // 真正修 S-11 的是 tom 那半边（logPayload 过滤空条目）；这一行是配套。
+    // ⚠️ 实测（对照实验见提交说明）：今天它是 no-op —— talkHist 唯一写入点
+    // `:1228` 前面有 `if (!words) return`，每次 push 必先塞一条 text 非空的
+    // her 条目，所以「条目全空」这个形状不可达，length>0 与 .some(...) 在
+    // 所有可达形状上同值。改它不是为了修今天的可见行为，是为了 tom 的过滤
+    // 落地后两边不会各说各话（INV-A / S-12）。
+    log: VIEW === 'lit' ? LIT_MSGS.some(m => m && m.content && m.content.trim())
+                        : talkHist.some(m => m && (m.text || '').trim()),
+  };
+}
+
+function expsrc() {
+  const avail = expAvail();
+  let s = EXPSRC[VIEW] || 'doc';
+  if (!avail[s] && avail[s === 'doc' ? 'log' : 'doc']) s = s === 'doc' ? 'log' : 'doc';
+  EXPSRC[VIEW] = s;
+  return s;
+}
+
+/* 导出格式表。一处定义，三处消费：按钮置灰、「存为」预览的扩展名清单、
+   以及 expDo 里将来的格式分支。
+   为什么是表而不是一串 if：P2 要加 epub、html、pdf。加表就是加一行，
+   不用回头去找齐「哪几个地方把 .docx / .md / .txt 写死了」——写死两次的东西
+   迟早只改一处（P-SINGLE：任何出现两次的语义，必须被命名一次）。
+   file=false 表示产物不由本菜单落盘（pdf 走系统打印对话框），所以不进「存为」清单。
+   ⚠️ data-fmt 这个属性名在项目里是重载的：#expmenu 用 docx/md/txt，
+      #fmtbar（:378-381）用 bold/italic/underline/strike。所以下面所有
+      querySelectorAll 都必须限定在 EXPM 里；写成全局选择器会把加粗按钮也当格式喂进来。 */
+const EXP_FORMATS = [
+  {fmt: 'docx', ext: 'docx', file: true},
+  {fmt: 'md',   ext: 'md',   file: true},
+  {fmt: 'txt',  ext: 'txt',  file: true},
+  /* epub 要的是**排版过的**正文：目录是从 h1/h2 抽的，纯文本没有层级可抽。
+     needs 只看数据形状（有没有 p.html），不看 VIEW —— 文学视图迁到富文本之后
+     这里自动亮，不用回来改。这句人话会进 #expires，所以别写模块名。 */
+  {fmt: 'epub', ext: 'epub', file: true,
+   needs: p => p.html ? null : 'epub 的目录是从标题层级抽的，这份稿子还没有标题层级'},
+];
+
+/* 这个格式配这份 payload 能不能出。null = 能；字符串 = 一句人话的不能。
+   签名里刻意没有 VIEW：门控只看数据形状，不看当前在哪个视图。
+   这样 tom 的富文本迁移一落地，需要 p.html 的格式自动亮，这边零改动、不返工；
+   反过来若写成 VIEW === 'write' && p.html，两条任务线就被硬绑成同一次提交。
+   今天三个格式都只要求「有东西」，故 expCapable(fmt, p) ≡ !p，行为零变化。
+   needs 是给 P2 留的口子：{fmt:'epub', ext:'epub', file:true,
+   needs: p => p.html ? null : '这份稿子没有排版层级，导不出带目录的 epub'}
+   —— 加这一行就够，expCapable 与 expDo 都不用动。 */
+function expCapable(fmt, p) {
+  const f = EXP_FORMATS.find(x => x.fmt === fmt);
+  if (!f) return '这个格式还没接上';
+  if (!p) return '没有东西可以带走';
+  if (f.needs) { const why = f.needs(p); if (why) return why; }
+  return null;
+}
+
+/* 把表里每个格式的灰/亮按 expCapable 算一遍。
+   R46：expRefresh 与 expDo 的 finally 共用这【一个】定义。「门控结果」只允许
+   有一份算法，否则 R35 的门和 finally 的门会各自漂 —— 那正是 R45 要防的分叉，
+   也是 P-SINGLE 的病灶（写两遍的东西迟早只改一处）。
+   ⚠️ 刻意只碰按钮的 disabled，一个字节都不碰 #expires：R46 的硬约束是
+   finally 里不许调 expRefresh()，因为 expRefresh 会重写 #expires，把用户刚读到
+   或刚被读屏念到的「已存为 …」冲掉；而那三处结果性写入是刻意不加等值守卫的，
+   冲掉就等于把成功播报吞了。所以这里只把按钮那一段抽出来，别的都不抽。 */
+function expGate(p) {
+  EXPM.querySelectorAll('button[data-fmt]').forEach(b => {
+    b.disabled = expCapable(b.dataset.fmt, p) !== null;
+  });
+}
+
+// 每次展开都重算一次：字数会变，文学那边可能刚清过串
+function expRefresh() {
+  const s = expsrc();
+  $('#expsrcd').textContent = VIEW === 'lit' ? '左边材料框（成稿）' : '写作区（成稿）';
+  $('#expsrcl').textContent = '会话（含来回）';
+  const avail = expAvail();
+  EXPM.querySelectorAll('input[name=expsrc]').forEach(r => {
+    r.checked = r.value === s;
+    r.disabled = !avail[r.value];
+  });
+  const p = expPayload(s);
+  $('#exph').textContent = p
+    ? '导出 · ' + (s === 'log' ? '这一串会话' : (VIEW === 'lit' ? '左边材料' : '写作区'))
+      + '（' + p.n + '）'
+    : '导出';
+  // R35：置灰改问 expCapable，不再是「有没有 payload」的粗判。今天等价（三个格式
+  // 都只要求 p 存在），但 P2 的 epub 要 p.html，那时「有稿子但导不出 epub」
+  // 才是真会发生的状态，粗判会让按钮亮着、点下去产出一本没有目录的书。
+  // R46：这个循环搬进了 expGate()，为的是跟 expDo 的 finally 共用同一份门控。
+  expGate(p);
+  // R24：payload 里的 kind 要删掉，所以这里改读 p.name 快照，不再重算 expName(p.kind)。
+  // 两者今天恒等（四条 return 都是 name: expName(同一个 kind 字面量)），产物名零变化。
+  // p 为 null 时退回 expName('')，与原先 expName(p ? p.kind : '') 的 null 侧逐字相同。
+  // R35：扩展名清单从表里派生，不再手写；file=false 的（pdf）不进这句，
+  // 因为这句话的主语是「存为」，而打印不存文件。
+  const exts = EXP_FORMATS.filter(f => f.file).map(f => '.' + f.ext).join(' / ');
+  $('#expfn').textContent = '存为 ' + (p ? p.name : expName('')) + exts;
+  const h = $('#expires');
+  // R29 等值守卫。#expires 是 bel 要挂 aria-live="polite" 的那个节点（:324），
+  // 而 #expname 每敲一个字符就调一次 expRefresh（见下面的 input 监听）。
+  // 无条件赋值 = live region 无条件重写 = 每敲一个字播报一次「写作区是空的」。
+  // 守卫是那条 a11y 裁定的前提，不是可选优化：少了它，读屏用户没法在菜单里改文件名。
+  // display 只在 'none' 与 '' 之间跳，两个值都是我们自己写进去的，读回来必然可比。
+  // 有稿子、但有格式导不出时，也得说一句 —— 否则按钮灰着、没有任何解释，
+  // 她只会以为是坏了。写进 #expires 而不是 title：disabled 的原生控件在
+  // Chrome 下 tooltip 常常不出现，而且 title 对读屏基本无效。
+  const why = p ? EXP_FORMATS.map(f => expCapable(f.fmt, p)).filter(Boolean) : [];
+  const wq = why.filter((v, i) => why.indexOf(v) === i);
+  const nd = (p && !wq.length) ? 'none' : '';
+  if (h.style.display !== nd) h.style.display = nd;
+  const nt = wq.length ? wq.join('；') : (p ? '' : (VIEW === 'lit'
+    ? (s === 'doc'
+        ? '左边还没东西——「放进左边」可以把读到的原文或答复收进来。'
+        : '这一串还是空的——先跑一个动作，或者直接跟它说一句。')
+    : (s === 'doc'
+        ? '写作区是空的，没有东西可以带走。'
+        : '还没跟它说过话。')));
+  if (h.textContent !== nt) h.textContent = nt;
+  // ⚠️ expDo 里那三处写 #expires（没导成 / 已存为 / 异常）**刻意不加守卫**：
+  // 它们是结果性文本，同一格式连着导两次必须播报两次，加了等值判断就只剩一次。
+}
+
+/* 成功播报只有一句。原来两条路各说各话：服务端分支写「已存为 X.docx（N 字）·
+   落到你选的目录里了」，download() 只写「已存为 X.docx」——同一个动作，取决于
+   内部走了哪条路，两副面孔。而且「落到你选的目录」是错的：浏览器下载文件夹，
+   不是她选的目录。extra 是降级说明，只有真的丢了东西才带。 */
+function expSay(fmt, p, extra) {
+  return '已存为 ' + p.name + '.' + fmt + '（' + p.n + '）· 在浏览器的下载文件夹里'
+       + (extra ? ' ⚠ ' + extra : '');
+}
+
+async function expDo(fmt) {
+  // R46：把源【定住】。expsrc() 不是纯读 —— 当前源不可用而另一个源可用时，
+  // 它会顺手把 EXPSRC[VIEW] 翻过去。若 finally 里再调它一次，「导出途中把内容
+  // 清空」就会让源静默跳到会话：按钮按【另一份 payload】点亮，而单选钮还停在
+  // 原来的源上（我不能调 expRefresh 去刷它，见 finally）—— 菜单自己跟自己矛盾，
+  // S-9 也会变成「看当时有没有会话」的不确定结果。
+  // 定住 s 之后，finally 回答的才是「你刚才想导的那一份，现在还导得出吗」。
+  // 这一行本身零行为变化：原来也是调一次 expsrc()，只是没给它名字。
+  const s = expsrc();
+  const p = expPayload(s); if (!p) return;
+  const btn = EXPM.querySelector('button[data-fmt="' + fmt + '"]');
+  const old = btn.textContent, h = $('#expires');
+  btn.disabled = true; btn.textContent = '正在导出…';
+  try {
+    // DOCX 在**本机**生成：排好的版式（纸张/边距/栏数/行距/颜色）要跟着走，
+    // 走服务器就只剩一堆纯文本了——那等于排版白做。
+    if (fmt === 'docx' && p.html && window.DocWriter && window.JSZip) {
+      // 参数位置是有讲究的：纸张边距栏间距在第二个（page），
+      // 行距却在第三个（opts）——生成器从 opts.lineSpacing 取，不是从 page。
+      // 记清楚是因为填错了不报错，只是悄悄用默认值，要等打开 Word 才发现。
+      const blob = await window.DocWriter.htmlToDocxBlob(p.html, {
+        size: PAGE_SETUP.size, margin: PAGE_SETUP.margin,
+        columns: PAGE_SETUP.columns, columnGap_mm: PAGE_SETUP.columnGap_mm
+      }, {title: p.name, author: EXP_AUTHOR, lineSpacing: PAGE_SETUP.lineSpacing});
+      // ↑ author 不是 creator（E11）。title 待 R24 落地后改读 p.title（裸名）。
+      //   epub 已经读 p.title（下面那条分支），两条路取的是同一个字段。
+      // 读 :1755 那份快照，不重算。上面有个 await，而 expName() 读的全是活 UI
+      // （文件名框 / 位置框 / 带日期勾），大文档生成期间她改一下名字，重算就会
+      // 让这份 docx 跟走服务器那条路的 md/txt 叫不同的名字。快照则天生一致。
+      download(blob, p.name + '.docx', h);
+      h.textContent = expSay('docx', p);
+      return;
+    }
+    // epub 在**本机**打包：从零造一本（container.xml / OPF / 章节 xhtml 都在
+    // export-core.js 里现做），目录由 heading-core 补的 id 生成。走服务器没意义，
+    // 那边是纯标准库，没有 zip 也没有 DOMParser。
+    // 门控已经挡过「没有 p.html」的情况，这里再兜一次是因为门控读的是**菜单打开时**
+    // 的快照，而导出是异步的——中间她把稿子清空了也不是不可能。
+    if (fmt === 'epub') {
+      if (!p.html || !window.ExportCore) {
+        h.style.display = '';
+        h.textContent = window.ExportCore ? 'epub 的目录是从标题层级抽的，这份稿子还没有标题层级'
+                                          : '电子书组件没加载，导不出 epub';
+        return;
+      }
+      const r = await window.ExportCore.buildEpub({
+        html: p.html, title: p.title, author: EXP_AUTHOR, language: 'zh-CN'
+      });
+      download(r.blob, p.name + '.epub', h);
+      // 两件她看不到的结果，得说出来：切了几章（阅读器里翻到的就是这些），
+      // 以及目录是不是空的。没有标题层级时**不拦着她导**——一本没有目录的
+      // epub 仍然是本可读的书，拦下来等于不让她把字带走；但得让她知道。
+      h.textContent = expSay('epub', p, !r.headings
+        ? '这篇没有标题层级，导出的电子书目录是空的'
+        : (r.chapters > 1 ? '按 ' + r.chapters + ' 个一级标题切成了 ' + r.chapters + ' 章' : ''));
+      return;
+    }
+    // docx 想走本机富文本但组件没加载 → 落到服务端，只能出纯文本。
+    // 这次的结果比平时差，必须说清楚，否则她拿到一个没排版的 docx 还以为是自己写坏了。
+    const degraded = (fmt === 'docx' && p.html && !(window.DocWriter && window.JSZip));
+    let body = {text: p.text, format: fmt, name: p.name, markdown: p.markdown};
+    if (fmt === 'md' && p.html && window.TurndownService) {
+      // 排版过的文档不该丢标题层级：markdown 从 HTML 转，不从纯文本走
+      try {
+        const md = new window.TurndownService({headingStyle: 'atx'}).turndown(p.html);
+        body = {text: md, format: 'md', name: p.name, markdown: true};
+      } catch (e) { /* 转不动就还是按纯文本走 */ }
+    }
+    // 其余格式（md / txt）仍走服务器：那边统一处理文件名安全与落盘目录
+    const r = await fetch('/api/export', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+    if (!r.ok) {
+      let msg = '没导成（' + r.status + '）';
+      try { const d = await r.json(); if (d.error) msg = d.error; } catch (e) {}
+      h.style.display = ''; h.textContent = msg;
+      return;
+    }
+    // N8：这里原先是第三份手写的 a.download（服务端分支一份、download() 一份、
+    // 这里一份），加 epub 就会变四份。统一走 download()。
+    const blob = await r.blob();
+    download(blob, p.name + '.' + fmt, h);
+    h.textContent = expSay(fmt, p, degraded ? '富文本组件没加载，这次只导出了纯文本版式' : '');
+  } catch (e) {
+    h.style.display = ''; h.textContent = '没导成：' + e;
+  } finally {
+    // R46：复原的是【门控结果】，不是硬编码的 false。
+    // 原来写 btn.disabled = false，S-9 因此一直是红的：导出途中把内容清空，
+    // 结束后那个按钮被无条件点亮，点下去导出一份空的；P2 给 epub/html 加了
+    // needs: p.html 之后更糟 —— 它会把「本该灰的格式」点亮，产出一本没有目录的书。
+    //
+    // 为什么用 expGate(expPayload(s))，而不是拿 expAvail() 当廉价判据：
+    //   ① expAvail 是【按源】的投影，表达不了【按格式】的 needs —— 拿它当门，
+    //      P2 落地当天就种下一个新分叉，正是 R45/R46 要消灭的东西；
+    //   ② 那是给这个投影新增第 5 个消费点，得额外背 INV-A / S-12 的举证；
+    //   ③ 这里也不需要省：一次点击只跑一遍，而导出本身刚刚把全文序列化并
+    //      传了一次 —— TC-8 说的「击键放大」在这个位置不成立。
+    //
+    // 顺序是有讲究的：先还文字，再算门。万一 expPayload 在 finally 里抛了，
+    // 按钮至少不会永远停在「正在导出…」；灰着是能恢复的（重开菜单就会走
+    // expRefresh → expGate），停在进行中看起来像挂了。
+    // 不调 expRefresh()（R46 硬约束：它会冲掉「已存为 …」的成功播报）；
+    // btn.textContent 的存回机制一字未动（TC-3：格式按钮内部不许有元素结构）。
+    btn.textContent = old;
+    expGate(expPayload(s));
+    setTimeout(() => EXPM.classList.remove('on'), 1600);
+  }
+}
+
+$('#exportbtn').onclick = (e) => {
+  e.stopPropagation();
+  if (!EXPM.classList.contains('on')) { expLoadName(); expRefresh(); }
+  EXPM.classList.toggle('on');
+  if (EXPM.classList.contains('on')) $('#expname').select();
+};
+// 名字一改动就记住并刷新预览。两个视图各存各的：那边是材料，这边是稿子。
+$('#expname').addEventListener('input', () => {
+  try { localStorage.setItem(EXPN_KEY[VIEW], ($('#expname').value || '').trim()); } catch (e) {}
+  expRefresh();
+});
+$('#expdate').addEventListener('change', expRefresh);
+EXPM.onclick = (e) => e.stopPropagation();   // 点菜单里别把自己关掉
+EXPM.querySelectorAll('button[data-fmt]').forEach(b => {
+  b.onclick = (e) => { e.stopPropagation(); expDo(b.dataset.fmt); };
+});
+document.addEventListener('click', (e) => {
+  if (e.target !== $('#exportbtn')) EXPM.classList.remove('on');
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') EXPM.classList.remove('on');
+});
+
+/* ══════════════════════════════════════════════════════════════
+   富文本写作区 + 排版工具条
+   ══════════════════════════════════════════════════════════════
+   这块是后加的，所以它必须**不打扰原来那条链路**：
+   · 模型、探针、通读拿到的仍然是纯文本（兼容层负责），它们不知道界
+     面换了地基；
+   · 工具条只改 Quill 里的格式，**不发任何请求**——给自己的字加粗是排版，
+     不是写作动作，不该出现在模型看得见的地方，也不该打断流动。 */
+function setCountFor(n) {
+  const el = $('#count'); if (el) el.textContent = n + ' 字';
+}
+
+/* ---------- 窗口化：切章、回写、全文出口 ----------
+   凡是"读全文"的地方都从这里走，所以调用点一行没改：
+   `quillText()` / `docHtml()` 两个出口在窗口化时换成模型的出口，
+   探针、导出、复盘、目录、服务端看到的仍然是**全文**。 */
+
+/* 把编辑区里的这一章写回模型。只算这一章的字，不碰全文。 */
+function commitChapter() {
+  if (!WINDOWED || switching || !DOC) return false;
+  return DOC.commit(DOC.index, ta.html(), ta.value);
+}
+
+/* 纯文本 → 带段落的 html。Markdown 的 # 标题必须变成 h1–h6，
+   否则 docx 已经在服务端识别出的“标题 1”一到前端就被洗掉，目录/分章
+   无法复用后端那份章表。 */
+function textToHtml(t) {
+  return String(t || '').split(/\n\s*\n/).map(p => {
+    const m = /^\s{0,3}(#{1,6})\s+([\s\S]*?)\s*$/.exec(p);
+    if (m) {
+      const lv = Math.min(6, m[1].length);
+      return '<h' + lv + '>' + esc(m[2]).replace(/\n/g, '<br>') + '</h' + lv + '>';
+    }
+    return '<p>' + esc(p).replace(/\n/g, '<br>') + '</p>';
+  }).join('');
+}
+
+/* 进窗口化。list 有（epub 的 spine）就用它，没有就按标题/字数切。 */
+function enterWindowed(o) {
+  if (!DOC) return false;
+  let list = o.list;
+  if (!list || !list.length) {
+    list = window.DocModel.split(textToHtml(o.text), {chunkChars: WIN_CHUNK});
+  }
+  if (list.length < 2) return false;      // 切不动就别切：单章等于没窗口化
+  DOC.load(list);
+  WINDOWED = true;
+  switching = true;
+  ta.setRichDoc(DOC.chapterHtml(0));
+  switching = false;
+  chapSwitchedAt = Date.now();
+  chapBarUpdate();
+  setCountFor(DOC.chars());
+  return true;
+}
+
+function leaveWindowed() {
+  WINDOWED = false;
+  if (DOC) DOC.load([]);
+  chapBarUpdate();
+}
+
+/* ---------- 文学材料：与写作区同源的按章窗口 ----------
+   文学侧原来只把 rich HTML 整份塞进 lta：目录能列标题，却没有“第 i/n 章”
+   和上一章/下一章。这里给材料单独一条 DocModel，不碰写作区的 DOC；
+   两份稿子仍按 T-11 隔离。 */
+function litChapterInfo() {
+  if (!LIT_WINDOWED || !LIT_DOC || !LIT_DOC.count) return null;
+  return {index: LIT_DOC.index + 1, count: LIT_DOC.count,
+          title: LIT_DOC.title(LIT_DOC.index) || ('第 ' + (LIT_DOC.index + 1) + ' 章')};
+}
+function litText() {
+  return (LIT_WINDOWED && LIT_DOC) ? LIT_DOC.text() : lta.value;
+}
+
+/* 朗读桥：把文学材料全文发给 DeepSeek 网页端朗读。
+   声音由弹出的 Edge 窗口播放；若独立配置未登录，窗口停在登录页，
+   登录后自动继续。 */
+let _lttsBusy = false;
+function litTtsRead() {
+  const btn = $('#lttsbtn');
+  if (!btn || _lttsBusy) return;
+  const text = (litText() || '').trim();
+  if (!text) { alert('文学编辑框是空的，没有东西可以朗读。'); return; }
+  _lttsBusy = true;
+  const orig = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '… 朗读中';
+  fetch('/api/tts', {method: 'POST', headers: {'Content-Type': 'application/json'},
+                     body: JSON.stringify({text: text})})
+    .then(r => r.json())
+    .then(d => {
+      if (d && d.error) { alert('朗读失败：' + d.error); }
+      else if (d && d.message) { alert(d.message); }
+      else { alert('已发送给 DeepSeek 朗读。'); }
+    })
+    .catch(e => alert('朗读请求失败：' + e))
+    .finally(() => { _lttsBusy = false; btn.disabled = false; btn.textContent = orig; });
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const b = $('#lttsbtn');
+  if (b) b.addEventListener('click', litTtsRead);
+});
+
+function litHtml() {
+  return (LIT_WINDOWED && LIT_DOC) ? LIT_DOC.html() : lta.html();
+}
+
+function litCommitChapter() {
+  if (!LIT_WINDOWED || litSwitching || !LIT_DOC) return false;
+  return LIT_DOC.commit(LIT_DOC.index, lta.html(), lta.value);
+}
+
+function litChapBarUpdate() {
+  const bar = $('#litchapbar');
+  if (!bar) return;
+  bar.style.display = (LIT_WINDOWED && LIT_DOC) ? '' : 'none';
+  if (!LIT_WINDOWED || !LIT_DOC) return;
+  $('#litchapinfo').textContent = '第 ' + (LIT_DOC.index + 1) + '/' + LIT_DOC.count + ' 章';
+  const t = LIT_DOC.title(LIT_DOC.index);
+  $('#litchaptitle').textContent = t ? '· ' + t : '';
+  $('#litchapprev').disabled = LIT_DOC.index <= 0;
+  $('#litchapnext').disabled = LIT_DOC.index >= LIT_DOC.count - 1;
+  $('#lcount').textContent = LIT_DOC.chars() + ' 字';
+}
+
+function enterLitWindowed(o) {
+  if (!LIT_DOC) return false;
+  let list = o.list;
+  if (!list || !list.length) {
+    const src = o.rich || textToHtml(o.text);
+    list = window.DocModel.split(src, {chunkChars: WIN_CHUNK});
+  }
+  if (!list || list.length < 2) return false;
+  LIT_DOC.load(list);
+  LIT_WINDOWED = true;
+  litSwitching = true;
+  lta.setRichDoc(LIT_DOC.chapterHtml(0));
+  litSwitching = false;
+  litChapBarUpdate();
+  if (TOC) TOC.refresh();
+  return true;
+}
+
+function leaveLitWindowed() {
+  LIT_WINDOWED = false;
+  if (LIT_DOC) LIT_DOC.load([]);
+  litChapBarUpdate();
+}
+
+function showLitChapter(i) {
+  if (!LIT_WINDOWED || !LIT_DOC) return;
+  const n = Math.max(0, Math.min(LIT_DOC.count - 1, i));
+  if (n === LIT_DOC.index && lta.value.trim()) return;
+  litCommitChapter();
+  litSwitching = true;
+  LIT_DOC.index = n;
+  lta.setRichDoc(LIT_DOC.chapterHtml(n));
+  try { lta.quill.setSelection(0, 0); } catch (e) {}
+  litSwitching = false;
+  litChapBarUpdate();
+  posBoxUpdate();
+  if (TOC) TOC.refresh();
+}
+
+$('#litchapprev').onclick = () => { if (LIT_WINDOWED && LIT_DOC) showLitChapter(LIT_DOC.index - 1); };
+$('#litchapnext').onclick = () => { if (LIT_WINDOWED && LIT_DOC) showLitChapter(LIT_DOC.index + 1); };
+
+/* 换到第 i 章。先把这一章写回去，再整块换掉编辑区的内容。 */
+function showChapter(i) {
+  if (!WINDOWED || !DOC) return;
+  const n = Math.max(0, Math.min(DOC.count - 1, i));
+  if (n === DOC.index && ta.value.trim()) return;
+  commitChapter();
+  switching = true;
+  DOC.index = n;
+  ta.setRichDoc(DOC.chapterHtml(n));
+  try { ta.quill.setSelection(0, 0); } catch (e) { }
+  switching = false;
+  chapSwitchedAt = Date.now();
+  chapBarUpdate();
+  setCountFor(DOC.chars());
+  if (TOC) TOC.refresh();      // 目录要重算：现在是另一章的标题在 DOM 里
+}
+
+function chapBarUpdate() {
+  const bar = $('#chapbar');
+  if (!bar) return;
+  bar.style.display = (WINDOWED && DOC) ? '' : 'none';
+  if (!WINDOWED || !DOC) return;
+  $('#chapinfo').textContent = '第 ' + (DOC.index + 1) + '/' + DOC.count + ' 章';
+  const t = DOC.title(DOC.index);
+  $('#chaptitle').textContent = t ? '· ' + t : '';
+  $('#chapprev').disabled = DOC.index <= 0;
+  $('#chapnext').disabled = DOC.index >= DOC.count - 1;
+  posBoxUpdate();          // 换章了，右上角那格也跟着走
+}
+
+/* ---------- 章：全篇只有一份判定，前端只管复用 ----------
+   2026-09-20 猫猫报的 bug：docx / md 载进来之后，右上角位置框**永远是「—」**
+   ——因为 `#sec` 这个 input 从来没有人写过它，它的 value 是 HTML 里
+   硬编码的一个「—」。epub 之所以看着正常，是它走的**窗口化**那条路，
+   右上有「第 i/n 章」那条独立的章栏（#chapbar），位置框本身照样是「—」。
+   而且探针从来不知道自己在第几章，所以模型只能回 `§1308` 这种段号。
+
+   ⚠️ 判定的**唯一真源是后端**（server.py 的 detect_chapters）。
+   前端**不许**自己再认一遍标题：两端各写一份判定迟早走偏（§四.28 的老教训），
+   而且 epub 的章来自 spine、docx 的章来自标题行，本来就不是一回事。
+   这里只做两件事：存下后端给的章表，把"当前段号"映射成"第几章"。 */
+let CHAPS = [];          // [{no, title, start, end, chars}]，来自 /api/doc 的 meta
+
+function setChapters(list) {
+  CHAPS = Array.isArray(list) ? list : [];
+  posBoxUpdate();
+}
+
+/* 段号 → 章。段号口径与后端 split_paragraphs 一致（1 起、按空行切）。 */
+function chapterOfNo(no) {
+  if (!no || !CHAPS.length) return null;
+  for (const c of CHAPS) if (c.start <= no && no <= c.end) return c;
+  return null;
+}
+
+/* 光标现在在第几段（全文口径，1 起）。窗口化时要把当前章的段号加上前面各章。
+   为什么要算这个：位置框、探针、锚点三处都要说"她在第几章"，
+   而它们各自手里只有编辑器坐标。集中在这儿算一次，别各算各的。 */
+function cursorParaNo() {
+  // 与 tocEd 同一个路由：写作视图用 ta，文学视图用 lta（VIEW 是全局）。
+  const ed = (VIEW === 'lit') ? lta : ta;
+  const pos = ed.selectionStart ?? ed.value.length;
+  const before = ed.value.slice(0, pos);
+  // 空行切段：和 split_paragraphs 同一个口径
+  const local = before.split(/\n\s*\n/).filter(s => s.trim()).length;
+  const activeDoc = (VIEW === 'lit' && LIT_WINDOWED) ? LIT_DOC :
+                    ((VIEW === 'write' && WINDOWED) ? DOC : null);
+  if (activeDoc) {
+    // 前面各章的段数之和 —— 各章自身也是按空行切
+    let acc = 0;
+    for (let i = 0; i < activeDoc.index; i++) {
+      const t = activeDoc.chapter(i) ? activeDoc.chapter(i).text : '';
+      acc += t.split(/\n\s*\n/).filter(s => s.trim()).length;
+    }
+    return acc + local;
+  }
+  return local;
+}
+
+/* 右上角位置框。显示「第 N 章 章名」；认不出章就退回段号。
+   **不再显示行标（§1308）那种模型自己造出来的坐标**——她的原话是
+   "这个显示并不显示目前是多少行，会给用户极大的困惑"。 */
+function posBoxUpdate() {
+  const inp = $('#sec');
+  if (!inp) return;
+  const no = cursorParaNo();
+  const c = chapterOfNo(no);
+  const label = c ? ('第 ' + c.no + ' 章 ' + c.title)
+                  : (no ? ('第 ' + no + ' 段') : '—');
+  /* 只在**不是她正在手输**的时候改写，否则会打断她填自定义标记。
+     她点进去改过之后（focus），这一格归她；失焦后我们再接管。 */
+  if (document.activeElement === inp) return;
+  inp.value = label;
+  inp.dataset.auto = '1';
+  $('#scope').textContent = '读取范围：' + label
+    + (CHAPS.length ? ' · 全篇 ' + CHAPS.length + ' 章' : ' · 当前段落');
+}
+
+/* 位置框认的是**光标**，所以要跟着选区和编辑事件走。
+   节流到一个动画帧：input 事件在长文里一秒能来几十次。 */
+let posBoxTick = null;
+function posBoxSoon() {
+  if (posBoxTick) return;
+  posBoxTick = requestAnimationFrame(() => { posBoxTick = null; posBoxUpdate(); });
+}
+
+$('#sec').addEventListener('change', () => {
+  // 她手输了一个（或者清空了）——那就以她的为准，这一格不再自动接管。
+  delete $('#sec').dataset.auto;
+});
+
+$('#chapprev').onclick = () => { if (WINDOWED && DOC) showChapter(DOC.index - 1); };
+$('#chapnext').onclick = () => { if (WINDOWED && DOC) showChapter(DOC.index + 1); };
+
+/* 全文的两个出口。非窗口化时就是编辑区本身（老路一字不改）。 */
+function windowedText() {
+  if (!WINDOWED || !DOC) return ta.value;
+  commitChapter();
+  return DOC.text();
+}
+function windowedHtml() {
+  if (!WINDOWED || !DOC) return ta.html();
+  commitChapter();
+  return DOC.html();
+}
+
+/* ── 三个小工具：把 Quill 里的东西交给别的零件 ──
+   value 在这里抹掉末尾那一个换行：Quill 的滚动容器永远以换行结尾，
+   不抹的话 `ta.value = ta.value` 每跑一次多一个空行，字数也虚增 1。
+   纯文本是模型唯一通用的接口：探针、通读、语境切片都吃它，它们不认识 HTML。 */
+/* 这两个是全文的两个出口，全站**只有**这里能拿到"整篇"。
+   窗口化时它们换成模型的出口（探针 / 导出 / 复盘 / 目录 / 服务端都走这里，
+   所以那些调用点一行没改，看到的仍然是全文）；非窗口化时就是编辑区本身。 */
+function quillText() { return windowedText(); }
+function docHtml() { return windowedHtml(); }
+
+/* ---------- 新鲜度：服务端手里那份稿子会变旧（§49） ----------
+   原来服务端对全文的把握**冻结在"载入"那一刻**：伴写时只送【当前段＋前一段】，
+   于是它会把**她已经删掉的段落**当"文档原文"引用，在**她新写的**段落上
+   定位不到（§48 那个【光标后面那一段】因此一真用就死）。
+
+   分工是她的要求，**别改回去**：
+     · **指纹**（每段字数＋hash）只负责**便宜地发现"哪变了"**，几 KB；
+     · 但真正送出去的必须是**变了的那些段的正文**。只报"第 47 段变短了"
+       是**结构判断**——她明确不要那个："那样就失去了系统的特色"。
+       要让她读到的是文章**在信息上**处在什么局面、**内容性的空白**在哪里。
+
+   为什么**独立定时器**、不复用 8 秒探针：探针会被打字不断重置，
+   她连着写的时候永不到点，那份把握就一动不动——正是这条要治的病。
+   为什么**没变也发**：心跳给服务端一个"她多久没动"的时钟，
+   剖面重建要靠它判"她是不是已经停笔了"（见 server.py maybe_rebuild_profile）。 */
+const SYNC_EVERY = 5;           // 秒。指纹很小，5 秒一次本地毫无压力
+let syncTimer = null;
+let sentH = new Set();          // 已把正文送过去的那些段（按 hash 认）——只送新的/变了的
+let syncTicks = 0;
+
+/* 段落切法与后端 split_paragraphs() 一致：按空行切、去掉首尾空白、空段丢掉。 */
+function paraParts(txt) {
+  return (txt === undefined ? quillText() : txt)
+    .replace(/\r\n/g, '\n').split(/\n\s*\n/).map(s => s.trim()).filter(s => s);
+}
+
+/* 32 位 FNV-1a。**只在浏览器里算**——服务端把它当**不透明令牌**，不自己算一份。
+   两端各写一份哈希函数迟早会走偏（§四.28）；何况 JS 的 UTF-16 码元与 Python
+   的码点在中日韩扩展区并不一致，同一条文本两边算出来的值就是不同的。 */
+function fnv1a(s) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0;
+  }
+  return h.toString(36);
+}
+
+async function syncDoc() {
+  // 文学视图里敲材料不该被当成"她在写正文"——和 touch() 同一道门。
+  if (typeof VIEW !== 'undefined' && VIEW !== 'write') return;
+  let parts, fp, full;
+  try {
+    // `quillText()` 在窗口化下＝"提交当前章 ＋ 拼全文"，大书上不便宜——**只取一次**。
+    full = quillText();
+    parts = paraParts(full);
+    fp = parts.map(p => [p.length, fnv1a(p)]);
+  } catch (e) { return; }
+  syncTicks++;
+  if (!fp.length) return;
+  // 只带"服务端还没见过的"正文。载入后第一次会把整篇带过去一次（此后就只有增量）；
+  // 那样**不依赖两端对切段的理解完全一致**，也不必让服务端自己去算 hash。
+  const texts = {};
+  for (let i = 0; i < fp.length; i++) {
+    if (!sentH.has(fp[i][1])) texts[i] = parts[i];
+  }
+  try {
+    const r = await fetch('/api/sync', {
+      method: 'POST', headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({paras: fp, texts: texts, chars: full.length})
+    });
+    const d = await r.json();
+    if (d && d.ok) {
+      for (const [, h] of fp) sentH.add(h);
+      if (d.gaps) console.warn('[新鲜度] 服务端有 ' + d.gaps + ' 段没拿到正文');
+    }
+  } catch (e) { /* 服务端不可用不该影响她写字——静默**在这里是对的**，但埋点里留痕 */ }
+}
+
+function startSync() {
+  clearInterval(syncTimer);
+  syncTimer = setInterval(syncDoc, SYNC_EVERY * 1000);
+}
+startSync();
+
+function download(blob, fname, hintEl) {
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = fname;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  if (hintEl) { hintEl.style.display = ''; hintEl.textContent = '已存为 ' + fname; }
+}
+
+const PAGE_SETUP = {
+  size: { width_mm: 210, height_mm: 297, landscape: false },
+  margin: { top_mm: 25.4, bottom_mm: 25.4, left_mm: 31.8, right_mm: 31.8,
+            header_mm: 12.5, footer_mm: 12.5 },
+  columns: 1, columnGap_mm: 12, lineSpacing: 1.15
+};
+
+/* initEditor 已并入上面的 EditorController.create：Quill 现在随控制器创建，
+   不再等 boot。原来 boot 里那句 try/catch 的职责（Quill 缺席时别让工具条
+   假装能用）由下面的 fmtbar 显隐承担。 */
+
+// 工具条按钮状态跟着光标处的格式走（它自己不会亮）
+function markfmt(bar, ed) {
+  bar = bar || $('#fmtbar'); ed = ed || ta;
+  if (!ed.quill) return;
+  try {
+    const f = ed.getFormat();
+    bar.querySelectorAll('button[data-fmt]').forEach(b => {
+      const k = b.dataset.fmt;
+      b.classList.toggle('on', !!f[k]);
+    });
+    bar.querySelectorAll('button[data-al]').forEach(b => {
+      b.classList.toggle('on', (f.align || 'left') === b.dataset.al);
+    });
+    bar.querySelectorAll('button[data-list]').forEach(b => {
+      b.classList.toggle('on', f.list === b.dataset.list);
+    });
+    const blk = bar.querySelector('[data-block]'), sz = bar.querySelector('[data-size]');
+    if (blk) blk.value = f.header ? ('h' + f.header) : (f.blockquote ? 'quote' : 'p');
+    if (sz) sz.value = f.size || '';
+  } catch (e) {}
+}
+
+/* bar 里与「排版带走」无关的那部分（B/I/U、对齐、段落样式、列表）两个视图共用；
+   字号 / 颜色 / 行距 / 页面设置的语义是「排版跟着 docx 走」，只有伴写侧接（rich）。 */
+function bindFormatBar(bar, ed, opts) {
+  opts = opts || {};
+  if (!ed.quill) return;
+  const after = () => { markfmt(bar, ed); if (opts.after) opts.after(); };
+  bar.querySelectorAll('button[data-fmt]').forEach(b => {
+    b.onclick = (e) => {
+      e.preventDefault();
+      const k = b.dataset.fmt;
+      const f = ed.getFormat();
+      ed.format(k, !f[k], 'user');
+      after();
+    };
+  });
+  bar.querySelectorAll('button[data-al]').forEach(b => {
+    b.onclick = (e) => { e.preventDefault(); ed.format('align', b.dataset.al, 'user'); after(); };
+  });
+  bar.querySelectorAll('button[data-list]').forEach(b => {
+    b.onclick = (e) => {
+      e.preventDefault();
+      const on = ed.getFormat().list === b.dataset.list;
+      ed.format('list', on ? false : b.dataset.list, 'user');
+      after();
+    };
+  });
+  const blk = bar.querySelector('[data-block]');
+  if (blk) blk.onchange = (e) => {
+    const v = e.target.value;
+    ed.format('header', false); ed.format('blockquote', false);
+    if (v === 'h1') ed.format('header', 1);
+    else if (v === 'h2') ed.format('header', 2);
+    else if (v === 'h3') ed.format('header', 3);
+    else if (v === 'quote') ed.format('blockquote', true);
+    after();
+  };
+  if (!opts.rich) return;
+  const sz = bar.querySelector('[data-size]');
+  if (sz) sz.onchange = (e) => { ed.format('size', e.target.value || false, 'user'); after(); };
+  $('#fb-lh').onchange = (e) => {
+    PAGE_SETUP.lineSpacing = parseFloat(e.target.value) || 1.15;
+    ta.quill.root.style.lineHeight = PAGE_SETUP.lineSpacing;
+    e.target.blur();
+  };
+  $('#fb-color').oninput = (e) => { ed.format('color', e.target.value, 'user'); };
+  $('#fb-color').onchange = (e) => { after(); };
+  $('#fb-page').onclick = () => pageDialog();
+}
+
+// 页面设置：纸张/方向/边距/栏数。写进 PAGE_SETUP，导出 DOCX 时一起带走
+function pageDialog() {
+  const d = document.createElement('div');
+  d.className = 'lmmask';
+  d.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.28);z-index:60;'
+    + 'display:flex;align-items:center;justify-content:center';
+  const SIZES = [['A4',210,297],['A5',148,210],['B5',176,250],
+                 ['Letter',216,279],['16K',184,260]];
+  const box = document.createElement('div');
+  box.style.cssText = 'background:#fff;border-radius:11px;padding:18px 20px;min-width:330px;'
+    + 'box-shadow:0 10px 30px rgba(0,0,0,.18);font-size:12.5px';
+  // 原来这段是 '<option value="%s"%s>%s（%d×%dmm）' 链式 .replace：模板里有**三个**
+  // %s（值 / selected / 显示文字），而链上只换了前两个 → 第三个原样留在页面上，
+  // 下拉里显示成「%s（210×297mm）」。String.replace 只换第一处，一处的模板
+  // 掺多个同名占位符迟早踩这个。改用拼接，一眼看得见每个位置填的是什么。
+  const opts = SIZES.map(s => {
+    const cur = Math.abs(PAGE_SETUP.size.width_mm - s[1]) < 1
+             && Math.abs(PAGE_SETUP.size.height_mm - s[2]) < 1;
+    return '<option value="' + s[0] + '"' + (cur ? ' selected' : '') + '>'
+         + s[0] + '（' + s[1] + '×' + s[2] + 'mm）</option>';
+  }).join('');
+  box.innerHTML =
+    '<div style="font-weight:600;margin-bottom:12px">页面设置</div>' +
+    '<div style="display:flex;flex-direction:column;gap:9px">' +
+    '<label>纸张 <select id="pg-size">' + opts + '</select></label>' +
+    '<label>方向 <select id="pg-or">' +
+      '<option value="portrait">纵向</option><option value="landscape">横向</option></select></label>' +
+    '<div style="display:flex;gap:8px"><label style="flex:1">上 <input id="pg-t" type="number" step="1" style="width:100%"></label>' +
+      '<label style="flex:1">下 <input id="pg-b" type="number" step="1" style="width:100%"></label></div>' +
+    '<div style="display:flex;gap:8px"><label style="flex:1">左 <input id="pg-l" type="number" step="1" style="width:100%"></label>' +
+      '<label style="flex:1">右 <input id="pg-r" type="number" step="1" style="width:100%"></label></div>' +
+    '<div style="display:flex;gap:8px"><label style="flex:1">栏数 <select id="pg-cols">' +
+      '<option>1</option><option>2</option><option>3</option></select></label>' +
+      '<label style="flex:1">栏间距 <input id="pg-gap" type="number" step="1" style="width:100%"></label></div>' +
+    '</div>' +
+    '<div style="margin-top:14px;display:flex;gap:8px;justify-content:flex-end">' +
+    '<button id="pg-cancel">取消</button><button id="pg-ok">应用</button></div>';
+  d.appendChild(box);
+  document.body.appendChild(d);
+  $('#pg-or', d).value = PAGE_SETUP.size.landscape ? 'landscape' : 'portrait';
+  $('#pg-t', d).value = PAGE_SETUP.margin.top_mm;
+  $('#pg-b', d).value = PAGE_SETUP.margin.bottom_mm;
+  $('#pg-l', d).value = PAGE_SETUP.margin.left_mm;
+  $('#pg-r', d).value = PAGE_SETUP.margin.right_mm;
+  $('#pg-cols', d).value = String(PAGE_SETUP.columns);
+  $('#pg-gap', d).value = PAGE_SETUP.columnGap_mm;
+  const close = () => d.remove();
+  d.onclick = (e) => { if (e.target === d) close(); };
+  $('#pg-cancel', d).onclick = close;
+  $('#pg-ok', d).onclick = () => {
+    const sel = $('#pg-size', d), s = SIZES.find(x => x[0] === sel.value) || SIZES[0];
+    const land = $('#pg-or', d).value === 'landscape';
+    PAGE_SETUP.size = { width_mm: s[1], height_mm: s[2], landscape: land };
+    PAGE_SETUP.margin.top_mm = +$('#pg-t', d).value || 25;
+    PAGE_SETUP.margin.bottom_mm = +$('#pg-b', d).value || 25;
+    PAGE_SETUP.margin.left_mm = +$('#pg-l', d).value || 25;
+    PAGE_SETUP.margin.right_mm = +$('#pg-r', d).value || 25;
+    PAGE_SETUP.columns = +$('#pg-cols', d).value || 1;
+    PAGE_SETUP.columnGap_mm = +$('#pg-gap', d).value || 12;
+    close();
+  };
+}
+
+/* ══════════════════════════════════════════════════════════════
+   记忆层：写完一个 Part 就让它复盘提炼，召回由她按
+   ══════════════════════════════════════════════════════════════
+   先说清它和页面上另外那些"每读一遍就有一次的东西"的区别，否则它会
+   变成第二个剖面——那就白搭了：
+   · 全文剖面 —— 后端通读得出的**读法**，每换一篇就重算；
+   · 文学记忆库 —— 从写过的 Part 里提炼出来的**事实**（角色当前状态、
+     伏笔、设定、风格笔记），去重合并、能作废旧版本，跨会话攒着。
+
+   提炼必须过模型，但密钥不能摆到浏览器里，所以模型通道走本机的
+   /api/memory/chat——后端那半句是"协议判断只有一处"，这里不再抄一遍。
+
+   召回为什么手动：**一旦自动注入，记忆就溜进稿子了**。现在是她按一下，
+   那段东西挂在下一次请求上、用完即弃，她看得见它挂没挂上去。 */
+
+let MEMCORE = null;      // LitMemoryCore 实例
+let MEM_ONCE = '';       // 手动召回的那一段：下一次请求带上，随即清空
+
+function memModel() {
+  return {
+    async chat(messages, opts) {
+      const r = await fetch('/api/memory/chat', {
+        method: 'POST', headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({messages: messages,
+                              temperature: (opts && opts.temperature) || 0.3})
+      });
+      const d = await r.json().catch(() => ({}));
+      if (d.error) throw new Error(d.error);
+      return d.content || '';
+    }
+  };
+}
+
+function memInit() {
+  if (!window.LitMemoryCore) {
+    console.warn('lit-memory-core 没加载，记忆层不启用');
+    return false;
+  }
+  const key = expBase();     // 按稿子分区：换一篇东西，记忆库也跟着换
+  try {
+    MEMCORE = window.LitMemoryCore.createCore({
+      store: window.LitMemoryCore.createLocalStorageStore(key),
+      model: memModel(),
+      config: {reflectEvery: 3}     // 每 3 个 Part 归并一次"复盘规则"
+    });
+  } catch (e) {
+    console.warn('记忆层没起来：' + e);
+    MEMCORE = null;
+    return false;
+  }
+  MEMCORE.load().catch(() => {});
+  return true;
+}
+
+// 取走召回块。**取走即清空**——它只属于这一次，不许赖在后面几次里。
+function memTakeRecall() {
+  const s = MEM_ONCE; MEM_ONCE = ''; return s;
+}
+
+// 右侧面板上挂一张卡（和剖面卡同一套样子，位置在对话容器的外面）
+function memCard(id, cls, title, bodyHtml, buttons) {
+  let el = document.getElementById(id);
+  if (!el) {
+    el = document.createElement('div');
+    el.id = id;
+    cards.parentElement.insertBefore(el, cards);
+  }
+  el.className = 'prof ' + (cls || '');
+  el.innerHTML = '<div class="ph">' + esc(title) + '<span class="spacer"></span></div>'
+    + '<div class="pb">' + bodyHtml + '</div>';
+  (buttons || []).forEach(b => {
+    const x = document.createElement('button');
+    x.textContent = b.label;
+    x.onclick = b.on;
+    el.querySelector('.ph').appendChild(x);
+  });
+  return el;
+}
+
+async function memPartDone() {
+  const btn = $('#memreview'), hint = $('#hint');
+  const txt = (quillText() || '').trim();
+  if (!MEMCORE) { hint.textContent = '记忆库还没起来——lit-memory-core.js 没加载到？'; return; }
+  if (!txt) { hint.textContent = '写作区是空的，没有东西可以复盘'; return; }
+  btn.disabled = true; const old = btn.textContent; btn.textContent = '正在复盘…';
+  hint.textContent = '正在读这一整个 Part，提炼出来的会写进记忆库…';
+  try {
+    const res = await MEMCORE.runChapterReview({text: txt});
+    const rs = res.cardResults || [];
+    const cnt = k => rs.filter(r => r.action === k).length;
+    let html = '<div style="white-space:pre-wrap;line-height:1.8">'
+      + esc((res.chapterLog && res.chapterLog.summary) || '') + '</div>';
+    html += '<div style="margin-top:8px;color:var(--muted);font-size:12px">'
+      + '记忆：新建 ' + cnt('create') + ' · 更新 ' + cnt('update')
+      + ' · 作废 ' + cnt('supersede') + ' · 已存在跳过 ' + cnt('skip')
+      + '　｜　伏笔兑现 ' + ((res.resolvedIds || []).length) + '</div>';
+    if (res.reflection && res.reflection.rules && res.reflection.rules.length) {
+      html += '<div style="margin-top:8px"><b>攒出来的复盘规则</b><ul style="margin:4px 0 0 16px">'
+        + res.reflection.rules.map(r => '<li>' + esc(r.content || String(r)) + '</li>').join('')
+        + '</ul></div>';
+    }
+    (res.warnings || []).forEach(w => {
+      html += '<div style="margin-top:6px;color:var(--warn);font-size:12px">'
+        + esc(w) + '</div>';
+    });
+    memCard('memcard', 'ready',
+            '记忆库 · 已收下第 ' + (res.chapterLog ? res.chapterLog.number : '?') + ' 个 Part',
+            html,
+            [{label: '打开记忆库', on: memPanel},
+             {label: '收起', on: () => { const e = $('#memcard'); if (e) e.remove(); }}]);
+    hint.textContent = '这一 Part 已经提炼进记忆库了';
+  } catch (e) {
+    hint.textContent = '复盘没成：' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = old;
+  }
+}
+
+async function memRecallNow() {
+  const btn = $('#memrecall'), hint = $('#hint');
+  if (!MEMCORE) { hint.textContent = '记忆库还没起来'; return; }
+  const old = btn.textContent; btn.disabled = true; btn.textContent = '正在召回…';
+  try {
+    await MEMCORE.load();
+    const cc = cursorContext();
+    const intent = ((cc.cur || '') || quillText().slice(-300)).trim();
+    const r = MEMCORE.prepareRecall({intent: intent, maxChars: 1200});
+    // 只有"项目名 + 写作意图"时也算出 block，可那时候一个字都没回想起来。
+    // 这种情况下假装召回成功最伤人——她会以为记忆本来就这么空。
+    if (!r.block || !r.block.trim() || !(r.usedCards || []).length) {
+      hint.textContent = '记忆库还是空的——先写完一个 Part，点「这一 Part 写完」';
+      return;
+    }
+    MEM_ONCE = r.block;
+    const html = '<div style="white-space:pre-wrap;line-height:1.8;max-height:300px;'
+      + 'overflow:auto">' + esc(r.block) + '</div>'
+      + '<div style="margin-top:7px;color:var(--muted);font-size:12px">'
+      + '已挂在下一次伴写上（' + r.chars + ' 字，约 ' + r.tokenEstimate
+      + ' token）：它会带着这些事实去读你停下的那段。只挂一次，用完就摘。</div>';
+    memCard('memcard', 'ready', '记忆召回 · 下一次请求带', html,
+            [{label: '取消挂起', on: () => {
+                MEM_ONCE = '';
+                const e = $('#memcard'); if (e) e.remove();
+                hint.textContent = '已取消，下一次伴写不带记忆';
+             }},
+             {label: '打开记忆库', on: memPanel},
+             {label: '收起', on: () => { const e = $('#memcard'); if (e) e.remove(); }}]);
+    hint.textContent = '取回 ' + (r.usedCards || []).length + ' 条记忆 · 下一次伴写带上';
+  } catch (e) {
+    hint.textContent = '召回没成：' + e.message;
+  } finally {
+    btn.disabled = false; btn.textContent = old;
+  }
+}
+
+// 记忆库管理面板：改一条、作废一条、删、导出备份，都在这儿
+function memPanel() {
+  if (!MEMCORE) { $('#hint').textContent = '记忆库还没起来'; return; }
+  if (!window.LitMemoryPanel) { $('#hint').textContent = '记忆面板没加载到'; return; }
+  const d = document.createElement('div');
+  d.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.28);z-index:70;'
+    + 'display:flex;align-items:center;justify-content:center;padding:24px';
+  const box = document.createElement('div');
+  box.style.cssText = 'background:#fff;border-radius:11px;overflow:hidden;'
+    + 'width:min(920px,96vw);height:min(640px,88vh);display:flex;flex-direction:column;'
+    + 'box-shadow:0 10px 30px rgba(0,0,0,.2)';
+  const top = document.createElement('div');
+  top.style.cssText = 'display:flex;align-items:center;gap:8px;padding:8px 12px;'
+    + 'border-bottom:1px solid #e3e8ef;color:#5b6472;font-size:12px';
+  top.innerHTML = '<b style="color:#23272f">记忆库</b><span>改 / 作废 / 删 / 导入导出'
+    + '</span><span style="flex:1"></span>';
+  const close = document.createElement('button');
+  close.textContent = '关掉';
+  close.onclick = () => d.remove();
+  top.appendChild(close);
+  const body = document.createElement('div');
+  body.style.cssText = 'flex:1;overflow:hidden';
+  box.appendChild(top); box.appendChild(body);
+  d.appendChild(box);
+  document.body.appendChild(d);
+  d.addEventListener('click', e => { if (e.target === d) d.remove(); });
+  try {
+    window.LitMemoryPanel.create(body, {core: MEMCORE});
+  } catch (e) {
+    body.textContent = '面板没起来：' + e.message;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   目录面板（P1 ③）
+   ══════════════════════════════════════════════════════════════
+   ②落地后两个视图都是富文本，面板按当前视图路由到对应的编辑器。
+   root 写成 getter：toc-panel 那边每次要根元素都现问（它已改成不缓存），
+   缓存一次就会把跳转永远指到某一个编辑器上——那个视图还可能正藏着。 */
+let TOC = null;
+
+const tocEd = {
+  get ed() { return VIEW === 'lit' ? lta : ta; },
+  get root() { return this.ed.root; },
+  get _doc() { return VIEW === 'lit' ? LIT_DOC : DOC; },
+  get _win() { return VIEW === 'lit' ? LIT_WINDOWED : WINDOWED; },
+  get windowed() { return this._win && !!this._doc; },
+  html() { return this.windowed ? this._doc.html() : this.ed.html(); },
+  headings() { return this.windowed ? this._doc.headings() : null; },
+  chapterAt() { return this.windowed ? this._doc.index : -1; },
+  goChapter(i) {
+    if (!this.windowed) return;
+    if (VIEW === 'lit') showLitChapter(i); else showChapter(i);
+  },
+  formatHeader: (lv) => { tocEd.ed.format('header', lv, 'user'); },
+  // 「猜一下」确认后：找到那一行，把它整行设成标题。**不替她改别的字**。
+  applyHeadingToText: (s) => { tocEd.ed.applyHeadingToText(s); }
+};
+
+/* 目录按钮与抽屉**跟着当前视图搬**。它们只有一套（一个 TocPanel 实例、一个
+   #tocn 徽标、一个开合状态），住在谁家由这个视图决定。
+   ⚠️ 别改成"两个视图各放一份"：那会变成两个实例、两套状态，
+      而这边的目录关了那边的还开着——正是这个面板想避免的那种分叉。
+   抽屉是 position:absolute，宿主必须是有 position 的那个（.write）——
+   搬进 .bar 或 main 都会让它飞到视口左上角（见样式里那条注释）。 */
+function moveTocTo(v) {
+  const host = v === 'lit'
+    ? document.querySelector('#litmain > .write')
+    : document.querySelector('#writemain > .write');
+  if (!host) return;
+  const drawer = $('#tocdrawer');
+  if (drawer && drawer.parentNode !== host) host.appendChild(drawer);
+  const bar = host.querySelector('.bar');
+  const btn = $('#tocbtn');
+  if (bar && btn && btn.parentNode !== bar) bar.insertBefore(btn, bar.firstChild);
+}
+
+function initToc() {
+  if (!window.TocPanel) { console.warn('toc-panel.js 没加载，目录面板不启用'); return false; }
+  const btn = $('#tocbtn');
+  if (!btn) return false;
+  try {
+    TOC = window.TocPanel.create({
+      editor: tocEd,
+      mount: $('#tocdrawer'),
+      // scroller 不传：让面板自己往上找真正能滚的那一个（见 toc-panel.js 的注释）
+      badge: $('#tocn'),
+      flag: $('#tocflag')
+    });
+  } catch (e) {
+    console.warn('目录面板没起来：' + e);
+    btn.style.display = 'none';
+    return false;
+  }
+  btn.onclick = () => TOC.toggle();
+  moveTocTo(VIEW);        // 初始落在伴写视图；与视图切换处是同一条路径
+  // 内容一变就重算。面板关着时它只做个 dirty 标记（+ 按钮上一个小圆点），
+  // 打开时才真的算——getSemanticHTML() 是全文序列化，20 万字上不便宜。
+  // 两个编辑器都要听：文学侧的标题变了，目录同样得知道。
+  ta.addEventListener('input', () => { TOC.refresh(); posBoxSoon(); });
+  lta.addEventListener('input', () => { TOC.refresh(); posBoxSoon(); });
+  // 切视图时目录的对象换人了，必须重算——不然列的还是上一个视图的标题
+  document.querySelectorAll('#viewsw .vs').forEach(x => {
+    x.addEventListener('click', () => TOC.refresh());
+  });
+  return true;
+}
+
+/* ─── 启动 ─── */
+(function boot() {
+  bindFormatBar($('#fmtbar'), ta, {rich: true, after: () => setTimeout(() => touch && touch(), 0)});
+  bindFormatBar($('#lfmtbar'), lta, {});      // 材料框没有探针，after 只刷工具条状态
+  setCountFor(quillText().length);
+  initToc();
+  memInit();
+  $('#memreview').onclick = memPartDone;
+  $('#memrecall').onclick = memRecallNow;
+  if (!quill) {
+    // 地基没起，别让按钮亮着骗人。两个工具条一起藏：它们接的是同一套能力。
+    $('#fmtbar').style.display = 'none';
+    const lb = $('#lfmtbar'); if (lb) lb.style.display = 'none';
+  }
+})();
+
+/* ============= 盲评面板（§7 其四） =============
+   两型搭话：divergent（扩张型，把作者带离原方向）/ convergent（收敛型，只指出位置事实）。
+   **顺序按 blind_pos 排，不按类型排**——否则形态与位置就共变了，效应差无从归因。 */
+async function blindLoad() {
+  const r = await fetch('/api/probe/pairs', {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}'
+  });
+  const d = await r.json();
+  if (d.error) { document.getElementById('blindbody').innerHTML =
+    '<div>采集外挂未载入：' + (d.error || '') + '</div>'; return; }
+  document.getElementById('blindseed').textContent = d.seed || '—';
+  const body = document.getElementById('blindbody');
+  if (!d.pairs || !d.pairs.length) {
+    body.innerHTML = '<div style="color:#8a8274;line-height:1.9">'
+      + '还没有成对的场景。<br><br>'
+      + '这一栏要填的是<b>两型搭话的实际文本</b>——扩张型与收敛型各一条、'
+      + '同一个场景。那是写作判断，系统不生成。<br><br>'
+      + '填好后用 <code>POST /api/probe/trial</code> 写入：<br>'
+      + '<code>{"trial_kind":"divergent|convergent","g_text":"…","scene":"…"}</code><br><br>'
+      + '若已有落单的一型，会在这里提示还差哪一型。</div>';
+    document.getElementById('blindstat').textContent =
+      '落单场景 ' + ((d.unpaired || []).length);
+    return;
+  }
+  const esc = s => String(s == null ? '' : s).replace(/[<>&]/g,
+    c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
+  body.innerHTML = d.pairs.map(p => {
+    const it = [p.first, p.second];
+    /* 每条不再是「一个接按钮」，而是「接 / 不接」一组。
+       第 i 条的两个按钮共用同一 event_id，用 data-a 区分：
+       1=接（trial_accepted），0=不接（trial_rejected）。 */
+    const judge = (x, i) =>
+        '<div class="jrow">'
+      + '<span class="jl">第 ' + (i + 1) + ' 条</span>'
+      + '<span class="pbtns">'
+      + '<button data-eid="' + x.event_id + '" data-a="1" data-i="' + (i + 1) + '">接</button>'
+      + '<button class="no" data-eid="' + x.event_id + '" data-a="0" data-i="' + (i + 1) + '">不接</button>'
+      + '</span></div>';
+    return '<div class="pair" data-scene="' + esc(p.scene) + '">'
+      + '<div class="sc">场景：' + esc(p.scene) + '　（形态已隐藏，按随机序）</div>'
+      + it.map((x, i) =>
+          '<div class="g" data-eid="' + x.event_id + '">'
+          + '<span class="ord">第 ' + (i + 1) + ' 条</span>' + esc(x.g_text) + '</div>'
+        ).join('')
+      + '<textarea class="pbox" rows="3" spellcheck="false"'
+      + ' placeholder="你随后写的那一段（因变量 p）。粘整段进来，换行会保留。"'
+      + ' title="这是 s(g,p) 的另一半。它有换行、有长短——那些本身就是测量值，别压成一行。"></textarea>'
+      + '<div class="row2">'
+      + it.map(judge).join('')
+      + '<input type="text" class="s" placeholder="s(g,p)"'
+      + ' title="这段 p 与那句搭话的贴合程度。先定死一种口径（如 0–1 的小数，或 0–100 的整数）再开始，中途换尺子就不是同一个数了。留空则只用采纳率。">'
+      + '<span class="done"></span></div></div>';
+  }).join('');
+
+  /* 判定回填。三种操作都必须能走通：
+     接 → trial_accepted / 不接 → trial_rejected / 再点同一个 → 撤回。
+     原来只有「接」，也没有撤回：标错了要么改 jsonl 文件，要么带着错误过。 */
+  body.querySelectorAll('.pair button[data-eid]').forEach(btn => {
+    btn.onclick = async () => {
+      const pair = btn.closest('.pair');
+      const eid = btn.dataset.eid, idx = btn.dataset.i;
+      const pbox = pair.querySelector('.pbox'), sbox = pair.querySelector('.s');
+      const p = pbox.value, s = sbox.value;
+      if (btn.classList.contains('on')) {              // 再点＝撤回
+        const d0 = await probeApi('annotate', { event_id: eid, clear: true });
+        if (d0.error) { blindMsg('没撤回：' + (d0.error || '未知')); return; }
+        btn.classList.remove('on');
+        paintDone(pair);
+        blindMsg('已撤回第 ' + idx + ' 条');
+        blindStat();
+        return;
+      }
+      const acc = Number(btn.dataset.a);
+      const d2 = await probeApi('annotate', {
+        event_id: eid,
+        author_feedback: acc ? 'trial_accepted' : 'trial_rejected',
+        accepted: acc, p_text: p || null,
+        sim: s === '' ? null : Number(s)
+      });
+      if (d2.error) { blindMsg('没存上：' + d2.error); return; }
+      // 同一条的两个按钮互斥：先清这一条，再点亮被点的那个
+      pair.querySelectorAll('button[data-eid]').forEach(x => {
+        if (x.dataset.eid === eid) x.classList.remove('on');
+      });
+      btn.classList.add('on');
+      paintDone(pair);
+      blindMsg('已记第 ' + idx + ' 条·' + (acc ? '接' : '不接'));
+      blindStat();
+    };
+  });
+  /* p 与 s 是边写边填的，统计要跟着动。
+     原来 blindStat() 只在加载末尾调一次，于是「已填 p / 已填 s」
+     永远停在加载时的数字（通常是 0），看不出进度。 */
+  body.querySelectorAll('.pair .pbox, .pair .s').forEach(el => {
+    el.addEventListener('input', blindStat);
+  });
+  blindStat();
+}
+
+/* 这一对的判定摘要。一次刷新出來，不让它和"第几条被点亮"各说一套 */
+function paintDone(pair) {
+  if (!pair) return;
+  const on = [].slice.call(pair.querySelectorAll('button[data-eid].on'));
+  pair.querySelector('.done').textContent = on.length
+    ? on.map(x => '第' + x.dataset.i + '条·' + (x.dataset.a === '1' ? '接' : '不接')).join(' / ')
+    : '';
+}
+
+function blindMsg(t) {
+  const el = document.getElementById('blindmsg');
+  el.textContent = t || '';
+  if (t) setTimeout(() => { el.textContent = ''; }, 2400);
+}
+
+function blindStat() {
+  const pairs = document.querySelectorAll('#blindbody .pair');
+  let done = 0, withP = 0, withS = 0, accN = 0, rejN = 0;
+  pairs.forEach(p => {
+    if (p.querySelector('.done').textContent) done++;
+    if (p.querySelector('.pbox').value.trim()) withP++;
+    if (p.querySelector('.s').value.trim()) withS++;
+    p.querySelectorAll('button[data-eid].on').forEach(b => {
+      if (b.dataset.a === '1') accN++; else rejN++;
+    });
+  });
+  /* 接 / 不接 分开显示。合起来只报"已判 n"，看不出两边各多少——
+     而不接那一格的数量正是采纳率分母有没有被喂到东西的唯一现场读数：
+     它是 0，就说明这一整组数还没法进论文。 */
+  const el = document.getElementById('blindstat');
+  const txt = '配对 ' + pairs.length + ' ｜ 已判 ' + done
+    + '（接 ' + accN + '／不接 ' + rejN + '）'
+    + ' ｜ 已填 p ' + withP + ' ｜ 已填 s ' + withS;
+  el.textContent = txt;
+  el.style.color = (accN && rejN) ? '' : '#8a5a00';
+  el.title = (accN && rejN) ? ''
+    : '「接」与「不接」两边都得有数，采纳率的组间差才算得出来。'
+      + '现在至少一边是 0——这一组还只能看 s(g,p)，不能看采纳率。';
+}
+
+/* 第二个入口，挂在写作区底栏的甲/乙/丙那组旁边。
+   为什么还要一个：原来「伤害盲评」只插在采集面板的底栏里，而采集面板默认是收起的
+   ——她每一次想做盲评，都得先想起来"它藏在探针面板里"。这类**靠记忆才能找到**的入口，
+   用的人会越来越少，样本就断在这里。实验装置和测试件放在一起（右边就是主导权三档），
+   位置才不用记。同一个 handler，两个门。 */
+function injectBlindTrigger() {
+  const wrap = document.getElementById('iniwrap');
+  if (!wrap || document.getElementById('blindopen2')) return;
+  const b = document.createElement('button');
+  b.id = 'blindopen2';
+  b.textContent = '盲评';
+  b.title = '伤害盲评（§7 其四）：同一场景、两型搭话、随机序，形态标签已隐藏';
+  b.style.cssText = 'font-size:11px;padding:1px 7px;border-radius:5px';
+  wrap.parentNode.insertBefore(b, wrap.nextSibling);
+}
+
+/* ⚠️ 这一段原来直接取 #blindreload 绑事件，而 #blindpanel 整块 HTML
+   **在这段脚本之后**才被解析（盲评面板的 div 写在本脚本块的结束标签之后）。
+   注意：注释里不能出现脚本结束标签的字面量——HTML 解析器先于 JS 看到它，
+   整个脚本块会被从那里截断，症状是"整页毫无初始化"且报错不含行号。
+   于是 getElementById('blindreload') 恒为 null，第一行就抛
+   "Cannot set properties of null"——同一段脚本里它后面的语句**全部不执行**：
+   「伤害盲评」按钮从来没有被插进采集面板，盲评面板的重载/关闭也从来没绑上。
+   症状是：面板 DOM 存在但永远打不开，控制台只留一句看不懂的报错。
+   改成等 DOM 就绪再绑，并且每一处都判空——**缺一个按钮不该拖垮整段初始化**。 */
+function initBlindEntry() {
+  const panel = document.getElementById('blindpanel');
+  /* 键盘可达：遮罩层的关闭原来只有右上角那个 ✕，鼠标走不到的时候（面板内容
+     滚到底、或者手在写字）就没有退路。Esc 兜住所有情况。
+     aria 一起补上——屏幕阅读器需要知道"这里弹了个模态框"。 */
+  if (panel) {
+    panel.setAttribute('role', 'dialog');
+    panel.setAttribute('aria-modal', 'true');
+    panel.setAttribute('aria-label', '伤害盲评：同一场景两型搭话');
+    panel.addEventListener('keydown', e => {
+      if (e.key === 'Escape') panel.classList.remove('on');
+    });
+    const box = document.getElementById('blindbox');
+    if (box) box.setAttribute('tabindex', '-1');
+  }
+  document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    // 采集面板：它是**更外层**的那扇，只在盲评没开的时才轮到它。
+    // 两层都没开就什么都不做——Esc 不该顺手收起正在展开的东西。
+    const pp = document.getElementById('probepanel');
+    if (panel && panel.classList.contains('on')) {
+      panel.classList.remove('on');
+    } else if (pp && pp.classList.contains('on')) {
+      pp.classList.remove('on');
+      const tb = document.getElementById('probetab');
+      if (tb) tb.style.display = '';
+    }
+  });
+  const rl = document.getElementById('blindreload');
+  if (rl) rl.onclick = blindLoad;
+  const cl = document.getElementById('blindclose');
+  if (cl) cl.onclick = () => {
+    if (panel) panel.classList.remove('on');
+  };
+  /* 点遮罩本身也关：不用非得瞄准右上角那两个像素。
+     判断 target===panel 是关键——点在面板内容上不算点在外面。 */
+  if (panel) panel.onclick = e => { if (e.target === panel) panel.classList.remove('on'); };
+  /* 从采集面板进入 */
+  const foot = document.getElementById('probefoot');
+  if (foot && !document.getElementById('blindopen')) {
+    foot.insertAdjacentHTML('beforeend',
+      '<button id="blindopen" title="§7 其四：同一场景、两型搭话、随机序；形态标签已隐藏">伤害盲评</button>');
+  }
+  injectBlindTrigger();
+  const open = () => {
+    if (!panel) return;
+    panel.classList.add('on');
+    blindLoad();
+    const box = document.getElementById('blindbox');
+    if (box) box.focus();
+  };
+  const op = document.getElementById('blindopen');
+  if (op) op.onclick = open;
+  const op2 = document.getElementById('blindopen2');
+  if (op2) op2.onclick = open;
+}
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBlindEntry);
+} else {
+  initBlindEntry();
+}
+
+</script>
+
+<!--pnid:mwoqpMI9YqRWrG1Jt25j9y--><!-- ===== 盲评面板（§7 其四的装置；发行版无此块） ===== -->
+<div data-page-node-id="6paeYlOTIWH8fRPWvRKX1c" id="blindpanel">
+  <div data-page-node-id="SImzvX7B1XNNc5xcy9bk1k" id="blindbox">
+    <div data-page-node-id="JpriFhauQjmruqDXGZ0d81" class="bh"><span data-page-node-id="QrvoDd4bFeMe3u6XGFO6P5" class="x" id="blindclose"><!--pnid:qzdQlRHlZWRKkOhoRt14hx-->✕关闭</span>
+      <b data-page-node-id="5Ren5cYHfsdMdgoc1bda8G"><!--pnid:L3fcWKtovdi1iY0cSnYY5O-->伤害盲评</b><!--pnid:tQfXKebpzBSnGHhA15r1ZJ-->　同一场景两型搭话，按随机序呈现（种子 <span data-page-node-id="vinknAx1gayBVyz1wRUEYE" id="blindseed"><!--pnid:MiMtQtCA9A2Luvo7SACzpQ-->—</span><!--pnid:n9odoQjVWSjuYJmkATagAM-->）
+      <div data-page-node-id="ZeICOmv51C8YWdqiSEWA7K" style="font-weight:400; font-size:11px; color:#8a8274; margin-top:3px"><!--pnid:2pme7Ej5rqhGS81njdn0Az-->
+        形态标签已隐藏。填「接不接受」，并把你随后写的那一段填进 p 框——
+        <b data-page-node-id="YthWqhQJ4J6trzlc2N6rfU"><!--pnid:n0LFOgTve9pi7GxvFZ16j1-->那才是因变量 s(g,p) 的另一半</b><!--pnid:lklJHLcV4bsGLwsrXukxny-->。s 值可留空，留空则只用采纳率。
+      </div>
+    </div>
+    <div data-page-node-id="uAcNpXVHmn99Y9o20ivWIS" class="bb" id="blindbody"></div>
+    <div data-page-node-id="kBp9Vt1EOYjVJGNt3qciZf" id="blindfoot">
+      <button data-page-node-id="Qo1c9Obfr7lRyykZm0SAeV" id="blindreload"><!--pnid:ia7daH4tRtZTW4A1To7Vxs-->重载</button>
+      <span data-page-node-id="lIrmxbF8fAlyRw5xcGMoT2" id="blindmsg"></span>
+      <span data-page-node-id="mv3w2xap7TrV0D6OImuEBl" id="blindstat" style="margin-left:auto"></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

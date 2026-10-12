@@ -1,0 +1,82 @@
+{
+  "selected_config_id": "identity_h32_lr1e3",
+  "rows": [
+    {
+      "config_id": "baseline_s1g",
+      "n_present": 4,
+      "n_seeds": 4,
+      "n_proxy_pass": 0,
+      "mean_best_ret_train": 0.33406250000000004,
+      "epochs_max": 800,
+      "hidden": 32
+    },
+    {
+      "config_id": "orth_h32_lr1e3",
+      "n_present": 4,
+      "n_seeds": 4,
+      "n_proxy_pass": 0,
+      "mean_best_ret_train": 0.3715625,
+      "epochs_max": 800,
+      "hidden": 32
+    },
+    {
+      "config_id": "orth_h32_lr3e4_clip1",
+      "n_present": 4,
+      "n_seeds": 4,
+      "n_proxy_pass": 0,
+      "mean_best_ret_train": 0.3509375,
+      "epochs_max": 800,
+      "hidden": 32
+    },
+    {
+      "config_id": "identity_h32_lr1e3",
+      "n_present": 4,
+      "n_seeds": 4,
+      "n_proxy_pass": 0,
+      "mean_best_ret_train": 0.38359375,
+      "epochs_max": 800,
+      "hidden": 32
+    },
+    {
+      "config_id": "orth_h64_lr5e4",
+      "n_present": 4,
+      "n_seeds": 4,
+      "n_proxy_pass": 0,
+      "mean_best_ret_train": 0.37140625000000005,
+      "epochs_max": 800,
+      "hidden": 64
+    },
+    {
+      "config_id": "orth_h48_lr1e3_ep1200",
+      "n_present": 4,
+      "n_seeds": 4,
+      "n_proxy_pass": 0,
+      "mean_best_ret_train": 0.3615625,
+      "epochs_max": 1200,
+      "hidden": 48
+    }
+  ],
+  "rule": {
+    "primary": "maximize n_proxy_pass on tune seeds (proxy = train ret_curve_max>=0.55 OR early_stop OR eval all_pass if computed)",
+    "secondary": "maximize mean best_ret_train across present tune seeds",
+    "tertiary": "prefer fewer epochs_max, then smaller hidden, then id baseline_s1g as tiebreak",
+    "forbid": "never look at science seeds 200+ during selection",
+    "min_tune_seeds_present": 3
+  },
+  "selected_row": {
+    "config_id": "identity_h32_lr1e3",
+    "n_present": 4,
+    "n_seeds": 4,
+    "n_proxy_pass": 0,
+    "mean_best_ret_train": 0.38359375,
+    "epochs_max": 800,
+    "hidden": 32
+  },
+  "S3": "CLOSED",
+  "forbid": [
+    "tune on science seeds",
+    "claim 门控普遍必要",
+    "open S3",
+    "reopen E2b"
+  ]
+}

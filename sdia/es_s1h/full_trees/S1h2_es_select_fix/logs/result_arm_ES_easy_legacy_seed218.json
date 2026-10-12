@@ -1,0 +1,119 @@
+{
+  "schema": "s1h2_arm_result_v1",
+  "arm": "ES_easy_legacy",
+  "seed": 218,
+  "N": 2,
+  "k_lo": 5,
+  "k_hi": 10,
+  "step_rule": "s1g_legacy",
+  "lr": 0.05,
+  "sigma": 0.08,
+  "thresholds_file_hash": "468defc9af4113c805d0a8836b6aeb57ce409eb782f440530df7f92b44da0885",
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "fitness_source_hash": "0aea3c91b0d47b080b7e54bb6187d15a00ea842c4e55c79f2633554ade93836d",
+  "A_return": 0.558125,
+  "A_return_S1g_record": null,
+  "A_void_line": 0.72,
+  "void_env_A_ceiling": false,
+  "seed_void": false,
+  "pass": true,
+  "eval": {
+    "kind": "gru",
+    "return": {
+      "mean": 0.9953125,
+      "std": 0.004496092053105679,
+      "n": 16
+    },
+    "C1": {
+      "pass": true,
+      "return": 0.9953125,
+      "mem_return": 0.558125,
+      "margin": 0.25,
+      "abs": 0.7
+    },
+    "C2": {
+      "pass": true,
+      "decode_acc": 1.0,
+      "threshold": 0.75
+    },
+    "C2_leak": {
+      "samples": [
+        0.830225711481845,
+        0.8183613030602171,
+        0.8196078431372549,
+        0.8111545988258317,
+        0.807843137254902
+      ],
+      "mean": 0.8174385187520101,
+      "sd": 0.008669325129320898,
+      "n_eps": 12,
+      "n_rep": 5,
+      "max": 0.95,
+      "void_enabled": false,
+      "void": false
+    },
+    "C3": {
+      "pass": true,
+      "flip_rate": 1.0,
+      "threshold": 0.7,
+      "n_trials": 40
+    },
+    "C4pp": {
+      "pass": true,
+      "R_same_sparse": 1.0,
+      "R_opp_sparse": 0.13593750000000002,
+      "drop_sparse": 0.8640625,
+      "R_same_every": 1.0,
+      "R_opp_every": 1.0,
+      "drop_every": 0.0,
+      "thr_drop": 0.3,
+      "thr_R_same": 0.55,
+      "thr_every_frac": 0.5
+    },
+    "C5": {
+      "pass": true,
+      "note": "fitness_task_only; no stability terms in source"
+    },
+    "C6": {
+      "pass": true,
+      "return": 0.907750496031746,
+      "threshold": 0.6
+    },
+    "void_leak": false,
+    "all_pass": true
+  },
+  "evo": {
+    "best_fit_train": 0.9983333333333334,
+    "evals": 38400,
+    "hist_len": 600,
+    "optimizer": "OpenAI_ES",
+    "no_goal_labels": true,
+    "pop_mean_first": 0.4961979166666667,
+    "pop_mean_last": 0.7065104166666667,
+    "pop_mean_max": 0.7285677083333333,
+    "hist_tail": [
+      {
+        "gen": 597,
+        "best": 0.965,
+        "mean": 0.7129947916666666,
+        "evals": 38272
+      },
+      {
+        "gen": 598,
+        "best": 0.9566666666666667,
+        "mean": 0.695859375,
+        "evals": 38336
+      },
+      {
+        "gen": 599,
+        "best": 0.9616666666666666,
+        "mean": 0.7065104166666667,
+        "evals": 38400
+      }
+    ]
+  },
+  "wall_s": 1301.836153268814,
+  "role": "DIAGNOSTIC_legacy_step_on_easy (paired with ES_easy: same init/noise stream); not a gate",
+  "tune": false,
+  "smoke": false
+}

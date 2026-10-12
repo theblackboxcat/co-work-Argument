@@ -1,0 +1,119 @@
+[
+ {
+  "experiment": "S2L",
+  "args": [
+   "alien",
+   2000,
+   6
+  ],
+  "cost": 20.7
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "alien",
+   4000,
+   7
+  ],
+  "cost": 40.2
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "code",
+   3000,
+   2
+  ],
+  "cost": 30.4
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "en",
+   3000,
+   6
+  ],
+  "cost": 30.4
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "en",
+   5000,
+   0
+  ],
+  "cost": 49.9
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "en",
+   6500,
+   2
+  ],
+  "cost": 64.5
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "lisp",
+   2000,
+   2
+  ],
+  "cost": 20.7
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "lisp",
+   4000,
+   6
+  ],
+  "cost": 40.2
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "math",
+   5000,
+   6
+  ],
+  "cost": 49.9
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "math",
+   6500,
+   6
+  ],
+  "cost": 64.5
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "relperm",
+   5000,
+   6
+  ],
+  "cost": 49.9
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "relperm",
+   6500,
+   4
+  ],
+  "cost": 64.5
+ },
+ {
+  "experiment": "S2L",
+  "args": [
+   "zh",
+   2000,
+   2
+  ],
+  "cost": 20.7
+ }
+]

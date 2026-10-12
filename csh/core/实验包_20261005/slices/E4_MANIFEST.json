@@ -1,0 +1,56 @@
+{
+  "experiment": "E4",
+  "n_slices": 6,
+  "n_jobs": 90,
+  "total_cost_hours": 2.7,
+  "slices": [
+    {
+      "slice": "E4_slice00",
+      "experiment": "E4",
+      "n_jobs": 15,
+      "cost_seconds": 1618.5,
+      "est_hours": 0.45,
+      "runner": "run_slice.py --spec slices/E4_slice00.json"
+    },
+    {
+      "slice": "E4_slice01",
+      "experiment": "E4",
+      "n_jobs": 15,
+      "cost_seconds": 1618.5,
+      "est_hours": 0.45,
+      "runner": "run_slice.py --spec slices/E4_slice01.json"
+    },
+    {
+      "slice": "E4_slice02",
+      "experiment": "E4",
+      "n_jobs": 15,
+      "cost_seconds": 1618.5,
+      "est_hours": 0.45,
+      "runner": "run_slice.py --spec slices/E4_slice02.json"
+    },
+    {
+      "slice": "E4_slice03",
+      "experiment": "E4",
+      "n_jobs": 15,
+      "cost_seconds": 1618.5,
+      "est_hours": 0.45,
+      "runner": "run_slice.py --spec slices/E4_slice03.json"
+    },
+    {
+      "slice": "E4_slice04",
+      "experiment": "E4",
+      "n_jobs": 15,
+      "cost_seconds": 1618.5,
+      "est_hours": 0.45,
+      "runner": "run_slice.py --spec slices/E4_slice04.json"
+    },
+    {
+      "slice": "E4_slice05",
+      "experiment": "E4",
+      "n_jobs": 15,
+      "cost_seconds": 1618.5,
+      "est_hours": 0.45,
+      "runner": "run_slice.py --spec slices/E4_slice05.json"
+    }
+  ]
+}

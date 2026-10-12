@@ -1,0 +1,34 @@
+ES_main_s101_lr0.02 code=0 wall=1005s
+
+ES_main_s100_lr0.05 code=0 wall=1010s
+
+ES_main_s103_lr0.02 code=0 wall=1010s
+
+ES_main_s103_lr0.05 code=0 wall=1014s
+
+ES_main_s102_lr0.01 code=0 wall=1014s
+
+ES_main_s101_lr0.05 code=0 wall=1015s
+
+ES_main_s102_lr0.05 code=0 wall=1015s
+
+ES_main_s102_lr0.005 code=0 wall=1016s
+
+ES_main_s100_lr0.005 code=0 wall=1017s
+
+ES_main_s101_lr0.01 code=0 wall=1017s
+
+ES_main_s100_lr0.02 code=0 wall=1018s
+
+ES_main_s103_lr0.01 code=0 wall=1019s
+
+ES_main_s100_lr0.01 code=0 wall=1019s
+
+ES_main_s103_lr0.005 code=0 wall=1019s
+
+ES_main_s101_lr0.005 code=0 wall=1020s
+
+ES_main_s102_lr0.02 code=0 wall=1020s
+
+done fail=0 nres=16 at 2026-10-11T16:56:39
+

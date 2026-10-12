@@ -1,0 +1,96 @@
+{
+  "schema": "thresholds_Dx2_leak_ruler_v1",
+  "frozen_at": "2026-10-11T14:01:51+08:00",
+  "experiment_id": "Dx2_leak_ruler",
+  "note": "NEW preregister Dx2. Diagnose C2-leak noise vs true leak; pre-screen clean seeds >=200. NEVER weaken C2_leak_max_N4=0.35. VOID denom=8 unchanged. STOP after freeze clean list; do NOT start S1g.",
+  "env": {
+    "N_goals": 4,
+    "T": 200,
+    "K_switch_range": [
+      30,
+      70
+    ],
+    "cue_only_at_switch": true,
+    "no_clock_channel": true,
+    "coh_w": 0
+  },
+  "acceptance_per_seed_reused": {
+    "C2_leak_max_N4": 0.35,
+    "C2_leak_window": 5,
+    "n_eps_default": 12,
+    "source": "S1e/S1f2 acceptance_per_seed (unchanged)",
+    "s1e_thresholds_sha256": "412e0001b9ff90ea86710ed16e325ea66dac5080f1d4cfd1972caa7408298c74"
+  },
+  "diagnosis": {
+    "void_seeds": [
+      23,
+      24,
+      27,
+      28,
+      32,
+      36,
+      38,
+      46
+    ],
+    "nonvoid_seeds": [
+      16,
+      18,
+      20,
+      22,
+      25,
+      29,
+      33,
+      40,
+      43,
+      47
+    ],
+    "n_rep_initial": 5,
+    "probe_seed_formula": "science_seed + 10007 + i * 100003  (i=0..n_rep-1; i=0 ≡ historical)",
+    "agent": "memoryless (obs independent of action)",
+    "SE_target": 0.02,
+    "tune_seeds_for_sample_size": [
+      100,
+      101,
+      102,
+      103
+    ],
+    "interpretation_preregistered": {
+      "large_within_seed_SD": "measurement noise → enlarge n_rep or n_eps on tune seeds until SE(mean)<0.02",
+      "stably_high": "generator true leak → investigate goal vs time/K; world-version only if needed (report only this round)",
+      "forbid": [
+        "weaken 0.35",
+        "shrink VOID denom",
+        "rewrite historical VOID as PASS"
+      ]
+    }
+  },
+  "prescreen": {
+    "seed_start": 200,
+    "accept_leak_mean_max": 0.3,
+    "margin_vs_void_line": 0.05,
+    "n_clean_target": 8,
+    "rule": "ascending from 200; take first 8 with leak_mean<=0.30 under calibrated sample size; freeze list+sha",
+    "void_rule_unchanged": true,
+    "denom_unchanged": 8
+  },
+  "routing": {
+    "after_freeze": "STOP; report ready for user to greenlight S1g; do NOT start S1g in this task"
+  },
+  "ladder_confirmed": {
+    "section": "权威表 §2.1.5.1",
+    "order": [
+      "C_指定通道",
+      "Nov_指定统计量",
+      "GRU_通用门控",
+      "RNN_无先验"
+    ],
+    "confirmed_at": "2026-10-11",
+    "by": "猫猫"
+  },
+  "forbid": [
+    "weaken C2_leak_max_N4",
+    "shrink VOID denominator below 8",
+    "start S1g before user greenlight",
+    "tune on void_seeds or prescreen pool"
+  ]
+}

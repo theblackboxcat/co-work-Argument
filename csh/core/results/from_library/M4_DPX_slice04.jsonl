@@ -1,0 +1,1 @@
+{"cell": "TT", "arm": "depth_scan", "test_kind": "TT", "train_kind": "typed", "depth": 3, "overlap": 6, "n_rel": 6, "n_train": 11000, "seed": 5, "acc": 1.0, "steps": 343, "vocab": 31, "tok": 46, "branch_tr": 2.0, "branch_te": 2.0, "C3_tr": 24, "C3_te": 24, "Ceff_tr": 24, "Ceff_te": 24, "secs": 12.5, "_slice": "DPX_slice04", "_exp": "DPX"}

@@ -1,0 +1,137 @@
+[
+ {
+  "experiment": "E4",
+  "args": [
+   "chain_reverse",
+   2000,
+   1
+  ],
+  "cost": 68.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "chain_reverse",
+   3000,
+   1
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "chain_reverse",
+   4000,
+   1
+  ],
+  "cost": 106.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "chain_reverse",
+   5000,
+   1
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "chain_reverse",
+   6500,
+   1
+  ],
+  "cost": 153.5
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "null_renaming",
+   2000,
+   1
+  ],
+  "cost": 68.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "null_renaming",
+   3000,
+   1
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "null_renaming",
+   4000,
+   1
+  ],
+  "cost": 106.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "null_renaming",
+   5000,
+   1
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "null_renaming",
+   6500,
+   1
+  ],
+  "cost": 153.5
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "root_swap",
+   2000,
+   1
+  ],
+  "cost": 68.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "root_swap",
+   3000,
+   1
+  ],
+  "cost": 87.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "root_swap",
+   4000,
+   1
+  ],
+  "cost": 106.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "root_swap",
+   5000,
+   1
+  ],
+  "cost": 125.0
+ },
+ {
+  "experiment": "E4",
+  "args": [
+   "root_swap",
+   6500,
+   1
+  ],
+  "cost": 153.5
+ }
+]

@@ -1,0 +1,244 @@
+{
+  "schema": "fair_rnn_summary_v1",
+  "denominator": 8,
+  "science_config_id": "identity_h32_lr1e3",
+  "pass": 0,
+  "void": 0,
+  "missing": 0,
+  "wilson95": [
+    0,
+    0.3244156195108769
+  ],
+  "per_seed": [
+    {
+      "seed": 200,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.2790625,
+      "mem_A": 0.21531250000000002,
+      "leak_mean": 0.28830577774781924,
+      "C2_decode": 0.25750798722044727,
+      "C3_flip": 0.175,
+      "C4_pass": false,
+      "C6_ret": 0.3847889302348505,
+      "fails": [
+        "C1",
+        "C2",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.310625,
+      "train_last": 0.2225,
+      "slope_lasthalf": -0.0013333333333333333,
+      "wall_s": 1842.8933329582214,
+      "file": "result_arm_G_RL_RNN_fair_seed200_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 205,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.2325,
+      "mem_A": 0.31781250000000005,
+      "leak_mean": 0.2802055679819916,
+      "C2_decode": 0.35823754789272033,
+      "C3_flip": 0.25,
+      "C4_pass": false,
+      "C6_ret": 0.13074483518863367,
+      "fails": [
+        "C1",
+        "C2",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.346875,
+      "train_last": 0.270625,
+      "slope_lasthalf": -0.0055833333333333195,
+      "wall_s": 1860.0542750358582,
+      "file": "result_arm_G_RL_RNN_fair_seed205_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 210,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.30875,
+      "mem_A": 0.19156250000000002,
+      "leak_mean": 0.2890860500474316,
+      "C2_decode": 0.34612923864363404,
+      "C3_flip": 0.5,
+      "C4_pass": false,
+      "C6_ret": 0.23671024736757496,
+      "fails": [
+        "C1",
+        "C2",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.37125,
+      "train_last": 0.355,
+      "slope_lasthalf": 0.003979166666666663,
+      "wall_s": 1837.9254279136658,
+      "file": "result_arm_G_RL_RNN_fair_seed210_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 211,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.2371875,
+      "mem_A": 0.2296875,
+      "leak_mean": 0.27407819191217386,
+      "C2_decode": 0.37547892720306514,
+      "C3_flip": 0.425,
+      "C4_pass": false,
+      "C6_ret": 0.1403595646035229,
+      "fails": [
+        "C1",
+        "C2",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.3125,
+      "train_last": 0.28375,
+      "slope_lasthalf": 0.005093750000000002,
+      "wall_s": 1857.9691760540009,
+      "file": "result_arm_G_RL_RNN_fair_seed211_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 212,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.2584375,
+      "mem_A": 0.26375,
+      "leak_mean": 0.2909059033939496,
+      "C2_decode": 0.40319488817891375,
+      "C3_flip": 0.225,
+      "C4_pass": false,
+      "C6_ret": 0.3067197846497881,
+      "fails": [
+        "C1",
+        "C2",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.38125,
+      "train_last": 0.260625,
+      "slope_lasthalf": -0.00583333333333333,
+      "wall_s": 1848.7306377887726,
+      "file": "result_arm_G_RL_RNN_fair_seed212_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 216,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.31937499999999996,
+      "mem_A": 0.29875,
+      "leak_mean": 0.2829750641115954,
+      "C2_decode": 0.9411764705882353,
+      "C3_flip": 0.425,
+      "C4_pass": false,
+      "C6_ret": 0.2490975340275422,
+      "fails": [
+        "C1",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.435,
+      "train_last": 0.296875,
+      "slope_lasthalf": -0.0019270833333333087,
+      "wall_s": 1853.492731332779,
+      "file": "result_arm_G_RL_RNN_fair_seed216_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 218,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.2921875,
+      "mem_A": 0.290625,
+      "leak_mean": 0.2909115981599331,
+      "C2_decode": 0.26342710997442453,
+      "C3_flip": 0.225,
+      "C4_pass": false,
+      "C6_ret": 0.37071492891750607,
+      "fails": [
+        "C1",
+        "C2",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.31500000000000006,
+      "train_last": 0.26875,
+      "slope_lasthalf": 0.00023958333333333283,
+      "wall_s": 1850.7306594848633,
+      "file": "result_arm_G_RL_RNN_fair_seed218_identity_h32_lr1e3.json"
+    },
+    {
+      "seed": 219,
+      "status": "FAIL",
+      "config_id": "identity_h32_lr1e3",
+      "ret": 0.2184375,
+      "mem_A": 0.2184375,
+      "leak_mean": 0.2751684570322171,
+      "C2_decode": 0.9110684580934101,
+      "C3_flip": 0.25,
+      "C4_pass": false,
+      "C6_ret": 0.1875,
+      "fails": [
+        "C1",
+        "C3",
+        "C4pp",
+        "C6"
+      ],
+      "epochs": 800,
+      "train_max": 0.39,
+      "train_last": 0.165,
+      "slope_lasthalf": -0.00333333333333332,
+      "wall_s": 1856.8344492912292,
+      "file": "result_arm_G_RL_RNN_fair_seed219_identity_h32_lr1e3.json"
+    }
+  ],
+  "verdict_id": "RNN_STILL_0",
+  "verdict_zh": "公平调参后仍0/8 → 可写本玩具本预算失败；仍禁门控普遍必要/原理不可达",
+  "routing": {
+    "RNN_ge_7_8": {
+      "zh": "升「无先验档候选」；不自动改 E2/S3；仍禁写门控普遍必要",
+      "en": "upgrade to no-prior-tier CANDIDATE; do NOT auto-change E2/S3; still forbid claiming gates universally necessary"
+    },
+    "RNN_still_0_8": {
+      "zh": "公平调参后仍0/8 → 可写「本玩具本预算下无门RNN公平调参后仍失败」；仍禁写门控普遍必要/原理不可达",
+      "en": "after fair tune still 0/8 → may write failure-under-fair-tune on this toy/budget; still forbid universal necessity / principle-unreachable"
+    },
+    "RNN_mixed_1_to_6_of_8": {
+      "zh": "混合 → 报告数字与Wilson；不定档；不开S3",
+      "en": "mixed → report counts+Wilson; no tier upgrade; S3 stays CLOSED"
+    },
+    "C_fail_if_run": "positive control broken → VOID experiment integrity",
+    "STOP": "STOP after 报告.md. S3 CLOSED. Do NOT reopen E2b. Do NOT auto-open any new science."
+  },
+  "S3": "CLOSED",
+  "E2b": "DO_NOT_REOPEN",
+  "forbid": [
+    "weaken C2_leak_max_N4=0.35",
+    "shrink VOID denominator below 8",
+    "tune on science seeds",
+    "open S3",
+    "reopen E2b budget / more E2b epochs",
+    "claim 门控普遍必要",
+    "claim gates universally necessary",
+    "infinite budget arms race vs GRU then claim necessity",
+    "auto-rewrite E2 1/8 or E2b Path B 3/8"
+  ],
+  "thresholds_sha256": "6c342d5b288a0030ba0f6312f8300f05ec249467a84233015dc2ee0d8f3c8d25"
+}

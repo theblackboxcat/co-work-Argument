@@ -1,0 +1,22 @@
+[
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   4,
+   4000,
+   5
+  ],
+  "cost": 420.9
+ },
+ {
+  "experiment": "DPX",
+  "args": [
+   "TT",
+   5,
+   5000,
+   5
+  ],
+  "cost": 209.3
+ }
+]

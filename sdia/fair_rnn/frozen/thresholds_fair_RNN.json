@@ -1,0 +1,232 @@
+{
+  "schema": "thresholds_fair_RNN_overnight_v1",
+  "frozen_at": "2026-10-11T23:28:36+08:00",
+  "experiment_id": "fair_RNN_overnight_2026-10-11",
+  "note_zh": "新建预注册·公平RNN对照（claim-contract §5.1）。调参仅籽100–103；科学籽=Dx2干净8籽；验收与S1g同文；VOID分母=8；禁写门控普遍必要；S3 CLOSED；E2b预算不重开。阈值在科学跑前冻结。",
+  "note_en": "NEW prereg fair-RNN contrast (§5.1). Tune ONLY seeds 100-103; science=Dx2 clean 8; acceptance identical to S1g; VOID denom=8; NEVER claim gates universally necessary; S3 CLOSED; do not reopen E2b budget. Thresholds frozen BEFORE science.",
+  "claim_contract_ref": "决策层/论文论断收缩稿_2026-10-11.md §5.1",
+  "s1e_thresholds_sha256_reused_for_identical_acceptance": "412e0001b9ff90ea86710ed16e325ea66dac5080f1d4cfd1972caa7408298c74",
+  "s1g_thresholds_sha256_parent": "9b77a4a5d3885418f3714152a11c4c5ee7319c51fac4484d56a2210941444ea4",
+  "clean_seeds_Dx2_sha256": "22263a4f443d5be45ca4f1842a58fb971d0ef51d30933d8286610522b3e573f6",
+  "env": {
+    "N_goals_default": 4,
+    "K_switch_range_accept": [
+      30,
+      70
+    ],
+    "T": 200,
+    "cue_only_at_switch": true,
+    "no_clock_channel": true,
+    "coh_w": 0
+  },
+  "seeds": [
+    200,
+    205,
+    210,
+    211,
+    212,
+    216,
+    218,
+    219
+  ],
+  "tune_seeds": [
+    100,
+    101,
+    102,
+    103
+  ],
+  "tune_rule": "Tune ONLY on tune_seeds 100-103; NEVER tune on science seeds. Select ONE config_id by pre-registered rule BEFORE science.",
+  "budget_ceiling": {
+    "epochs_max_hard_cap": 1200,
+    "hidden_max": 64,
+    "note": "Ceiling preregistered; no infinite GRU-vs-RNN arms race."
+  },
+  "leak_probe": {
+    "n_eps": 12,
+    "n_rep": 5,
+    "window": 5,
+    "probe_seed_formula": "science_seed + 10007 + i * 100003",
+    "void_if_mean_gt": 0.35,
+    "source": "Dx2_leak_ruler calibrated (same as S1g)"
+  },
+  "arms": {
+    "A_memoryless": {
+      "role": "C1_VOID_baseline_optional",
+      "kind": "memoryless",
+      "N": 4,
+      "pop": 36,
+      "gens": 100,
+      "K_eval": 3,
+      "k_lo": 30,
+      "k_hi": 70,
+      "optional_on_science": true,
+      "note": "Can reuse S1g A returns if gene files present; otherwise run once per science seed."
+    },
+    "C_handwritten": {
+      "role": "positive_control_optional_integrity",
+      "kind": "hand_gate",
+      "N": 4,
+      "pop": 36,
+      "gens": 100,
+      "K_eval": 3,
+      "k_lo": 30,
+      "k_hi": 70,
+      "optional_on_science": true,
+      "note": "If C fails ≥7/8 integrity VOID. Prefer reuse S1g C results (same env/seeds) when available."
+    },
+    "G_RL_RNN_fair": {
+      "role": "MAIN_fair_ungated_RNN",
+      "optimizer": "A2C_REINFORCE_return_only_S1f2_return_standardized",
+      "architecture": "RNNCell_tanh_no_gates",
+      "ladder_rung": "RNN_无先验_fair_tune",
+      "N": 4,
+      "k_lo": 30,
+      "k_hi": 70,
+      "episodes_per_epoch": 16,
+      "entropy_coef": 0.01,
+      "value_coef": 0.5,
+      "gamma": 0.99,
+      "early_stop_return": 0.85,
+      "log_every_epochs": 50,
+      "group_pass_rule": ">=7/8",
+      "l2_variant": "L2-self",
+      "no_goal_labels": true,
+      "hyperparams_from": "selected tune config_id"
+    }
+  },
+  "tune_grid": [
+    {
+      "id": "baseline_s1g",
+      "hidden": 32,
+      "lr": 0.001,
+      "epochs_max": 800,
+      "init_mode": "default",
+      "grad_clip": 5.0,
+      "note": "S1g G_RL_RNN hyperparameters (untuned reference; may still be selected)"
+    },
+    {
+      "id": "orth_h32_lr1e3",
+      "hidden": 32,
+      "lr": 0.001,
+      "epochs_max": 800,
+      "init_mode": "orthogonal",
+      "grad_clip": 5.0,
+      "note": "orthogonal init, same h/lr/epochs as S1g"
+    },
+    {
+      "id": "orth_h32_lr3e4_clip1",
+      "hidden": 32,
+      "lr": 0.0003,
+      "epochs_max": 800,
+      "init_mode": "orthogonal",
+      "grad_clip": 1.0,
+      "note": "lower lr + tighter clip"
+    },
+    {
+      "id": "identity_h32_lr1e3",
+      "hidden": 32,
+      "lr": 0.001,
+      "epochs_max": 800,
+      "init_mode": "identity_hh",
+      "grad_clip": 5.0,
+      "note": "identity recurrent init"
+    },
+    {
+      "id": "orth_h64_lr5e4",
+      "hidden": 64,
+      "lr": 0.0005,
+      "epochs_max": 800,
+      "init_mode": "orthogonal",
+      "grad_clip": 5.0,
+      "note": "wider hidden within ceiling"
+    },
+    {
+      "id": "orth_h48_lr1e3_ep1200",
+      "hidden": 48,
+      "lr": 0.001,
+      "epochs_max": 1200,
+      "init_mode": "orthogonal",
+      "grad_clip": 5.0,
+      "note": "budget ceiling epochs_max=1200 (hard cap)"
+    }
+  ],
+  "tune_selection_rule": {
+    "primary": "maximize n_proxy_pass on tune seeds (proxy = train ret_curve_max>=0.55 OR early_stop OR eval all_pass if computed)",
+    "secondary": "maximize mean best_ret_train across present tune seeds",
+    "tertiary": "prefer fewer epochs_max, then smaller hidden, then id baseline_s1g as tiebreak",
+    "forbid": "never look at science seeds 200+ during selection",
+    "min_tune_seeds_present": 3
+  },
+  "acceptance_per_seed": {
+    "C1_margin_over_memoryless": 0.25,
+    "C1_absolute_return": 0.7,
+    "C2_decode_acc_min": 0.75,
+    "C2_chance_N4": 0.25,
+    "C2_leak_max_N4": 0.35,
+    "C2_leak_window": 5,
+    "C3_flip_within_steps": 3,
+    "C3_flip_rate_min": 0.7,
+    "C4pp_toy": {
+      "name": "C4″_toy 自身码本·定向",
+      "sparse_return_drop_min": 0.3,
+      "R_same_min": 0.55,
+      "every_drop_max_frac_of_sparse": 0.5,
+      "n_eps": 16
+    },
+    "C5_no_stability_terms": [
+      "||ds||",
+      "s_variance",
+      "s_stability",
+      "coh_w"
+    ],
+    "C6_removal_segment_len_factor": 2,
+    "C6_removal_return_min": 0.6
+  },
+  "group_pass_min_seeds": 7,
+  "group_pass_of": 8,
+  "void_rules": {
+    "A_return_gt_N4": 0.4,
+    "C2_leak_mean_over_line": "VOID",
+    "denom_always": 8,
+    "forbid_shrink_denom": true,
+    "forbid_weaken_leak_line": true
+  },
+  "MAIN": [
+    "G_RL_RNN_fair"
+  ],
+  "routing": {
+    "RNN_ge_7_8": {
+      "zh": "升「无先验档候选」；不自动改 E2/S3；仍禁写门控普遍必要",
+      "en": "upgrade to no-prior-tier CANDIDATE; do NOT auto-change E2/S3; still forbid claiming gates universally necessary"
+    },
+    "RNN_still_0_8": {
+      "zh": "公平调参后仍0/8 → 可写「本玩具本预算下无门RNN公平调参后仍失败」；仍禁写门控普遍必要/原理不可达",
+      "en": "after fair tune still 0/8 → may write failure-under-fair-tune on this toy/budget; still forbid universal necessity / principle-unreachable"
+    },
+    "RNN_mixed_1_to_6_of_8": {
+      "zh": "混合 → 报告数字与Wilson；不定档；不开S3",
+      "en": "mixed → report counts+Wilson; no tier upgrade; S3 stays CLOSED"
+    },
+    "C_fail_if_run": "positive control broken → VOID experiment integrity",
+    "STOP": "STOP after 报告.md. S3 CLOSED. Do NOT reopen E2b. Do NOT auto-open any new science."
+  },
+  "forbid": [
+    "weaken C2_leak_max_N4=0.35",
+    "shrink VOID denominator below 8",
+    "tune on science seeds",
+    "open S3",
+    "reopen E2b budget / more E2b epochs",
+    "claim 门控普遍必要",
+    "claim gates universally necessary",
+    "infinite budget arms race vs GRU then claim necessity",
+    "auto-rewrite E2 1/8 or E2b Path B 3/8"
+  ],
+  "stance": "prereg_fair_RNN_overnight",
+  "parent_experiments": [
+    "S1g_clean_confirm",
+    "Dx2_leak_ruler",
+    "claim_contract_§5.1"
+  ],
+  "S3": "CLOSED",
+  "E2b": "DONE_PathB_do_not_reopen"
+}

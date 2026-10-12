@@ -1,0 +1,124 @@
+========================================================================
+DPX 已回收部分分析（198 条）
+========================================================================
+
+每个 depth 实际拿到的 n 网格：
+  depth 3: [8500, 11000, 14000]
+  depth 4: [4000, 14000]
+  depth 5: [4000, 5000, 6500, 8500]
+
+三档 depth 共同的 n（真正可交叉比较的）： 无
+
+------------------------------------------------------------------------
+1. TT 基线的 acc 随 (depth, n) 变化 —— 纠缠长什么样
+------------------------------------------------------------------------
+depth        4000     5000     6500     8500    11000    14000
+3               .        .        .    1.000    1.000    1.000
+4           0.489        .        .        .        .    1.000
+5           0.410    0.489    0.697    0.810        .        .
+
+------------------------------------------------------------------------
+2. 配对 penalty = acc(TT) - acc(cell)  逐 (depth, n)
+   同 seed 配对；每格 6/6 为正则标*
+------------------------------------------------------------------------
+
+[TU]
+  depth      4000     5000     6500     8500    11000    14000
+  3               .        .        .   0.279    0.195    0.184 
+  4          0.171*        .        .        .        .   0.257*
+  5          0.210*   0.235*   0.321*   0.248*        .        .
+
+[Thighovl]
+  depth      4000     5000     6500     8500    11000    14000
+  3               .        .        .   0.000    0.000    0.000 
+  4         -0.021         .        .        .        .   0.000 
+  5          0.003    0.015    0.030    0.015         .        .
+
+[Tlowovl]
+  depth      4000     5000     6500     8500    11000    14000
+  3               .        .        .   0.437*   0.308*   0.301*
+  4          0.375*        .        .        .        .   0.385*
+  5          0.343*   0.380*   0.501*   0.434*        .        .
+
+------------------------------------------------------------------------
+3. penalty 的 depth 斜率（每 depth 一档，报删失与配对数）
+   斜率 > 0 表示 penalty 随 depth 上升
+------------------------------------------------------------------------
+
+[TU] 共同 n 上的 (depth,n) 点只有 0 个，不足以估斜率
+
+[Thighovl] 共同 n 上的 (depth,n) 点只有 0 个，不足以估斜率
+
+[Tlowovl] 共同 n 上的 (depth,n) 点只有 0 个，不足以估斜率
+
+------------------------------------------------------------------------
+4. 无删失读数：按 depth 串成曲线（不受 tau 判据影响）
+   n½ 越大越难 / area 越小越难
+------------------------------------------------------------------------
+
+  depth3  (3 档: n=8500:1.000, n=11000:1.000, n=14000:1.000)
+          n@0.5 = 8500   area = 1.000
+
+  depth4  (2 档: n=4000:0.489, n=14000:1.000)
+          n@0.5 = 14000   area = 0.745
+
+  depth5  (4 档: n=4000:0.410, n=5000:0.489, n=6500:0.697, n=8500:0.810)
+          n@0.5 = 6500   area = 0.608
+
+========================================================================
+缺口（还需补跑才能支撑完整结论）：
+========================================================================
+  TT         depth3 n=  4000  现有 0 seeds
+  TT         depth3 n=  5000  现有 0 seeds
+  TT         depth3 n=  6500  现有 0 seeds
+  TT         depth3 n=  8500  现有 5 seeds
+  TT         depth3 n= 11000  现有 5 seeds
+  TT         depth3 n= 14000  现有 5 seeds
+  TT         depth4 n=  4000  现有 5 seeds
+  TT         depth4 n=  5000  现有 0 seeds
+  TT         depth4 n=  6500  现有 0 seeds
+  TT         depth4 n=  8500  现有 0 seeds
+  TT         depth4 n= 11000  现有 0 seeds
+  TT         depth4 n= 14000  现有 5 seeds
+  TT         depth5 n=  4000  现有 5 seeds
+  TT         depth5 n=  5000  现有 5 seeds
+  TT         depth5 n=  6500  现有 5 seeds
+  TT         depth5 n=  8500  现有 5 seeds
+  TT         depth5 n= 11000  现有 0 seeds
+  TT         depth5 n= 14000  现有 0 seeds
+  TU         depth3 n=  4000  现有 0 seeds
+  TU         depth3 n=  5000  现有 0 seeds
+  TU         depth3 n=  6500  现有 0 seeds
+  TU         depth4 n=  5000  现有 0 seeds
+  TU         depth4 n=  6500  现有 0 seeds
+  TU         depth4 n=  8500  现有 0 seeds
+  TU         depth4 n= 11000  现有 0 seeds
+  TU         depth5 n= 11000  现有 0 seeds
+  TU         depth5 n= 14000  现有 0 seeds
+  Thighovl   depth3 n=  4000  现有 0 seeds
+  Thighovl   depth3 n=  5000  现有 0 seeds
+  Thighovl   depth3 n=  6500  现有 0 seeds
+  Thighovl   depth3 n=  8500  现有 5 seeds
+  Thighovl   depth3 n= 11000  现有 5 seeds
+  Thighovl   depth3 n= 14000  现有 5 seeds
+  Thighovl   depth4 n=  4000  现有 5 seeds
+  Thighovl   depth4 n=  5000  现有 0 seeds
+  Thighovl   depth4 n=  6500  现有 0 seeds
+  Thighovl   depth4 n=  8500  现有 0 seeds
+  Thighovl   depth4 n= 11000  现有 0 seeds
+  Thighovl   depth4 n= 14000  现有 5 seeds
+  Thighovl   depth5 n=  4000  现有 5 seeds
+  Thighovl   depth5 n=  5000  现有 5 seeds
+  Thighovl   depth5 n=  6500  现有 5 seeds
+  Thighovl   depth5 n=  8500  现有 5 seeds
+  Thighovl   depth5 n= 11000  现有 0 seeds
+  Thighovl   depth5 n= 14000  现有 0 seeds
+  Tlowovl    depth3 n=  4000  现有 0 seeds
+  Tlowovl    depth3 n=  5000  现有 0 seeds
+  Tlowovl    depth3 n=  6500  现有 0 seeds
+  Tlowovl    depth4 n=  5000  现有 0 seeds
+  Tlowovl    depth4 n=  6500  现有 0 seeds
+  Tlowovl    depth4 n=  8500  现有 0 seeds
+  Tlowovl    depth4 n= 11000  现有 0 seeds
+  Tlowovl    depth5 n= 11000  现有 0 seeds
+  Tlowovl    depth5 n= 14000  现有 0 seeds

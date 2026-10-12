@@ -1,0 +1,81 @@
+{
+  "meta": {
+    "model": "dots3-note-prev",
+    "provider": "dots3",
+    "base_url_host": "<API_HOST>",
+    "temperature": 0.3,
+    "thinking": "disabled",
+    "feature_impl": "v3/classifier.py + params.json",
+    "params_version": "3.8",
+    "label_set": "genre_proxy_P_vs_S (corpus_genre as P-proxy, corpus_S as S-proxy)",
+    "label_batch": "holdout_n30_each_seed20261012",
+    "delta_stop": "0.02 AUC x 2 consecutive steps",
+    "arm_mapping": {
+      "A": "approximate prompt-ablation: bare classifier instruction only (NOT runner baseline=SKILL+WORKFLOW)",
+      "B": "policy.build_system (SKILL_v3 + mode/bans/iron) + classify-only suffix",
+      "C": "B + civility C1-C13 + attention workflow text (NOT live cursor state machine)",
+      "D": "not run (optional structure arm)",
+      "native_unclean": "runner.py only has baseline|v3; attention is server-only; documented as approximate"
+    },
+    "deltas": {
+      "B_minus_A": 0.05390000000000006,
+      "C_minus_B": -0.0798000000000001
+    },
+    "STOP_prereg_signed_gain": false,
+    "STOP_note": "STOP if Delta(B-A) < 0.02 AND Delta(C-B) < 0.02"
+  },
+  "table": {
+    "A": {
+      "n_total": 60,
+      "n_scored": 60,
+      "n_errors": 0,
+      "AUC": 0.5989,
+      "Acc_mode_exact": 0.5167,
+      "mean_score_S": 0.627,
+      "mean_score_P": 0.541,
+      "class_prior_S": 0.5
+    },
+    "B": {
+      "n_total": 60,
+      "n_scored": 60,
+      "n_errors": 0,
+      "AUC": 0.6528,
+      "Acc_mode_exact": 0.65,
+      "mean_score_S": 0.607,
+      "mean_score_P": 0.393,
+      "class_prior_S": 0.5
+    },
+    "C": {
+      "n_total": 60,
+      "n_scored": 59,
+      "n_errors": 1,
+      "AUC": 0.573,
+      "Acc_mode_exact": 0.5763,
+      "mean_score_S": 0.5087,
+      "mean_score_P": 0.3962,
+      "class_prior_S": 0.5
+    }
+  },
+  "feature": {
+    "feature_impl": "v3/classifier.py + params.json classifier.weights",
+    "params_version": "3.8",
+    "cross_lang": {
+      "n_S": 1200,
+      "n_genre": 852,
+      "mean_S": 0.1309,
+      "mean_genre": 0.1373,
+      "AUC_S_vs_genre": 0.4921,
+      "AUC_genre_vs_S": 0.5079,
+      "note": "lexical feature mode_score; near 0.5 = inseparable"
+    },
+    "same_lang_zh": {
+      "n_novel": 800,
+      "n_prose": 572,
+      "mean_novel": 0.1529,
+      "mean_prose": 0.1625,
+      "AUC_novel_vs_prose": 0.4596,
+      "AUC_prose_vs_novel": 0.5404,
+      "note": "file-name heuristic split inside corpus_private; aligns with paper same-lang setup"
+    }
+  }
+}
