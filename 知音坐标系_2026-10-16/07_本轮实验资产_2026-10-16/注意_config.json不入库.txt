@@ -1,0 +1,2 @@
+真 key 写入 config.json（与脚本同目录），不要提交到公开库。
+已打包脚本中的硬编码 key 全部剥离，改为运行时读 config.json 或环境变量 DOTS3_KEY。

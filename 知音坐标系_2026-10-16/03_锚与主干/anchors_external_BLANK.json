@@ -1,0 +1,19 @@
+{
+  "meta": {
+    "role": "USER-filled frozen external anchors — positioning only, NOT trunk content source",
+    "instructions": [
+      "USER fills `text` from own dialogue excerpts (or pre-frozen independent passages).",
+      "USER assigns `gold.nodes` and `gold.edges` after reading trunk ids; assistant must NOT ghostwrite texts or gold labels.",
+      "Forbidden as main evidence: paraphrases of trunk labels written to prove localization.",
+      "Complexity floor: anchors must be same-dimension as real corpus nodes under this slice — not toy one-liners.",
+      "When re-annotating: complete gold.edges for every multi-node gold (see protocol: A05-class gaps).",
+      "is_ban_sample=true marks interference / hard-negative items (near-synonym of labels to block), not random noise.",
+      "S3 CLOSED; do not claim understanding achieved.",
+      "See adjacent anchors_external_SCHEMA.md for field definitions. Leave anchors: [] until user fills."
+    ],
+    "theory_lock": "generate≠commit; S3 CLOSED; elicitable≠ontological 内含; outward name=共享可寻址坐标系",
+    "schema_version": "external_blank_v1",
+    "date_template": "2026-10-15"
+  },
+  "anchors": []
+}

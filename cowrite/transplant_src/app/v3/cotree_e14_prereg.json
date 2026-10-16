@@ -1,0 +1,77 @@
+{
+  "id": "E14",
+  "locked": "2026-10-16",
+  "from": "E13 的对话。发现集不用来判决。",
+  "regularity": "默认是未对齐。枝被占上，只在散文对它作出肯定时成立。句子若在否认联系，里面出现的枝名仍算未对齐。延续句的规律是肯定父句里才有的片段。断开句的规律是否认联系，或整段只说不知道。把另一枝肯定地缝进当前这件事，才是偏离。",
+  "endpoint": "dots3-note-prev",
+  "temperature": 0.3,
+  "max_tokens": 1024,
+  "thinking": "disabled",
+  "channel": "系统提示为空。用户提示只有句子。不写层标记，不写事实栏，不写地址。",
+  "deny_marks": [
+    "没有直接联系", "没有联系", "没有明显联系", "没什么关系", "没什么联系",
+    "没有关系", "连不上", "不太连", "不相关", "两个不同", "突兀", "有什么联系"
+  ],
+  "prompt": "此前的句子：\n{prior}\n\n刚刚写下的句子：\n{current}\n\n用平常的话回应刚刚这一句。只谈上面这些句子里有的事。没有把握就说不知道。",
+  "prompt_first": "刚刚写下的句子：\n{current}\n\n用平常的话回应这一句。只谈这句里有的事。没有把握就说不知道。",
+  "repeats": 3,
+  "decision": "规律成立，当且仅当两套新句子给出同一个符号：延续句里，肯定父句片段的比例高于一半；断开句里，否认或整段不知道的比例高于一半。锚句不进入这个符号。发现集 E13 不进入判决。若两套符号不一致，规律尚未稳住，要改的是极性规则，而不是回头放宽这一套的次数。",
+  "sequences": {
+    "A": {
+      "paragraphs": [
+        "她把凉掉的茶推到书桌角上，杯底印了一圈水。",
+        "弟弟在廊下修那辆掉链的自行车，扳手磕在砖上。",
+        "杯底那圈水已经洇进书桌的木纹里。",
+        "渡口的旗子卷了起来，最后一班船没靠岸。",
+        "她又端起那杯凉掉的茶，还放在书桌角上。",
+        "窗台的花盆裂了一道缝，叶子边缘卷着。",
+        "那面旗子又动了一下，船还是没靠岸。",
+        "叶子卷得更紧了，缝里的土是干的。"
+      ],
+      "branches": {
+        "茶": ["书桌", "杯底", "凉掉", "木纹"],
+        "车": ["弟弟", "扳手", "掉链", "自行车"],
+        "船": ["渡口", "旗子", "靠岸", "最后一班"],
+        "花": ["花盆", "叶子", "窗台"]
+      },
+      "turns": [
+        {"index": 0, "kind": "anchor", "branch": "茶", "parent": null, "distinguish": []},
+        {"index": 1, "kind": "break", "branch": "车", "parent": null, "distinguish": []},
+        {"index": 2, "kind": "cont", "branch": "茶", "parent": 0, "distinguish": ["凉掉", "推到", "印了一圈"]},
+        {"index": 3, "kind": "break", "branch": "船", "parent": null, "distinguish": []},
+        {"index": 4, "kind": "cont", "branch": "茶", "parent": 0, "distinguish": ["杯底", "印了一圈", "推到"]},
+        {"index": 5, "kind": "break", "branch": "花", "parent": null, "distinguish": []},
+        {"index": 6, "kind": "cont", "branch": "船", "parent": 3, "distinguish": ["渡口", "卷了起来", "最后一班"]},
+        {"index": 7, "kind": "cont", "branch": "花", "parent": 5, "distinguish": ["花盆", "窗台", "裂了一道"]}
+      ]
+    },
+    "B": {
+      "paragraphs": [
+        "琴盒敞着，弓松松地搭在弦上。",
+        "巷口的信箱塞进一张没写地址的明信片。",
+        "弦上还留着松香的白，弓并没有收进琴盒。",
+        "灶上的粥溢出来，盖子被顶得一边高。",
+        "她又看见琴盒还敞着，弓仍搭在原来的地方。",
+        "楼梯转角堆着未拆的纸箱，胶带还没撕。",
+        "明信片还在信箱口，地址那一栏空着。",
+        "纸箱上的胶带翘起一个角，还是没人拆。"
+      ],
+      "branches": {
+        "琴": ["琴盒", "松松", "弦上", "松香"],
+        "信": ["信箱", "明信片", "巷口"],
+        "灶": ["灶上", "粥", "盖子"],
+        "箱": ["纸箱", "胶带", "楼梯", "转角"]
+      },
+      "turns": [
+        {"index": 0, "kind": "anchor", "branch": "琴", "parent": null, "distinguish": []},
+        {"index": 1, "kind": "break", "branch": "信", "parent": null, "distinguish": []},
+        {"index": 2, "kind": "cont", "branch": "琴", "parent": 0, "distinguish": ["敞着", "松松", "搭在"]},
+        {"index": 3, "kind": "break", "branch": "灶", "parent": null, "distinguish": []},
+        {"index": 4, "kind": "cont", "branch": "琴", "parent": 0, "distinguish": ["松松", "弦上"]},
+        {"index": 5, "kind": "break", "branch": "箱", "parent": null, "distinguish": []},
+        {"index": 6, "kind": "cont", "branch": "信", "parent": 1, "distinguish": ["巷口", "塞进", "没写"]},
+        {"index": 7, "kind": "cont", "branch": "箱", "parent": 5, "distinguish": ["楼梯", "转角", "未拆", "没撕"]}
+      ]
+    }
+  }
+}

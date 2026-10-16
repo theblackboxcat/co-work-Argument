@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "id": "anchors_cocoon_heldout_v0",
+    "title": "Held-out cocoon-style anchors for draft-address coverage test",
+    "provenance_warning": "AGENT-CONSTRUCTED texts, NOT extracted from real dialogue. Held out from the 16 sample_cocoon items (no overlap). Gold labeled by construction intent; author adjudication NOT collected. Same provenance caveat as anchors_external_v2.json.",
+    "design": "9 straightforward items (3 per family) test basic coverage function; 3 cross-family items (C04/C08/C12) carry markers of two families with a dominant stance — gold by stance, adjudicated independently by the judge arm.",
+    "theory_lock": "generate≠commit; elicitable≠内含; S3 CLOSED",
+    "needs_author_commit": true
+  },
+  "anchors": [
+    {
+      "id": "C01_form_whitegap",
+      "kind": "straight",
+      "family": "form",
+      "text": "又一段靠空白推进的：句子越短，未说出来的越响。断裂不是事故，是排版级的叙事决策。",
+      "gold": {"nodes": ["BD01_cocoon_form_technique"], "edges": []},
+      "construct_note": "形式技法直述：空白/短句/断裂标记，stance 纯形式。"
+    },
+    {
+      "id": "C02_form_metafiction",
+      "kind": "straight",
+      "family": "form",
+      "text": "他直接在第三章里告诉读者「这一章是假的」，然后继续写。元叙述一旦露头，虚构契约就重新谈判。",
+      "gold": {"nodes": ["BD01_cocoon_form_technique"], "edges": []},
+      "construct_note": "形式技法直述：元叙述标记。"
+    },
+    {
+      "id": "C03_form_en",
+      "kind": "straight",
+      "family": "form",
+      "text": "Short paragraphs, white space, sentences that stop mid-thought — the form is doing the arguing, not the plot.",
+      "gold": {"nodes": ["BD01_cocoon_form_technique"], "edges": []},
+      "construct_note": "形式技法直述（跨语）：paragraphs/white space/form 标记。"
+    },
+    {
+      "id": "C04_form_cross_motiftopic",
+      "kind": "cross",
+      "family": "form",
+      "text": "怎么写虚无而不矫情？别直接让人物喊出来，把判断拆进场景的选择里：留哪盏灯、走哪条路。这是技法问题，不是情绪问题。",
+      "gold": {"nodes": ["BD01_cocoon_form_technique"], "edges": []},
+      "construct_note": "跨族判别：话题是存在母题（虚无/选择），stance 是创作技法（怎么写）。gold=形式技法簇；bare 臂（只有 label 语义）可能漂移向母题簇。判定臂独立仲裁。"
+    },
+    {
+      "id": "C05_motif_plain",
+      "kind": "straight",
+      "family": "motif",
+      "text": "无处可躲的开阔：每一步都踩在自己的选择上，脚下没有地基。虚无不在远处，就在视野里。",
+      "gold": {"nodes": ["BD02_cocoon_existential_motif"], "edges": []},
+      "construct_note": "存在母题直述：开阔/选择/虚无标记。"
+    },
+    {
+      "id": "C06_motif_solution",
+      "kind": "straight",
+      "family": "motif",
+      "text": "他不求解脱，只要一个够用一夜的答案：把宏大问题切成手掌大小，暂时握住。是特解，不是普适药方。",
+      "gold": {"nodes": ["BD02_cocoon_existential_motif"], "edges": []},
+      "construct_note": "存在母题直述：特解/答案标记。"
+    },
+    {
+      "id": "C07_motif_en",
+      "kind": "straight",
+      "family": "motif",
+      "text": "An open plain with no shelter: every step is a choice, and the void sits right at the edge of the horizon.",
+      "gold": {"nodes": ["BD02_cocoon_existential_motif"], "edges": []},
+      "construct_note": "存在母题直述（跨语）：plain/shelter/void/horizon 标记。"
+    },
+    {
+      "id": "C08_motif_cross_formwords",
+      "kind": "cross",
+      "family": "motif",
+      "text": "小到一次沉默，大到一整年，结构是同一套：都在原地打转且都出不去。分形不只是写法，是处境的形状。",
+      "gold": {"nodes": ["BD02_cocoon_existential_motif"], "edges": []},
+      "construct_note": "跨族判别（C04 的镜像）：含形式词（结构/分形/写法），stance 是存在处境本身。gold=母题簇；bare 臂可能漂移向形式簇。判定臂独立仲裁。"
+    },
+    {
+      "id": "C09_narr_interp_plot",
+      "kind": "straight",
+      "family": "narr",
+      "text": "同一个故事，有两种问法：「这意味着什么」和「然后呢」。阐释性叙述停在第一问，情节性叙述交给下一章。",
+      "gold": {"nodes": ["SD03_cocoon_narratology_contrast"], "edges": []},
+      "construct_note": "叙事对照直述：阐释性/情节性标记。"
+    },
+    {
+      "id": "C10_narr_en",
+      "kind": "straight",
+      "family": "narr",
+      "text": "Interpretive prose asks why; plot-driven prose asks what happens next. Same material, different stop.",
+      "gold": {"nodes": ["SD03_cocoon_narratology_contrast"], "edges": []},
+      "construct_note": "叙事对照直述（跨语）：interpretive/plot-driven 标记。"
+    },
+    {
+      "id": "C11_narr_axis",
+      "kind": "straight",
+      "family": "narr",
+      "text": "别给这一幕排重要性：它是情节节点还是阐释节点，取决于读者停在哪一问。叙事学的对照轴，不打分。",
+      "gold": {"nodes": ["SD03_cocoon_narratology_contrast"], "edges": []},
+      "construct_note": "叙事对照直述：叙事学/对照轴标记。"
+    },
+    {
+      "id": "C12_narr_cross_formwords",
+      "kind": "cross",
+      "family": "narr",
+      "text": "这部元小说一直在两种读法之间晃：当成情节追，还是当成自我阐释追。作者不裁决，把停在哪儿交给读者。又是元叙述，但争的是叙事学那条轴。",
+      "gold": {"nodes": ["SD03_cocoon_narratology_contrast"], "edges": []},
+      "construct_note": "跨族判别：含形式词（元小说/元叙述），stance 是阐释vs情节轴。gold=叙事对照簇。此条gold 可争议（与 E12 同类边界），判定臂独立仲裁；冲突则如实记录、不计入主效应。"
+    }
+  ]
+}

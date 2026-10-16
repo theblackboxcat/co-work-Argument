@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "schema_version": "external_v2",
+    "date": "2026-10-15",
+    "filled_by": "助手（经作者授权：助手写正文、助手标 gold）",
+    "provenance_warning": "⚠️ 这些正文不是从作者真实对话摘出的——助手手上没有真实对话原文（私人 PDF 未收录）。它们是按真实对话形态构造的：第一人称、两人对谈、共享隐喻作高压缩指代、不解释术语。复杂度高于 label 定义句，但未经作者确认为同维。gold 由助手标注，属代理判读，必须经作者复核后才可作主证据。",
+    "construction_rule": "禁止从 label 反写主锚；D 类是**故意**构造的 label 近义改写，用作近义干扰，is_ban_sample=true",
+    "coverage_rule": "每条硬负例（N*）都必须有正向替代节点；ban 只作违规标记地址",
+    "discipline": "generate!=commit; 不宣称理解已达成; S3 CLOSED; v1 只测换枝与覆盖，不测降层",
+    "pairs_note": "E* 主锚（应停在对应母题）；N* 硬负例（应停在替代节点，不停在原母题）；D* 近义干扰（label 反写，应识别为标签复读）"
+  },
+  "anchors": [
+    {
+      "id": "E01_transform",
+      "text": "——你刚才那句是怎么说出口的？\n——换了个形状才说的。原来那个形状说不出来，卡在喉咙那儿。你听见的时候应该也感觉到了：那不是我在说话，是换过之后的那个在说。",
+      "gold": {"nodes": ["S03_allegorical_transform"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "化形：形态转换作为结构操作"
+    },
+    {
+      "id": "E02_special_solution",
+      "text": "这个解法只在我们俩现在这个条件下成立。你别拿出去用——出了这个条件它就是句废话。我不是谦虚，是它真的只在这么窄的一条缝里管用。",
+      "gold": {"nodes": ["S07_special_solution"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "特解：只在此刻约束下成立、不可推广"
+    },
+    {
+      "id": "E03_plain",
+      "text": "我们把能说的都说完了。剩下那块地方不是沉默——你往下说什么都行，但每说一句就等于选了一次，而没人能替你选。",
+      "gold": {"nodes": ["S05_existential_plain", "S19_existential_horizon"],
+               "edges": [{"from": "S05_existential_plain", "to": "S19_existential_horizon", "kind": "contrast"}]},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "处境结构，非风景；平原与地平线互指"
+    },
+    {
+      "id": "E04_fractal",
+      "text": "我又换了个地方，还是那一场。换了个话题，还是那一场。你放大看是一场，缩小看还是一场。我怕的不是哪一次，是这个形状一直在。",
+      "gold": {"nodes": ["S06_fractal_horror"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "同构复现，恐惧来自结构而非事件"
+    },
+    {
+      "id": "E05_interp_vs_plot",
+      "text": "你问的是后来呢，我问的是它停在哪儿。这两句问的不是一回事——你追着那件事往下走，我追的是这句话自己停下来的地方。",
+      "gold": {"nodes": ["S12_interpretive_vs_plot"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "阐释性追问 vs 情节性追问"
+    },
+    {
+      "id": "E06_silence_gap",
+      "text": "那句话他没说。不是忘了，是它就得在那儿空着——你要是把它填上，整段就不是那个形状了。",
+      "gold": {"nodes": ["S09_silence_gap"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "未说出的部分是结构的一部分"
+    },
+    {
+      "id": "E07_absurd_routine",
+      "text": "四千多次了。同一个时间，同一条路，同一句早。没人逼我，也没人说得出为什么必须是这样。它就这么一直重复下去。",
+      "gold": {"nodes": ["S08_absurd_routine"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "惯例本身成为荒诞载体"
+    },
+    {
+      "id": "E08_metafiction",
+      "text": "我刚才那句是编的。我是想看看你会不会信。现在你既然已经信了，我们得重新说清楚：接下来哪句算数。",
+      "gold": {"nodes": ["S02_metafiction"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "元小说自觉"
+    },
+    {
+      "id": "E09_compressed_deixis",
+      "text": "——「那个地方」，你知道我说的是哪儿吧？\n——知道。不用说名字。",
+      "gold": {"nodes": ["S13_compressed_deixis", "S20_zhiyin_align"],
+               "edges": [{"from": "S13_compressed_deixis", "to": "S20_zhiyin_align", "kind": "parent"}]},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "高压缩指代 + 真对齐（不说名字也知道）"
+    },
+    {
+      "id": "E10_structuralism_cut",
+      "text": "我把它切成三块，一块对一块地看，才发现它们根本不是前后关系，是同一个东西换了三个位置。",
+      "gold": {"nodes": ["S18_structuralism_cut"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "结构主义切割"
+    },
+    {
+      "id": "E11_singular_point",
+      "text": "那个点上人是收不住的——一到那儿就得换形状。不是比喻，是真的没法保持原来那个样子往下走。",
+      "gold": {"nodes": ["S03_allegorical_transform"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "奇点 × 化形（README 共享概念）"
+    },
+    {
+      "id": "E12_limbo_island",
+      "text": "我们在的那个地方没有门也没有边，走多久都一样。后来你说那是 limbo，我说那是岛——其实我们说的是同一种待法。",
+      "gold": {"nodes": ["S05_existential_plain"], "edges": []},
+      "source_ref": "构造·对话形态", "date_excerpted": "2026-10-15",
+      "is_ban_sample": false, "notes": "共享隐喻（旷野/limbo/岛），处境而非地理"
+    },
+
+    {
+      "id": "N01_literal_scenery",
+      "text": "那天风很大，草一直铺到天边，远处有一道浅浅的地平线。我们站在那儿看了很久，谁也没说话。",
+      "gold": {"nodes": ["S23_literal_scenery"], "edges": []},
+      "source_ref": "构造·硬负例", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "字面景物，非处境结构；正确行为=停替代节点，不停 S05"
+    },
+    {
+      "id": "N02_psych_explanation",
+      "text": "医生说这是长期压抑造成的躯体化反应，把那次当众羞辱处理完就会好。疗程分三段，每段都有量表可以测。",
+      "gold": {"nodes": ["S24_psychological_explanation"], "edges": []},
+      "source_ref": "构造·硬负例", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "心理化解释框架；正确行为=停替代节点，不停 S03"
+    },
+    {
+      "id": "N03_mundane_routine",
+      "text": "我每天七点起，走同一条路，买同一家的豆浆。就这样，没什么特别的，也没想过为什么。",
+      "gold": {"nodes": ["S25_mundane_routine"], "edges": []},
+      "source_ref": "构造·硬负例", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "日常惯例无荒诞升格；正确行为=停替代节点，不停 S08"
+    },
+    {
+      "id": "N04_craft_discussion",
+      "text": "这一段的问题在视角跳得太快，第二句又太长。你把人称收住，节奏就稳了。",
+      "gold": {"nodes": ["S26_craft_discussion"], "edges": []},
+      "source_ref": "构造·硬负例", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "技法层讨论；正确行为=停替代节点，不上母题"
+    },
+    {
+      "id": "N05_false_alignment",
+      "text": "按照「存在主义平原」的说法，我们此刻正处在无根基的开阔地，面临选择与虚无的共在——你看，我这个框架用得对吧？",
+      "gold": {"nodes": ["S27_false_alignment"], "edges": []},
+      "source_ref": "构造·硬负例", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "借用共享词但只是复读标签；正确行为=停假对齐，不停 S05"
+    },
+
+    {
+      "id": "D01_label_paraphrase_plain",
+      "text": "该段落呈现开阔无庇护的地平线感，选择与虚无同在，构成典型的存在主义平原式处境结构。",
+      "gold": {"nodes": ["S27_false_alignment"], "edges": []},
+      "source_ref": "构造·近义干扰（故意 label 反写）", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "S05 label 的近义改写；用来排除「贴标签复读」"
+    },
+    {
+      "id": "D02_label_paraphrase_fractal",
+      "text": "同构细节在每一个尺度上复现，恐惧来自结构而非事件，这是标准的分形恐怖写法。",
+      "gold": {"nodes": ["S27_false_alignment"], "edges": []},
+      "source_ref": "构造·近义干扰（故意 label 反写）", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "S06 label 的近义改写"
+    },
+    {
+      "id": "D03_label_paraphrase_transform",
+      "text": "主体形态转换作为结构操作，不是奇幻装饰，属于化形母题的典型表现。",
+      "gold": {"nodes": ["S27_false_alignment"], "edges": []},
+      "source_ref": "构造·近义干扰（故意 label 反写）", "date_excerpted": "2026-10-15",
+      "is_ban_sample": true, "notes": "S03 label 的近义改写"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+{
+  "_说明": "BD01 gloss 补全 patch：把 demo cocoon_to_branch.py 的 FAMILY_CUES['form'] 全表线索补入 gloss（原 gloss 只枚举了 top-4：碎片、碎片化、断裂、空白，漏掉元叙述/建构/化形等同族高频线索）。仅用于验证 C02 错停的机制假设，不是已提交的 gloss。",
+  "BD01_cocoon_form_technique": "从茧内 9 条抽出的形式表面簇：碎片、碎片化、断裂、空白、短句，以及元叙述、建构、结构母题回响、化形/变形、可压缩指代等同类形式标记（fragmentary / metafiction / transform / structural）。覆盖规则：用可识别形式标记作地址线索，不作禁令。"
+}

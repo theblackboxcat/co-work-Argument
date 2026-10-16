@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "id": "trunk_v1_parent_edges",
+    "derived_from": "trunk_v0.json",
+    "role": "SEPARATE derived file — does NOT replace trunk_v0.json ontology content",
+    "notes": [
+      "Exports node.parent as edges array entries {from: child, to: parent, kind: parent}.",
+      "Expect 26 edges for trunk_v0 (every non-root node).",
+      "Zero overlap with trunk_v0.edges array (v0 parent-kind edges are cross-stop links S12→S10/S11, not hierarchy).",
+      "Additive merge candidate: concat with trunk_v0.edges for protocols that score edge hits on hierarchy.",
+      "compact_trunk already sends parent+layer+gloss on nodes; this file makes hierarchy addressable in the edges channel so task+scoring can require/score them."
+    ],
+    "count": 26,
+    "overlap_with_v0_edges": 0
+  },
+  "edges": [
+    {
+      "from": "B01_form_technique",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "B02_motif_cluster",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "B03_narratology",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "B04_struct_exist_comm",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "S01_fragmentary_prose",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S02_metafiction",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S03_allegorical_transform",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S04_structural_reprise",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S05_existential_plain",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S06_fractal_horror",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S07_special_solution",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S08_absurd_routine",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S09_silence_gap",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S10_interpretive_fiction",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S11_plot_fiction",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S12_interpretive_vs_plot",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S13_compressed_deixis",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S14_shared_stop",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S15_wrong_branch",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S16_ban_psychologize",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S17_ban_plot_reduce",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S18_structuralism_cut",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S19_existential_horizon",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S20_zhiyin_align",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S21_ban_memory_as_tree",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S22_layer_mismatch",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    }
+  ]
+}

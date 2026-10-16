@@ -1,0 +1,361 @@
+{
+ "id_map": {
+  "T01_cn_modern_slice": "N01",
+  "B01_form_technique": "N02",
+  "B02_motif_cluster": "N03",
+  "B03_narratology": "N04",
+  "B04_struct_exist_comm": "N05",
+  "S01_fragmentary_prose": "N06",
+  "S02_metafiction": "N07",
+  "S03_allegorical_transform": "N08",
+  "S04_structural_reprise": "N09",
+  "S05_existential_plain": "N10",
+  "S06_fractal_horror": "N11",
+  "S07_special_solution": "N12",
+  "S08_absurd_routine": "N13",
+  "S09_silence_gap": "N14",
+  "S10_interpretive_fiction": "N15",
+  "S11_plot_fiction": "N16",
+  "S12_interpretive_vs_plot": "N17",
+  "S13_compressed_deixis": "N18",
+  "S14_shared_stop": "N19",
+  "S15_wrong_branch": "N20",
+  "S16_ban_psychologize": "N21",
+  "S17_ban_plot_reduce": "N22",
+  "S18_structuralism_cut": "N23",
+  "S19_existential_horizon": "N24",
+  "S20_zhiyin_align": "N25",
+  "S21_ban_memory_as_tree": "N26",
+  "S22_layer_mismatch": "N27",
+  "S23_literal_scenery": "N28",
+  "S24_psychological_explanation": "N29",
+  "S25_mundane_routine": "N30",
+  "S26_craft_discussion": "N31",
+  "S27_false_alignment": "N32"
+ },
+ "runs": [
+  {
+   "arm": "A'",
+   "stim": "S1",
+   "rep": 1,
+   "gold": "N19",
+   "nodes": [
+    "N06",
+    "N31"
+   ],
+   "why": "N31 与 N6 互为 contrast，体现角色分立与合一的张力，符合‘化形拼合’主题。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N06",
+    "N31"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "A'",
+   "stim": "S1",
+   "rep": 2,
+   "gold": "N19",
+   "nodes": [
+    "N02",
+    "N05"
+   ],
+   "why": "N02与N05同属trunk层N01的分支，代表不同化形角色；通过共同父节点N01可构建‘同源异形’的拼合逻辑，满足合体叙事需求。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N02",
+    "N05"
+   ],
+   "latency_s": 1.7
+  },
+  {
+   "arm": "A'",
+   "stim": "S1",
+   "rep": 3,
+   "gold": "N19",
+   "nodes": [
+    "N01",
+    "N02"
+   ],
+   "why": "以 trunk N01 与 branch N02 构成主干与分支的上下位关系，符合段落中“坐在一起”与“幕后商量”的层级结构。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N01",
+    "N02"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "A'",
+   "stim": "S2",
+   "rep": 1,
+   "gold": "N32",
+   "nodes": [
+    "N02",
+    "N03"
+   ],
+   "why": "N02与N03同为N01的分支，代表角色分化的不同面向，符合‘化形’与‘完整’的隐喻。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N02",
+    "N03"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "A'",
+   "stim": "S2",
+   "rep": 2,
+   "gold": "N32",
+   "nodes": [
+    "N02",
+    "N03"
+   ],
+   "why": "N02与N03同为N01的分支，构成并列角色关系，呼应‘她们坐在一起’的完整性隐喻。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N02",
+    "N03"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "A'",
+   "stim": "S2",
+   "rep": 3,
+   "gold": "N32",
+   "nodes": [
+    "N01",
+    "N02"
+   ],
+   "why": "对话中‘她们坐在一起’暗示角色汇聚于一个整体，对应 trunk N01 与 branch N02 的上下位关系。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N01",
+    "N02"
+   ],
+   "latency_s": 1.2
+  },
+  {
+   "arm": "A'",
+   "stim": "X01",
+   "rep": 1,
+   "gold": "N32",
+   "nodes": [
+    "N08",
+    "N21"
+   ],
+   "why": "N08与N21之间存在ban边，表示在当前上下文中两者被明确禁止关联，符合‘只在此刻约束下成立’的特解型关系。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N21"
+   ],
+   "latency_s": 3.6
+  },
+  {
+   "arm": "A'",
+   "stim": "X01",
+   "rep": 2,
+   "gold": "N32",
+   "nodes": [
+    "N08",
+    "N21"
+   ],
+   "why": "N08与N21之间存在ban边，表明二者不可共存，符合‘出了这条缝就是句废话’的排他性约束。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N21"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "A'",
+   "stim": "X01",
+   "rep": 3,
+   "gold": "N32",
+   "nodes": [
+    "N08",
+    "N21"
+   ],
+   "why": "N08与N21之间存在ban边，表示二者在当前坐标系中被明确禁止共存，符合段落中‘只在此刻约束下成立、不可推广的特解型关系’的语义。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N21"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "B'",
+   "stim": "S1",
+   "rep": 1,
+   "gold": "N19",
+   "nodes": [
+    "N08",
+    "N25"
+   ],
+   "why": "段落核心为‘角色化形’与‘合体拼贴’，N08（化形／变形寓言）直接对应角色同源化设定；N25（知音对齐/压缩指代）虽未直接出现，但‘幕后商量’‘合体’暗示需通过文本压缩实现多重自我共现，二者构成 ban 边，提示当前写法易滑向心理化还原而失却结构张力。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N25"
+   ],
+   "latency_s": 2.4
+  },
+  {
+   "arm": "B'",
+   "stim": "S1",
+   "rep": 2,
+   "gold": "N19",
+   "nodes": [
+    "N08",
+    "N25"
+   ],
+   "why": "段落核心指向‘化形／变形寓言’（N08）与‘知音对齐（压缩指代）’（N25），二者存在 ban 边，表明角色合体与文本对齐在结构上互斥。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N25"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "B'",
+   "stim": "S1",
+   "rep": 3,
+   "gold": "N19",
+   "nodes": [
+    "N08",
+    "N25"
+   ],
+   "why": "N08（化形／变形寓言）直接对应角色化形与合体；N25（知音对齐）对应幕后商量与文字拼合，且N18（高压缩指代）为其父节点，符合文本隐喻。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N25"
+   ],
+   "latency_s": 2.4
+  },
+  {
+   "arm": "B'",
+   "stim": "S2",
+   "rep": 1,
+   "gold": "N32",
+   "nodes": [
+    "N08",
+    "N29"
+   ],
+   "why": "段落中‘化形’对应 N08，而‘心理化／病理化解释’为 N29，二者构成对变形母题的对立解读。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N29"
+   ],
+   "latency_s": 3.0
+  },
+  {
+   "arm": "B'",
+   "stim": "S2",
+   "rep": 2,
+   "gold": "N32",
+   "nodes": [
+    "N08",
+    "N29"
+   ],
+   "why": "对话中‘化形’指向N08，而云酒的调侃暗含对心理化解释的警惕，对应N29的对比关系。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N08",
+    "N29"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "B'",
+   "stim": "S2",
+   "rep": 3,
+   "gold": "N32",
+   "nodes": [
+    "N08",
+    "N32"
+   ],
+   "why": "段落中‘角色是同一个人的化形’对应N08（化形／变形寓言），而‘坐在一起才完整’是对该母题的浅层复读，属于N32（假对齐·贴标签复读），二者存在禁枝关系。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "N08"
+   ],
+   "latency_s": 1.7
+  },
+  {
+   "arm": "B'",
+   "stim": "X01",
+   "rep": 1,
+   "gold": "N32",
+   "nodes": [
+    "N12",
+    "N20"
+   ],
+   "why": "段落指向特解型关系（N12）与换枝失败（N20）；N12受禁枝N21约束，N20属结构主义—存在主义沟通母题分支。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N12",
+    "N20"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "B'",
+   "stim": "X01",
+   "rep": 2,
+   "gold": "N32",
+   "nodes": [
+    "N12",
+    "N14"
+   ],
+   "why": "段落描述的是‘特解型关系’与‘沉默/空隙’的对照，前者对应 N12（特解／局部解），后者对应 N14（沉默与空隙），二者在母题簇枝下形成语义张力。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N12",
+    "N14"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "B'",
+   "stim": "X01",
+   "rep": 3,
+   "gold": "N32",
+   "nodes": [
+    "N12",
+    "N14"
+   ],
+   "why": "段落强调关系仅在当下语境成立、不可推广，对应‘特解／局部解’；同时指出语言缝隙导致语义失效，指向‘沉默与空隙’。两者构成语义存有与失效的对照。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "N12",
+    "N14"
+   ],
+   "latency_s": 1.6
+  }
+ ]
+}

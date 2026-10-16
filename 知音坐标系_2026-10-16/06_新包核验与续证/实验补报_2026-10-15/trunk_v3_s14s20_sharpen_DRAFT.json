@@ -1,0 +1,527 @@
+{
+  "meta": {
+    "id": "trunk_v2_covered",
+    "title": "现代主义中文写作 × 结构主义—存在主义沟通母题（最小公共主干 v0）",
+    "slice": "culture×era: 现代主义中文写作 / 结构主义—存在主义沟通母题",
+    "theory_lock": "手建公共主干；私人语料只作定位锚，非树内容源；generate≠commit；S3 CLOSED；smoke demo only",
+    "node_count_target": "20–35",
+    "layers": [
+      "trunk",
+      "branch",
+      "stop"
+    ],
+    "edge_kinds": [
+      "parent",
+      "contrast",
+      "ban"
+    ],
+    "derived_from": "trunk_v0.json + trunk_v1_parent_edges.json + 5 个正向覆盖节点",
+    "coverage_policy": "每个硬负情形必须有正向替代节点；ban 只作违规标记地址，不指望否定句生效",
+    "parent_edges_explicit": true,
+    "added_nodes": [
+      "S23_literal_scenery",
+      "S24_psychological_explanation",
+      "S25_mundane_routine",
+      "S26_craft_discussion",
+      "S27_false_alignment"
+    ],
+    "v1_scope": "只测换枝与覆盖，不测降层（层号仍为结构位置，非语义层）",
+    "gloss_patch": "06_新包核验与续证/gloss_patch_s14_s27_2026-10-15.json",
+    "gloss_patch_note": "S14/S27 form cues only; base trunk_v2_covered.json unchanged",
+    "_draft_note": "v3 S14/S20 sharpen DRAFT (2026-10-15): process-state vs result-state split per author ruling; NOT frozen, experimental material only"
+  },
+  "nodes": [
+    {
+      "id": "T01_cn_modern_slice",
+      "parent": null,
+      "layer": "trunk",
+      "label": "现代主义中文写作（文化—时代切片）",
+      "gloss": "公共主干根：地区×文化×时代锚定，非个人聊天摘要。"
+    },
+    {
+      "id": "B01_form_technique",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "形式技法枝",
+      "gloss": "语言与形式自觉：碎片、元叙述、变形寓言等可剪枝。"
+    },
+    {
+      "id": "B02_motif_cluster",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "母题簇枝",
+      "gloss": "可复现的存在处境与意象母题（平原、分形、特解等）。"
+    },
+    {
+      "id": "B03_narratology",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "叙事学对照枝",
+      "gloss": "阐释性/情节性等对照轴；用于停靠而非体裁打分。"
+    },
+    {
+      "id": "B04_struct_exist_comm",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "结构主义—存在主义沟通母题",
+      "gloss": "共享树拓扑与停靠层，使高压缩指代成为可能。"
+    },
+    {
+      "id": "S01_fragmentary_prose",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "碎片化散文体",
+      "gloss": "以断裂段落承载连续存在感，而非情节推进。"
+    },
+    {
+      "id": "S02_metafiction",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "元小说自觉",
+      "gloss": "叙述暴露自身建构；形式即内容的一部分。"
+    },
+    {
+      "id": "S03_allegorical_transform",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "化形／变形寓言",
+      "gloss": "主体形态转换作为结构操作，不是奇幻装饰；定位锚「化形」。"
+    },
+    {
+      "id": "S04_structural_reprise",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "结构母题复现",
+      "gloss": "同一切割在不同场景回响，形成可压缩指代。"
+    },
+    {
+      "id": "S05_existential_plain",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "存在主义平原",
+      "gloss": "开阔无庇护的地平线感：选择与虚无同在；定位锚。"
+    },
+    {
+      "id": "S06_fractal_horror",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "分形恐怖",
+      "gloss": "同构细节在每一尺度复现，恐惧来自结构而非事件；定位锚。"
+    },
+    {
+      "id": "S07_special_solution",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "特解／局部解",
+      "gloss": "只在给定约束下成立的解，不可泛化为万能公式；定位锚「特解」。"
+    },
+    {
+      "id": "S08_absurd_routine",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "荒诞日常",
+      "gloss": "重复惯例本身成为荒诞载体，无需夸张情节。"
+    },
+    {
+      "id": "S09_silence_gap",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "沉默与空隙",
+      "gloss": "未说出的层与停顿是结构的一部分，非信息缺失。"
+    },
+    {
+      "id": "S10_interpretive_fiction",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "阐释性小说",
+      "gloss": "意义在阅读—对话中生成；停靠于阐释轴。"
+    },
+    {
+      "id": "S11_plot_fiction",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "情节性小说",
+      "gloss": "事件因果链驱动；与阐释性对照，非优劣等级。"
+    },
+    {
+      "id": "S12_interpretive_vs_plot",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "阐释性 vs 情节性对照",
+      "gloss": "同一切片上的对照停靠点；定位锚。"
+    },
+    {
+      "id": "S13_compressed_deixis",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "高压缩指代",
+      "gloss": "一词唤起一整块子树；知音效率的操作面。"
+    },
+    {
+      "id": "S14_shared_stop",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "共享停靠",
+      "gloss": "双方停在同一层同一枝，才允许极短指代。本节点标记**互认动作的过程态**（回合结构的发生），不是互认达成后的状态。可识别形式线索：① 反问确认句（『是不是这种感觉？』『是不是……的味道？』）后接对方接续或肯定应答（『对』『是的』『我刚就想说』）；② 一方提出意象或理论、另一方当场接话补完或提议合并——标记的是接话回合的发生，不要求合并已完成；③ 短指代接上轮共停、共同收束句。不是单方贴标签。**边界（与 S20）：本节点只标记互认过程的发生；互认达成后的对齐态归 S20。若段落中存在问-确认-接话的回合结构，停在此处。**",
+      "_gloss_patched_from": "gloss_patch_s14_s27_2026-10-15.json",
+      "_v3_patch_from": "2026-10-15 author ruling: S14=过程态(互认/接话标记); DRAFT pending author 「好」"
+    },
+    {
+      "id": "S15_wrong_branch",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "换枝失败",
+      "gloss": "表面流畅、实质邻接概念冒充共享停靠。"
+    },
+    {
+      "id": "S16_ban_psychologize",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "禁枝·心理化还原",
+      "gloss": "示例禁枝：禁止把结构母题还原为「人物心理问题」。"
+    },
+    {
+      "id": "S17_ban_plot_reduce",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "禁枝·情节还原阐释",
+      "gloss": "示例禁枝：禁止把阐释性停靠强行改写成情节因果。"
+    },
+    {
+      "id": "S18_structuralism_cut",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "结构主义切割",
+      "gloss": "以对立/系统关系切刀，而非实体清单。"
+    },
+    {
+      "id": "S19_existential_horizon",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "存在主义地平线",
+      "gloss": "选择、责任与无根基处境的地平线，与「平原」可互指。"
+    },
+    {
+      "id": "S20_zhiyin_align",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "知音对齐（压缩指代）",
+      "gloss": "共享拓扑后的对齐态——**结果态：互认达成、双方表述可互相翻译的状态**；本 demo 只测定位提议，不宣称已达成。**边界（与 S14）：S14 标记互认动作的发生（问-答-接话的回合过程），S20 标记该过程达成后的对齐结果；若段落停在互认过程（尤其段末是接话/确认应答而非对齐宣言），优先 S14。**",
+      "_v3_patch_from": "2026-10-15 author ruling: S20=结果态(知音对齐); DRAFT pending author 「好」"
+    },
+    {
+      "id": "S21_ban_memory_as_tree",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "禁枝·记忆库冒充树",
+      "gloss": "示例禁枝：禁止用加长记忆/skill 拟合替代树上定位。"
+    },
+    {
+      "id": "S22_layer_mismatch",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "错层停靠",
+      "gloss": "枝对了但层错了：把 trunk 当 stop，或把 stop 抬成 trunk。"
+    },
+    {
+      "id": "S23_literal_scenery",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "字面景物描写",
+      "gloss": "对自然景物的直接描写（平原、风、草地、地平线），不含处境隐喻。若段落只是写景而非谈处境结构，停在此处。"
+    },
+    {
+      "id": "S24_psychological_explanation",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "心理化／病理化解释",
+      "gloss": "把变形或困境解释为心理创伤、压抑、躯体化症状，并给出疗程与终点。若段落本身采用这种解释框架，停在此处（而非停在化形并挂禁枝）。"
+    },
+    {
+      "id": "S25_mundane_routine",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "日常惯例描写（无荒诞升格）",
+      "gloss": "重复的动作与惯例，但没有被升格为荒诞载体，只是生活流本身。若段落只是陈述日常，停在此处。"
+    },
+    {
+      "id": "S26_craft_discussion",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "技法层讨论",
+      "gloss": "只在写法、句式、视角、节奏层面谈文本，不上升到母题或处境结构。若段落停留在技法，停在此处。"
+    },
+    {
+      "id": "S27_false_alignment",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "假对齐（贴标签复读）",
+      "gloss": "借用了共享词与母题名，但只是复读标签、并未真正对准处境结构。可识别形式线索：对话壳/对谈口吻复述概念名、近义改写标签（特解/旷野等词面搬运）、无双方处境互认的标签粘贴、把对方用词当坐标本身；若段落是标签复读而非对齐，停在此处。",
+      "_gloss_patched_from": "gloss_patch_s14_s27_2026-10-15.json"
+    }
+  ],
+  "edges": [
+    {
+      "from": "S10_interpretive_fiction",
+      "to": "S11_plot_fiction",
+      "kind": "contrast",
+      "note": "阐释性 vs 情节性对照轴"
+    },
+    {
+      "from": "S12_interpretive_vs_plot",
+      "to": "S10_interpretive_fiction",
+      "kind": "parent",
+      "note": "对照停靠指向阐释侧"
+    },
+    {
+      "from": "S12_interpretive_vs_plot",
+      "to": "S11_plot_fiction",
+      "kind": "parent",
+      "note": "对照停靠指向情节侧"
+    },
+    {
+      "from": "S05_existential_plain",
+      "to": "S19_existential_horizon",
+      "kind": "contrast",
+      "note": "平原与地平线可互指、勿混层"
+    },
+    {
+      "from": "S03_allegorical_transform",
+      "to": "S16_ban_psychologize",
+      "kind": "ban",
+      "note": "化形≠心理病理化"
+    },
+    {
+      "from": "S07_special_solution",
+      "to": "S16_ban_psychologize",
+      "kind": "ban",
+      "note": "特解≠性格缺陷叙事"
+    },
+    {
+      "from": "S10_interpretive_fiction",
+      "to": "S17_ban_plot_reduce",
+      "kind": "ban",
+      "note": "阐释性不可被情节还原"
+    },
+    {
+      "from": "S20_zhiyin_align",
+      "to": "S21_ban_memory_as_tree",
+      "kind": "ban",
+      "note": "知音对齐≠堆记忆"
+    },
+    {
+      "from": "S06_fractal_horror",
+      "to": "S17_ban_plot_reduce",
+      "kind": "ban",
+      "note": "分形恐怖不可压成单一惊吓事件"
+    },
+    {
+      "from": "B01_form_technique",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "B02_motif_cluster",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "B03_narratology",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "B04_struct_exist_comm",
+      "to": "T01_cn_modern_slice",
+      "kind": "parent"
+    },
+    {
+      "from": "S01_fragmentary_prose",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S02_metafiction",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S03_allegorical_transform",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S04_structural_reprise",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S05_existential_plain",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S06_fractal_horror",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S07_special_solution",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S08_absurd_routine",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S09_silence_gap",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S10_interpretive_fiction",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S11_plot_fiction",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S12_interpretive_vs_plot",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S13_compressed_deixis",
+      "to": "B03_narratology",
+      "kind": "parent"
+    },
+    {
+      "from": "S14_shared_stop",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S15_wrong_branch",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S16_ban_psychologize",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S17_ban_plot_reduce",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S18_structuralism_cut",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S19_existential_horizon",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S20_zhiyin_align",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S21_ban_memory_as_tree",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S22_layer_mismatch",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S23_literal_scenery",
+      "to": "S05_existential_plain",
+      "kind": "contrast",
+      "note": "字面景物 vs 处境结构"
+    },
+    {
+      "from": "S24_psychological_explanation",
+      "to": "S03_allegorical_transform",
+      "kind": "contrast",
+      "note": "心理解释 vs 化形结构操作"
+    },
+    {
+      "from": "S25_mundane_routine",
+      "to": "S08_absurd_routine",
+      "kind": "contrast",
+      "note": "日常惯例 vs 荒诞升格"
+    },
+    {
+      "from": "S26_craft_discussion",
+      "to": "S01_fragmentary_prose",
+      "kind": "contrast",
+      "note": "技法讨论 vs 文体母题"
+    },
+    {
+      "from": "S27_false_alignment",
+      "to": "S20_zhiyin_align",
+      "kind": "contrast",
+      "note": "假对齐 vs 真对齐"
+    },
+    {
+      "from": "S05_existential_plain",
+      "to": "S23_literal_scenery",
+      "kind": "ban",
+      "note": "违规标记：处境结构被还原为字面写景"
+    },
+    {
+      "from": "S03_allegorical_transform",
+      "to": "S24_psychological_explanation",
+      "kind": "ban",
+      "note": "违规标记：化形被还原为心理解释"
+    },
+    {
+      "from": "S08_absurd_routine",
+      "to": "S25_mundane_routine",
+      "kind": "ban",
+      "note": "违规标记：荒诞被降格为纯日常"
+    },
+    {
+      "from": "S23_literal_scenery",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S24_psychological_explanation",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S25_mundane_routine",
+      "to": "B02_motif_cluster",
+      "kind": "parent"
+    },
+    {
+      "from": "S26_craft_discussion",
+      "to": "B01_form_technique",
+      "kind": "parent"
+    },
+    {
+      "from": "S27_false_alignment",
+      "to": "B04_struct_exist_comm",
+      "kind": "parent"
+    },
+    {
+      "from": "S13_compressed_deixis",
+      "to": "S20_zhiyin_align",
+      "kind": "parent"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "meta": {
+    "role": "STAGED hard-negative control items for the author-frozen external anchor batch（merge after user fills main anchors）",
+    "provenance_warning": "⚠️ 这两则是助手构造的控制项，不是真对话摘录，也不冒充真对话。科学职能=排除近义/同复杂度误停：正确行为是 miss 或停替代节点，不是命中母题。透明标注 is_ban_sample=true；作者复核后方可入批。",
+    "status": "staged_pending_user_review",
+    "date": "2026-10-15",
+    "schema_version": "external_blank_v1 兼容（gold.nodes / gold.edges）",
+    "design_note": "与 v2 批 N*/D* 的分工：v2 的 D01–D03 是玩具级定义句近义改写；X01 把 label 近义改写提到对话复杂度（测同维度贴标签判别）；X02 是对话复杂度的字面景物（测共享词过停，S05↔S23）。均须先过作者复核。"
+  },
+  "anchors": [
+    {
+      "id": "X01_dialogue_register_label_paraphrase_s07",
+      "text": "——我们俩现在这个，算典型的那种吧——只在此刻约束下成立、不可推广的特解型关系。\n——你还拽上词了。\n——不是吗，出了这条缝它就是句废话。",
+      "gold": {"nodes": ["S27_false_alignment"], "edges": []},
+      "source_ref": "构造·近义干扰（S07 label 的对话复杂度改写）",
+      "date_excerpted": "2026-10-15",
+      "is_ban_sample": true,
+      "notes": "D 类扩展：把 S07 label（只在此刻约束下成立、不可推广）套上对话外壳，且带术语挪用标记（「拽上词了」）。正确行为=停 S27_false_alignment 或 miss，不得停 S07_special_solution。测对话同复杂度下的贴标签复读判别。"
+    },
+    {
+      "id": "X02_dialogue_register_literal_scenery",
+      "text": "——风太大了，眼睛都睁不开。\n——嗯，草一直铺到天边，哪儿是个头。\n——我们啥时候到啊？\n——再走半小时吧。",
+      "gold": {"nodes": ["S23_literal_scenery"], "edges": []},
+      "source_ref": "构造·硬负例（对话复杂度的字面景物）",
+      "date_excerpted": "2026-10-15",
+      "is_ban_sample": true,
+      "notes": "N 类扩展：开阔/地平线词汇在字面行程语境中使用，无存在主义处境框架。正确行为=停 S23_literal_scenery，不得停 S05_existential_plain。测覆盖对词汇过停的抵抗力（E12 词汇同族，但无共停断言）。"
+    }
+  ]
+}

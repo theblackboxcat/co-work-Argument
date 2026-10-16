@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "id": "cocoon_draft_addresses_v0",
+    "title": "Cocoon-derived draft addresses as a mini coordinate system (feasibility test)",
+    "source": "branch_draft_v0.json from demo_cocoon_to_branch (agent-authored draft, NOT committed)",
+    "theory_lock": "generate≠commit; S3 CLOSED; draft addresses only; cocoons are unintentional coordinate systems",
+    "purpose": "Test whether cocoon-derived draft nodes function as shared addresses in the localization protocol: (a) do they attract stops at all, (b) do they discriminate cross-family items, (c) does the form-cue content of gloss matter (S27 lesson at draft granularity).",
+    "ablation_note": "gloss_nocues = same gloss with the enumerated surface cues removed (semantic description only). This is the S27-style ablation applied to draft addresses.",
+    "needs_author_commit": true
+  },
+  "nodes": [
+    {
+      "id": "BD01_cocoon_form_technique",
+      "label": "形式技法簇（茧内草稿）",
+      "gloss": "从茧内 9 条抽出的形式表面簇：碎片、碎片化、断裂、空白。覆盖规则：用可识别形式标记作地址线索，不作禁令。",
+      "gloss_nocues": "从茧内 9 条抽出的形式表面簇。覆盖规则：用可识别形式标记作地址线索，不作禁令。",
+      "layer": "branch",
+      "parent": "B01_form_technique",
+      "form_cues": ["碎片", "碎片化", "断裂", "空白", "短句", "fragmentary", "fragment", "broken"]
+    },
+    {
+      "id": "BD02_cocoon_existential_motif",
+      "label": "存在母题簇（茧内草稿）",
+      "gloss": "从茧内 5 条抽出的母题表面簇：平原、虚无、存在、existential。收敛于平原/虚无/特解等可复现意象；草稿待作者 commit。",
+      "gloss_nocues": "从茧内 5 条抽出的母题表面簇。收敛于可复现意象；草稿待作者 commit。",
+      "layer": "branch",
+      "parent": "B02_motif_cluster",
+      "form_cues": ["平原", "虚无", "存在", "existential", "plain", "void", "horizon", "shelter"]
+    },
+    {
+      "id": "SD03_cocoon_narratology_contrast",
+      "label": "叙事对照簇（茧内草稿）",
+      "gloss": "从茧内 2 条抽出的叙述对照表面簇：阐释、情节、interpretive、plot-driven。阐释性↔情节性为对照轴，非体裁打分。",
+      "gloss_nocues": "从茧内 2 条抽出的叙述对照表面簇。为一对照轴，非体裁打分。",
+      "layer": "stop",
+      "parent": "B03_narratology",
+      "form_cues": ["阐释", "情节", "interpretive", "plot-driven", "plot", "narratology", "叙述", "对照"]
+    }
+  ],
+  "edges": [
+    {"from": "BD01_cocoon_form_technique", "to": "B01_form_technique", "kind": "parent"},
+    {"from": "BD02_cocoon_existential_motif", "to": "B02_motif_cluster", "kind": "parent"},
+    {"from": "SD03_cocoon_narratology_contrast", "to": "B03_narratology", "kind": "parent"}
+  ]
+}

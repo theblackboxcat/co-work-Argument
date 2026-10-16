@@ -1,0 +1,126 @@
+{
+  "meta": {
+    "id": "branch_draft_v0_from_cocoon",
+    "title": "Cocoon → branch/stop draft (feasibility v0)",
+    "compatible_with": "trunk node spirit: id/label/gloss/layer + parent_hint; form_cues for coverage (v2 surface markers)",
+    "theory_lock": "generate≠commit; S3 CLOSED; extraction→draft addresses only; not proof of full cognitive tree; cocoons are unintentional coordinate systems",
+    "method": "cue-family soft assign + bag-of-words Jaccard within-family (stdlib only; no sklearn/network)",
+    "source_cocoon": "cocoon_synth_modernist_exist_v0",
+    "n_source_items": 16,
+    "n_draft_nodes": 3,
+    "needs_author_commit": true
+  },
+  "nodes": [
+    {
+      "id": "BD01_cocoon_form_technique",
+      "label": "形式技法簇（茧内草稿）",
+      "gloss": "从茧内 9 条抽出的形式表面簇：碎片、碎片化、断裂、空白。覆盖规则：用可识别形式标记作地址线索，不作禁令。",
+      "layer": "branch",
+      "parent_hint": "B01_form_technique",
+      "form_cues": [
+        "碎片",
+        "碎片化",
+        "断裂",
+        "空白",
+        "短句",
+        "fragmentary",
+        "fragment",
+        "broken"
+      ],
+      "status": "draft",
+      "needs_author_commit": true,
+      "source_cluster": {
+        "size": 9,
+        "item_ids": [
+          "p01",
+          "p02",
+          "p03",
+          "p04",
+          "p05",
+          "p06",
+          "p11",
+          "p12",
+          "p15"
+        ],
+        "family_guess": "form"
+      }
+    },
+    {
+      "id": "BD02_cocoon_existential_motif",
+      "label": "存在母题簇（茧内草稿）",
+      "gloss": "从茧内 5 条抽出的母题表面簇：平原、虚无、存在、existential。收敛于平原/虚无/特解等可复现意象；草稿待作者 commit。",
+      "layer": "branch",
+      "parent_hint": "B02_motif_cluster",
+      "form_cues": [
+        "平原",
+        "虚无",
+        "存在",
+        "existential",
+        "plain",
+        "void",
+        "horizon",
+        "shelter"
+      ],
+      "status": "draft",
+      "needs_author_commit": true,
+      "source_cluster": {
+        "size": 5,
+        "item_ids": [
+          "p07",
+          "p08",
+          "p09",
+          "p10",
+          "p16"
+        ],
+        "family_guess": "motif"
+      }
+    },
+    {
+      "id": "SD03_cocoon_narratology_contrast",
+      "label": "叙事对照簇（茧内草稿）",
+      "gloss": "从茧内 2 条抽出的叙述对照表面簇：阐释、情节、interpretive、plot-driven。阐释性↔情节性为对照轴，非体裁打分。",
+      "layer": "stop",
+      "parent_hint": "B03_narratology",
+      "form_cues": [
+        "阐释",
+        "情节",
+        "interpretive",
+        "plot-driven",
+        "plot",
+        "narratology",
+        "叙述",
+        "对照"
+      ],
+      "status": "draft",
+      "needs_author_commit": true,
+      "source_cluster": {
+        "size": 2,
+        "item_ids": [
+          "p13",
+          "p14"
+        ],
+        "family_guess": "narr"
+      }
+    }
+  ],
+  "edges_suggested": [
+    {
+      "from": "B01_form_technique",
+      "to": "BD01_cocoon_form_technique",
+      "kind": "parent",
+      "status": "draft_hint"
+    },
+    {
+      "from": "B02_motif_cluster",
+      "to": "BD02_cocoon_existential_motif",
+      "kind": "parent",
+      "status": "draft_hint"
+    },
+    {
+      "from": "B03_narratology",
+      "to": "SD03_cocoon_narratology_contrast",
+      "kind": "parent",
+      "status": "draft_hint"
+    }
+  ]
+}

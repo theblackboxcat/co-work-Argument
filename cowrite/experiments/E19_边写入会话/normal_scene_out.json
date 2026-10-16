@@ -1,0 +1,112 @@
+[
+ {
+  "turn": "停在第三段",
+  "text": "她在那儿站了一会儿，没有伸手。",
+  "prev": "走廊尽头的灯闪了两下，随后一直亮着。",
+  "ctx_paras": [
+   "走廊尽头的灯闪了两下，随后一直亮着。"
+  ],
+  "prompt": {
+   "system_empty": true,
+   "has_workflow_steps": true,
+   "has_fact_protocol": true,
+   "has_edge_prompt": false,
+   "has_no_continue": true,
+   "has_layer_mark": true,
+   "has_umbrella": false,
+   "has_lamp": true,
+   "has_crumb": false,
+   "system_head": ""
+  },
+  "user": "【当前位置】文档第 3 段\n【作者刚刚停下的段落】\n她在那儿站了一会儿，没有伸手。\n\n【前一段（语境）】\n走廊尽头的灯闪了两下，随后一直亮着。\n\n---\n请严格按 WORKFLOW 执行：\n第 1 步判定作者现在在哪一层（A 思路性 / B 结构性 / C 情节性）；\n第 2 步走该层对应的分支；第 3 步保持简洁（3 句以内）；\n第 4 步过三条自检；判不出或无可依据，走第 5 步主动声明沉默。\n依据只能来自上面给出的文本。文本里没有的，就说你不知道。\n不要续写正文，不要建议作者接下来写什么，不要预测情节走向。\n【输出形态】第一行开头写层标记 [A]/[B]/[C]/[⊘]，标记后直接接正文。\n禁止输出步骤标题、判定过程、自检清单、字数统计，禁止复述原文。\n\n【全文阅读状态 · 尚未建立】不要声称已经读过全文。\n\n【已载入文档】试篇（58 字 / 共 3 段）\n\n【文档中与当前段落相关的原文片段】\n· 第 2 段（相关度 0.56 · 全 18 字）：走廊尽头的灯闪了两下，随后一直亮着。\n引用位置时只能用上面标注的段号，不要自己编段号。\n**重要：不要使用任何工具调用语法（如 <invoke>、function call 等），直接用自然语言回答。**\n\n【交给代码核对的三行】先写这三行，没有的写「无」。不要写层名，不要写节点编号。\n并置：词甲 | 词乙\n再出现：词 @ 先前那句里能对上的原句\n变化：原先 -> 现在\n然后空一行，再写你要说的话。写不出可核对的事实，就只写这三行「无」，不要编。",
+  "card": {
+   "type": "withhold",
+   "layer": "⊘",
+   "struct_layer": "⊘",
+   "by": "cotree-code",
+   "body": "模型输出的是沉默标记",
+   "verdict": "no"
+  },
+  "ledger": []
+ },
+ {
+  "turn": "又写下一段",
+  "text": "她又看了一眼，还是没有动。",
+  "prev": "她在那儿站了一会儿，没有伸手。",
+  "ctx_paras": [
+   "她在那儿站了一会儿，没有伸手。"
+  ],
+  "prompt": {
+   "system_empty": true,
+   "has_workflow_steps": true,
+   "has_fact_protocol": true,
+   "has_edge_prompt": false,
+   "has_no_continue": true,
+   "has_layer_mark": true,
+   "has_umbrella": false,
+   "has_lamp": false,
+   "has_crumb": false,
+   "system_head": ""
+  },
+  "user": "【当前位置】未标注\n【作者刚刚停下的段落】\n她又看了一眼，还是没有动。\n\n【前一段（语境）】\n她在那儿站了一会儿，没有伸手。\n\n---\n请严格按 WORKFLOW 执行：\n第 1 步判定作者现在在哪一层（A 思路性 / B 结构性 / C 情节性）；\n第 2 步走该层对应的分支；第 3 步保持简洁（3 句以内）；\n第 4 步过三条自检；判不出或无可依据，走第 5 步主动声明沉默。\n依据只能来自上面给出的文本。文本里没有的，就说你不知道。\n不要续写正文，不要建议作者接下来写什么，不要预测情节走向。\n【输出形态】第一行开头写层标记 [A]/[B]/[C]/[⊘]，标记后直接接正文。\n禁止输出步骤标题、判定过程、自检清单、字数统计，禁止复述原文。\n\n【全文阅读状态 · 尚未建立】不要声称已经读过全文。\n\n【已载入文档】试篇（58 字 / 共 3 段）\n\n【文档中与当前段落相关的原文片段】\n· 第 3 段（相关度 0.60 · 全 15 字）：她在那儿站了一会儿，没有伸手。\n引用位置时只能用上面标注的段号，不要自己编段号。\n**重要：不要使用任何工具调用语法（如 <invoke>、function call 等），直接用自然语言回答。**\n\n【交给代码核对的三行】先写这三行，没有的写「无」。不要写层名，不要写节点编号。\n并置：词甲 | 词乙\n再出现：词 @ 先前那句里能对上的原句\n变化：原先 -> 现在\n然后空一行，再写你要说的话。写不出可核对的事实，就只写这三行「无」，不要编。",
+  "card": {
+   "type": "model",
+   "layer": "⊘",
+   "struct_layer": "A",
+   "by": "cotree-code",
+   "body": "[⊘]\n无\n无\n无\n我无法判定作者当前所处的层级，因为提供的文本过于简短，缺乏足够的上下文和结构信息来区分思路性、结构性或情节性层级。",
+   "verdict": null
+  },
+  "ledger": [
+   {
+    "id": "addr-0001",
+    "parent": null,
+    "assertion": "[⊘]",
+    "layer": "A"
+   }
+  ]
+ },
+ {
+  "turn": "两条枝都在账本里，没有指定父边",
+  "text": "她在那儿站了一会儿，没有伸手。",
+  "prev": "走廊尽头的灯闪了两下，随后一直亮着。",
+  "prompt": {
+   "system_empty": true,
+   "has_workflow_steps": false,
+   "has_fact_protocol": false,
+   "has_edge_prompt": true,
+   "has_no_continue": false,
+   "has_layer_mark": false,
+   "has_umbrella": false,
+   "has_lamp": false,
+   "has_crumb": true,
+   "system_head": ""
+  },
+  "user": "她刚刚写下的一句，接在先前某一句下面。沿那条边，这里只取出那一句，别的句子没有放进来。\n先前那一句：面包屑还在桌沿\n\n刚刚这一句：她在那儿站了一会儿，没有伸手。\n\n用平常的话回应刚刚这一句，并把先前那一句里已经写下的具体事物说进来。不要编下一步。不要写编号。",
+  "card": {
+   "type": "model",
+   "layer": "",
+   "struct_layer": "A",
+   "by": "cotree-code",
+   "body": "她站在桌边，看着那条桌沿，面包屑还静静地堆在那儿，一点也没动。",
+   "verdict": null
+  },
+  "ledger": [
+   {
+    "id": "addr-0001",
+    "parent": null,
+    "assertion": "雨水顺着伞骨往下滴"
+   },
+   {
+    "id": "addr-0002",
+    "parent": null,
+    "assertion": "面包屑还在桌沿"
+   },
+   {
+    "id": "addr-0003",
+    "parent": "addr-0002",
+    "assertion": "她站在桌边，看着那条桌沿，面包屑还静静地堆在那儿，一点也没动"
+   }
+  ]
+ }
+]

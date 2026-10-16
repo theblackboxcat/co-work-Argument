@@ -1,0 +1,56 @@
+[
+ {
+  "who": "ME",
+  "text": "我从一段公开的东西出发，分几轮带进来。第一段是费曼被问「两块磁铁之间到底发生了什么」时的回答：\n\n「when you are asked, for example, why two magnets repel, there are many different levels. It depends on whether you are a student of physics, or an ordinary person who doesn't know anything.」\n\n我指一处，不命名：问的那句话从头到尾没有变，变的是谁在听。",
+  "pos": "S22_layer_mismatch"
+ },
+ {
+  "who": "DOTS3",
+  "text": "问题本身是同一个句子，但听它的人换了，它所处的层级也就跟着滑动——学生、普通人、物理学家，各自接收到的不是同一句话。这不是内容变了，是接收端的预设变了，于是同一串音节被压进了不同的解释框架里。\n\n位置：S22_layer_mismatch"
+ },
+ {
+  "who": "ME",
+  "text": "第二段，他拒绝用橡皮筋打比方：\n\n「if I said the magnets attract like as if they were connected by rubber bands, I would be cheating you... if you were curious enough, you'd ask me why rubber bands tend to pull back together again, and I would end up explaining that in terms of electrical forces, which are the very things that I'm trying to use the rubber bands to explain. So I have cheated very badly.」\n\n我指一处，不命名：借来的那个东西，往回走一步，正好撞上要用它去解释的那个东西。绕了一圈回来了。",
+  "pos": "S15_wrong_branch"
+ },
+ {
+  "who": "DOTS3",
+  "text": "借来的比喻像一条回头路：它本该是桥，却在半途折返，撞上它要跨过的那条河。橡皮筋的回弹被归因于电荷力，而电荷力正是磁力背后的东西——用它解释磁力，等于用磁力解释磁力，只是换了一层皮。\n\n位置：S15_wrong_branch"
+ },
+ {
+  "who": "ME",
+  "text": "第三段，他不再往下走：\n\n「So I am not going to be able to give you an answer to why magnets attract each other except to tell you that they do. And to tell you that that's one of the elements in the world... If you were a student, I could go further.」\n\n我指一处，不命名：他停下来了，但停的方式不是「我不知道」，是把它摆成一个不许再追问的东西。而且往下还能不能走，仍然取决于听的人。",
+  "pos": "S09_silence_gap"
+ },
+ {
+  "who": "DOTS3",
+  "text": "他停下的地方不是空白，是一道门槛——把「磁铁相吸」摆成世界的基本砖块，不许再拆。不是 inability，是 boundary。而门槛后面那条路开不开，仍取决于站在门外的人是谁：学生能进，普通人被留在这里。\n\n位置：S09_silence_gap"
+ },
+ {
+  "who": "ME",
+  "text": "第四段，是对完全不懂的人说的那一句：\n\n「If you're somebody who doesn't know anything at all about it, all I can say is the magnetic force makes them repel, and that you're feeling that force.」\n\n我指一处，不命名：这里给了一个名字，而那个名字和被问的那件事，是同一件事的两种写法。",
+  "pos": "S27_false_alignment"
+ },
+ {
+  "who": "DOTS3",
+  "text": "「磁力」这个词被摆出来了，但它和「两块磁铁为何相斥」是同一现象的两种写法，不是解释。它把问题重新包装了一次，贴了个标签，听的人以为拿到了答案，其实只是换了个说法。\n\n位置：S27_false_alignment"
+ },
+ {
+  "who": "ME",
+  "text": "第五段，是他为什么答不上来的那句自白：\n\n「I really can't do a good job, any job, of explaining magnetic force in terms of something else you're more familiar with, because I don't understand it in terms of anything else that you're more familiar with.」\n\n我指一处，不命名：他说的是「你熟悉的」——不是「我懂的」。能不能解释，挂在一个他俩之间有没有的东西上，而不挂在他自己懂多少上。",
+  "pos": "S13_compressed_deixis"
+ },
+ {
+  "who": "DOTS3",
+  "text": "他把「解释」的条件从自己身上摘了出去，挂到了「你熟悉的」上面。不是「我不会说」，而是「你没有可挂靠的」。能不能讲明白，取决于听的人手里有没有他能借的梯子，而不是他有没有梯子。\n\n位置：S13_compressed_deixis"
+ },
+ {
+  "who": "ME",
+  "text": "现在我把自己这些天在做的事，作为一段材料放到你旁边，不命名它：\n\n有一批只在两个人之间成立的东西，散在四年的对话里。我们把它写成一棵树，让它在那两个人之外也能被找到。后来发现三件事——\n\n一，给一个东西起名字，不等于解释它（你说的那句「贴了个标签」）；\n二，到底了就停，不是不知道，是边界（你说的那句「不是 inability，是 boundary」）；\n三，能不能解释，挂在双方之间有没有那套「熟悉的东西」上（你刚才那句还没说完的）。\n\n第四件是这两天才出来的：两个人各站一边、谁也没确认谁的时候，那种不重合的状态不是缺陷，是让对话能往下走的东西。\n\n我指一处：第四件在树上没有位置。",
+  "pos": "⊘"
+ },
+ {
+  "who": "DOTS3",
+  "text": "第四件说的「不重合」不是错误，也不是未完成的对齐，而是一种悬空的间隙——它不被任何现有节点覆盖，因为树里所有节点都默认对齐是目标，而它恰恰是未对齐本身。它不在任何一条边上，也不在任何一对 contrast 或 ban 里，它是对话进行时的中间态。\n\n位置：⊘"
+ }
+]
