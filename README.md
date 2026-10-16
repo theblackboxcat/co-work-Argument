@@ -40,3 +40,15 @@ All listed with sha256 in `cowrite/eval/CORPORA_MANIFEST.tsv`.
 API keys removed (one real key found in `Cowrite-test/readme.txt` → `<YOUR_API_KEY>`); endpoint host → `<API_HOST>`; absolute paths → `%USERPROFILE%` / `%DSH_ROOT%` (set `DSH_ROOT` to your checkout).
 
 Note: `%DSH_ROOT%/lir/文献/CSH论文_深度扫描更新_20261005/llm_feasibility/probe*.py` is a separate LLM-feasibility line, not CSH, and is not included.
+
+## Added 2026-10-16 (CO-TREE / 知音坐标系)
+
+Additive update. Existing `csh/`, `sdia/`, `cowrite/eval`, `cowrite/verify`, `paper/主要结果表.csv`, and `paper/李逾凡_从词表不可分到门控结构中的目标维持.docx` are unchanged, including the study numbers 0.489, 0.523, and GRU/A2C 8/8.
+
+- `paper/李逾凡_从词表不可分到门控结构中的目标维持_学术重写版v3.docx` — academic rewrite v3, added beside the earlier docx. `paper/答辩_2026-10-16.pptx` — defense slides for 2026-10-16.
+- `cowrite/transplant_src/` — CoWrite app copy for the CO-TREE transplant (`app/v3/cotree.py`, E12–E15 scripts, preregistrations, raw outputs).
+- `cowrite/experiments/` — E17–E19 scripts, preregistrations, outputs, notes, and the transplant check.
+- `知音坐标系_2026-10-16/` — deduped public research pack (protocols, scripts, trunks, run logs).
+- `账本_2026-10-16/` — progress ledger, plus the note on other work and transplant feasibility.
+
+Scripts read `COWRITE_CONFIG` (and the production cowrite check also reads `COWRITE_APP`). Root `.gitignore` ignores `config.json` and `**/config.json`. The private dialogue PDF, the extracted full text, and the FROZEN/DRAFT 云酒 anchor JSON files that contain excerpt text are not in this tree; those paths are `*.不入库.txt` placeholders only. `anchors_E05_split_DRAFT_2026-10-15.json` and `实验补报_2026-10-15/anchors_expA.json` were in the update pack with verbatim excerpts and a “not for public GitHub” line, so they are placeholders too.

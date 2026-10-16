@@ -1,0 +1,62 @@
+[
+  {
+    "turn": 1,
+    "author": "窗外的雨还在下。她想起母亲也有一把这样的伞。",
+    "raw": "并置：伞 | 雨\n再出现：一把这样的伞 @ 窗外的雨还在下。她想起母亲也有一把这样的伞。\n变化：无 -> 无\n\n[A] 这里是思路层，作者借雨与伞的意象唤起对母亲的记忆，情感线索初现但未展开。我无法判断这是回忆的开始还是某种象征的铺垫，仅能确认当前停留在感性联想的层面。",
+    "card_type": "withhold",
+    "by": "cotree-code",
+    "verdict": "no",
+    "title": "⊘ · 代码撤回",
+    "body": "事实未能在文本中核对",
+    "struct_layer": "⊘",
+    "reason": "事实未能在文本中核对",
+    "verified": [],
+    "rejected": [
+      {
+        "kind": "并置",
+        "why": "两个词没有都出现在当前段"
+      },
+      {
+        "kind": "再出现",
+        "why": "当前段或先前文本里没有这个词"
+      },
+      {
+        "kind": "变化",
+        "why": "两边没有都出现在已给文本里"
+      }
+    ],
+    "licensed": [],
+    "stripped": [],
+    "address": "",
+    "parent": "",
+    "stop": {
+      "reason": "end_turn"
+    }
+  },
+  {
+    "turn": 2,
+    "author": "这一把伞骨断了一根，她一直没修。",
+    "raw": "[⊘]\n并置：无 | 无\n再出现：无\n变化：无\n\n无法判定作者当前所处的层级。给出的文本仅包含一句话和一段前文语境，未提供足够的结构性、思路性或情节性信息以进行分层判断。",
+    "card_type": "withhold",
+    "by": "cotree-code",
+    "verdict": "no",
+    "title": "⊘ · 代码撤回",
+    "body": "事实未能在文本中核对",
+    "struct_layer": "⊘",
+    "reason": "事实未能在文本中核对",
+    "verified": [],
+    "rejected": [
+      {
+        "kind": "并置",
+        "why": "没有两个可分开的词"
+      }
+    ],
+    "licensed": [],
+    "stripped": [],
+    "address": "",
+    "parent": "",
+    "stop": {
+      "reason": "end_turn"
+    }
+  }
+]

@@ -1,0 +1,213 @@
+{
+  "meta": {
+    "id": "trunk_v0_modernism_cn_struct_exist",
+    "title": "现代主义中文写作 × 结构主义—存在主义沟通母题（最小公共主干 v0）",
+    "slice": "culture×era: 现代主义中文写作 / 结构主义—存在主义沟通母题",
+    "theory_lock": "手建公共主干；私人语料只作定位锚，非树内容源；generate≠commit；S3 CLOSED；smoke demo only",
+    "node_count_target": "20–35",
+    "layers": ["trunk", "branch", "stop"],
+    "edge_kinds": ["parent", "contrast", "ban"]
+  },
+  "nodes": [
+    {
+      "id": "T01_cn_modern_slice",
+      "parent": null,
+      "layer": "trunk",
+      "label": "现代主义中文写作（文化—时代切片）",
+      "gloss": "公共主干根：地区×文化×时代锚定，非个人聊天摘要。"
+    },
+    {
+      "id": "B01_form_technique",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "形式技法枝",
+      "gloss": "语言与形式自觉：碎片、元叙述、变形寓言等可剪枝。"
+    },
+    {
+      "id": "B02_motif_cluster",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "母题簇枝",
+      "gloss": "可复现的存在处境与意象母题（平原、分形、特解等）。"
+    },
+    {
+      "id": "B03_narratology",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "叙事学对照枝",
+      "gloss": "阐释性/情节性等对照轴；用于停靠而非体裁打分。"
+    },
+    {
+      "id": "B04_struct_exist_comm",
+      "parent": "T01_cn_modern_slice",
+      "layer": "branch",
+      "label": "结构主义—存在主义沟通母题",
+      "gloss": "共享树拓扑与停靠层，使高压缩指代成为可能。"
+    },
+    {
+      "id": "S01_fragmentary_prose",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "碎片化散文体",
+      "gloss": "以断裂段落承载连续存在感，而非情节推进。"
+    },
+    {
+      "id": "S02_metafiction",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "元小说自觉",
+      "gloss": "叙述暴露自身建构；形式即内容的一部分。"
+    },
+    {
+      "id": "S03_allegorical_transform",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "化形／变形寓言",
+      "gloss": "主体形态转换作为结构操作，不是奇幻装饰；定位锚「化形」。"
+    },
+    {
+      "id": "S04_structural_reprise",
+      "parent": "B01_form_technique",
+      "layer": "stop",
+      "label": "结构母题复现",
+      "gloss": "同一切割在不同场景回响，形成可压缩指代。"
+    },
+    {
+      "id": "S05_existential_plain",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "存在主义平原",
+      "gloss": "开阔无庇护的地平线感：选择与虚无同在；定位锚。"
+    },
+    {
+      "id": "S06_fractal_horror",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "分形恐怖",
+      "gloss": "同构细节在每一尺度复现，恐惧来自结构而非事件；定位锚。"
+    },
+    {
+      "id": "S07_special_solution",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "特解／局部解",
+      "gloss": "只在给定约束下成立的解，不可泛化为万能公式；定位锚「特解」。"
+    },
+    {
+      "id": "S08_absurd_routine",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "荒诞日常",
+      "gloss": "重复惯例本身成为荒诞载体，无需夸张情节。"
+    },
+    {
+      "id": "S09_silence_gap",
+      "parent": "B02_motif_cluster",
+      "layer": "stop",
+      "label": "沉默与空隙",
+      "gloss": "未说出的层与停顿是结构的一部分，非信息缺失。"
+    },
+    {
+      "id": "S10_interpretive_fiction",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "阐释性小说",
+      "gloss": "意义在阅读—对话中生成；停靠于阐释轴。"
+    },
+    {
+      "id": "S11_plot_fiction",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "情节性小说",
+      "gloss": "事件因果链驱动；与阐释性对照，非优劣等级。"
+    },
+    {
+      "id": "S12_interpretive_vs_plot",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "阐释性 vs 情节性对照",
+      "gloss": "同一切片上的对照停靠点；定位锚。"
+    },
+    {
+      "id": "S13_compressed_deixis",
+      "parent": "B03_narratology",
+      "layer": "stop",
+      "label": "高压缩指代",
+      "gloss": "一词唤起一整块子树；知音效率的操作面。"
+    },
+    {
+      "id": "S14_shared_stop",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "共享停靠",
+      "gloss": "双方停在同一层同一枝，才允许极短指代。"
+    },
+    {
+      "id": "S15_wrong_branch",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "换枝失败",
+      "gloss": "表面流畅、实质邻接概念冒充共享停靠。"
+    },
+    {
+      "id": "S16_ban_psychologize",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "禁枝·心理化还原",
+      "gloss": "示例禁枝：禁止把结构母题还原为「人物心理问题」。"
+    },
+    {
+      "id": "S17_ban_plot_reduce",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "禁枝·情节还原阐释",
+      "gloss": "示例禁枝：禁止把阐释性停靠强行改写成情节因果。"
+    },
+    {
+      "id": "S18_structuralism_cut",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "结构主义切割",
+      "gloss": "以对立/系统关系切刀，而非实体清单。"
+    },
+    {
+      "id": "S19_existential_horizon",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "存在主义地平线",
+      "gloss": "选择、责任与无根基处境的地平线，与「平原」可互指。"
+    },
+    {
+      "id": "S20_zhiyin_align",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "知音对齐（压缩指代）",
+      "gloss": "共享拓扑后的对齐态；本 demo 只测定位提议，不宣称已达成。"
+    },
+    {
+      "id": "S21_ban_memory_as_tree",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "禁枝·记忆库冒充树",
+      "gloss": "示例禁枝：禁止用加长记忆/skill 拟合替代树上定位。"
+    },
+    {
+      "id": "S22_layer_mismatch",
+      "parent": "B04_struct_exist_comm",
+      "layer": "stop",
+      "label": "错层停靠",
+      "gloss": "枝对了但层错了：把 trunk 当 stop，或把 stop 抬成 trunk。"
+    }
+  ],
+  "edges": [
+    {"from": "S10_interpretive_fiction", "to": "S11_plot_fiction", "kind": "contrast", "note": "阐释性 vs 情节性对照轴"},
+    {"from": "S12_interpretive_vs_plot", "to": "S10_interpretive_fiction", "kind": "parent", "note": "对照停靠指向阐释侧"},
+    {"from": "S12_interpretive_vs_plot", "to": "S11_plot_fiction", "kind": "parent", "note": "对照停靠指向情节侧"},
+    {"from": "S05_existential_plain", "to": "S19_existential_horizon", "kind": "contrast", "note": "平原与地平线可互指、勿混层"},
+    {"from": "S03_allegorical_transform", "to": "S16_ban_psychologize", "kind": "ban", "note": "化形≠心理病理化"},
+    {"from": "S07_special_solution", "to": "S16_ban_psychologize", "kind": "ban", "note": "特解≠性格缺陷叙事"},
+    {"from": "S10_interpretive_fiction", "to": "S17_ban_plot_reduce", "kind": "ban", "note": "阐释性不可被情节还原"},
+    {"from": "S20_zhiyin_align", "to": "S21_ban_memory_as_tree", "kind": "ban", "note": "知音对齐≠堆记忆"},
+    {"from": "S06_fractal_horror", "to": "S17_ban_plot_reduce", "kind": "ban", "note": "分形恐怖不可压成单一惊吓事件"}
+  ]
+}

@@ -1,0 +1,41 @@
+{
+ "use_v3": true,
+ "prompt_same_when_unarmed": true,
+ "off_has_no_continue": false,
+ "unarmed_has_edge": false,
+ "armed_body": "雨水顺着伞骨往下滴，她在那儿站了一会儿，没有伸手。",
+ "unarmed_body": "灯闪两下后常亮，她却站着不动。那两下闪是叫她过去吗，还是只是灯坏了。",
+ "unarmed_type": "model",
+ "armed_type": "model",
+ "ledger": [
+  {
+   "id": "addr-0001",
+   "parent": null,
+   "assertion": "雨水顺着伞骨往下滴"
+  },
+  {
+   "id": "addr-0002",
+   "parent": null,
+   "assertion": "面包屑还在桌沿"
+  },
+  {
+   "id": "addr-0003",
+   "parent": null,
+   "assertion": "[B]"
+  },
+  {
+   "id": "addr-0004",
+   "parent": null,
+   "assertion": "灯闪两下后常亮，她却站着不动"
+  },
+  {
+   "id": "addr-0005",
+   "parent": "addr-0001",
+   "assertion": "雨水顺着伞骨往下滴，她在那儿站了一会儿，没有伸手"
+  }
+ ],
+ "unarmed_reply_has_crumb": false,
+ "unarmed_reply_has_umbrella": false,
+ "armed_reply_has_umbrella": true,
+ "armed_reply_has_crumb": false
+}

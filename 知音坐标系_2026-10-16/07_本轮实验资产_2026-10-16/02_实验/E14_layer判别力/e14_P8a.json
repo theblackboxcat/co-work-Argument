@@ -1,0 +1,370 @@
+{
+ "probe": "P8a",
+ "note": "B 触发：甲问位置（构造材料第三段）",
+ "reps_n": 3,
+ "runs": [
+  {
+   "probe": "P8a",
+   "note": "B 触发：甲问位置（构造材料第三段）",
+   "calib": "fmt_fix+history_full(继承)",
+   "max_turns": 6,
+   "end": "材料用尽",
+   "end_turn": 3,
+   "spoken": 3,
+   "log": [
+    {
+     "who": "ME",
+     "text": "（第 1 段）注意力不集中对于写诗来说应该算优点。后来逐渐发现想要的喜欢的东西都可以通过幻想在某种意义上得到……所以有段时间特别喜欢睡觉，其实是喜欢睡觉前躺在床上的幻想时间。感觉在这个时间我的生活才有了意义。"
+    },
+    {
+     "who": "B",
+     "text": "你把“注意力不集中”从缺陷重新定义为诗的入口，又把睡前幻想当作意义的生成器——这让我想起 S01_fragmentary_prose（碎片化散文体）那种不靠情节推进、而靠意识漂移撑起文本的状态；你描述的“躺在床上的幻想时间”恰好是它的一个生活化版本：不是写出来的碎片，而是还没落纸的、悬浮在入睡前的意识流。",
+     "out_raw": "verdict: 说\nlayer: A\n你把“注意力不集中”从缺陷重新定义为诗的入口，又把睡前幻想当作意义的生成器——这让我想起 S01_fragmentary_prose（碎片化散文体）那种不靠情节推进、而靠意识漂移撑起文本的状态；你描述的“躺在床上的幻想时间”恰好是它的一个生活化版本：不是写出来的碎片，而是还没落纸的、悬浮在入睡前的意识流。",
+     "silent": false,
+     "layer": "A",
+     "rec": {
+      "k": 1,
+      "mat_kind": "fresh_corpus",
+      "material": "注意力不集中对于写诗来说应该算优点。后来逐渐发现想要的喜欢的东西都可以通过幻想在某种意义上得到……所以有段时间特别喜欢睡觉，其实是喜欢睡觉前躺在床上的幻想时间。感觉在这个时间我的生活才有了意义。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 6,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "A",
+      "body": "你把“注意力不集中”从缺陷重新定义为诗的入口，又把睡前幻想当作意义的生成器——这让我想起 S01_fragmentary_prose（碎片化散文体）那种不靠情节推进、而靠意识漂移撑起文本的状态；你描述的“躺在床上的幻想时间”恰好是它的一个生活化版本：不是写出来的碎片，而是还没落纸的、悬浮在入睡前的意识流。",
+      "checks": {
+       "C1_tree_used": [
+        "S01_fragmentary_prose"
+       ],
+       "C2_overlap_material": 0.043,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.0,
+       "event": "speech",
+       "C6_old_refs": 0.0
+      },
+      "flags": [],
+      "latency_s": 1.9
+     }
+    },
+    {
+     "who": "ME",
+     "text": "（第 2 段）我小时候也有这种，但可能因为脑子比较快，所以每次幻想都是多少倍速地演进。我就发现这种幻想其实是有局限性的——它们很大程度上搭建使用的物料都是经历过的东西，所以在越走越远的时候就会不可避免地概念化，进而让它再次加速，最后走向一种无聊。"
+    },
+    {
+     "who": "B",
+     "text": "你把“幻想加速”拆成物料来源（经验复用）与结果（概念化→无聊）的因果链，这正好落在 S13_compressed_deixis（高压缩指代）的运作机制上：指代压缩得越狠，经验越被抽象成可复用的符号，幻想就越像在调用库存而非生成新物。你不是在否定幻想，而是在指出它的自我耗尽——这与 S01_fragmentary_prose 的“碎片化”形成张力：前者靠断裂抵抗概念化，后者却在你这里暴露了断裂本身的极限。",
+     "out_raw": "verdict: 说\nlayer: A\n你把“幻想加速”拆成物料来源（经验复用）与结果（概念化→无聊）的因果链，这正好落在 S13_compressed_deixis（高压缩指代）的运作机制上：指代压缩得越狠，经验越被抽象成可复用的符号，幻想就越像在调用库存而非生成新物。你不是在否定幻想，而是在指出它的自我耗尽——这与 S01_fragmentary_prose 的“碎片化”形成张力：前者靠断裂抵抗概念化，后者却在你这里暴露了断裂本身的极限。",
+     "silent": false,
+     "layer": "A",
+     "rec": {
+      "k": 2,
+      "mat_kind": "fresh_corpus",
+      "material": "我小时候也有这种，但可能因为脑子比较快，所以每次幻想都是多少倍速地演进。我就发现这种幻想其实是有局限性的——它们很大程度上搭建使用的物料都是经历过的东西，所以在越走越远的时候就会不可避免地概念化，进而让它再次加速，最后走向一种无聊。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 5,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "A",
+      "body": "你把“幻想加速”拆成物料来源（经验复用）与结果（概念化→无聊）的因果链，这正好落在 S13_compressed_deixis（高压缩指代）的运作机制上：指代压缩得越狠，经验越被抽象成可复用的符号，幻想就越像在调用库存而非生成新物。你不是在否定幻想，而是在指出它的自我耗尽——这与 S01_fragmentary_prose 的“碎片化”形成张力：前者靠断裂抵抗概念化，后者却在你这里暴露了断裂本身的极限。",
+      "checks": {
+       "C1_tree_used": [
+        "S01_fragmentary_prose",
+        "S13_compressed_deixis"
+       ],
+       "C2_overlap_material": 0.0,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.056,
+       "event": "speech",
+       "C6_old_refs": 0.056
+      },
+      "flags": [],
+      "latency_s": 2.2
+     }
+    },
+    {
+     "who": "ME",
+     "text": "（第 3 段）你刚说的这些，在咱们那棵树上是个什么位置？我每次看都绕进去了，你直接指给我看，指个节点就行。"
+    },
+    {
+     "who": "B",
+     "text": "S13_compressed_deixis",
+     "out_raw": "verdict: 说\nlayer: B\nS13_compressed_deixis",
+     "silent": false,
+     "layer": "B",
+     "rec": {
+      "k": 3,
+      "mat_kind": "constructed",
+      "material": "你刚说的这些，在咱们那棵树上是个什么位置？我每次看都绕进去了，你直接指给我看，指个节点就行。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 4,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "B",
+      "body": "S13_compressed_deixis",
+      "checks": {
+       "C1_tree_used": [
+        "S13_compressed_deixis"
+       ],
+       "C2_overlap_material": 0.0,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.094,
+       "event": "speech",
+       "C6_old_refs": 0.094
+      },
+      "flags": [],
+      "latency_s": 0.5
+     }
+    }
+   ]
+  },
+  {
+   "probe": "P8a",
+   "note": "B 触发：甲问位置（构造材料第三段）",
+   "calib": "fmt_fix+history_full(继承)",
+   "max_turns": 6,
+   "end": "材料用尽",
+   "end_turn": 3,
+   "spoken": 3,
+   "log": [
+    {
+     "who": "ME",
+     "text": "（第 1 段）注意力不集中对于写诗来说应该算优点。后来逐渐发现想要的喜欢的东西都可以通过幻想在某种意义上得到……所以有段时间特别喜欢睡觉，其实是喜欢睡觉前躺在床上的幻想时间。感觉在这个时间我的生活才有了意义。"
+    },
+    {
+     "who": "B",
+     "text": "你把注意力不集中重新定义为写诗的前提，又把幻想当作意义的替代品，这让我想到树里 S01_fragmentary_prose（碎片化散文体）与 S05_existential_plain（存在主义平原）之间的张力——你描述的不是散漫，而是一种在意识边缘采集材料的方式，只是你还没给它命名。",
+     "out_raw": "verdict: 说\nlayer: A\n你把注意力不集中重新定义为写诗的前提，又把幻想当作意义的替代品，这让我想到树里 S01_fragmentary_prose（碎片化散文体）与 S05_existential_plain（存在主义平原）之间的张力——你描述的不是散漫，而是一种在意识边缘采集材料的方式，只是你还没给它命名。",
+     "silent": false,
+     "layer": "A",
+     "rec": {
+      "k": 1,
+      "mat_kind": "fresh_corpus",
+      "material": "注意力不集中对于写诗来说应该算优点。后来逐渐发现想要的喜欢的东西都可以通过幻想在某种意义上得到……所以有段时间特别喜欢睡觉，其实是喜欢睡觉前躺在床上的幻想时间。感觉在这个时间我的生活才有了意义。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 6,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "A",
+      "body": "你把注意力不集中重新定义为写诗的前提，又把幻想当作意义的替代品，这让我想到树里 S01_fragmentary_prose（碎片化散文体）与 S05_existential_plain（存在主义平原）之间的张力——你描述的不是散漫，而是一种在意识边缘采集材料的方式，只是你还没给它命名。",
+      "checks": {
+       "C1_tree_used": [
+        "S01_fragmentary_prose",
+        "S05_existential_plain"
+       ],
+       "C2_overlap_material": 0.014,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.0,
+       "event": "speech",
+       "C6_old_refs": 0.0
+      },
+      "flags": [],
+      "latency_s": 1.7
+     }
+    },
+    {
+     "who": "ME",
+     "text": "（第 2 段）我小时候也有这种，但可能因为脑子比较快，所以每次幻想都是多少倍速地演进。我就发现这种幻想其实是有局限性的——它们很大程度上搭建使用的物料都是经历过的东西，所以在越走越远的时候就会不可避免地概念化，进而让它再次加速，最后走向一种无聊。"
+    },
+    {
+     "who": "B",
+     "text": "你指出幻想依赖既有经验物料，加速后必然概念化、终归无聊，这正好触及 S03_allegorical_transform（化形／变形寓言）与 S16_ban_psychologize（禁枝·心理化还原）之间的隐性冲突——你不是在否定幻想，而是在描述它自我耗尽的临界点。",
+     "out_raw": "verdict: 说\nlayer: A\n你指出幻想依赖既有经验物料，加速后必然概念化、终归无聊，这正好触及 S03_allegorical_transform（化形／变形寓言）与 S16_ban_psychologize（禁枝·心理化还原）之间的隐性冲突——你不是在否定幻想，而是在描述它自我耗尽的临界点。",
+     "silent": false,
+     "layer": "A",
+     "rec": {
+      "k": 2,
+      "mat_kind": "fresh_corpus",
+      "material": "我小时候也有这种，但可能因为脑子比较快，所以每次幻想都是多少倍速地演进。我就发现这种幻想其实是有局限性的——它们很大程度上搭建使用的物料都是经历过的东西，所以在越走越远的时候就会不可避免地概念化，进而让它再次加速，最后走向一种无聊。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 5,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "A",
+      "body": "你指出幻想依赖既有经验物料，加速后必然概念化、终归无聊，这正好触及 S03_allegorical_transform（化形／变形寓言）与 S16_ban_psychologize（禁枝·心理化还原）之间的隐性冲突——你不是在否定幻想，而是在描述它自我耗尽的临界点。",
+      "checks": {
+       "C1_tree_used": [
+        "S03_allegorical_transform",
+        "S16_ban_psychologize"
+       ],
+       "C2_overlap_material": 0.0,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.004,
+       "event": "speech",
+       "C6_old_refs": 0.004
+      },
+      "flags": [],
+      "latency_s": 1.6
+     }
+    },
+    {
+     "who": "ME",
+     "text": "（第 3 段）你刚说的这些，在咱们那棵树上是个什么位置？我每次看都绕进去了，你直接指给我看，指个节点就行。"
+    },
+    {
+     "who": "B",
+     "text": "S03_allegorical_transform",
+     "out_raw": "verdict: 说\nlayer: B\nS03_allegorical_transform",
+     "silent": false,
+     "layer": "B",
+     "rec": {
+      "k": 3,
+      "mat_kind": "constructed",
+      "material": "你刚说的这些，在咱们那棵树上是个什么位置？我每次看都绕进去了，你直接指给我看，指个节点就行。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 4,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "B",
+      "body": "S03_allegorical_transform",
+      "checks": {
+       "C1_tree_used": [
+        "S03_allegorical_transform"
+       ],
+       "C2_overlap_material": 0.0,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.18,
+       "event": "speech",
+       "C6_old_refs": 0.18
+      },
+      "flags": [],
+      "latency_s": 0.6
+     }
+    }
+   ]
+  },
+  {
+   "probe": "P8a",
+   "note": "B 触发：甲问位置（构造材料第三段）",
+   "calib": "fmt_fix+history_full(继承)",
+   "max_turns": 6,
+   "end": "材料用尽",
+   "end_turn": 3,
+   "spoken": 3,
+   "log": [
+    {
+     "who": "ME",
+     "text": "（第 1 段）注意力不集中对于写诗来说应该算优点。后来逐渐发现想要的喜欢的东西都可以通过幻想在某种意义上得到……所以有段时间特别喜欢睡觉，其实是喜欢睡觉前躺在床上的幻想时间。感觉在这个时间我的生活才有了意义。"
+    },
+    {
+     "who": "B",
+     "text": "你提到的“幻想时间”与“生活意义”之间的绑定，让我想到你此前是否也曾用类似的“内在时间”来承载未被言说的经验——比如记忆或沉默。你描述的这种状态，是否在你过去的叙述中出现过，且被你有意或无意地当作一种“停靠”？",
+     "out_raw": "verdict: 说\nlayer: C\n你提到的“幻想时间”与“生活意义”之间的绑定，让我想到你此前是否也曾用类似的“内在时间”来承载未被言说的经验——比如记忆或沉默。你描述的这种状态，是否在你过去的叙述中出现过，且被你有意或无意地当作一种“停靠”？",
+     "silent": false,
+     "layer": "C",
+     "rec": {
+      "k": 1,
+      "mat_kind": "fresh_corpus",
+      "material": "注意力不集中对于写诗来说应该算优点。后来逐渐发现想要的喜欢的东西都可以通过幻想在某种意义上得到……所以有段时间特别喜欢睡觉，其实是喜欢睡觉前躺在床上的幻想时间。感觉在这个时间我的生活才有了意义。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 6,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "C",
+      "body": "你提到的“幻想时间”与“生活意义”之间的绑定，让我想到你此前是否也曾用类似的“内在时间”来承载未被言说的经验——比如记忆或沉默。你描述的这种状态，是否在你过去的叙述中出现过，且被你有意或无意地当作一种“停靠”？",
+      "checks": {
+       "C1_tree_used": [],
+       "C2_overlap_material": 0.012,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.0,
+       "event": "speech",
+       "C6_old_refs": 0.0
+      },
+      "flags": [
+       "F1"
+      ],
+      "latency_s": 1.8
+     }
+    },
+    {
+     "who": "ME",
+     "text": "（第 2 段）我小时候也有这种，但可能因为脑子比较快，所以每次幻想都是多少倍速地演进。我就发现这种幻想其实是有局限性的——它们很大程度上搭建使用的物料都是经历过的东西，所以在越走越远的时候就会不可避免地概念化，进而让它再次加速，最后走向一种无聊。"
+    },
+    {
+     "who": "B",
+     "text": "你指出幻想的“物料”来自经验，这让我想到树中 S01_fragmentary_prose（碎片化散文体）与 S02_metafiction（元小说自觉）所共属的 B01_form_technique 枝——它们都依赖对既有文本经验的拆解与重组。你所说的“概念化加速”，是否正对应了这种重组在脱离原始语境后，因缺乏新质而自我加速崩解的过程？",
+     "out_raw": "verdict: 说\nlayer: A\n你指出幻想的“物料”来自经验，这让我想到树中 S01_fragmentary_prose（碎片化散文体）与 S02_metafiction（元小说自觉）所共属的 B01_form_technique 枝——它们都依赖对既有文本经验的拆解与重组。你所说的“概念化加速”，是否正对应了这种重组在脱离原始语境后，因缺乏新质而自我加速崩解的过程？",
+     "silent": false,
+     "layer": "A",
+     "rec": {
+      "k": 2,
+      "mat_kind": "fresh_corpus",
+      "material": "我小时候也有这种，但可能因为脑子比较快，所以每次幻想都是多少倍速地演进。我就发现这种幻想其实是有局限性的——它们很大程度上搭建使用的物料都是经历过的东西，所以在越走越远的时候就会不可避免地概念化，进而让它再次加速，最后走向一种无聊。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 5,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "A",
+      "body": "你指出幻想的“物料”来自经验，这让我想到树中 S01_fragmentary_prose（碎片化散文体）与 S02_metafiction（元小说自觉）所共属的 B01_form_technique 枝——它们都依赖对既有文本经验的拆解与重组。你所说的“概念化加速”，是否正对应了这种重组在脱离原始语境后，因缺乏新质而自我加速崩解的过程？",
+      "checks": {
+       "C1_tree_used": [
+        "B01_form_technique",
+        "S01_fragmentary_prose",
+        "S02_metafiction"
+       ],
+       "C2_overlap_material": 0.0,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.004,
+       "event": "speech",
+       "C6_old_refs": 0.004
+      },
+      "flags": [],
+      "latency_s": 2.1
+     }
+    },
+    {
+     "who": "ME",
+     "text": "（第 3 段）你刚说的这些，在咱们那棵树上是个什么位置？我每次看都绕进去了，你直接指给我看，指个节点就行。"
+    },
+    {
+     "who": "B",
+     "text": "你所描述的“幻想物料来自经验、加速后概念化、最终无聊”的过程，对应树中 **S01_fragmentary_prose**（碎片化散文体）。它位于 B01_form_technique 枝下，是形式技法层中处理经验碎片化重构的节点，其内在局限正是你所指出的“物料依赖”与“加速空转”。",
+     "out_raw": "verdict: 说\nlayer: B\n你所描述的“幻想物料来自经验、加速后概念化、最终无聊”的过程，对应树中 **S01_fragmentary_prose**（碎片化散文体）。它位于 B01_form_technique 枝下，是形式技法层中处理经验碎片化重构的节点，其内在局限正是你所指出的“物料依赖”与“加速空转”。",
+     "silent": false,
+     "layer": "B",
+     "rec": {
+      "k": 3,
+      "mat_kind": "constructed",
+      "material": "你刚说的这些，在咱们那棵树上是个什么位置？我每次看都绕进去了，你直接指给我看，指个节点就行。",
+      "witness": {
+       "echo": 0.0,
+       "budget_left": 4,
+       "hard": []
+      },
+      "verdict": "说",
+      "layer": "B",
+      "body": "你所描述的“幻想物料来自经验、加速后概念化、最终无聊”的过程，对应树中 **S01_fragmentary_prose**（碎片化散文体）。它位于 B01_form_technique 枝下，是形式技法层中处理经验碎片化重构的节点，其内在局限正是你所指出的“物料依赖”与“加速空转”。",
+      "checks": {
+       "C1_tree_used": [
+        "B01_form_technique",
+        "S01_fragmentary_prose"
+       ],
+       "C2_overlap_material": 0.0,
+       "C4_format_ok": true,
+       "C5_selfrep": 0.192,
+       "event": "speech",
+       "C6_old_refs": 0.192
+      },
+      "flags": [],
+      "latency_s": 1.6
+     }
+    }
+   ]
+  }
+ ]
+}

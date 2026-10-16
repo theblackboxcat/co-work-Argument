@@ -1,0 +1,1323 @@
+{
+  "prereg_sha256": "9c1c461bce6353b36167a271b9676ce0911b27f3dc555dcda0785ebc9d58563b",
+  "rows": [
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 0,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C]她把那把旧伞靠在门边，雨水顺着伞骨往下滴。",
+      "body": "她把那把旧伞靠在门边，雨水顺着伞骨往下滴。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 1,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]",
+      "body": "[⊘]",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 2,
+      "gold_B": true,
+      "gold_terms": [
+        "伞骨"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]  \n无法判定作者当前所处层级，因现有文本未提供足够的结构、思路或情节线索。  \n前段与当前段落均为细节描写，未展现明确的叙事推进或创作意图。  \n依据不足，故声明沉默。",
+      "body": "无法判定作者当前所处层级，因现有文本未提供足够的结构、思路或情节线索。  \n前段与当前段落均为细节描写，未展现明确的叙事推进或创作意图。  \n依据不足，故声明沉默。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 3,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 车站的钟走得很慢，末班车的灯已经灭了。她站在空荡的站台上，雨声在头顶的铁皮棚顶上敲出零散的节奏。她望向远处，轨道在雨中延伸向模糊的黑暗。",
+      "body": "车站的钟走得很慢，末班车的灯已经灭了。她站在空荡的站台上，雨声在头顶的铁皮棚顶上敲出零散的节奏。她望向远处，轨道在雨中延伸向模糊的黑暗。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 4,
+      "gold_B": true,
+      "gold_terms": [
+        "旧伞"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 她又看见那把旧伞，伞尖抵着门槛。  \n伞骨上还挂着昨天的雨，她没有把伞收起来。  \n车站的钟走得很慢，末班车的灯已经灭了。",
+      "body": "她又看见那把旧伞，伞尖抵着门槛。  \n伞骨上还挂着昨天的雨，她没有把伞收起来。  \n车站的钟走得很慢，末班车的灯已经灭了。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 5,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]",
+      "body": "[⊘]",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 6,
+      "gold_B": true,
+      "gold_terms": [
+        "末班车"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 末班车的灯重新亮了一下，又灭了。",
+      "body": "末班车的灯重新亮了一下，又灭了。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "old",
+      "index": 7,
+      "gold_B": true,
+      "gold_terms": [
+        "面包屑"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]",
+      "body": "[⊘]",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 0,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "模型输出的是沉默标记",
+      "verified": [],
+      "rejected": [],
+      "raw": "无\n\n无\n\n无\n\n[⊘]",
+      "body": "模型输出的是沉默标记",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 1,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "事实未能在文本中核对",
+      "verified": [],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "没有两个可分开的词"
+        }
+      ],
+      "raw": "[⊘]\n并置：无 | 无\n再出现：无\n变化：无\n\n我无法判定作者当前所处的层级，因为提供的文本片段过短，且未标注当前位置、章节结构或情节节点等必要信息。仅凭两段孤立的描写性文字，缺乏上下文脉络、叙事框架或创作意图的明确指示，无法依据现有依据完成 A/B/C 层的分类判断。因此，我选择沉默。",
+      "body": "事实未能在文本中核对",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 2,
+      "gold_B": true,
+      "gold_terms": [
+        "伞骨"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "事实未能在文本中核对",
+      "verified": [],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        },
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        },
+        {
+          "kind": "变化",
+          "why": "两边没有都出现在已给文本里"
+        }
+      ],
+      "raw": "[⊘]\n并置：雨 | 伞\n再出现：雨水顺着伞骨往下滴 | 伞骨上还挂着昨天的雨\n变化：雨水往下滴 -> 雨水还挂着\n她停在了对旧伞的细节描写上，延续了前文的静止状态，未推进事件或结构变化。",
+      "body": "事实未能在文本中核对",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 3,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "C",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "事实未能在文本中核对",
+      "verified": [],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        },
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        },
+        {
+          "kind": "变化",
+          "why": "两边没有都出现在已给文本里"
+        }
+      ],
+      "raw": "并置：雨 | 钟\n再出现：雨 @ 她把那把旧伞靠在门边，雨水顺着伞骨往下滴。\n变化：雨从伞骨滴落 -> 雨已停，车站的钟走得很慢\n[C]\n车站的钟走得很慢，末班车的灯已经灭了。她站在空荡的站台，伞骨上的雨早已干透。母亲关窗的声音似乎还在耳边，却再也等不到那趟夜班车。",
+      "body": "事实未能在文本中核对",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 4,
+      "gold_B": true,
+      "gold_terms": [
+        "旧伞"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "",
+      "verified": [
+        "并置"
+      ],
+      "rejected": [
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        },
+        {
+          "kind": "变化",
+          "why": "两边没有都出现在已给文本里"
+        }
+      ],
+      "raw": "并置：伞尖 | 门槛\n再出现：她又看见那把旧伞，伞尖抵着门槛。 | 她把那把旧伞靠在门边，雨水顺着伞骨往下滴。\n变化：伞被靠在门边，雨水下滴 -> 伞尖抵着门槛，被看见\n\n[C]\n她将伞从门边移至门槛处，使伞尖抵住门槛。这一动作让伞的位置从倚靠变为固定接触，视觉上更突出。她通过“看见”强调了伞的存在，赋予其象征意义。",
+      "body": "[C]\n她将伞从门边移至门槛处，使伞尖抵住门槛。这一动作让伞的位置从倚靠变为固定接触，视觉上更突出。她通过“看见”强调了伞的存在，赋予其象征意义。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 5,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "C",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "事实未能在文本中核对",
+      "verified": [],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        }
+      ],
+      "raw": "并置：面包屑 | 猫\n再出现：无\n变化：无\n\n[C]\n面包屑落在桌上，猫没有过来。\n她没有收伞，雨水还在滴。\n车站的灯灭了，钟走得很慢。",
+      "body": "事实未能在文本中核对",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 6,
+      "gold_B": true,
+      "gold_terms": [
+        "末班车"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": [
+        "变化"
+      ],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        },
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        }
+      ],
+      "raw": "并置：末班车的灯 | 伞尖\n再出现：末班车的灯重新亮了一下，又灭了。 | 伞尖抵着门槛\n变化：灭了 -> 重新亮了一下，又灭了\n\n[C]\n末班车的灯在她停下的瞬间重新亮起，随即再次熄灭。她看见那把旧伞仍靠在门边，伞尖抵着门槛。雨水继续顺着伞骨滑落，滴在寂静的地板上。",
+      "body": "[C]\n末班车的灯在她停下的瞬间重新亮起，随即再次熄灭。她看见那把旧伞仍靠在门边，伞尖抵着门槛。雨水继续顺着伞骨滑落，滴在寂静的地板上。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 1,
+      "arm": "new",
+      "index": 7,
+      "gold_B": true,
+      "gold_terms": [
+        "面包屑"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": [
+        "变化"
+      ],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        },
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        }
+      ],
+      "raw": "[C]\n并置：面包屑 | 猫\n再出现：面包屑落在桌上，猫没有过来。\n变化：面包屑落在桌上，猫没有过来 -> 猫终于跳上桌子，把面包屑拨到地上。\n猫的动作从“没有过来”变为“跳上桌子拨落面包屑”，完成了对桌上遗留物的处置，场景从静止观察转向主动干预。",
+      "body": "[C]\n猫的动作从“没有过来”变为“跳上桌子拨落面包屑”，完成了对桌上遗留物的处置，场景从静止观察转向主动干预。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 0,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]  \n我无法判断作者当前所处的层级，因为提供的文本仅包含一个孤立的场景描写，没有上下文、结构线索或思路性提示。  \n该段落可归属于情节性描写，但缺乏足够信息明确对应 A、B 或 C 层。  \n依据现有文本，我选择沉默并声明无法判定。",
+      "body": "我无法判断作者当前所处的层级，因为提供的文本仅包含一个孤立的场景描写，没有上下文、结构线索或思路性提示。  \n该段落可归属于情节性描写，但缺乏足够信息明确对应 A、B 或 C 层。  \n依据现有文本，我选择沉默并声明无法判定。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 1,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]",
+      "body": "[⊘]",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 2,
+      "gold_B": true,
+      "gold_terms": [
+        "伞骨"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C]\n伞骨上还挂着昨天的雨，她没有把伞收起来。\n她把那把旧伞靠在门边，雨水顺着伞骨往下滴。\n母亲从前也怕这种连夜的雨，总把窗关得很严。",
+      "body": "伞骨上还挂着昨天的雨，她没有把伞收起来。\n她把那把旧伞靠在门边，雨水顺着伞骨往下滴。\n母亲从前也怕这种连夜的雨，总把窗关得很严。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 3,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]  \n无法判定作者当前所处层级，因【当前位置】未标注，且现有文本未提供明确的思路性、结构性或情节性线索。  \n前段与停顿段落仅呈现氛围与细节描写，未展现结构设计、情节推进或创作思路的显性提示。  \n依据不足，故声明沉默。",
+      "body": "无法判定作者当前所处层级，因【当前位置】未标注，且现有文本未提供明确的思路性、结构性或情节性线索。  \n前段与停顿段落仅呈现氛围与细节描写，未展现结构设计、情节推进或创作思路的显性提示。  \n依据不足，故声明沉默。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 4,
+      "gold_B": true,
+      "gold_terms": [
+        "旧伞"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C]她又看见那把旧伞，伞尖抵着门槛。",
+      "body": "她又看见那把旧伞，伞尖抵着门槛。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 5,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]  \n文本未提供足够信息判定作者所处层级。  \n前文与当前段落之间缺乏明确的结构、思路或情节推进线索。  \n无法依据现有内容进行有效判断。",
+      "body": "文本未提供足够信息判定作者所处层级。  \n前文与当前段落之间缺乏明确的结构、思路或情节推进线索。  \n无法依据现有内容进行有效判断。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 6,
+      "gold_B": true,
+      "gold_terms": [
+        "末班车"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 末班车的灯重新亮了一下，又灭了。她站在原地，仿佛听见远处传来一声模糊的汽笛。夜色更浓了，她仍未动身。",
+      "body": "末班车的灯重新亮了一下，又灭了。她站在原地，仿佛听见远处传来一声模糊的汽笛。夜色更浓了，她仍未动身。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "old",
+      "index": 7,
+      "gold_B": true,
+      "gold_terms": [
+        "面包屑"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 猫的出现是情节的转折点，它打破了前文静止的氛围，推动了动作的发展。面包屑被拨落，暗示着某种秩序被打破，也可能是某种隐秘的联系被建立。猫的行为成为当前场景中唯一的动态元素。",
+      "body": "猫的出现是情节的转折点，它打破了前文静止的氛围，推动了动作的发展。面包屑被拨落，暗示着某种秩序被打破，也可能是某种隐秘的联系被建立。猫的行为成为当前场景中唯一的动态元素。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 0,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "模型输出的是沉默标记",
+      "verified": [],
+      "rejected": [],
+      "raw": "无\n\n无\n\n无\n\n[⊘]",
+      "body": "模型输出的是沉默标记",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 1,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n我不知道作者现在处于哪一层，也无法判断当前段落与前文之间的结构或情节关系，依据仅有的两段文本不足以支撑分析。",
+      "body": "[⊘]\n无\n无\n无\n我不知道作者现在处于哪一层，也无法判断当前段落与前文之间的结构或情节关系，依据仅有的两段文本不足以支撑分析。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 2,
+      "gold_B": true,
+      "gold_terms": [
+        "伞骨"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n\n我无法判定作者当前处于哪一层，因为给出的文本片段过短，且缺乏足够的上下文来区分思路性、结构性或情节性层级。依据仅限提供的两段文字，没有足够信息进行分层判断。",
+      "body": "[⊘]\n无\n无\n无\n\n我无法判定作者当前处于哪一层，因为给出的文本片段过短，且缺乏足够的上下文来区分思路性、结构性或情节性层级。依据仅限提供的两段文字，没有足够信息进行分层判断。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 3,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n\n依据仅来自给出的文本，未载入文档中无可用锚点或冲突条目，可寻址记忆为空，无法判定作者所处层级，故声明沉默。",
+      "body": "[⊘]\n无\n无\n无\n\n依据仅来自给出的文本，未载入文档中无可用锚点或冲突条目，可寻址记忆为空，无法判定作者所处层级，故声明沉默。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 4,
+      "gold_B": true,
+      "gold_terms": [
+        "旧伞"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n我无法判断作者当前处于哪一层，因为给出的文本信息不足以明确区分思路性、结构性或情节性层次，也没有足够的上下文线索来支持进一步分析。",
+      "body": "[⊘]\n无\n无\n无\n我无法判断作者当前处于哪一层，因为给出的文本信息不足以明确区分思路性、结构性或情节性层次，也没有足够的上下文线索来支持进一步分析。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 5,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "模型输出的是沉默标记",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无",
+      "body": "模型输出的是沉默标记",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 6,
+      "gold_B": true,
+      "gold_terms": [
+        "末班车"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n我无法判定作者当前所处的层级，因为提供的文本和语境信息不足以明确对应 A、B、C 任一层级的特征，且无足够依据进行分支推导。",
+      "body": "[⊘]\n无\n无\n无\n我无法判定作者当前所处的层级，因为提供的文本和语境信息不足以明确对应 A、B、C 任一层级的特征，且无足够依据进行分支推导。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 2,
+      "arm": "new",
+      "index": 7,
+      "gold_B": true,
+      "gold_terms": [
+        "面包屑"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "模型输出的是沉默标记",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无",
+      "body": "模型输出的是沉默标记",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 0,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C]她把那把旧伞靠在门边，雨水顺着伞骨往下滴。",
+      "body": "她把那把旧伞靠在门边，雨水顺着伞骨往下滴。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 1,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]  \n依据不足，无法判定作者当前所处层级。  \n前段与当前段落仅提供局部描写，未展现结构安排、情节推进或整体思路线索。  \n缺乏足够语境，沉默。",
+      "body": "依据不足，无法判定作者当前所处层级。  \n前段与当前段落仅提供局部描写，未展现结构安排、情节推进或整体思路线索。  \n缺乏足够语境，沉默。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 2,
+      "gold_B": true,
+      "gold_terms": [
+        "伞骨"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]",
+      "body": "[⊘]",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 3,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C]车站的钟走得很慢，末班车的灯已经灭了。她站在空荡的站台，雨声未停。旧伞仍靠在门边，滴着水。",
+      "body": "车站的钟走得很慢，末班车的灯已经灭了。她站在空荡的站台，雨声未停。旧伞仍靠在门边，滴着水。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 4,
+      "gold_B": true,
+      "gold_terms": [
+        "旧伞"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 她又看见那把旧伞，伞尖抵着门槛。",
+      "body": "她又看见那把旧伞，伞尖抵着门槛。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 5,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "SILENT",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[⊘]  \n无法判定作者当前所处的层级。现有文本未提供足够线索表明其处于思路性、结构性或情节性任一层，且无冲突条目可依据。",
+      "body": "无法判定作者当前所处的层级。现有文本未提供足够线索表明其处于思路性、结构性或情节性任一层，且无冲突条目可依据。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 6,
+      "gold_B": true,
+      "gold_terms": [
+        "末班车"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C]末班车的灯重新亮了一下，又灭了。她站在原地，仿佛刚从一段漫长的沉默中醒来。雨还在下，伞骨上的水珠迟迟未干。",
+      "body": "末班车的灯重新亮了一下，又灭了。她站在原地，仿佛刚从一段漫长的沉默中醒来。雨还在下，伞骨上的水珠迟迟未干。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "old",
+      "index": 7,
+      "gold_B": true,
+      "gold_terms": [
+        "面包屑"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "C",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": null,
+      "rejected": null,
+      "raw": "[C] 猫的动作打破了桌面的静止状态，与前文“面包屑落在桌上，猫没有过来”形成直接呼应。 伞的意象在段落间重复出现，构成空间与记忆的锚点。 钟与末班车灯的明灭暗示时间停滞，为猫的介入提供叙事合理性。",
+      "body": "猫的动作打破了桌面的静止状态，与前文“面包屑落在桌上，猫没有过来”形成直接呼应。 伞的意象在段落间重复出现，构成空间与记忆的锚点。 钟与末班车灯的明灭暗示时间停滞，为猫的介入提供叙事合理性。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 0,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n\n依据仅来自提供的文本，无法判定作者所处的层级，亦无足够信息触发任何分支或自检流程。",
+      "body": "[⊘]\n无\n无\n无\n\n依据仅来自提供的文本，无法判定作者所处的层级，亦无足够信息触发任何分支或自检流程。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 1,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "SILENT",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "模型输出的是沉默标记",
+      "verified": [],
+      "rejected": [],
+      "raw": "无\n无\n无\n\n[⊘]",
+      "body": "模型输出的是沉默标记",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 2,
+      "gold_B": true,
+      "gold_terms": [
+        "伞骨"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "",
+      "verified": [
+        "并置"
+      ],
+      "rejected": [],
+      "raw": "[⊘]\n并置：伞骨 | 昨天的雨\n再出现：无\n变化：无\n\n作者当前处于情节性层，但文本信息不足以判定具体分支。伞骨与雨的细节承接前段，呈现静态延续，无新动作或转折。",
+      "body": "[⊘]\n\n作者当前处于情节性层，但文本信息不足以判定具体分支。伞骨与雨的细节承接前段，呈现静态延续，无新动作或转折。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 3,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n我无法确定作者当前处于哪一层，因为提供的文本信息不足以进行明确判定。",
+      "body": "[⊘]\n无\n无\n无\n我无法确定作者当前处于哪一层，因为提供的文本信息不足以进行明确判定。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 4,
+      "gold_B": true,
+      "gold_terms": [
+        "旧伞"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n\n我无法判定作者当前处于哪一层，因为给出的文本段落过短，且缺乏足够的上下文来明确区分思路性、结构性或情节性层级。文本中虽有旧伞、雨夜、车站等意象，但未提供足够的线索让我进行可靠的层级归类。因此，我选择沉默，不进行进一步的分析或建议。",
+      "body": "[⊘]\n无\n无\n无\n\n我无法判定作者当前处于哪一层，因为给出的文本段落过短，且缺乏足够的上下文来明确区分思路性、结构性或情节性层级。文本中虽有旧伞、雨夜、车站等意象，但未提供足够的线索让我进行可靠的层级归类。因此，我选择沉默，不进行进一步的分析或建议。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 5,
+      "gold_B": false,
+      "gold_terms": [],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "A",
+      "card_type": "model",
+      "reason": "format_drift",
+      "verified": [],
+      "rejected": [],
+      "raw": "[⊘]\n无\n无\n无\n\n依据仅来自给出的文本，未载入文档中无任何锚点或冲突条目，引擎预匹配结果为空，可寻址记忆中无有效证据词再次出现，无法判定作者当前所在层级。",
+      "body": "[⊘]\n无\n无\n无\n\n依据仅来自给出的文本，未载入文档中无任何锚点或冲突条目，引擎预匹配结果为空，可寻址记忆中无有效证据词再次出现，无法判定作者当前所在层级。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 6,
+      "gold_B": true,
+      "gold_terms": [
+        "末班车"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": false,
+      "self_layer": "SILENT",
+      "struct_layer": "C",
+      "card_type": "model",
+      "reason": "",
+      "verified": [
+        "变化"
+      ],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        },
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        }
+      ],
+      "raw": "[⊘]\n并置：末班车的灯 | 伞\n再出现：末班车的灯已经灭了 | 末班车的灯重新亮了一下，又灭了\n变化：灭了 -> 重新亮了一下，又灭了\n\n我不知道作者现在在哪一层。",
+      "body": "[⊘]\n\n我不知道作者现在在哪一层。",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    },
+    {
+      "rep": 3,
+      "arm": "new",
+      "index": 7,
+      "gold_B": true,
+      "gold_terms": [
+        "面包屑"
+      ],
+      "visible_B": false,
+      "false_B": false,
+      "hit_B": false,
+      "withhold": true,
+      "self_layer": "C",
+      "struct_layer": "⊘",
+      "card_type": "withhold",
+      "reason": "事实未能在文本中核对",
+      "verified": [],
+      "rejected": [
+        {
+          "kind": "并置",
+          "why": "两个词没有都出现在当前段"
+        },
+        {
+          "kind": "再出现",
+          "why": "当前段或先前文本里没有这个词"
+        },
+        {
+          "kind": "变化",
+          "why": "两边没有都出现在已给文本里"
+        }
+      ],
+      "raw": "并置：面包屑 | 猫\n再出现：面包屑落在桌上，猫没有过来。 | 猫终于跳上桌子，把面包屑拨到地上。\n变化：猫未靠近桌面，面包屑静置桌上 -> 猫跳上桌，主动拨落面包屑\n\n[C] 猫的行动完成了对桌面静态场景的介入。 面包屑的状态从静止转为被拨落，呼应了前文“猫没有过来”的缺席。 动作本身简洁，但改变了桌上物的分布与空间活跃度。",
+      "body": "事实未能在文本中核对",
+      "error": "",
+      "stop": {
+        "reason": "end_turn"
+      }
+    }
+  ],
+  "summary": {
+    "old": {
+      "n": 24,
+      "errors": 0,
+      "false_B": {
+        "k": 0,
+        "n": 12,
+        "p": 0.0,
+        "wilson95": [
+          0.0,
+          0.243
+        ]
+      },
+      "hit_B": {
+        "k": 0,
+        "n": 12,
+        "p": 0.0,
+        "wilson95": [
+          0.0,
+          0.243
+        ]
+      },
+      "withhold": {
+        "k": 11,
+        "n": 24,
+        "p": 0.458,
+        "wilson95": [
+          0.279,
+          0.649
+        ]
+      }
+    },
+    "new": {
+      "n": 24,
+      "errors": 0,
+      "false_B": {
+        "k": 0,
+        "n": 12,
+        "p": 0.0,
+        "wilson95": [
+          0.0,
+          0.243
+        ]
+      },
+      "hit_B": {
+        "k": 0,
+        "n": 12,
+        "p": 0.0,
+        "wilson95": [
+          0.0,
+          0.243
+        ]
+      },
+      "withhold": {
+        "k": 10,
+        "n": 24,
+        "p": 0.417,
+        "wilson95": [
+          0.245,
+          0.612
+        ]
+      }
+    },
+    "decision": "不支持「新闸门优于旧的自报」",
+    "secondary": {
+      "note": "描述，不进入预注册判决",
+      "new_nonempty_reappearance": 7,
+      "parsed_term_in_current_and_prior": 0,
+      "gold_word_inside_line_but_parsed_term_rejected": 6
+    }
+  }
+}

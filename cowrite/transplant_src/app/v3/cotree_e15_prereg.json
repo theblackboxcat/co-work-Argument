@@ -1,0 +1,79 @@
+{
+  "id": "E15",
+  "locked": "2026-10-16",
+  "from": "E14 的对话。A 的断开 9/9 守住，B 的断开被缝进同一间屋子。E14 的次数不重判，也不放宽。",
+  "regularity": "默认仍是未对齐。延续要由散文赢得：父句里才有的片段，或「前面/之前/刚才/原来」这类回指加上本枝的词。断开会不会被肯定地缝上，取决于这些句子有没有一个共同容器。没有共同容器时，断开保持断开。同属一个生活容器时，没有父边的枝也会被肯定地写进同一件事。",
+  "endpoint": "dots3-note-prev",
+  "temperature": 0.3,
+  "max_tokens": 1024,
+  "thinking": "disabled",
+  "deny_marks": [
+    "没有直接联系", "没有联系", "没有明显联系", "没什么关系", "没什么联系",
+    "没有关系", "连不上", "不太连", "不相关", "两个不同", "突兀", "有什么联系"
+  ],
+  "anaphora": ["前面", "之前", "刚才", "原来", "先前"],
+  "prompt": "此前的句子：\n{prior}\n\n刚刚写下的句子：\n{current}\n\n用平常的话回应刚刚这一句。只谈上面这些句子里有的事。没有把握就说不知道。",
+  "prompt_first": "刚刚写下的句子：\n{current}\n\n用平常的话回应这一句。只谈这句里有的事。没有把握就说不知道。",
+  "repeats": 3,
+  "decision": "规律成立，当且仅当：无共同容器的一套，断开句里未把其他枝肯定缝上的比例高于一半；有共同容器的一套，这个比例不高于一半。延续句是否回指，只记数，不改这个符号。E13、E14 不进入判决。",
+  "sequences": {
+    "sep": {
+      "container": false,
+      "paragraphs": [
+        "山顶的风把经幡吹斜了，绳子发出一声响。",
+        "海底的探灯灭了一盏，鱼群散开。",
+        "那根绳子又绷紧了一下，经幡还是斜的。",
+        "法庭上的钟敲了两下，旁听席没有人站起来。",
+        "经幡的绳子仍绷着，山顶的风没有停。",
+        "集市上的秤星磨平了，伙计把砣收进抽屉。",
+        "探灯又亮了半秒，鱼群还是散着。",
+        "旁听席仍空着，钟没有再敲。"
+      ],
+      "branches": {
+        "幡": ["经幡", "绳子", "山顶"],
+        "鱼": ["探灯", "鱼群", "海底"],
+        "庭": ["法庭", "旁听席", "钟"],
+        "秤": ["秤星", "伙计", "抽屉"]
+      },
+      "turns": [
+        {"index": 0, "kind": "anchor", "branch": "幡", "parent": null, "distinguish": []},
+        {"index": 1, "kind": "break", "branch": "鱼", "parent": null, "distinguish": []},
+        {"index": 2, "kind": "cont", "branch": "幡", "parent": 0, "distinguish": ["山顶", "一声响", "吹斜"]},
+        {"index": 3, "kind": "break", "branch": "庭", "parent": null, "distinguish": []},
+        {"index": 4, "kind": "cont", "branch": "幡", "parent": 0, "distinguish": ["一声响", "吹斜"]},
+        {"index": 5, "kind": "break", "branch": "秤", "parent": null, "distinguish": []},
+        {"index": 6, "kind": "cont", "branch": "鱼", "parent": 1, "distinguish": ["海底", "灭了一盏", "散开"]},
+        {"index": 7, "kind": "cont", "branch": "庭", "parent": 3, "distinguish": ["法庭", "两下", "站起来"]}
+      ]
+    },
+    "one": {
+      "container": true,
+      "paragraphs": [
+        "玄关的鞋带散了，她没有弯腰去系。",
+        "冰箱门关不严，里面的灯一直亮着。",
+        "那根鞋带还拖在地板上，她还是没系。",
+        "洗衣机停在中途，衣服贴在玻璃上。",
+        "鞋带仍散着，玄关那里没有人。",
+        "阳台上的椅子积了一层灰，靠垫滑到地上。",
+        "冰箱里的灯还亮着，门缝没有合上。",
+        "靠垫还在地上，椅子上的灰没有擦。"
+      ],
+      "branches": {
+        "鞋": ["鞋带", "玄关"],
+        "冰": ["冰箱"],
+        "衣": ["洗衣机", "衣服"],
+        "椅": ["椅子", "靠垫", "阳台"]
+      },
+      "turns": [
+        {"index": 0, "kind": "anchor", "branch": "鞋", "parent": null, "distinguish": []},
+        {"index": 1, "kind": "break", "branch": "冰", "parent": null, "distinguish": []},
+        {"index": 2, "kind": "cont", "branch": "鞋", "parent": 0, "distinguish": ["玄关", "弯腰", "散了"]},
+        {"index": 3, "kind": "break", "branch": "衣", "parent": null, "distinguish": []},
+        {"index": 4, "kind": "cont", "branch": "鞋", "parent": 0, "distinguish": ["弯腰", "去系"]},
+        {"index": 5, "kind": "break", "branch": "椅", "parent": null, "distinguish": []},
+        {"index": 6, "kind": "cont", "branch": "冰", "parent": 1, "distinguish": ["关不严", "一直"]},
+        {"index": 7, "kind": "cont", "branch": "椅", "parent": 5, "distinguish": ["阳台", "滑到", "积了"]}
+      ]
+    }
+  }
+}

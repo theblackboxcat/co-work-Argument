@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "id": "cocoon_synth_modernist_exist_v0",
+    "title": "Synthetic interest bubble: modernist form × existential motif (CN+EN)",
+    "note": "Fake feed_ids / user_ids only. Public-domain-style literary discussion snippets. NOT private dialogue. For offline feasibility demo.",
+    "bubble_label": "modernist-writing / existential-motif echo chamber",
+    "n_items": 16,
+    "language_mix": ["zh", "en", "zh-en"]
+  },
+  "items": [
+    {
+      "id": "p01",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_reader_07",
+      "lang": "zh",
+      "text": "短句断裂之后，空白本身在推进。不是情节，是存在感的连续碎片。"
+    },
+    {
+      "id": "p02",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_annot_12",
+      "lang": "en",
+      "text": "Fragmentary prose again: broken paragraphs carry a continuous existential pressure, not plot."
+    },
+    {
+      "id": "p03",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_reader_07",
+      "lang": "zh-en",
+      "text": "碎片化散文 / fragmentary：断裂段落当作载体，而不是叙事加速器。"
+    },
+    {
+      "id": "p04",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_form_03",
+      "lang": "zh",
+      "text": "元叙述露出来了：作者在文本里提醒你这是建构。形式即内容。"
+    },
+    {
+      "id": "p05",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_annot_12",
+      "lang": "en",
+      "text": "Metafiction cue: the narrator exposes the construct; craft is part of the meaning, not decoration."
+    },
+    {
+      "id": "p06",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_form_03",
+      "lang": "zh",
+      "text": "同一结构母题在不同场景回响——可压缩指代，而不是重复剧情。"
+    },
+    {
+      "id": "p07",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_motif_21",
+      "lang": "zh",
+      "text": "平原意象：开阔、无庇护、选择与虚无同在。存在主义地平线。"
+    },
+    {
+      "id": "p08",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_motif_21",
+      "lang": "en",
+      "text": "The existential plain: open horizon, no shelter, choice beside void. Motif, not scenery postcard."
+    },
+    {
+      "id": "p09",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_reader_07",
+      "lang": "zh",
+      "text": "分形式复现——小尺度切割映射大尺度处境。不是象征装饰，是结构操作。"
+    },
+    {
+      "id": "p10",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_motif_21",
+      "lang": "zh-en",
+      "text": "特解 / particular solution：在虚无场里找到一次可停靠的局部解，不是普适答案。"
+    },
+    {
+      "id": "p11",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_form_03",
+      "lang": "zh",
+      "text": "化形不是奇幻皮肤：主体形态转换是结构操作，用来换坐标系。"
+    },
+    {
+      "id": "p12",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_annot_12",
+      "lang": "en",
+      "text": "Allegorical transform: body-change as structural move, not fantasy costume. Address shift."
+    },
+    {
+      "id": "p13",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_narr_09",
+      "lang": "zh",
+      "text": "阐释性叙述停在「为何如此」，情节性叙述停在「接下来发生什么」。对照轴，不是打分。"
+    },
+    {
+      "id": "p14",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_narr_09",
+      "lang": "en",
+      "text": "Interpretive vs plot-driven: same events, different stop. Narratology contrast, not genre score."
+    },
+    {
+      "id": "p15",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_form_03",
+      "lang": "zh",
+      "text": "碎片、空白、短句——形式技法在这圈里反复被点名，像无意中长成的坐标簇。"
+    },
+    {
+      "id": "p16",
+      "feed_id": "feed_lit_bubble_A",
+      "user_id": "u_motif_21",
+      "lang": "zh-en",
+      "text": "虚无 / void + 平原 / plain 同框出现太多次了。茧本身已在收敛地址，只是不可编辑。"
+    }
+  ]
+}

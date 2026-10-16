@@ -1,0 +1,44 @@
+{
+  "meta": {
+    "role": "positioning anchors only — NOT tree content source",
+    "theory_lock": "private corpus = anchors; generate≠commit; smoke demo; S3 CLOSED",
+    "source_policy": "paraphrased/public-style; if inspired by 云酒×猫猫: short, anonymized, research-only, source=anchor_demo"
+  },
+  "anchors": [
+    {
+      "id": "A01_transform",
+      "text": "有时沟通不是换说法，而是整个人换了一种形态才能继续说话：对方听见的不是新论点，而是「你已经不是刚才那个形状了」。这种转换本身就是结构操作，不该被写成「情绪波动」。",
+      "gold_node_ids": ["S03_allegorical_transform", "S16_ban_psychologize"],
+      "notes": "stop candidate: 化形；ban: 心理化还原",
+      "source": "anchor_demo"
+    },
+    {
+      "id": "A02_special_solution",
+      "text": "二人对话里忽然出现一个只在此刻约束下成立的解：它极管用，却不能推广成人生公式。把它当成万能解药，就离开了原来的枝。",
+      "gold_node_ids": ["S07_special_solution"],
+      "notes": "stop candidate: 特解／局部解",
+      "source": "anchor_demo"
+    },
+    {
+      "id": "A03_existential_plain",
+      "text": "谈话停在一片没有遮蔽的开阔地：不是找不到话题，而是任何话题都会立刻暴露选择与无根基。平原感来自处境结构，不是风景描写。",
+      "gold_node_ids": ["S05_existential_plain", "S19_existential_horizon"],
+      "notes": "stop candidate: 存在主义平原",
+      "source": "anchor_demo"
+    },
+    {
+      "id": "A04_fractal_horror",
+      "text": "细看每一段日常，都重复着同一套不对齐：再放大一格，还是同构。恐惧不来自某一惊吓事件，而来自尺度换了结构仍在。",
+      "gold_node_ids": ["S06_fractal_horror"],
+      "notes": "stop candidate: 分形恐怖；ban edge vs plot-reduce",
+      "source": "anchor_demo"
+    },
+    {
+      "id": "A05_interpretive_vs_plot",
+      "text": "有人问「后来发生了什么」，有人问「这句话停在哪一层」。前者追事件链，后者追阐释停靠；把后者硬改写成前者，就是禁枝上的情节还原。",
+      "gold_node_ids": ["S12_interpretive_vs_plot", "S17_ban_plot_reduce"],
+      "notes": "stop candidate: 阐释性 vs 情节性；ban: 情节还原阐释",
+      "source": "anchor_demo"
+    }
+  ]
+}

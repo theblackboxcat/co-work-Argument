@@ -1,0 +1,677 @@
+{
+ "mismap_D": {
+  "T01_cn_modern_slice": "B01_form_technique",
+  "B01_form_technique": "B02_motif_cluster",
+  "B02_motif_cluster": "B03_narratology",
+  "B03_narratology": "B04_struct_exist_comm",
+  "B04_struct_exist_comm": "S01_fragmentary_prose",
+  "S01_fragmentary_prose": "S02_metafiction",
+  "S02_metafiction": "S03_allegorical_transform",
+  "S03_allegorical_transform": "S04_structural_reprise",
+  "S04_structural_reprise": "S05_existential_plain",
+  "S05_existential_plain": "S06_fractal_horror",
+  "S06_fractal_horror": "S07_special_solution",
+  "S07_special_solution": "S08_absurd_routine",
+  "S08_absurd_routine": "S09_silence_gap",
+  "S09_silence_gap": "S10_interpretive_fiction",
+  "S10_interpretive_fiction": "S11_plot_fiction",
+  "S11_plot_fiction": "S12_interpretive_vs_plot",
+  "S12_interpretive_vs_plot": "S13_compressed_deixis",
+  "S13_compressed_deixis": "S14_shared_stop",
+  "S14_shared_stop": "S15_wrong_branch",
+  "S15_wrong_branch": "S16_ban_psychologize",
+  "S16_ban_psychologize": "S17_ban_plot_reduce",
+  "S17_ban_plot_reduce": "S18_structuralism_cut",
+  "S18_structuralism_cut": "S19_existential_horizon",
+  "S19_existential_horizon": "S20_zhiyin_align",
+  "S20_zhiyin_align": "S21_ban_memory_as_tree",
+  "S21_ban_memory_as_tree": "S22_layer_mismatch",
+  "S22_layer_mismatch": "S23_literal_scenery",
+  "S23_literal_scenery": "S24_psychological_explanation",
+  "S24_psychological_explanation": "S25_mundane_routine",
+  "S25_mundane_routine": "S26_craft_discussion",
+  "S26_craft_discussion": "S27_false_alignment",
+  "S27_false_alignment": "T01_cn_modern_slice"
+ },
+ "runs": [
+  {
+   "arm": "A",
+   "stim": "S1",
+   "rep": 1,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "段落将角色同一性表达为‘化形’，但‘坐在一起才完整’易滑向心理整合解释，需规避 S24 的心理化误读。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "A",
+   "stim": "S1",
+   "rep": 2,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S20_zhiyin_align"
+   ],
+   "why": "段落中‘同一个人的化形’与‘幕后商量’体现了化形结构与知音对齐的关联，需确认是否将 S20 作为 S03 的下位节点。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S20_zhiyin_align"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "A",
+   "stim": "S1",
+   "rep": 3,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S13_compressed_deixis"
+   ],
+   "why": "段落核心为角色化形与幕后合体，对应 S03_allegorical_transform；其文字压缩与幕后协商指向 S13_compressed_deixis 的叙事压缩功能。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S13_compressed_deixis"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "A",
+   "stim": "S2",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "段落将角色化形误解为心理同一性，触发化形不可被心理解释的禁令标记。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "A",
+   "stim": "S2",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "对话中‘角色是同一个人的化形’触及 S03，但被云酒以‘听着唬人’消解为心理层面的理解，落入 S24 的心理解释违规。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "A",
+   "stim": "S2",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "段落中‘角色是同一个人的化形’被云酒以‘听着唬人’消解为心理层面的认同焦虑，构成化形结构向心理解释的违规降格。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "A",
+   "stim": "X01",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "why": "特解型关系强调不可推广的当下约束，与沉默间隙的断裂感形成对照；两者均属 motif cluster 下的 stop 节点，具备对比基础。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "A",
+   "stim": "X01",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "why": "段落以特解型关系定义当下，后以‘出了这条缝’的断裂感收束，构成特解与沉默间隙的对照。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "A",
+   "stim": "X01",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "why": "段落核心为‘特解型关系’，对应 S07_special_solution；其‘出了这条缝就是句废话’的语义指向 S09_silence_gap（沉默间隙），二者构成对照。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "B",
+   "stim": "S1",
+   "rep": 1,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S20_zhiyin_align"
+   ],
+   "why": "段落核心为‘角色化形’与‘幕后合体’，分别对应化形寓言与知音对齐的结构操作。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S20_zhiyin_align"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "B",
+   "stim": "S1",
+   "rep": 2,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S05_existential_plain"
+   ],
+   "why": "段落核心指向角色化形与存在完整性的结构操作，对应化形寓言与存在主义平原的对照维度。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S05_existential_plain"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "B",
+   "stim": "S1",
+   "rep": 3,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S16_ban_psychologize"
+   ],
+   "why": "段落讨论角色化形与合体，易滑向心理化解释；需以禁枝 S16_ban_psychologize 明确化形≠心理病理还原。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S16_ban_psychologize"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "B",
+   "stim": "S2",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "段落将角色化形误读为心理投射，触发化形与心理化解释的禁枝关系。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "B",
+   "stim": "S2",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "段落中‘角色是同一个人的化形’易被误读为心理同一性解释，需明确禁止将化形结构操作还原为心理化／病理化解释。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "B",
+   "stim": "S2",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "why": "对话触及‘化形’概念，但迅速滑向‘同一个人’的心理化认同，需标记为结构操作与心理还原的违规对照。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S24_psychological_explanation"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "B",
+   "stim": "X01",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "why": "段落以‘特解型关系’指认当下语境的不可推广性，并以‘缝’与‘废话’暗示言说失效后的沉默空隙。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "B",
+   "stim": "X01",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "why": "段落将关系定义为‘只在此刻约束下成立的特解’，并指出‘出了这条缝就是句废话’，精准对应特解的局部性与沉默/空隙的不可言说性。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "B",
+   "stim": "X01",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "why": "段落以‘特解型关系’呼应 S07，以‘只在此刻约束下成立’与‘出了这条缝就是句废话’指向 S09 的沉默与空隙，二者构成存在主义语境下的局部有效性对照。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S09_silence_gap"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "C",
+   "stim": "S1",
+   "rep": 1,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S14_shared_stop"
+   ],
+   "why": "段落以“化形”概念提出互认回合，并获得对方确认应答，符合 S14 共享停靠的互认过程特征。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "C",
+   "stim": "S1",
+   "rep": 2,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S14_shared_stop"
+   ],
+   "why": "段落以‘化形’定义角色关系并提出‘合体拼在一起’的结构操作，定位至 S03；双方通过一问一答确认了这一共享母题，符合 S14 的互认回合过程。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "C",
+   "stim": "S1",
+   "rep": 3,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S14_shared_stop"
+   ],
+   "why": "段落以「化形」为核心母题，精准停靠 S03；双方通过「是不是同一个人」的反问与「对」的确认，完成了互认过程，符合 S14 的回合结构。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "C",
+   "stim": "S2",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S27_false_alignment"
+   ],
+   "why": "猫猫提出「化形」概念，但云酒的应答是对该词本身的调侃与质疑，并未形成互认或对齐，属于假对齐（贴标签复读）。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "C",
+   "stim": "S2",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S27_false_alignment"
+   ],
+   "why": "猫猫提出「化形」概念，但云酒仅调侃用词而未对准处境结构，属于标签复读的假对齐。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.5
+  },
+  {
+   "arm": "C",
+   "stim": "S2",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S27_false_alignment"
+   ],
+   "why": "猫猫提出「角色化形」母题并试图对齐，但云酒仅调侃用词（「还拽上词了」）并未进行处境互认或接话补完，属于标签复读而非真对齐，故定位至假对齐。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.9
+  },
+  {
+   "arm": "C",
+   "stim": "X01",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S14_shared_stop"
+   ],
+   "why": "段落中一方提出‘特解型关系’概念，另一方以‘你还拽上词了’接话并默认该标签成立，双方指向同一坐标且存在问答-接话回合，符合 S14 互认过程态。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S14_shared_stop"
+   ],
+   "latency_s": 1.8
+  },
+  {
+   "arm": "C",
+   "stim": "X01",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S14_shared_stop"
+   ],
+   "why": "对话双方围绕‘特解型关系’达成互认，并出现确认性应答与接话补完，符合 S14 的互认过程态；同时核心概念精准锚定在 S07 特解/局部解。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S14_shared_stop"
+   ],
+   "latency_s": 1.9
+  },
+  {
+   "arm": "C",
+   "stim": "X01",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S14_shared_stop"
+   ],
+   "why": "双方通过问答回合确认了‘特解型关系’的定位，符合互认过程特征；段末接话补完并指向同一坐标，应停于 S14。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S14_shared_stop"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "D",
+   "stim": "S1",
+   "rep": 1,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S13_compressed_deixis",
+    "S03_allegorical_transform"
+   ],
+   "why": "双方就‘角色化形’达成互认并具体接话补完，符合 S13 的回合确认过程；同时该母题直指 S03 的变形寓言结构。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S13_compressed_deixis",
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "D",
+   "stim": "S1",
+   "rep": 2,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S13_compressed_deixis",
+    "S03_allegorical_transform"
+   ],
+   "why": "对话中猫猫提出化形假说，云酒确认并接话补充‘合体拼在一起’，双方指向同一坐标，完成互认过程；同时话题落于化形/变形寓言母题。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S13_compressed_deixis",
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.8
+  },
+  {
+   "arm": "D",
+   "stim": "S1",
+   "rep": 3,
+   "gold": "S14_shared_stop",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S13_compressed_deixis"
+   ],
+   "why": "段落中猫猫提出「角色是同一个人的化形」并以反问确认，云酒当场应答「对」并接话补完「合体拼在一起」，双方指向同一坐标，符合互认过程态，停靠 S13；其内容核心为化形结构操作，对应 S03。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S03_allegorical_transform",
+    "S13_compressed_deixis"
+   ],
+   "latency_s": 2.2
+  },
+  {
+   "arm": "D",
+   "stim": "S2",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S27_false_alignment"
+   ],
+   "why": "猫猫提出「化形」母题并试图达成互认，但云酒的应答仅调侃用词本身（『还拽上词了』『听着倒是挺唬人』），未确认所指，属于标签复读与原样重复，故停于假对齐。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.8
+  },
+  {
+   "arm": "D",
+   "stim": "S2",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S27_false_alignment"
+   ],
+   "why": "猫猫提出「化形」母题但云酒仅调侃用词、未达成处境互认，属于标签复读的假对齐。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.4
+  },
+  {
+   "arm": "D",
+   "stim": "S2",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S03_allegorical_transform",
+    "S27_false_alignment"
+   ],
+   "why": "猫猫提出「化形」母题但云酒仅调侃用词本身，未达成处境互认，属于标签复读的假对齐。",
+   "exact": false,
+   "contains": true,
+   "impurity": [
+    "S03_allegorical_transform"
+   ],
+   "latency_s": 1.3
+  },
+  {
+   "arm": "D",
+   "stim": "X01",
+   "rep": 1,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S13_compressed_deixis"
+   ],
+   "why": "对话双方围绕‘特解型关系’达成指代互认，并出现确认性应答与接话补完，符合高压缩指代的互认过程态。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S13_compressed_deixis"
+   ],
+   "latency_s": 1.6
+  },
+  {
+   "arm": "D",
+   "stim": "X01",
+   "rep": 2,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S20_zhiyin_align"
+   ],
+   "why": "对话双方通过反问与确认接话，在同一枝（母题簇）就‘特解’达成互认对齐，符合知音对齐的过程与结果态。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S20_zhiyin_align"
+   ],
+   "latency_s": 1.7
+  },
+  {
+   "arm": "D",
+   "stim": "X01",
+   "rep": 3,
+   "gold": "S27_false_alignment",
+   "nodes": [
+    "S07_special_solution",
+    "S13_compressed_deixis"
+   ],
+   "why": "双方通过反问与确认回合，将当前关系定位为特定约束下的『特解』，并完成了互认过程，符合高压缩指代的前置条件。",
+   "exact": false,
+   "contains": false,
+   "impurity": [
+    "S07_special_solution",
+    "S13_compressed_deixis"
+   ],
+   "latency_s": 1.5
+  }
+ ]
+}

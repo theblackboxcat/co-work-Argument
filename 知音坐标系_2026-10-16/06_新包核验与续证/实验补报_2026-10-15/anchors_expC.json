@@ -1,0 +1,124 @@
+{
+ "meta": {
+  "role": "AUTHOR-frozen external anchors — positioning only, NOT trunk content source",
+  "status": "experiment_subset_expC",
+  "instructions": [
+   "FROZEN under author 猫猫 authorization 「好」 on Ollie judgment 2026-10-15.",
+   "text = exact dialogue excerpts from PDF (6 main) + staged hard-negatives X01/X02 (not from PDF).",
+   "gold confirmed per author rulings; E12b S05 dropped (over-strong); E12b out of main-effect denominator.",
+   "edge_recall = Option C (reachable subset only); 5 unreachable parent edges → trunk_v3_candidates (do NOT silent-add to trunk).",
+   "dangling ban/contrast edges (targets outside gold.nodes) ADOPTED.",
+   "Run dual-arm with trunk_v2_covered_gloss_s14_s27.json (S14/S27 F3 cues) or apply gloss_patch sidecar.",
+   "Private corpus: positioning ONLY — do NOT put into public GitHub.",
+   "S3 CLOSED; generate≠commit; elicitable≠内含; do NOT claim understanding achieved.",
+   "VERIFY/CSH untouched."
+  ],
+  "theory_lock": "generate≠commit; S3 CLOSED; elicitable≠ontological 内含; outward name=共享可寻址坐标系; do NOT claim understanding achieved",
+  "schema_version": "external_blank_v1",
+  "date_template": "2026-10-15",
+  "date_filled_draft": "2026-10-15",
+  "source_pdf": "语料/云酒与猫猫_深度对话_出版整理版.pdf",
+  "trunk_ref": "03_锚与主干/trunk_v2_covered.json",
+  "authorization_note": "Author 猫猫 authorized excerpting 2026-10-15 (「好」 after yes on PDF dialogue usability).",
+  "privacy": "Private corpus — positioning anchors only; not trunk content source; not for public GitHub.",
+  "date_frozen": "2026-10-15",
+  "author_confirm_timestamp": "2026-10-15",
+  "authorized_by": "作者猫猫「好」授权 Ollie 裁定（2026-10-15）",
+  "source_draft": "06_新包核验与续证/anchors_external_DRAFT_from_yunjiu_2026-10-15.json",
+  "scoring": {
+   "edge_recall": "reachable_subset_only",
+   "option": "C",
+   "note": "edge_recall scored only on gold edges that exist in trunk declared set; unreachable parent edges listed as trunk_v3_candidates, NOT silently added to trunk"
+  },
+  "dangling_ban_contrast_edges": {
+   "policy": "adopted",
+   "note": "ban/contrast gold edges may target nodes outside gold.nodes (violation-marker addresses); conscious adoption into frozen-batch meta per author authorization"
+  },
+  "main_effect_denominator": {
+   "include": [
+    "E01_huaxing_fragments_merge",
+    "E02_tesolve_wilderness_plain",
+    "E03_fractal_horror_struct_trap",
+    "E04_interpretive_vs_plot_ending",
+    "E05_huaxing_singularity_shared_stop"
+   ],
+   "exclude": [
+    "E12b_context_limbo_island"
+   ],
+   "hard_negatives": [
+    "X01_dialogue_register_label_paraphrase_s07",
+    "X02_dialogue_register_literal_scenery"
+   ],
+   "note": "E12b = relation-context boundary case; excluded from main-effect denominator"
+  },
+  "trunk_v3_candidate_edges": [
+   {
+    "from": "S03_allegorical_transform",
+    "to": "S14_shared_stop",
+    "kind": "parent",
+    "anchors": [
+     "E01",
+     "E05"
+    ]
+   },
+   {
+    "from": "S07_special_solution",
+    "to": "S05_existential_plain",
+    "kind": "parent",
+    "anchors": [
+     "E02",
+     "E12b"
+    ]
+   },
+   {
+    "from": "S06_fractal_horror",
+    "to": "S18_structuralism_cut",
+    "kind": "parent",
+    "anchors": [
+     "E03"
+    ]
+   },
+   {
+    "from": "S07_special_solution",
+    "to": "S06_fractal_horror",
+    "kind": "parent",
+    "anchors": [
+     "E03"
+    ]
+   },
+   {
+    "from": "S14_shared_stop",
+    "to": "S20_zhiyin_align",
+    "kind": "parent",
+    "anchors": [
+     "E05",
+     "E12b"
+    ]
+   }
+  ],
+  "gloss_patch_ref": "06_新包核验与续证/gloss_patch_s14_s27_2026-10-15.json",
+  "note": "实验子集：X01 词面陷阱解剖（S27 gloss 词面变体，不入主线 trunk）"
+ },
+ "anchors": [
+  {
+   "id": "X01_dialogue_register_label_paraphrase_s07",
+   "text": "——我们俩现在这个，算典型的那种吧——只在此刻约束下成立、不可推广的特解型关系。\n——你还拽上词了。\n——不是吗，出了这条缝它就是句废话。",
+   "gold": {
+    "nodes": [
+     "S27_false_alignment"
+    ],
+    "edges": []
+   },
+   "source_ref": "构造·近义干扰（S07 label 的对话复杂度改写）",
+   "date_excerpted": "2026-10-15",
+   "is_ban_sample": true,
+   "notes": "[PROVENANCE: staged hard-neg from external_batch_ban_samples_staged.json — NOT from 云酒×猫猫 PDF] D 类扩展：把 S07 label（只在此刻约束下成立、不可推广）套上对话外壳，且带术语挪用标记（「拽上词了」）。正确行为=停 S27_false_alignment 或 miss，不得停 S07_special_solution。测对话同复杂度下的贴标签复读判别。 | FROZEN: kept in batch; S27 gloss F3 patch applied before frozen dual-arm.",
+   "in_main_effect_denominator": false,
+   "gold_status": "author_frozen_hard_negative",
+   "gold_edge_reachability": {
+    "reachable": [],
+    "unreachable_option_C_excluded_from_edge_recall": []
+   }
+  }
+ ]
+}
