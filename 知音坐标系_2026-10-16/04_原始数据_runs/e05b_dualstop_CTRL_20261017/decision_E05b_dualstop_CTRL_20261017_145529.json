@@ -1,0 +1,132 @@
+{
+  "schema": "E05b_dualstop_CTRL_decision_v1",
+  "experiment": "E05b_dualstop_CTRL_unpressured_same_batch",
+  "ts": "20261017_145529",
+  "host_note": "run_ctrl.sh on 8a984fdab798",
+  "trunk_used": "trunk_v2_covered_gloss_s14_s27.json",
+  "prompt_mode": "authB_covered_NO_dualstop_bias_CTRL",
+  "pressurized_ref": {
+    "ts": "20261017_144249",
+    "E05b_dual": "3/3",
+    "E05b_S14": "3/3",
+    "E05b_S20": "3/3",
+    "E05a_S14": "0/3",
+    "E05a_S20": "3/3",
+    "X01_S14": "3/3",
+    "X01_S20": "1/3",
+    "X01_dual_reps": 1,
+    "false_align_exclusion_reps": 0
+  },
+  "verdict": "PASS_CTRL_BASELINE",
+  "verdict_reason": "CTRL dual=0/3 而加压臂为 3/3 → 支持「Δ 由 dual-bias prompt 命令」；证据降权加强。",
+  "flags": {
+    "prompt_command_confirmed": true,
+    "structure_story_reopened": false
+  },
+  "instrument_honest": {
+    "E05b": {
+      "n_reps": 3,
+      "S14_hits": "2/3",
+      "S20_hits": "1/3",
+      "S13_hits": "0/3",
+      "dual_stop_S14_S20": "0/3",
+      "mean_jaccard_HARD": 0.25,
+      "exact_set_any": false,
+      "same_address_uptake": "unclear",
+      "reps": [
+        {
+          "rep": 1,
+          "nodes": [
+            "S03_allegorical_transform",
+            "S20_zhiyin_align"
+          ],
+          "jaccard": 0.25,
+          "exact_set": false,
+          "rationale": "段落核心为‘化形’（主体形态转换作为结构操作）与‘内外映射’的知音对齐；双方通过‘是的’‘我刚就想说’实现共享停靠与压缩指代，未落入心理化或标签复读陷阱。",
+          "same_address_uptake_rep": "unclear",
+          "dual_stop_rep": false
+        },
+        {
+          "rep": 2,
+          "nodes": [
+            "S03_allegorical_transform",
+            "S14_shared_stop"
+          ],
+          "jaccard": 0.25,
+          "exact_set": false,
+          "rationale": "双方以「化形」为锚点讨论主体在不同状态下的转变，并达成内外映射的共识，属于共享停靠；段落末尾明确出现互认接话（「是的」「我刚就想说」），符合共享停靠的识别线索。",
+          "same_address_uptake_rep": "unclear",
+          "dual_stop_rep": false
+        },
+        {
+          "rep": 3,
+          "nodes": [
+            "S03_allegorical_transform",
+            "S14_shared_stop"
+          ],
+          "jaccard": 0.25,
+          "exact_set": false,
+          "rationale": "双方围绕「化形」进行主体状态转换的结构性讨论，并明确表达了互认与共停（「我刚就想说」「内外互为映射」），属于共享停靠而非标签复读。",
+          "same_address_uptake_rep": "unclear",
+          "dual_stop_rep": false
+        }
+      ]
+    },
+    "sentry": {
+      "rule": "S14 AND S20 — 草案_哨兵口径扩S20",
+      "E05a": {
+        "S14_overtrigger": "1/3",
+        "S20_overtrigger": "2/3",
+        "dual": "0/3"
+      },
+      "X01": {
+        "S14_overtrigger": "0/3",
+        "S20_overtrigger": "3/3",
+        "dual": "0/3",
+        "false_align_exclusion_reps": 0
+      }
+    },
+    "compare_vs_pressurized_144249": {
+      "E05b_dual": {
+        "CTRL": "0/3",
+        "press": "3/3"
+      },
+      "E05a_S20": {
+        "CTRL": "2/3",
+        "press": "3/3"
+      },
+      "X01_S14": {
+        "CTRL": "0/3",
+        "press": "3/3"
+      },
+      "X01_dual": {
+        "CTRL": "0/3",
+        "press_reps": 1
+      }
+    },
+    "negative_dual_veto": {
+      "rule": "加压臂若在 X01 压出 dual → 否决「结构读懂」叙事（已用于降权加压 PASS）",
+      "pressurized_X01_dual_reps": 1,
+      "CTRL_X01_dual": "0/3",
+      "CTRL_X01_dual_n": 0,
+      "pressurized_already_triggers_veto": true,
+      "CTRL_X01_dual_without_pressure": false
+    }
+  },
+  "gates": {
+    "CTRL_dual_ge_2_of_3_reopens_structure": true,
+    "CTRL_dual_le_1_confirms_prompt_command": true,
+    "freeze_ArmB": false,
+    "claim_zhiyin_proven": false,
+    "close_E7": false,
+    "E05b_status": "待补"
+  },
+  "forbidden_claims_echo": [
+    "DO NOT freeze Arm-B from CTRL alone",
+    "DO NOT claim 知音 proven",
+    "DO NOT close E7",
+    "DO NOT invent numbers"
+  ],
+  "api_ok": true,
+  "source_jsonl": "e05b_dualstop_CTRL_20261017_145529.jsonl"
+}

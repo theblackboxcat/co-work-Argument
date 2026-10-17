@@ -1,0 +1,42 @@
+{
+  "schema": "E05b_Step3_decision_v1",
+  "experiment": "E05b_mutual_recognition_retest_sequential_Steps1-2",
+  "ts": "YYYYMMDD_HHMMSS",
+  "host_note": "free text: which machine / whether dots3 ok",
+  "trunk_used": "trunk_v2_covered_gloss_s14_s27.json",
+  "draft_scoring": "S14_clue2_same_address_uptake_DRAFT",
+  "verdict": "PASS|FAIL|INC",
+  "verdict_reason": "one paragraph",
+  "instrument_honest": {
+    "E05b": {
+      "n_reps": 3,
+      "S14_hits": "k/3",
+      "S20_hits": "k/3",
+      "S13_hits": "k/3",
+      "dual_stop_S14_S20": "k/3",
+      "mean_jaccard_HARD": 0.0,
+      "exact_set_any": false,
+      "same_address_uptake": "yes|no|unclear",
+      "j_ceiling_note": "3-node gold × HARD 1-2 → J≤2/3"
+    },
+    "sentry": {
+      "E05a_S14_overtrigger": "k/3",
+      "X01_S14_overtrigger": "k/3"
+    }
+  },
+  "gates": {
+    "exact0_alone_is_not_channel_fail": true,
+    "freeze_ArmB": false,
+    "claim_zhiyin_proven": false,
+    "close_E7": false,
+    "E05b_status": "待补|补全|INC"
+  },
+  "forbidden_claims_echo": [
+    "DO NOT freeze Arm-B into auth B",
+    "DO NOT claim 知音 overall proven",
+    "DO NOT close E7",
+    "DO NOT invent numbers if API fails"
+  ],
+  "api_ok": true,
+  "notes": ""
+}

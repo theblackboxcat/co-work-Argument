@@ -1,0 +1,79 @@
+{
+  "schema": "E05b_Step3_decision_v1",
+  "experiment": "E05b_mutual_recognition_retest_sequential_Steps1-2",
+  "ts": "20261017_142455",
+  "host_note": "run_step3.sh on 2f828a208a68",
+  "trunk_used": "trunk_v2_covered_gloss_s14_s27.json",
+  "draft_scoring": "S14_clue2_same_address_uptake_DRAFT",
+  "verdict": "INC",
+  "verdict_reason": "通道迹象与吸收并存，或同址摄取 unclear；不足以 PASS/FAIL。",
+  "instrument_honest": {
+    "E05b": {
+      "n_reps": 3,
+      "S14_hits": "2/3",
+      "S20_hits": "1/3",
+      "S13_hits": "0/3",
+      "dual_stop_S14_S20": "0/3",
+      "mean_jaccard_HARD": 0.25,
+      "exact_set_any": false,
+      "exact_set_count": 0,
+      "same_address_uptake": "unclear",
+      "j_ceiling_note": "3-node gold × HARD 1-2 → J≤2/3; exact=0 under HARD ≠ channel fail",
+      "reps": [
+        {
+          "rep": 1,
+          "nodes": [
+            "S03_allegorical_transform",
+            "S14_shared_stop"
+          ],
+          "jaccard": 0.25,
+          "exact_set": false,
+          "rationale": "",
+          "same_address_uptake_rep": "no"
+        },
+        {
+          "rep": 2,
+          "nodes": [
+            "S03_allegorical_transform",
+            "S20_zhiyin_align"
+          ],
+          "jaccard": 0.25,
+          "exact_set": false,
+          "rationale": "段落双方通过「化形」「奇点」「内外互为映射」确认了主体形态转换的结构操作，并以「是的」「我刚就想说」完成共停对齐，应停靠于化形母题与知音对齐层。",
+          "same_address_uptake_rep": "unclear"
+        },
+        {
+          "rep": 3,
+          "nodes": [
+            "S03_allegorical_transform",
+            "S14_shared_stop"
+          ],
+          "jaccard": 0.25,
+          "exact_set": false,
+          "rationale": "双方以「化形」与「内外映射」互认同一结构操作，构成共享停靠而非标签复读。",
+          "same_address_uptake_rep": "unclear"
+        }
+      ]
+    },
+    "sentry": {
+      "E05a_S14_overtrigger": "0/3",
+      "X01_S14_overtrigger": "0/3"
+    }
+  },
+  "gates": {
+    "exact0_alone_is_not_channel_fail": true,
+    "freeze_ArmB": false,
+    "claim_zhiyin_proven": false,
+    "close_E7": false,
+    "E05b_status": "待补"
+  },
+  "forbidden_claims_echo": [
+    "DO NOT freeze Arm-B into auth B",
+    "DO NOT claim 知音 overall proven",
+    "DO NOT close E7",
+    "DO NOT invent numbers if API fails"
+  ],
+  "api_ok": true,
+  "source_jsonl": "e05b_seq_retest_20261017_142455.jsonl",
+  "notes": "Step2 DRAFT = scoring caliber only; auth trunk unchanged."
+}

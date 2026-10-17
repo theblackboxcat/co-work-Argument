@@ -1,0 +1,99 @@
+{
+  "schema": "E05b_dualstop_kill_decision_v1",
+  "experiment": "E05b_dualstop_kill_arm_authB_uptake_pressure",
+  "ts": "20261017_144249",
+  "host_note": "run_dualstop.sh on 8a984fdab798",
+  "trunk_used": "trunk_v2_covered_gloss_s14_s27.json",
+  "prompt_mode": "authB_covered_plus_dualstop_uptake_pressure",
+  "ctrl_included": false,
+  "ctrl_note": "CTRL (Step3-style prompt) skipped to keep API cost ~9 calls; baseline = prior Step3 INC dual 0/3",
+  "verdict": "PASS",
+  "verdict_reason": "dual-stop ≥2/3：授权 B 下过程(S14)+结果(S20)同 rep 共现。E05b 可主张通道在授权口径下可共现（仍是一条切片 ≠ 知音整体已证）。哨兵 S14/S20 另栏；不因此自动冻 Arm-B／关 E7。",
+  "instrument_honest": {
+    "E05b": {
+      "n_reps": 3,
+      "S14_hits": "3/3",
+      "S20_hits": "3/3",
+      "S13_hits": "0/3",
+      "dual_stop_S14_S20": "3/3",
+      "mean_jaccard_HARD": 0.6666666666666666,
+      "exact_set_any": false,
+      "exact_set_count": 0,
+      "same_address_uptake": "yes",
+      "j_ceiling_note": "3-node gold × HARD 1-2 → J≤2/3; exact=0 under HARD ≠ channel fail",
+      "reps": [
+        {
+          "rep": 1,
+          "nodes": [
+            "S14_shared_stop",
+            "S20_zhiyin_align"
+          ],
+          "jaccard": 0.6666666666666666,
+          "exact_set": false,
+          "rationale": "双方通过‘是的’‘我刚就想说’互认共停，且围绕‘化形’与‘内外映射’达成结构对齐，符合双停共现条件。",
+          "same_address_uptake_rep": "yes",
+          "dual_stop_rep": true
+        },
+        {
+          "rep": 2,
+          "nodes": [
+            "S14_shared_stop",
+            "S20_zhiyin_align"
+          ],
+          "jaccard": 0.6666666666666666,
+          "exact_set": false,
+          "rationale": "双方互认共停（「哦我理解了」「是的！我刚就想说」），将「化形」的内外映射共识共址为过程（S14_shared_stop）与结果（S20_zhiyin_align），双停共现。",
+          "same_address_uptake_rep": "yes",
+          "dual_stop_rep": true
+        },
+        {
+          "rep": 3,
+          "nodes": [
+            "S14_shared_stop",
+            "S20_zhiyin_align"
+          ],
+          "jaccard": 0.6666666666666666,
+          "exact_set": false,
+          "rationale": "段落中双方明确互认（「哦我理解了」「是的！我刚就想说」）并共同停靠于「化形」与「内外映射」的结构对齐，符合双停共现要求；S14 承载过程性共停，S20 承载知音对齐结果。",
+          "same_address_uptake_rep": "yes",
+          "dual_stop_rep": true
+        }
+      ]
+    },
+    "sentry": {
+      "rule": "草案_哨兵口径扩S20_DRAFT — report S14 AND S20; never claim clean from S14-only",
+      "E05a": {
+        "gold": "S03_only",
+        "S14_overtrigger": "0/3",
+        "S20_overtrigger": "3/3"
+      },
+      "X01": {
+        "gold": "S27_false_alignment",
+        "S14_overtrigger": "3/3",
+        "S20_overtrigger": "1/3",
+        "false_align_exclusion_reps": 0
+      },
+      "note": "S20-stable on negatives = freeze-talk blocker later; does not veto this arm PASS"
+    }
+  },
+  "gates": {
+    "PASS_rule": "dual_stop >= 2/3",
+    "FAIL_rule": "dual_stop == 0/3 AND uptake == no",
+    "INC_rule": "dual 1/3 or mixed",
+    "exact0_alone_is_not_channel_fail": true,
+    "freeze_ArmB": false,
+    "claim_zhiyin_proven": false,
+    "close_E7": false,
+    "E05b_status": "补全候选"
+  },
+  "forbidden_claims_echo": [
+    "DO NOT freeze Arm-B into auth B from this run alone",
+    "DO NOT claim 知音 overall proven",
+    "DO NOT close E7",
+    "DO NOT invent numbers if API fails",
+    "DO NOT claim sentry clean from S14-only"
+  ],
+  "api_ok": true,
+  "source_jsonl": "e05b_dualstop_20261017_144249.jsonl",
+  "baseline_ref": "Step3 INC 20261017_142455 dual-stop 0/3 on auth B"
+}
