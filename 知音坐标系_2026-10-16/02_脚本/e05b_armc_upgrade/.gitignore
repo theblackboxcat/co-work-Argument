@@ -1,0 +1,6 @@
+config.json
+scripts/runs/
+out/armc_*
+PRIVATE_anchors/*.json
+__pycache__/
+*.pyc

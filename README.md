@@ -1,6 +1,6 @@
 # co-work-Argument — reproduction code
 
-Paper: `paper/李逾凡_从词表不可分到门控结构中的目标维持.docx` · numbers table: `paper/主要结果表.csv`
+Paper: `paper/李逾凡_从词表不可分到门控结构中的目标维持_学术重写版v4_2026-10-17.docx` · deck: `paper/答辩_2026-10-17_v2.pptx` · numbers table: `paper/主要结果表.csv`
 Science seeds (Dx2 leak-screened): 200 205 210 211 212 216 218 219 · tuning seeds: 100–103 (`*/frozen/clean_seeds_Dx2.json`, sha256 alongside).
 Install: `pip install -r requirements.txt`. All `frozen/*.json` thresholds were frozen before science runs; verify with the `.sha256` files.
 
@@ -43,9 +43,9 @@ Note: `%DSH_ROOT%/lir/文献/CSH论文_深度扫描更新_20261005/llm_feasibili
 
 ## Added 2026-10-16 (CO-TREE / 知音坐标系)
 
-Additive update. Existing `csh/`, `sdia/`, `cowrite/eval`, `cowrite/verify`, `paper/主要结果表.csv`, and `paper/李逾凡_从词表不可分到门控结构中的目标维持.docx` are unchanged, including the study numbers 0.489, 0.523, and GRU/A2C 8/8.
+Additive update. Existing `csh/`, `sdia/`, `cowrite/eval`, `cowrite/verify`, `paper/主要结果表.csv`, and `paper/李逾凡_从词表不可分到门控结构中的目标维持.docx` (removed 2026-10-17 PM; superseded by v4 / deck v2) are unchanged, including the study numbers 0.489, 0.523, and GRU/A2C 8/8.
 
-- `paper/李逾凡_从词表不可分到门控结构中的目标维持_学术重写版v3.docx` — academic rewrite v3, added beside the earlier docx. `paper/答辩_2026-10-16.pptx` — defense slides for 2026-10-16.
+- `paper/李逾凡_从词表不可分到门控结构中的目标维持_学术重写版v3.docx` (removed 2026-10-17 PM; superseded by v4 / deck v2) — academic rewrite v3, added beside the earlier docx. `paper/答辩_2026-10-16.pptx` (removed 2026-10-17 PM; superseded by v4 / deck v2) — defense slides for 2026-10-16.
 - `cowrite/transplant_src/` — CoWrite app copy for the CO-TREE transplant (`app/v3/cotree.py`, E12–E15 scripts, preregistrations, raw outputs).
 - `cowrite/experiments/` — E17–E19 scripts, preregistrations, outputs, notes, and the transplant check.
 - `知音坐标系_2026-10-16/` — deduped public research pack (protocols, scripts, trunks, run logs).
@@ -62,3 +62,14 @@ Public increment only, overwritten or added under the existing `知音坐标系_
 - Instrument-honest side report for E05b→E7 is included. The Arm-B narrow boundary trunk is DRAFT only.
 - Scripts: `02_脚本/nn_of_nn_phase1/`, `nn_of_nn_phase1_retest/`, `nn_of_nn_reverse_RA_RB/` (example grid JSON only; no `config.json`).
 - Runs ship decision / summary / criticality / means / plots / logs. Not shipped: `不入库_私人语料/`, private anchors, `anchors_B_retest_filtered.json`, raw `*.jsonl` dumps, and `cells_raw`.
+
+## Added 2026-10-17 PM (知音坐标系 DELTA · stance layer)
+
+Public increment under the existing `知音坐标系_2026-10-16/` tree. `csh/`, `sdia/`, `cowrite/` are unchanged. Merge note: `知音坐标系_2026-10-16/README_合并说明_DELTA_2026-10-17_PM.md`. Plain-language status: `知音坐标系_2026-10-16/00_结论/现状白话_2026-10-17.md` (evening version).
+
+- E05b content-level co-location was elicited with no command (Arm-C upgrade). The dual-stop PASS is discounted: the unpressured CTRL scored 0/3, so the pressurized 3/3 was prompt-driven. The E05b locate dual is still 待补. E7 stays open.
+- Stance layer, real-dialogue cold read plus two bid shots: given full context, the reader catches confirmation instants and hollow confirmations. It has a stable blind spot for dual-function turns, where a reply also hands over a relational bid. The author files this as 动作边界 evidence. The auth-B structure is a negative contribution at the stance layer.
+- NN micro stays idle, with a negative result. ArmC2 design is paused.
+- Paper: `paper/李逾凡_从词表不可分到门控结构中的目标维持_学术重写版v4_2026-10-17.docx` (v4; the 懂人／知音共址 question is now the starting proposition, with a new Study 4 on behavioral-layer co-addressing) and deck `paper/答辩_2026-10-17_v2.pptx`. All earlier docx/pptx under `paper/` were removed so the paper lives as one copy; `paper/主要结果表.csv` and `paper/研究二数据对齐说明_2026-10-14.md` stay.
+- Runners: `02_脚本/e05b_*/` and `02_脚本/stance_coldread/`. The key comes only from `DOTS3_API_KEY`.
+- Not shipped: the author's private group-chat corpus (transcripts, rendered prompts, raw readings, quoted screens), the E05b/E05a/X01 anchor JSON (placeholder `*.不入库.txt` only), and raw `*.jsonl` for today's E05b runs and Arm-C. Stance-layer results ship only as a quote-free count summary.

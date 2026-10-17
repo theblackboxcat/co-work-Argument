@@ -1,0 +1,9 @@
+dialogue/*.txt
+rendered_prompts/
+out/*.jsonl
+out/*.md
+!out/README_结果放这里.md
+out/*.json
+config.json
+__pycache__/
+*.pyc

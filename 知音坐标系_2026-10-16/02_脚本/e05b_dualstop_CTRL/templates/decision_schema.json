@@ -1,0 +1,14 @@
+{
+  "schema": "E05b_dualstop_CTRL_decision_v1",
+  "experiment": "E05b_dualstop_CTRL_unpressured_same_batch",
+  "prompt_mode": "authB_covered_NO_dualstop_bias_CTRL",
+  "verdict": "PASS_CTRL_BASELINE|INC",
+  "pressurized_ref": {"ts": "20261017_144249", "E05b_dual": "3/3"},
+  "instrument_honest": {
+    "E05b": {"dual_stop_S14_S20": "k/3"},
+    "sentry": {"E05a": {}, "X01": {}},
+    "negative_dual_veto": {},
+    "compare_vs_pressurized_144249": {}
+  },
+  "gates": {"freeze_ArmB": false, "close_E7": false, "claim_zhiyin_proven": false}
+}

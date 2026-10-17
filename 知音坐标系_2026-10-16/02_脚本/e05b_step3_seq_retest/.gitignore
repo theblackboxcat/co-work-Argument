@@ -1,0 +1,7 @@
+config.json
+scripts/runs/
+out/*.jsonl
+out/summary_*.md
+out/decision_*.json
+__pycache__/
+*.pyc

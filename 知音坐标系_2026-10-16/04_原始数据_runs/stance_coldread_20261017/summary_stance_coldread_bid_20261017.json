@@ -1,0 +1,324 @@
+{
+  "NOTE": "公开摘要 · 去引文、去对话。原始读数（raw jsonl / readings md / 带引文的粗筛 json）大量引用作者私人群聊原文，只留作者本地，不入库。计数只是粗筛（读者用引号引了几处、对上原文几行），不是判定；判读由作者逐句精读完成，结论见 00_结论/结算_态度层真实对话冷读与出价两枪_2026-10-17.md。",
+  "material": {
+    "source": "作者本人真实群聊（A=作者，B=对方），同一场对话按时间分三段：前半 R02、中段 R_mid、后半 R01；整场 R_full = 三段连起来",
+    "included_in_repo": false
+  },
+  "coldread": {
+    "ts": "20261017_160342",
+    "model": "dots3-note-prev",
+    "params": {
+      "temperature": 0.2,
+      "max_tokens": 1600,
+      "thinking": "disabled"
+    },
+    "n_calls": 16,
+    "budget": 16,
+    "stopped": null,
+    "reps_per_cell": 1,
+    "retries": 0,
+    "trunk_for_struct_reader": "trunk_v2_covered_gloss_s14_s27.json",
+    "trunk_sha256": "fee2d380c6ad3d893890ac35930ad49c2be9e87ceb9c0edd45eee1a146a32c33",
+    "dialogue_sha256": {
+      "R_full.txt": "fb567d94462f066214bba8dffbb1a53d6035264b61483e061ffb2e2e60894463",
+      "R02.txt": "c8bbe6f5f07fa41e3134ac1aece4d117a22f2ff26ea0b0f2bc29c0cf75cd4f66",
+      "R_mid.txt": "0b0f258f8b2d2652a217d6e6dd1bfcbe76a1c1a81d3a2052f11e220dfb3c3fae",
+      "R01.txt": "ccafe5e940e49e309b41000d784bb2eecd7b90bc0649f7f700940f5f9841e4f0"
+    },
+    "cells": [
+      {
+        "condition": "full",
+        "reader": "bare",
+        "r1": {
+          "stop_reason": "end_turn",
+          "reply_chars": 2534,
+          "n_quotes": 67,
+          "n_cited_lines_verbatim": 21
+        },
+        "r2": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1461,
+          "n_quotes": 30,
+          "n_cited_lines_verbatim": 11
+        }
+      },
+      {
+        "condition": "full",
+        "reader": "struct",
+        "r1": {
+          "stop_reason": "max_tokens",
+          "reply_chars": 2623,
+          "n_quotes": 77,
+          "n_cited_lines_verbatim": 26
+        },
+        "r2": {
+          "stop_reason": "max_tokens",
+          "reply_chars": 2609,
+          "n_quotes": 59,
+          "n_cited_lines_verbatim": 39
+        }
+      },
+      {
+        "condition": "seg_R02",
+        "reader": "bare",
+        "r1": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1875,
+          "n_quotes": 42,
+          "n_cited_lines_verbatim": 9
+        },
+        "r2": {
+          "stop_reason": "end_turn",
+          "reply_chars": 2231,
+          "n_quotes": 39,
+          "n_cited_lines_verbatim": 15
+        }
+      },
+      {
+        "condition": "seg_R02",
+        "reader": "struct",
+        "r1": {
+          "stop_reason": "max_tokens",
+          "reply_chars": 2650,
+          "n_quotes": 59,
+          "n_cited_lines_verbatim": 18
+        },
+        "r2": {
+          "stop_reason": "max_tokens",
+          "reply_chars": 2612,
+          "n_quotes": 42,
+          "n_cited_lines_verbatim": 13
+        }
+      },
+      {
+        "condition": "seg_R_mid",
+        "reader": "bare",
+        "r1": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1668,
+          "n_quotes": 56,
+          "n_cited_lines_verbatim": 11
+        },
+        "r2": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1025,
+          "n_quotes": 31,
+          "n_cited_lines_verbatim": 10
+        }
+      },
+      {
+        "condition": "seg_R_mid",
+        "reader": "struct",
+        "r1": {
+          "stop_reason": "end_turn",
+          "reply_chars": 2623,
+          "n_quotes": 46,
+          "n_cited_lines_verbatim": 11
+        },
+        "r2": {
+          "stop_reason": "end_turn",
+          "reply_chars": 2084,
+          "n_quotes": 48,
+          "n_cited_lines_verbatim": 21
+        }
+      },
+      {
+        "condition": "seg_R01",
+        "reader": "bare",
+        "r1": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1757,
+          "n_quotes": 44,
+          "n_cited_lines_verbatim": 10
+        },
+        "r2": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1187,
+          "n_quotes": 32,
+          "n_cited_lines_verbatim": 11
+        }
+      },
+      {
+        "condition": "seg_R01",
+        "reader": "struct",
+        "r1": {
+          "stop_reason": "max_tokens",
+          "reply_chars": 2660,
+          "n_quotes": 57,
+          "n_cited_lines_verbatim": 11
+        },
+        "r2": {
+          "stop_reason": "end_turn",
+          "reply_chars": 1162,
+          "n_quotes": 22,
+          "n_cited_lines_verbatim": 6
+        }
+      }
+    ]
+  },
+  "bid": {
+    "open": {
+      "ts": "20261017_161943",
+      "probe": "open",
+      "cond": "full",
+      "reader": "bare",
+      "repeat": 3,
+      "n_calls": 6,
+      "budget": 6,
+      "params": {
+        "temperature": 0.2,
+        "max_tokens": 1600,
+        "thinking": "disabled"
+      },
+      "dialogue_sha256": "fb567d94462f066214bba8dffbb1a53d6035264b61483e061ffb2e2e60894463",
+      "reps": [
+        {
+          "rep": 1,
+          "r1": {
+            "stop": "max_tokens",
+            "reply_chars": 2602,
+            "quotes_verbatim": 5,
+            "quotes_not_found": 13
+          },
+          "r2": {
+            "stop": "end_turn",
+            "reply_chars": 1137,
+            "quotes_verbatim": 1,
+            "quotes_not_found": 11
+          },
+          "r2_mismatch_hint": true
+        },
+        {
+          "rep": 2,
+          "r1": {
+            "stop": "end_turn",
+            "reply_chars": 2479,
+            "quotes_verbatim": 14,
+            "quotes_not_found": 9
+          },
+          "r2": {
+            "stop": "end_turn",
+            "reply_chars": 1008,
+            "quotes_verbatim": 9,
+            "quotes_not_found": 8
+          },
+          "r2_mismatch_hint": true
+        },
+        {
+          "rep": 3,
+          "r1": {
+            "stop": "end_turn",
+            "reply_chars": 2214,
+            "quotes_verbatim": 15,
+            "quotes_not_found": 5
+          },
+          "r2": {
+            "stop": "end_turn",
+            "reply_chars": 421,
+            "quotes_verbatim": 5,
+            "quotes_not_found": 3
+          },
+          "r2_mismatch_hint": true
+        }
+      ]
+    },
+    "both": {
+      "ts": "20261017_162351",
+      "probe": "both",
+      "cond": "full",
+      "reader": "bare",
+      "repeat": 3,
+      "n_calls": 6,
+      "budget": 6,
+      "params": {
+        "temperature": 0.2,
+        "max_tokens": 1600,
+        "thinking": "disabled"
+      },
+      "dialogue_sha256": "fb567d94462f066214bba8dffbb1a53d6035264b61483e061ffb2e2e60894463",
+      "reps": [
+        {
+          "rep": 1,
+          "r1": {
+            "stop": "max_tokens",
+            "reply_chars": 2646,
+            "quotes_verbatim": 7,
+            "quotes_not_found": 7
+          },
+          "r2": {
+            "stop": "end_turn",
+            "reply_chars": 1074,
+            "quotes_verbatim": 3,
+            "quotes_not_found": 4
+          },
+          "r2_mismatch_hint": true
+        },
+        {
+          "rep": 2,
+          "r1": {
+            "stop": "max_tokens",
+            "reply_chars": 2530,
+            "quotes_verbatim": 5,
+            "quotes_not_found": 8
+          },
+          "r2": {
+            "stop": "end_turn",
+            "reply_chars": 2417,
+            "quotes_verbatim": 7,
+            "quotes_not_found": 5
+          },
+          "r2_mismatch_hint": true
+        },
+        {
+          "rep": 3,
+          "r1": {
+            "stop": "end_turn",
+            "reply_chars": 2076,
+            "quotes_verbatim": 5,
+            "quotes_not_found": 4
+          },
+          "r2": {
+            "stop": "end_turn",
+            "reply_chars": 302,
+            "quotes_verbatim": 2,
+            "quotes_not_found": 4
+          },
+          "r2_mismatch_hint": true
+        }
+      ]
+    }
+  },
+  "author_reading_by_function": {
+    "coldread": [
+      {
+        "item": "前半段的确认瞬间（一句简短确认）",
+        "result": "拿到前半段的读者都指了出来，但读成单向的「一方接住另一方」的凭据，没读出双方共在"
+      },
+      {
+        "item": "后半段的空确认（附和后换成现成大词）",
+        "result": "整场 bare 读者判为表面认同、实质未承接，与作者判断一致；只读后半段时，同一读者把同一处判为深度承接或轻微断层——判断随语境反转，空确认要看到前面的断才读得出"
+      },
+      {
+        "item": "中段断点（A 的对等关系性类比被搁置）",
+        "result": "0 个读者读到，且方向读反（把断点算到 A 头上）"
+      },
+      {
+        "item": "struct 读者（带 auth B 结构）",
+        "result": "被 S14 释义「互相确认/接话」牵引，把确认词当接住；auth B 在态度层是负贡献"
+      }
+    ],
+    "bid": [
+      {
+        "probe": "open",
+        "result": "0/3 把 A 的那句关系性递出认作出价；B 一处被搁置的递出只在 1/3 里看到"
+      },
+      {
+        "probe": "both",
+        "result": "分别点名问 A、B 仍 0/3；A 的递出只列出观点和隐喻类，那句关系性递出始终被放在「回应」栏"
+      },
+      {
+        "note": "盲点之外的判断在 rep 之间不稳定；只有这个盲点稳定复现。读者对「对得上吗」按话题层作答，话题连续 ≠ 所指承接"
+      }
+    ]
+  }
+}
