@@ -1,0 +1,4 @@
+Loaded 2520 raw cells
+Wrote report → /workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/00_结论/实验报告_NN组织NN_第1期_2026-10-17.md
+Decision: Fail-Bind
+Allowed: 绑定/私有结构非因；臂 B 与主臂无实质差别。

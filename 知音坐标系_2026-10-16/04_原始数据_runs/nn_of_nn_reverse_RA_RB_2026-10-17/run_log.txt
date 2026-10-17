@@ -1,0 +1,51 @@
+R-A+R-B grid: 1575 cells → /workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/04_原始数据_runs/nn_of_nn_reverse_RA_RB_2026-10-17
+configs=[(4.0, 0, 'R-A'), (2.0, 0, 'R-B-i'), (8.0, 0, 'R-B-i'), (4.0, 16, 'R-B-ii'), (4.0, 32, 'R-B-ii')]
+(parents untouched: nn_of_nn_phase1_2026-10-17, nn_of_nn_phase1_retest_2026-10-17)
+[1/1575] d=16 α=0.05 O-H β=4.0 ep=0 seed=0 U=-0.0145 m=1.0  (0s, ~21s left)
+[40/1575] d=16 α=0.05 O-M β=4.0 ep=32 seed=2 U=-0.0073 m=1.0  (5s, ~187s left)
+[80/1575] d=16 α=0.1 O-H β=4.0 ep=32 seed=0 U=-0.0159 m=1.0  (13s, ~247s left)
+[120/1575] d=16 α=0.1 O-M β=4.0 ep=32 seed=3 U=-0.0040 m=1.0  (19s, ~232s left)
+[160/1575] d=16 α=0.14 O-H β=4.0 ep=32 seed=1 U=-0.0099 m=1.0  (26s, ~233s left)
+[200/1575] d=16 α=0.14 O-M β=4.0 ep=32 seed=4 U=-0.0187 m=1.0  (33s, ~230s left)
+[240/1575] d=16 α=0.2 O-H β=4.0 ep=32 seed=2 U=-0.0143 m=0.9161141514778137  (39s, ~219s left)
+[280/1575] d=16 α=0.2 D β=4.0 ep=32 seed=0 U=-0.0151 m=nan  (48s, ~223s left)
+[320/1575] d=16 α=0.3 O-H β=4.0 ep=32 seed=3 U=-0.0174 m=0.8828664422035217  (53s, ~210s left)
+[360/1575] d=16 α=0.3 D β=4.0 ep=32 seed=1 U=-0.0175 m=nan  (63s, ~213s left)
+[400/1575] d=16 α=0.5 O-H β=4.0 ep=32 seed=4 U=-0.0253 m=0.807092547416687  (67s, ~197s left)
+[440/1575] d=16 α=0.5 D β=4.0 ep=32 seed=2 U=-0.0207 m=nan  (79s, ~203s left)
+[480/1575] d=16 α=1.0 O-M β=4.0 ep=32 seed=0 U=-0.0189 m=0.09866772592067719  (82s, ~188s left)
+[520/1575] d=16 α=1.0 D β=4.0 ep=32 seed=3 U=-0.0224 m=nan  (94s, ~191s left)
+[560/1575] d=32 α=0.05 O-M β=4.0 ep=32 seed=1 U=-0.0257 m=1.0  (99s, ~179s left)
+[600/1575] d=32 α=0.05 D β=4.0 ep=32 seed=4 U=-0.0079 m=nan  (109s, ~178s left)
+[640/1575] d=32 α=0.1 O-M β=4.0 ep=32 seed=2 U=-0.0116 m=0.16004030406475067  (114s, ~166s left)
+[680/1575] d=32 α=0.14 O-H β=4.0 ep=32 seed=0 U=-0.0144 m=0.9137158989906311  (123s, ~162s left)
+[720/1575] d=32 α=0.14 O-M β=4.0 ep=32 seed=3 U=-0.0120 m=0.5863116383552551  (129s, ~153s left)
+[760/1575] d=32 α=0.2 O-H β=4.0 ep=32 seed=1 U=-0.0225 m=0.8891502022743225  (137s, ~147s left)
+[800/1575] d=32 α=0.2 O-M β=4.0 ep=32 seed=4 U=-0.0276 m=0.4209598898887634  (145s, ~140s left)
+[840/1575] d=32 α=0.3 O-H β=4.0 ep=32 seed=2 U=-0.0210 m=0.7432135939598083  (151s, ~132s left)
+[880/1575] d=32 α=0.3 D β=4.0 ep=32 seed=0 U=-0.0185 m=nan  (160s, ~127s left)
+[920/1575] d=32 α=0.5 O-H β=4.0 ep=32 seed=3 U=-0.0225 m=0.6338629722595215  (166s, ~118s left)
+[960/1575] d=32 α=0.5 D β=4.0 ep=32 seed=1 U=-0.0226 m=nan  (176s, ~113s left)
+[1000/1575] d=32 α=1.0 O-H β=4.0 ep=32 seed=4 U=-0.0216 m=0.45419231057167053  (180s, ~103s left)
+[1040/1575] d=32 α=1.0 D β=4.0 ep=32 seed=2 U=-0.0244 m=nan  (191s, ~98s left)
+[1080/1575] d=64 α=0.05 O-M β=4.0 ep=32 seed=0 U=-0.0160 m=0.883592426776886  (195s, ~89s left)
+[1120/1575] d=64 α=0.05 D β=4.0 ep=32 seed=3 U=-0.0142 m=nan  (207s, ~84s left)
+[1160/1575] d=64 α=0.1 O-M β=4.0 ep=32 seed=1 U=-0.0188 m=0.40748924016952515  (211s, ~76s left)
+[1200/1575] d=64 α=0.1 D β=4.0 ep=32 seed=4 U=-0.0192 m=nan  (224s, ~70s left)
+[1240/1575] d=64 α=0.14 O-M β=4.0 ep=32 seed=2 U=-0.0179 m=0.20422996580600739  (230s, ~62s left)
+[1280/1575] d=64 α=0.2 O-H β=4.0 ep=32 seed=0 U=-0.0177 m=0.7005829215049744  (245s, ~57s left)
+[1320/1575] d=64 α=0.2 O-M β=4.0 ep=32 seed=3 U=-0.0152 m=0.12633207440376282  (252s, ~49s left)
+[1360/1575] d=64 α=0.3 O-H β=4.0 ep=32 seed=1 U=-0.0243 m=0.6143743991851807  (260s, ~41s left)
+[1400/1575] d=64 α=0.3 O-M β=4.0 ep=32 seed=4 U=-0.0212 m=0.10232281684875488  (269s, ~34s left)
+[1440/1575] d=64 α=0.5 O-H β=4.0 ep=32 seed=2 U=-0.0234 m=0.48204901814460754  (275s, ~26s left)
+[1480/1575] d=64 α=0.5 D β=4.0 ep=32 seed=0 U=-0.0240 m=nan  (285s, ~18s left)
+[1520/1575] d=64 α=1.0 O-H β=4.0 ep=32 seed=3 U=-0.0234 m=0.3110237419605255  (290s, ~10s left)
+[1560/1575] d=64 α=1.0 D β=4.0 ep=32 seed=1 U=-0.0263 m=nan  (301s, ~3s left)
+[1575/1575] d=64 α=1.0 D β=4.0 ep=32 seed=4 U=-0.0245 m=nan  (305s, ~0s left)
+/workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/02_脚本/nn_of_nn_reverse_RA_RB/run_RA_RB.py:164: RuntimeWarning: Mean of empty slice
+  "m_mean": float(np.nanmean(ms)),
+/usr/local/lib/python3.13/dist-packages/numpy/lib/_nanfunctions_impl.py:1997: RuntimeWarning: Degrees of freedom <= 0 for slice.
+  var = nanvar(a, axis=axis, dtype=dtype, out=out, ddof=ddof,
+/workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/02_脚本/nn_of_nn_reverse_RA_RB/run_RA_RB.py:168: RuntimeWarning: Mean of empty slice
+  "entropy_mean": float(np.nanmean(ents)),
+Done in 305.0s. Wrote /workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/04_原始数据_runs/nn_of_nn_reverse_RA_RB_2026-10-17/cells_raw.jsonl

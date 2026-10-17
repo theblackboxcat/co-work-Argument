@@ -1,0 +1,46 @@
+{
+  "n_cells": 2520,
+  "elapsed_sec": 525.0681617259979,
+  "d_list": [
+    16,
+    32,
+    64
+  ],
+  "alpha_list": [
+    0.05,
+    0.1,
+    0.14,
+    0.2,
+    0.3,
+    0.5,
+    1.0
+  ],
+  "eta_levels": {
+    "low": 0.15,
+    "high": 0.8
+  },
+  "organizers": [
+    "O-H",
+    "O-M",
+    "D"
+  ],
+  "arms": [
+    "main",
+    "B"
+  ],
+  "pads": [
+    "none",
+    "pad_perp"
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "retest": true,
+  "task": "combinatorial_concat",
+  "armB_mode": "hard_wrong_pair_train_and_test",
+  "parent_results_untouched": "/workspace/proj_20261009/\u8bba\u6587\u8d44\u6599_cowork/\u77e5\u97f3\u5750\u6807\u7cfb_2026-10-16/04_\u539f\u59cb\u6570\u636e_runs/nn_of_nn_phase1_2026-10-17"
+}

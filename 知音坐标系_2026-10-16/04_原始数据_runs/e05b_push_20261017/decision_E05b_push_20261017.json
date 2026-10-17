@@ -1,0 +1,57 @@
+{
+  "schema": "E05b_mutual_push_2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "host": "LAPTOP-dots3",
+  "b_caliber_remains_authorized": true,
+  "e7_closed": false,
+  "zhiyin_claim": false,
+  "decision": "needs_author_拍",
+  "loop": "advanced_diagnostic_not_closed",
+  "arms": {
+    "A_context_enrich_Btrunk": {
+      "E05b_S14": "1/3",
+      "E05b_S20": "2/3",
+      "E05b_S13": "0/3",
+      "meanJ": 0.25,
+      "verdict": "KILLED — enrichment alone does not move under B"
+    },
+    "B_DRAFT_narrow_boundary": {
+      "E05b_S14": "3/3",
+      "E05b_S20": "3/3",
+      "E05b_S13": "0/3",
+      "meanJ": 0.667,
+      "verdict": "MOVED S14/S20 dual-stop; DRAFT only; S13 still 0",
+      "side_effect": {
+        "E01_S14": "2/3",
+        "E05a_S14": "2/3",
+        "X01_S14": "3/3",
+        "note": "over-trigger family like v3; do not freeze"
+      }
+    },
+    "C_twoturn_probe_Btrunk": {
+      "turn1_pattern": "S03+S20 x2 / S03+S14 x1 (same as B)",
+      "turn2_prefer_S14": "1/3",
+      "turn2_prefer_S20": "2/3",
+      "turn2_s13_内外": "3/3",
+      "turn2_mutual": "3/3",
+      "verdict": "MOVED proposition-layer: latent S13+mutual when forced; single-shot still absorbs"
+    },
+    "CTRL_orig_Btrunk": {
+      "E05b_S14": "1/3",
+      "E05b_S20": "2/3",
+      "E05b_S13": "0/3",
+      "meanJ": 0.25,
+      "verdict": "reproduces morning B"
+    }
+  },
+  "baseline_B_retest_105628": {
+    "E05b_S14": "1/3",
+    "E05b_S20": "2/3",
+    "E05b_S13": "0/3"
+  },
+  "author_must_拍": [
+    "Authorize ArmB narrow DRAFT into B? (side-effect X01/E05a S14 leak still present — need accept or further kill)",
+    "S13: demote from E05b gold vs enrich gloss vs accept ArmC probe as separate evidence channel",
+    "Instrument: 3-node gold under hard 1-2 node output cap (exact impossible; J capped 2/3)"
+  ]
+}

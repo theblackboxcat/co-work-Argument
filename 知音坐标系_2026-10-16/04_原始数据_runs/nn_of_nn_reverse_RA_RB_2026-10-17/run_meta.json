@@ -1,0 +1,79 @@
+{
+  "n_cells": 1575,
+  "elapsed_sec": 305.0409138202667,
+  "d_list": [
+    16,
+    32,
+    64
+  ],
+  "alpha_list": [
+    0.05,
+    0.1,
+    0.14,
+    0.2,
+    0.3,
+    0.5,
+    1.0
+  ],
+  "eta_levels": {
+    "low": 0.15
+  },
+  "organizers": [
+    "O-H",
+    "O-M",
+    "D"
+  ],
+  "seeds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "beta_org_levels": [
+    2.0,
+    4.0,
+    8.0
+  ],
+  "exec_pad_dims": [
+    0,
+    16,
+    32
+  ],
+  "configs": [
+    {
+      "beta_org": 4.0,
+      "exec_pad_dim": 0,
+      "sweep": "R-A"
+    },
+    {
+      "beta_org": 2.0,
+      "exec_pad_dim": 0,
+      "sweep": "R-B-i"
+    },
+    {
+      "beta_org": 8.0,
+      "exec_pad_dim": 0,
+      "sweep": "R-B-i"
+    },
+    {
+      "beta_org": 4.0,
+      "exec_pad_dim": 16,
+      "sweep": "R-B-ii"
+    },
+    {
+      "beta_org": 4.0,
+      "exec_pad_dim": 32,
+      "sweep": "R-B-ii"
+    }
+  ],
+  "package": "nn_of_nn_reverse_RA_RB",
+  "prereg": "prereg_反向共形_RA_RB_2026-10-17.md",
+  "author_auth": "开跑 2026-10-17",
+  "no_E_pass_redeem": true,
+  "Fail_Bind_H2_authority": true,
+  "parents_untouched": [
+    "/workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/04_原始数据_runs/nn_of_nn_phase1_2026-10-17",
+    "/workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/04_原始数据_runs/nn_of_nn_phase1_retest_2026-10-17"
+  ]
+}

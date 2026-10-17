@@ -1,0 +1,91 @@
+{
+  "slice": "eta=low, pad=none",
+  "per_d": {
+    "16": {
+      "oh_m_critical": true,
+      "oh_U_critical": true,
+      "oh_m_alpha_c": 0.4,
+      "oh_U_alpha_c": 0.17,
+      "oh_m_gap": -0.28172886490821836,
+      "oh_U_gap": -0.008173959511440308,
+      "om_U_critical": true,
+      "om_m_critical": true,
+      "om_U_alpha_c": 0.17,
+      "d_U_critical": true,
+      "d_U_alpha_c": 0.17,
+      "same_morph_om": true,
+      "same_morph_d": true,
+      "armB_gone_or_shifted": false,
+      "pad_redeemed": false,
+      "oh_B_m_critical": true,
+      "oh_B_U_critical": true,
+      "oh_pad_m_critical": true,
+      "oh_pad_U_critical": true
+    },
+    "32": {
+      "oh_m_critical": true,
+      "oh_U_critical": true,
+      "oh_m_alpha_c": 0.4,
+      "oh_U_alpha_c": 0.17,
+      "oh_m_gap": -0.3587930351495744,
+      "oh_U_gap": -0.005390138782285055,
+      "om_U_critical": true,
+      "om_m_critical": true,
+      "om_U_alpha_c": 0.17,
+      "d_U_critical": true,
+      "d_U_alpha_c": 0.17,
+      "same_morph_om": true,
+      "same_morph_d": true,
+      "armB_gone_or_shifted": true,
+      "pad_redeemed": false,
+      "oh_B_m_critical": true,
+      "oh_B_U_critical": true,
+      "oh_pad_m_critical": true,
+      "oh_pad_U_critical": true
+    },
+    "64": {
+      "oh_m_critical": true,
+      "oh_U_critical": true,
+      "oh_m_alpha_c": 0.25,
+      "oh_U_alpha_c": 0.4,
+      "oh_m_gap": -0.3622428447008133,
+      "oh_U_gap": -0.0035661824229651223,
+      "om_U_critical": true,
+      "om_m_critical": true,
+      "om_U_alpha_c": 0.4,
+      "d_U_critical": true,
+      "d_U_alpha_c": 0.4,
+      "same_morph_om": true,
+      "same_morph_d": true,
+      "armB_gone_or_shifted": true,
+      "pad_redeemed": false,
+      "oh_B_m_critical": true,
+      "oh_B_U_critical": true,
+      "oh_pad_m_critical": true,
+      "oh_pad_U_critical": true
+    }
+  },
+  "decision_code": "Fail-Bind",
+  "allowed_wording": "装置已生效，但臂 B 与主臂临界形态仍同 → 支持 H2；机制层停。",
+  "rationale": [
+    "Apparatus OK but Arm B criticality not gone/shifted (H2)"
+  ],
+  "R1_U_m_corr": {
+    "corr": 0.501890861617153,
+    "n": 105
+  },
+  "R1_unfixed": false,
+  "apparatus_ok": true,
+  "armB_m_drop": {
+    "pass_frac": 1.0,
+    "n_pass": 14,
+    "n_total": 14,
+    "apparatus_ok": true
+  },
+  "oh_pass_count": 3,
+  "oh_m_only_count": 3,
+  "any_same_morph_om": true,
+  "any_same_morph_d": true,
+  "all_armB_ok": false,
+  "any_pad_redeem": false
+}

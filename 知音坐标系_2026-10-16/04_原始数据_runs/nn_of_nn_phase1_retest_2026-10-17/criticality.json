@@ -1,0 +1,1970 @@
+[
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.008173959511440308,
+      "ci_low": -0.012961973926144198,
+      "ci_high": -0.0047544203798751735,
+      "mu_left": -0.010688167721606294,
+      "mu_right": -0.018862127233046602,
+      "alpha_c_boot_mean": 0.20622499999999996
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.28172886490821836,
+      "ci_low": -0.28914513123035435,
+      "ci_high": -0.26030701498190556,
+      "mu_left": 0.9635624957084656,
+      "mu_right": 0.6818336308002473,
+      "alpha_c_boot_mean": 0.3928749999999999
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.008470180912037564,
+      "ci_low": -0.012512951578262025,
+      "ci_high": -0.00477289287817898,
+      "mu_left": -0.010619015836517087,
+      "mu_right": -0.01908919674855465,
+      "alpha_c_boot_mean": 0.21369999999999997
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.27896646022796634,
+      "ci_low": -0.2870479583740234,
+      "ci_high": -0.2564780380080143,
+      "mu_left": 0.9633570766448974,
+      "mu_right": 0.6843906164169311,
+      "alpha_c_boot_mean": 0.39137500000000003
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.01472932167753426,
+      "ci_low": -0.019293808286803587,
+      "ci_high": -0.012515725613639745,
+      "mu_left": -0.01058577405657723,
+      "mu_right": -0.02531509573411149,
+      "alpha_c_boot_mean": 0.22865
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.8422952371339003,
+      "ci_low": -0.8497786124547323,
+      "ci_high": -0.8331963509321213,
+      "mu_left": 0.9155791372060775,
+      "mu_right": 0.07328390007217726,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.01480020361437316,
+      "ci_low": -0.018988779745471127,
+      "ci_high": -0.013326908927805857,
+      "mu_left": -0.010615931948436597,
+      "mu_right": -0.025416135562809757,
+      "alpha_c_boot_mean": 0.24072499999999997
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.8459854672352473,
+      "ci_low": -0.853056528667609,
+      "ci_high": -0.8354725178952018,
+      "mu_left": 0.918675622344017,
+      "mu_right": 0.07269015510876974,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.008061594702552586,
+      "ci_low": -0.011760538881091579,
+      "ci_high": -0.005217963154187195,
+      "mu_left": -0.010628868454438853,
+      "mu_right": -0.018690463156991438,
+      "alpha_c_boot_mean": 0.27177499999999993
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6554537385702133,
+      "ci_low": -0.7090645059943199,
+      "ci_high": -0.6229381452004115,
+      "mu_left": 0.9131260275840759,
+      "mu_right": 0.2576722890138626,
+      "alpha_c_boot_mean": 0.22579999999999997
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.008093504464719056,
+      "ci_low": -0.011759106797749243,
+      "ci_high": -0.005578108521301767,
+      "mu_left": -0.01058838053159361,
+      "mu_right": -0.018681884996312667,
+      "alpha_c_boot_mean": 0.2551
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6542919618388017,
+      "ci_low": -0.7145318947980802,
+      "ci_high": -0.6267686269525439,
+      "mu_left": 0.9194735206663609,
+      "mu_right": 0.26518155882755917,
+      "alpha_c_boot_mean": 0.22519999999999996
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.01421569691445828,
+      "ci_low": -0.01825545139545204,
+      "ci_high": -0.01259800272732974,
+      "mu_left": -0.010568073352694052,
+      "mu_right": -0.02478377026715233,
+      "alpha_c_boot_mean": 0.28442499999999993
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6578048919637998,
+      "ci_low": -0.6752223625282446,
+      "ci_high": -0.6452531186739603,
+      "mu_left": 0.9168412178754807,
+      "mu_right": 0.25903632591168085,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014156813193019873,
+      "ci_low": -0.019167115572301274,
+      "ci_high": -0.0121015111604234,
+      "mu_left": -0.010613245561476284,
+      "mu_right": -0.024770058754496158,
+      "alpha_c_boot_mean": 0.22519999999999996
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6529435391227405,
+      "ci_low": -0.6660172472770015,
+      "ci_high": -0.6405859798192979,
+      "mu_left": 0.915086904168129,
+      "mu_right": 0.26214336504538854,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.008307645549741815,
+      "ci_low": -0.01198960291406571,
+      "ci_high": -0.005511611451224578,
+      "mu_left": -0.010642745348063485,
+      "mu_right": -0.0189503908978053,
+      "alpha_c_boot_mean": 0.26717499999999994
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.008298674664994824,
+      "ci_low": -0.012940640004867828,
+      "ci_high": -0.005804605557283547,
+      "mu_left": -0.010655924260452887,
+      "mu_right": -0.01895459892544771,
+      "alpha_c_boot_mean": 0.25567499999999993
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014392364324586316,
+      "ci_low": -0.018356091475302042,
+      "ci_high": -0.013004218142604062,
+      "mu_left": -0.010710350363294216,
+      "mu_right": -0.025102714687880532,
+      "alpha_c_boot_mean": 0.28154999999999997
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014326091951374511,
+      "ci_low": -0.01789476689838359,
+      "ci_high": -0.012211157385192238,
+      "mu_left": -0.010619007131435034,
+      "mu_right": -0.024945099082809546,
+      "alpha_c_boot_mean": 0.22174999999999995
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014614433973468613,
+      "ci_low": -0.018811565930667015,
+      "ci_high": -0.012371480164474988,
+      "mu_left": -0.010713946276251171,
+      "mu_right": -0.025328380249719784,
+      "alpha_c_boot_mean": 0.2240749999999999
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.4345760017633439,
+      "ci_low": -0.4474693546444178,
+      "ci_high": -0.416993855436643,
+      "mu_left": 0.9605550318956375,
+      "mu_right": 0.5259790301322936,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014594697237800545,
+      "ci_low": -0.019091735945934586,
+      "ci_high": -0.011573471963150329,
+      "mu_left": -0.010597888666083221,
+      "mu_right": -0.025192585903883766,
+      "alpha_c_boot_mean": 0.22232499999999994
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.43706179757912944,
+      "ci_low": -0.4472839145859083,
+      "ci_high": -0.4291606575250625,
+      "mu_left": 0.9638244062662125,
+      "mu_right": 0.526762608687083,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.015567642053605535,
+      "ci_low": -0.019243188410127312,
+      "ci_high": -0.01275765743415664,
+      "mu_left": -0.010603043868520979,
+      "mu_right": -0.026170685922126513,
+      "alpha_c_boot_mean": 0.20852499999999996
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.7588376641273499,
+      "ci_low": -0.7630277673403422,
+      "ci_high": -0.7528083617488543,
+      "mu_left": 0.9155731499195099,
+      "mu_right": 0.15673548579216004,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.015609737816595031,
+      "ci_low": -0.019812049011355866,
+      "ci_high": -0.013195017532517585,
+      "mu_left": -0.010617415360808827,
+      "mu_right": -0.02622715317740386,
+      "alpha_c_boot_mean": 0.20277499999999996
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.7627611259619395,
+      "ci_low": -0.768769841765364,
+      "ci_high": -0.7560058310627937,
+      "mu_left": 0.9182239413261414,
+      "mu_right": 0.1554628153642019,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014169752161463987,
+      "ci_low": -0.018342858803766456,
+      "ci_high": -0.01137761333139237,
+      "mu_left": -0.01061862668656457,
+      "mu_right": -0.024788378848028557,
+      "alpha_c_boot_mean": 0.21217499999999995
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.656665497024854,
+      "ci_low": -0.6703515748182932,
+      "ci_high": -0.6423399815956752,
+      "mu_left": 0.9158753484487534,
+      "mu_right": 0.25920985142389935,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014209625672436695,
+      "ci_low": -0.018462677091006418,
+      "ci_high": -0.011466870536125209,
+      "mu_left": -0.01057835354020036,
+      "mu_right": -0.024787979212637055,
+      "alpha_c_boot_mean": 0.20239999999999994
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6635037531455358,
+      "ci_low": -0.6732598025972645,
+      "ci_high": -0.6556212648376822,
+      "mu_left": 0.9231090635061264,
+      "mu_right": 0.25960531036059065,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.015101557875848555,
+      "ci_low": -0.019755922596292313,
+      "ci_high": -0.012883460488328152,
+      "mu_left": -0.010570120965600865,
+      "mu_right": -0.02567167884144942,
+      "alpha_c_boot_mean": 0.22592499999999993
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6584137131770451,
+      "ci_low": -0.6643033772706985,
+      "ci_high": -0.6522968637943267,
+      "mu_left": 0.9166611820459366,
+      "mu_right": 0.25824746886889144,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014878577005682197,
+      "ci_low": -0.01892114779791638,
+      "ci_high": -0.011889217356106154,
+      "mu_left": -0.010623938928684093,
+      "mu_right": -0.02550251593436629,
+      "alpha_c_boot_mean": 0.19472499999999995
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.6537806883454322,
+      "ci_low": -0.6589723472793896,
+      "ci_high": -0.6487337897221248,
+      "mu_left": 0.915274378657341,
+      "mu_right": 0.2614936903119087,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014591134307521085,
+      "ci_low": -0.018640860284422987,
+      "ci_high": -0.01177956201232907,
+      "mu_left": -0.011118610333915554,
+      "mu_right": -0.02570974464143664,
+      "alpha_c_boot_mean": 0.21964999999999996
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.014752032768157296,
+      "ci_low": -0.01888366531711644,
+      "ci_high": -0.011331445080785587,
+      "mu_left": -0.010977566996149657,
+      "mu_right": -0.025729599764306953,
+      "alpha_c_boot_mean": 0.19759999999999994
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.015506287387347788,
+      "ci_low": -0.01964813124254041,
+      "ci_high": -0.013062833244201428,
+      "mu_left": -0.011207944609373749,
+      "mu_right": -0.026714231996721537,
+      "alpha_c_boot_mean": 0.21967499999999998
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 16,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.015507099504719122,
+      "ci_low": -0.02040505204565548,
+      "ci_high": -0.01237520708714617,
+      "mu_left": -0.01090783959988994,
+      "mu_right": -0.026414939104609063,
+      "alpha_c_boot_mean": 0.18149999999999994
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.005390138782285055,
+      "ci_low": -0.01002050882066659,
+      "ci_high": -0.0025206048215258015,
+      "mu_left": -0.01553409601578428,
+      "mu_right": -0.020924234798069336,
+      "alpha_c_boot_mean": 0.19932499999999997
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.3587930351495744,
+      "ci_low": -0.3719213509559631,
+      "ci_high": -0.3456647193431853,
+      "mu_left": 0.897715175151825,
+      "mu_right": 0.5389221400022506,
+      "alpha_c_boot_mean": 0.4
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.004831976943683421,
+      "ci_low": -0.009623050643391745,
+      "ci_high": -0.0025519284968416947,
+      "mu_left": -0.01568217121137908,
+      "mu_right": -0.0205141481550625,
+      "alpha_c_boot_mean": 0.19322499999999998
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.35331163227558116,
+      "ci_low": -0.36300055086612704,
+      "ci_high": -0.31654606036841887,
+      "mu_left": 0.8966404151916503,
+      "mu_right": 0.5433287829160691,
+      "alpha_c_boot_mean": 0.38987499999999997
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.013425522302824497,
+      "ci_low": -0.01686114605242133,
+      "ci_high": -0.010293553261058973,
+      "mu_left": -0.016468941324556494,
+      "mu_right": -0.02989446362738099,
+      "alpha_c_boot_mean": 0.17644999999999997
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.7727053163945675,
+      "ci_low": -0.7784984579011798,
+      "ci_high": -0.7672022929787635,
+      "mu_left": 0.8322679400444031,
+      "mu_right": 0.059562623649835576,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.013606101977515276,
+      "ci_low": -0.017116949363707626,
+      "ci_high": -0.010823342105910082,
+      "mu_left": -0.016325841012315802,
+      "mu_right": -0.029931942989831078,
+      "alpha_c_boot_mean": 0.189125
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.7720852650701999,
+      "ci_low": -0.7807020743340254,
+      "ci_high": -0.7610601624026895,
+      "mu_left": 0.8322827816009521,
+      "mu_right": 0.060197516530752185,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.006567773699048292,
+      "ci_low": -0.010394129376818639,
+      "ci_high": -0.004694770819763577,
+      "mu_left": -0.014872731535748399,
+      "mu_right": -0.02144050523479669,
+      "alpha_c_boot_mean": 0.22514999999999996
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.5799896654486656,
+      "ci_low": -0.596172890663147,
+      "ci_high": -0.5180834510053197,
+      "mu_left": 0.8382022976875305,
+      "mu_right": 0.25821263223886487,
+      "alpha_c_boot_mean": 0.14140000000000003
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.006940689810917432,
+      "ci_low": -0.011079999077442502,
+      "ci_high": -0.004894115284433145,
+      "mu_left": -0.014905330739912159,
+      "mu_right": -0.02184602055082959,
+      "alpha_c_boot_mean": 0.204
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.6161284767091274,
+      "ci_low": -0.6756693105921148,
+      "ci_high": -0.5222293754139297,
+      "mu_left": 0.8483568787574768,
+      "mu_right": 0.23222840204834938,
+      "alpha_c_boot_mean": 0.12875000000000003
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.013108584651276727,
+      "ci_low": -0.016421699008152827,
+      "ci_high": -0.009897271548917817,
+      "mu_left": -0.016120256236676952,
+      "mu_right": -0.02922884088795368,
+      "alpha_c_boot_mean": 0.1704
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.5449746143072844,
+      "ci_low": -0.5911563110351563,
+      "ci_high": -0.5327192965894938,
+      "mu_left": 0.7284225046634675,
+      "mu_right": 0.18344789035618306,
+      "alpha_c_boot_mean": 0.16075
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.012785399140664441,
+      "ci_low": -0.01661122989883794,
+      "ci_high": -0.009359093288696737,
+      "mu_left": -0.016188780458979507,
+      "mu_right": -0.02897417959964395,
+      "alpha_c_boot_mean": 0.17314999999999997
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.6175546938180922,
+      "ci_low": -0.6390630702786149,
+      "ci_high": -0.5961450588591397,
+      "mu_left": 0.8339624762535095,
+      "mu_right": 0.2164077824354172,
+      "alpha_c_boot_mean": 0.12075000000000005
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.006877617110298271,
+      "ci_low": -0.01102369223419728,
+      "ci_high": -0.005525288545252673,
+      "mu_left": -0.014990686484674108,
+      "mu_right": -0.02186830359497238,
+      "alpha_c_boot_mean": 0.25682499999999997
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.0073240080406045075,
+      "ci_low": -0.010765608655471411,
+      "ci_high": -0.00563764034210654,
+      "mu_left": -0.01488498252246461,
+      "mu_right": -0.022208990563069117,
+      "alpha_c_boot_mean": 0.21557499999999996
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.013462211771554228,
+      "ci_low": -0.01701875638216688,
+      "ci_high": -0.009712439530069502,
+      "mu_left": -0.016145699754427655,
+      "mu_right": -0.029607911525981884,
+      "alpha_c_boot_mean": 0.17119999999999996
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.013017552706353724,
+      "ci_low": -0.016558942745527026,
+      "ci_high": -0.009398679845843853,
+      "mu_left": -0.01627099306175682,
+      "mu_right": -0.029288545768110543,
+      "alpha_c_boot_mean": 0.17477499999999999
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.011855807285371413,
+      "ci_low": -0.01650771432884023,
+      "ci_high": -0.008293376994606014,
+      "mu_left": -0.018008355605299422,
+      "mu_right": -0.029864162890670835,
+      "alpha_c_boot_mean": 0.17147500000000002
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.45108650624752045,
+      "ci_low": -0.46896271208922075,
+      "ci_high": -0.44285626113414767,
+      "mu_left": 0.8035029917955399,
+      "mu_right": 0.3524164855480194,
+      "alpha_c_boot_mean": 0.215
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.011656261091872202,
+      "ci_low": -0.01577184654988987,
+      "ci_high": -0.008049166720641304,
+      "mu_left": -0.018090034163218176,
+      "mu_right": -0.02974629525509038,
+      "alpha_c_boot_mean": 0.164075
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.45934789379437774,
+      "ci_low": -0.46610719660917915,
+      "ci_high": -0.4521595244854688,
+      "mu_left": 0.8069181323051453,
+      "mu_right": 0.34757023851076757,
+      "alpha_c_boot_mean": 0.2366
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.012346258036619016,
+      "ci_low": -0.016707657340199782,
+      "ci_high": -0.009163906981143596,
+      "mu_left": -0.018298835507819043,
+      "mu_right": -0.03064509354443806,
+      "alpha_c_boot_mean": 0.162275
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.6841434159874916,
+      "ci_low": -0.6969329464361071,
+      "ci_high": -0.6727360335513949,
+      "mu_left": 0.8314356863498688,
+      "mu_right": 0.14729227036237716,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.012533839857756957,
+      "ci_low": -0.017036742068030006,
+      "ci_high": -0.009402951107642901,
+      "mu_left": -0.018067770222170074,
+      "mu_right": -0.03060161007992703,
+      "alpha_c_boot_mean": 0.175075
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.7001148617267609,
+      "ci_low": -0.7151840882003307,
+      "ci_high": -0.6840387296676635,
+      "mu_left": 0.8389878928661346,
+      "mu_right": 0.13887303113937377,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.010770186472412572,
+      "ci_low": -0.01557675846958315,
+      "ci_high": -0.007945750838400725,
+      "mu_left": -0.017829118452494814,
+      "mu_right": -0.028599304924907386,
+      "alpha_c_boot_mean": 0.162175
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.5922674900293351,
+      "ci_low": -0.5993496876955031,
+      "ci_high": -0.5367476917803289,
+      "mu_left": 0.8384598195552826,
+      "mu_right": 0.24619232952594752,
+      "alpha_c_boot_mean": 0.145375
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.011436648976317437,
+      "ci_low": -0.016182562198791082,
+      "ci_high": -0.008353499951852437,
+      "mu_left": -0.01760362277131487,
+      "mu_right": -0.029040271747632306,
+      "alpha_c_boot_mean": 0.16185
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.6045831206440925,
+      "ci_low": -0.6235009720772505,
+      "ci_high": -0.5904846055482834,
+      "mu_left": 0.8373937129974365,
+      "mu_right": 0.23281059235334398,
+      "alpha_c_boot_mean": 0.12125000000000004
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.011779291529490674,
+      "ci_low": -0.015801492834435136,
+      "ci_high": -0.007760055162228074,
+      "mu_left": -0.018037497526324425,
+      "mu_right": -0.0298167890558151,
+      "alpha_c_boot_mean": 0.162625
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.5430088924864928,
+      "ci_low": -0.5504188935877755,
+      "ci_high": -0.5381362004609158,
+      "mu_left": 0.7239067713419596,
+      "mu_right": 0.18089787885546682,
+      "alpha_c_boot_mean": 0.16887499999999997
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.011468757545556936,
+      "ci_low": -0.015888911325689682,
+      "ci_high": -0.007914869062793359,
+      "mu_left": -0.018139738803472708,
+      "mu_right": -0.029608496349029644,
+      "alpha_c_boot_mean": 0.1593
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.6006554785370827,
+      "ci_low": -0.6094403655827045,
+      "ci_high": -0.5909434761106969,
+      "mu_left": 0.8330181777477265,
+      "mu_right": 0.23236269921064379,
+      "alpha_c_boot_mean": 0.12112500000000004
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.011418502541938574,
+      "ci_low": -0.016275506365594543,
+      "ci_high": -0.008320613938464687,
+      "mu_left": -0.018423700743989423,
+      "mu_right": -0.029842203285927998,
+      "alpha_c_boot_mean": 0.1702
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.012089039541967671,
+      "ci_low": -0.01680284527742382,
+      "ci_high": -0.009123130530244465,
+      "mu_left": -0.018023307487664664,
+      "mu_right": -0.030112347029632336,
+      "alpha_c_boot_mean": 0.165175
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.0125594317589163,
+      "ci_low": -0.017380174312104063,
+      "ci_high": -0.009206220445034918,
+      "mu_left": -0.018670140151922664,
+      "mu_right": -0.031229571910838964,
+      "alpha_c_boot_mean": 0.164625
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 32,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.0119944463275998,
+      "ci_low": -0.017013706806857404,
+      "ci_high": -0.008251861978742649,
+      "mu_left": -0.018824655192691886,
+      "mu_right": -0.030819101520291686,
+      "alpha_c_boot_mean": 0.16092499999999998
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.0035661824229651223,
+      "ci_low": -0.00502176040433588,
+      "ci_high": -0.0015270727959866871,
+      "mu_left": -0.018244396708913983,
+      "mu_right": -0.021810579131879105,
+      "alpha_c_boot_mean": 0.3705250000000001
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.3622428447008133,
+      "ci_low": -0.36877760986487074,
+      "ci_high": -0.35570807953675593,
+      "mu_left": 0.8350314885377884,
+      "mu_right": 0.4727886438369751,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.0035004569384281294,
+      "ci_low": -0.0050968888805413524,
+      "ci_high": -0.0013203889043306612,
+      "mu_left": -0.01833345999970996,
+      "mu_right": -0.02183391693813809,
+      "alpha_c_boot_mean": 0.39039999999999997
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.25,
+      "gap": -0.360161962111791,
+      "ci_low": -0.36461273389558,
+      "ci_high": -0.35502676765124014,
+      "mu_left": 0.8341123223304749,
+      "mu_right": 0.4739503602186839,
+      "alpha_c_boot_mean": 0.25
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.00875463318086539,
+      "ci_low": -0.010880954752831913,
+      "ci_high": -0.006441726447286175,
+      "mu_left": -0.022315191695500218,
+      "mu_right": -0.031069824876365608,
+      "alpha_c_boot_mean": 0.14087500000000003
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3215283964574337,
+      "ci_low": -0.3248092205505818,
+      "ci_high": -0.3185677181184292,
+      "mu_left": 0.364502852037549,
+      "mu_right": 0.04297445558011532,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.00829497194481833,
+      "ci_low": -0.01038128276025986,
+      "ci_high": -0.005798593988955426,
+      "mu_left": -0.022713480721374447,
+      "mu_right": -0.031008452666192777,
+      "alpha_c_boot_mean": 0.13767500000000005
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.32530797451734544,
+      "ci_low": -0.3298335023969412,
+      "ci_high": -0.32073580071330077,
+      "mu_left": 0.36833502538502216,
+      "mu_right": 0.04302705086767673,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.00692074540419603,
+      "ci_low": -0.00913676795223159,
+      "ci_high": -0.0040655712018256825,
+      "mu_left": -0.018356000220785908,
+      "mu_right": -0.025276745624981937,
+      "alpha_c_boot_mean": 0.37332499999999996
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3940433771163225,
+      "ci_low": -0.4834103558212518,
+      "ci_high": -0.2633629309386015,
+      "mu_left": 0.5097771853208541,
+      "mu_right": 0.11573380820453168,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.006919873206492552,
+      "ci_low": -0.008618034892962926,
+      "ci_high": -0.004310533340572381,
+      "mu_left": -0.018415333264388874,
+      "mu_right": -0.025335206470881427,
+      "alpha_c_boot_mean": 0.364375
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3574798625707626,
+      "ci_low": -0.4797494159415364,
+      "ci_high": -0.19523106471945845,
+      "mu_left": 0.47298567593097685,
+      "mu_right": 0.11550581336021423,
+      "alpha_c_boot_mean": 0.12320000000000003
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.0074356691382249165,
+      "ci_low": -0.009792215057244185,
+      "ci_high": -0.004911983052375071,
+      "mu_left": -0.02230665126902564,
+      "mu_right": -0.029742320407250555,
+      "alpha_c_boot_mean": 0.13005000000000003
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.39514989398419853,
+      "ci_low": -0.4054541952908039,
+      "ci_high": -0.3848455926775933,
+      "mu_left": 0.5094113916158676,
+      "mu_right": 0.11426149763166904,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007344850321616879,
+      "ci_low": -0.009238615621907809,
+      "ci_high": -0.005362355767257566,
+      "mu_left": -0.0227852538433036,
+      "mu_right": -0.030130104164920478,
+      "alpha_c_boot_mean": 0.13435000000000005
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3904524036496878,
+      "ci_low": -0.39520552486181265,
+      "ci_high": -0.38499471346288916,
+      "mu_left": 0.5058888345956802,
+      "mu_right": 0.11543643094599246,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.007099426484402014,
+      "ci_low": -0.008870384645677076,
+      "ci_high": -0.004533732631408694,
+      "mu_left": -0.01861064257517086,
+      "mu_right": -0.025710069059572873,
+      "alpha_c_boot_mean": 0.376725
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.4,
+      "gap": -0.007396049066468041,
+      "ci_low": -0.0090645433949278,
+      "ci_high": -0.004744920941043964,
+      "mu_left": -0.018596636301557203,
+      "mu_right": -0.025992685368025244,
+      "alpha_c_boot_mean": 0.37487500000000007
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007671477542747992,
+      "ci_low": -0.009848133426752524,
+      "ci_high": -0.005048947445953762,
+      "mu_left": -0.02249164212809125,
+      "mu_right": -0.03016311967083924,
+      "alpha_c_boot_mean": 0.13662500000000005
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "low",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007506132038673785,
+      "ci_low": -0.009497441722014392,
+      "ci_high": -0.005463493492641118,
+      "mu_left": -0.022924562870991656,
+      "mu_right": -0.03043069490966544,
+      "alpha_c_boot_mean": 0.13760000000000003
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.008244270701951849,
+      "ci_low": -0.010005896287225109,
+      "ci_high": -0.005846111014823958,
+      "mu_left": -0.02229345633239152,
+      "mu_right": -0.03053772703434337,
+      "alpha_c_boot_mean": 0.13932500000000003
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.4174500149488448,
+      "ci_low": -0.4326115310192109,
+      "ci_high": -0.37631450916330017,
+      "mu_left": 0.736907923221588,
+      "mu_right": 0.31945790827274323,
+      "alpha_c_boot_mean": 0.13100000000000003
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.008005752802738155,
+      "ci_low": -0.01023048057563533,
+      "ci_high": -0.005989036612326547,
+      "mu_left": -0.022304753047040847,
+      "mu_right": -0.030310505849779002,
+      "alpha_c_boot_mean": 0.14722500000000005
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.17,
+      "gap": -0.3871666522075733,
+      "ci_low": -0.39103027259310097,
+      "ci_high": -0.3805824836002042,
+      "mu_left": 0.665079136689504,
+      "mu_right": 0.27791248448193073,
+      "alpha_c_boot_mean": 0.16999999999999996
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.008275662587566464,
+      "ci_low": -0.010387669337146074,
+      "ci_high": -0.0058521967860039395,
+      "mu_left": -0.023027374722447917,
+      "mu_right": -0.03130303731001438,
+      "alpha_c_boot_mean": 0.13557500000000006
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3464914228767157,
+      "ci_low": -0.35826942428946496,
+      "ci_high": -0.33375533707439897,
+      "mu_left": 0.43031940758228304,
+      "mu_right": 0.08382798470556736,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-H",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007776340791323489,
+      "ci_low": -0.00984767558764022,
+      "ci_high": -0.005524145135446991,
+      "mu_left": -0.023469777054264028,
+      "mu_right": -0.031246117845587517,
+      "alpha_c_boot_mean": 0.14295000000000005
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3545738883316517,
+      "ci_low": -0.36440778974629934,
+      "ci_high": -0.34409421640448273,
+      "mu_left": 0.4360122621059418,
+      "mu_right": 0.08143837377429007,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007114229109473208,
+      "ci_low": -0.009380541923792347,
+      "ci_high": -0.004134968468775076,
+      "mu_left": -0.02205331403099678,
+      "mu_right": -0.029167543140469987,
+      "alpha_c_boot_mean": 0.14117500000000002
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.4042641621828079,
+      "ci_low": -0.4112738179415464,
+      "ci_high": -0.3977149415742605,
+      "mu_left": 0.5193985104560852,
+      "mu_right": 0.11513434827327726,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007400985569792663,
+      "ci_low": -0.009589898363319423,
+      "ci_high": -0.005021435631537147,
+      "mu_left": -0.022041151882293566,
+      "mu_right": -0.02944213745208623,
+      "alpha_c_boot_mean": 0.14697500000000002
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3710806096345186,
+      "ci_low": -0.4052405339479446,
+      "ci_high": -0.3361046691983938,
+      "mu_left": 0.48729064166545866,
+      "mu_right": 0.11621003203094005,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007011982563208518,
+      "ci_low": -0.00929577986703133,
+      "ci_high": -0.004988301149525747,
+      "mu_left": -0.022943469651618437,
+      "mu_right": -0.029955452214826955,
+      "alpha_c_boot_mean": 0.12975000000000003
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3928381142020226,
+      "ci_low": -0.3969918894767762,
+      "ci_high": -0.3871691148504615,
+      "mu_left": 0.5080131024122239,
+      "mu_right": 0.11517498821020127,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "O-M",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.0068494864076267155,
+      "ci_low": -0.008698736889083743,
+      "ci_high": -0.004773006276261345,
+      "mu_left": -0.023496468105139244,
+      "mu_right": -0.03034595451276596,
+      "alpha_c_boot_mean": 0.13472500000000004
+    },
+    "m_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.3879298774152994,
+      "ci_low": -0.3904474084079266,
+      "ci_high": -0.3839464423805476,
+      "mu_left": 0.5029848575592041,
+      "mu_right": 0.11505498014390467,
+      "alpha_c_boot_mean": 0.12000000000000004
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007785984159975733,
+      "ci_low": -0.010110443857506698,
+      "ci_high": -0.005035576590105062,
+      "mu_left": -0.022628747197714162,
+      "mu_right": -0.030414731357689895,
+      "alpha_c_boot_mean": 0.13677500000000004
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "main",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007799560607849112,
+      "ci_low": -0.009897248649366797,
+      "ci_high": -0.005898866321302259,
+      "mu_left": -0.022661866417150532,
+      "mu_right": -0.030461427024999644,
+      "alpha_c_boot_mean": 0.14707500000000004
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "none",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007447869367763524,
+      "ci_low": -0.009700275181414277,
+      "ci_high": -0.005327138631886101,
+      "mu_left": -0.023762853698426414,
+      "mu_right": -0.031210723066189938,
+      "alpha_c_boot_mean": 0.13092500000000004
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  },
+  {
+    "d": 64,
+    "eta": "high",
+    "organizer": "D",
+    "arm": "B",
+    "pad": "pad_perp",
+    "U_cp": {
+      "critical": true,
+      "reason": "ok",
+      "alpha_c": 0.12000000000000001,
+      "gap": -0.007239595103838436,
+      "ci_low": -0.009081712191844265,
+      "ci_high": -0.005206824776552981,
+      "mu_left": -0.02433051579148641,
+      "mu_right": -0.03157011089532485,
+      "alpha_c_boot_mean": 0.14427500000000001
+    },
+    "m_cp": {
+      "critical": false,
+      "reason": "m_undefined_for_D",
+      "alpha_c": null,
+      "gap": null
+    }
+  }
+]

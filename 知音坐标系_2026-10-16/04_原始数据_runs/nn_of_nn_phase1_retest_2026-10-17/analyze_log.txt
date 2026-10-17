@@ -1,0 +1,6 @@
+Loaded 2520 raw cells
+Wrote report → /workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/00_结论/实验报告_NN组织NN_第1期复测_2026-10-17.md
+Decision: Fail-Bind
+Apparatus OK: True
+R1 corr: {'corr': 0.501890861617153, 'n': 105}
+Allowed: 装置已生效，但臂 B 与主臂临界形态仍同 → 支持 H2；机制层停。

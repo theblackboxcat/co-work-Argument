@@ -1,0 +1,11 @@
+{
+  "d_list": [16, 32, 64],
+  "alpha_list": [0.05, 0.1, 0.14, 0.2, 0.3, 0.5, 1.0],
+  "eta": "low",
+  "seeds": [0, 1, 2, 3, 4],
+  "organizers": ["O-H", "O-M", "D"],
+  "beta_org_levels": [2.0, 4.0, 8.0],
+  "exec_pad_dims": [0, 16, 32],
+  "rb_u_delay_alpha_steps": 1,
+  "note": "Defaults from prereg draft §4–§5; edit only with author re-lock of §1 gates."
+}
