@@ -1,0 +1,396 @@
+{
+  "schema": "B_retest_v2F3_s14_weakened",
+  "date": "2026-10-17",
+  "timezone": "Asia/Shanghai",
+  "run": {
+    "jsonl": "04_原始数据_runs/v2_B_retest_20261017_105628.jsonl",
+    "ts": "20261017_105628",
+    "trunk": "trunk_v2_covered_gloss_s14_s27.json",
+    "anchors": "anchors_B_retest_filtered.json",
+    "repeat": 3,
+    "arms": "bare,covered",
+    "judge": true,
+    "host": "LAPTOP-dots3 (author dual-run authorized)"
+  },
+  "denom_main6": [
+    "E01_huaxing_fragments_merge",
+    "E02_tesolve_wilderness_plain",
+    "E03_fractal_horror_struct_trap",
+    "E04_interpretive_vs_plot_ending",
+    "E05a_huaxing_theory_monologue",
+    "E05b_alignment_confirmation"
+  ],
+  "aux_out_of_denom": [
+    "E12b_context_limbo_island",
+    "X01_dialogue_register_label_paraphrase_s07",
+    "X02_dialogue_register_literal_scenery"
+  ],
+  "decision_code": "PASS",
+  "confirm_pending": true,
+  "e7_closed": false,
+  "e7_note": "Even on PASS, E7 not auto-closed (E05b-S14/edge recall/confirm batch still open).",
+  "checks": {
+    "covered_node_hit_18_18": true,
+    "E05a_S03_ge_2_of_3": true,
+    "E01_S03_ge_2_of_3_s14_weakened": true,
+    "X02_covered_HIT": true,
+    "no_v3_v4_loaded": true,
+    "denom_is_6_not_5": true,
+    "E12b_out_of_denom": true
+  },
+  "fail_triggers": [],
+  "inc_notes": [
+    "E05b-S14=1/3 (ceiling; expected INC under B)",
+    "E05b-S13=0/3",
+    "E01-S14=0/3 (demote; not blocking)",
+    "X01 known-fail: S07 forbidden 3/3, S27=0 (not blocking)",
+    "edgeR_C covered mean=0.1167 (below ~0.27 baseline; INC sampling/ceiling, not FAIL)"
+  ],
+  "key_numbers": {
+    "covered_node_hit": "18/18",
+    "bare_node_hit": "16/18",
+    "covered_exact_set": "2/18",
+    "bare_exact_set": "0/18",
+    "covered_mean_jaccard": 0.5556,
+    "bare_mean_jaccard": 0.463,
+    "covered_mean_edgeR_C": 0.1167,
+    "covered_edgeR_n_reps": 15,
+    "bare_mean_edgeR_C": 0.0167,
+    "bare_edgeR_n_reps": 15,
+    "E05a_S03": "3/3",
+    "E01_S03": "3/3",
+    "E01_S14": "0/3",
+    "E05b_S14": "1/3",
+    "E05b_S20": "2/3",
+    "E05b_S13": "0/3",
+    "X01_S27": "0/3",
+    "X01_S07_forbidden": "3/3",
+    "X02_S23": "3/3",
+    "X02_covered_node_hit": "3/3",
+    "X02_S05_co_stop": "1/3"
+  },
+  "per_anchor_covered": {
+    "E01_huaxing_fragments_merge": {
+      "gold": [
+        "S03",
+        "S14"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S03",
+          "S24"
+        ],
+        [
+          "S03",
+          "S24"
+        ],
+        [
+          "S03",
+          "S24"
+        ]
+      ],
+      "S03": 3,
+      "S14": 0,
+      "S20": 0,
+      "S13": 0,
+      "mean_jaccard": 0.3333,
+      "exact": 0
+    },
+    "E02_tesolve_wilderness_plain": {
+      "gold": [
+        "S07",
+        "S05",
+        "S19"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S07",
+          "S05"
+        ],
+        [
+          "S07",
+          "S05"
+        ],
+        [
+          "S07",
+          "S05"
+        ]
+      ],
+      "S03": 0,
+      "S14": 0,
+      "S20": 0,
+      "S13": 0,
+      "mean_jaccard": 0.6667,
+      "exact": 0
+    },
+    "E03_fractal_horror_struct_trap": {
+      "gold": [
+        "S06",
+        "S18",
+        "S07"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S06",
+          "S07",
+          "S18"
+        ],
+        [
+          "S06",
+          "S07"
+        ],
+        [
+          "S06",
+          "S07",
+          "S18",
+          "S20"
+        ]
+      ],
+      "S03": 0,
+      "S14": 0,
+      "S20": 1,
+      "S13": 0,
+      "mean_jaccard": 0.8056,
+      "exact": 1
+    },
+    "E04_interpretive_vs_plot_ending": {
+      "gold": [
+        "S12",
+        "S10",
+        "S11"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S12",
+          "S10"
+        ],
+        [
+          "S12",
+          "S10",
+          "S11"
+        ],
+        [
+          "S12",
+          "S10"
+        ]
+      ],
+      "S03": 0,
+      "S14": 0,
+      "S20": 0,
+      "S13": 0,
+      "mean_jaccard": 0.7778,
+      "exact": 1
+    },
+    "E05a_huaxing_theory_monologue": {
+      "gold": [
+        "S03"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S03",
+          "S24"
+        ],
+        [
+          "S03",
+          "S20"
+        ],
+        [
+          "S03",
+          "S20"
+        ]
+      ],
+      "S03": 3,
+      "S14": 0,
+      "S20": 2,
+      "S13": 0,
+      "mean_jaccard": 0.5,
+      "exact": 0
+    },
+    "E05b_alignment_confirmation": {
+      "gold": [
+        "S14",
+        "S20",
+        "S13"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S03",
+          "S20"
+        ],
+        [
+          "S03",
+          "S20"
+        ],
+        [
+          "S03",
+          "S14"
+        ]
+      ],
+      "S03": 3,
+      "S14": 1,
+      "S20": 2,
+      "S13": 0,
+      "mean_jaccard": 0.25,
+      "exact": 0
+    }
+  },
+  "aux_covered": {
+    "E12b_context_limbo_island": {
+      "gold": [
+        "S07",
+        "S14"
+      ],
+      "node_hit": "2/3",
+      "stops": [
+        [
+          "S03",
+          "S07"
+        ],
+        [
+          "S03",
+          "S20"
+        ],
+        [
+          "S03",
+          "S07",
+          "S14"
+        ]
+      ],
+      "S07": 2,
+      "S23": 0,
+      "S27": 0,
+      "S05": 0,
+      "S14": 1
+    },
+    "X01_dialogue_register_label_paraphrase_s07": {
+      "gold": [
+        "S27"
+      ],
+      "node_hit": "0/3",
+      "stops": [
+        [
+          "S07",
+          "S20"
+        ],
+        [
+          "S07",
+          "S20"
+        ],
+        [
+          "S07",
+          "S20"
+        ]
+      ],
+      "S07": 3,
+      "S23": 0,
+      "S27": 0,
+      "S05": 0,
+      "S14": 0
+    },
+    "X02_dialogue_register_literal_scenery": {
+      "gold": [
+        "S23"
+      ],
+      "node_hit": "3/3",
+      "stops": [
+        [
+          "S23",
+          "S25"
+        ],
+        [
+          "S23",
+          "S25"
+        ],
+        [
+          "S23",
+          "S05"
+        ]
+      ],
+      "S07": 0,
+      "S23": 3,
+      "S27": 0,
+      "S05": 1,
+      "S14": 0
+    }
+  },
+  "judge": {
+    "E01_huaxing_fragments_merge": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": false
+    },
+    "E02_tesolve_wilderness_plain": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": false
+    },
+    "E03_fractal_horror_struct_trap": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": true
+    },
+    "E04_interpretive_vs_plot_ending": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": true,
+      "J5": false
+    },
+    "E05a_huaxing_theory_monologue": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": true
+    },
+    "E05b_alignment_confirmation": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": false
+    },
+    "E12b_context_limbo_island": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": false
+    },
+    "X01_dialogue_register_label_paraphrase_s07": {
+      "J1": false,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": true
+    },
+    "X02_dialogue_register_literal_scenery": {
+      "J1": true,
+      "J2": false,
+      "J3": false,
+      "J4": false,
+      "J5": false
+    }
+  },
+  "baseline_1328_compare": {
+    "covered_hit": "18/18 vs 18/18",
+    "covered_meanJ": "0.5556 vs 0.519",
+    "covered_edgeR_C": "0.1167 vs 0.267",
+    "E05a_S03": "3/3 vs 3/3",
+    "E01_S14": "0/3 vs 0/3",
+    "E05b_S14": "1/3 vs 0/3 (this run 1/3)",
+    "X02_covered": "3/3 HIT both"
+  }
+}

@@ -1,0 +1,40 @@
+Analyzing R-A...
+  RA code=RA-fail
+Analyzing R-B...
+  RB code=RB-fail
+  pack=Pack-kill kills=['K-no-cov']
+Plotting...
+Wrote report /workspace/proj_20261009/论文资料_cowork/知音坐标系_2026-10-16/00_结论/实验报告_NN组织NN_反向共形_RA_RB_2026-10-17.md
+Done.
+{
+  "RA": "RA-fail",
+  "RB": "RB-fail",
+  "pack": "Pack-kill",
+  "kills": [
+    "K-no-cov"
+  ],
+  "r1": {
+    "corr": 0.501890861617153,
+    "n": 105
+  },
+  "r1_blocks_exec_separation_claim": false,
+  "gates": {
+    "purpose": {
+      "status": "PASS",
+      "note": "首页复述原命题+返回桥；不赎回E-pass；通过≠涌现；服务停靠边界非仪器学"
+    },
+    "service": {
+      "status": "PASS",
+      "RA_return": "嵌套地址在 α-面上无独立协变 → 知音主张收缩为：本探针不支持『分层组织带来可返回的共址边界』；资源回 L2 最小主干定位／coverage／作者确认。",
+      "RB_return": "嵌套可分性未立 → 知音主张不得再写『组织层单独保证共址停靠』；回 L2 用作者确认与主干定位取证，本探针闭合。"
+    },
+    "bypass_kill": {
+      "status": "FAIL",
+      "reason": "K-Hopfield-only"
+    }
+  },
+  "E_pass_redeemed": false,
+  "Fail_Bind_H2_authority": true,
+  "emergence_claimed": false,
+  "into_zhiyin_main_narrative": false
+}

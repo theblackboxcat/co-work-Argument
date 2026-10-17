@@ -52,3 +52,13 @@ Additive update. Existing `csh/`, `sdia/`, `cowrite/eval`, `cowrite/verify`, `pa
 - `账本_2026-10-16/` — progress ledger, plus the note on other work and transplant feasibility.
 
 Scripts read `COWRITE_CONFIG` (and the production cowrite check also reads `COWRITE_APP`). Root `.gitignore` ignores `config.json` and `**/config.json`. The private dialogue PDF, the extracted full text, and the FROZEN/DRAFT 云酒 anchor JSON files that contain excerpt text are not in this tree; those paths are `*.不入库.txt` placeholders only. `anchors_E05_split_DRAFT_2026-10-15.json` and `实验补报_2026-10-15/anchors_expA.json` were in the update pack with verbatim excerpts and a “not for public GitHub” line, so they are placeholders too.
+
+## Added 2026-10-17 (知音坐标系 DELTA)
+
+Public increment only, overwritten or added under the existing `知音坐标系_2026-10-16/` tree. `csh/` and `sdia/` are unchanged. Merge note: `知音坐标系_2026-10-16/README_合并说明_DELTA_2026-10-17.md`. Plain-language status: `知音坐标系_2026-10-16/00_结论/现状白话_2026-10-17.md`.
+
+- NN Fail-Bind (H2) and Pack-kill (R-A fail + R-B fail) are closed; the NN structural claim is **ADOPTED** as downgraded. The NN line is idle; the live line is L2.
+- Authorized-caliber B retest decision is **PASS**. E05b mutual-recognition is still open (待补). E7 stays open. The overall 知音 claim is not asserted.
+- Instrument-honest side report for E05b→E7 is included. The Arm-B narrow boundary trunk is DRAFT only.
+- Scripts: `02_脚本/nn_of_nn_phase1/`, `nn_of_nn_phase1_retest/`, `nn_of_nn_reverse_RA_RB/` (example grid JSON only; no `config.json`).
+- Runs ship decision / summary / criticality / means / plots / logs. Not shipped: `不入库_私人语料/`, private anchors, `anchors_B_retest_filtered.json`, raw `*.jsonl` dumps, and `cells_raw`.

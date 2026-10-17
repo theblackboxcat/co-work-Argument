@@ -1,0 +1,236 @@
+{
+  "code": "RA-fail",
+  "kill": "K-no-cov",
+  "per_d": {
+    "16": {
+      "d": 16,
+      "O-H": {
+        "m_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.4,
+          "gap": -0.28172886490821836,
+          "ci_low": -0.28840444564819323,
+          "ci_high": -0.25965073679884265,
+          "mu_left": 0.9635624957084656,
+          "mu_right": 0.6818336308002473
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.17,
+          "gap": -0.008173959511440308,
+          "ci_low": -0.01193343907260653,
+          "ci_high": -0.005004824219174628,
+          "mu_left": -0.010688167721606294,
+          "mu_right": -0.018862127233046602
+        }
+      },
+      "O-M": {
+        "m_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.25,
+          "gap": -0.6554537385702133,
+          "ci_low": -0.7036446828767657,
+          "ci_high": -0.6228695398444931,
+          "mu_left": 0.9131260275840759,
+          "mu_right": 0.2576722890138626
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.17,
+          "gap": -0.008061594702552586,
+          "ci_low": -0.011869107612205372,
+          "ci_high": -0.005219552624752575,
+          "mu_left": -0.010628868454438853,
+          "mu_right": -0.018690463156991438
+        }
+      },
+      "D": {
+        "m_cp": {
+          "critical": false,
+          "reason": "m_undefined_for_D",
+          "alpha_c": null,
+          "gap": null,
+          "ci_low": null,
+          "ci_high": null,
+          "mu_left": null,
+          "mu_right": null
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.17,
+          "gap": -0.008307645549741815,
+          "ci_low": -0.01198960291406571,
+          "ci_high": -0.005701293060042769,
+          "mu_left": -0.010642745348063485,
+          "mu_right": -0.0189503908978053
+        }
+      }
+    },
+    "32": {
+      "d": 32,
+      "O-H": {
+        "m_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.4,
+          "gap": -0.3587930351495744,
+          "ci_low": -0.3719213509559631,
+          "ci_high": -0.3456532283872365,
+          "mu_left": 0.897715175151825,
+          "mu_right": 0.5389221400022506
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.17,
+          "gap": -0.005390138782285055,
+          "ci_low": -0.010126831685360367,
+          "ci_high": -0.002628261503275177,
+          "mu_left": -0.01553409601578428,
+          "mu_right": -0.020924234798069336
+        }
+      },
+      "O-M": {
+        "m_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.12000000000000001,
+          "gap": -0.5799896654486656,
+          "ci_low": -0.5980512982606888,
+          "ci_high": -0.5257301768288016,
+          "mu_left": 0.8382022976875305,
+          "mu_right": 0.25821263223886487
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.17,
+          "gap": -0.006567773699048292,
+          "ci_low": -0.010409266189805746,
+          "ci_high": -0.004694770819763584,
+          "mu_left": -0.014872731535748399,
+          "mu_right": -0.02144050523479669
+        }
+      },
+      "D": {
+        "m_cp": {
+          "critical": false,
+          "reason": "m_undefined_for_D",
+          "alpha_c": null,
+          "gap": null,
+          "ci_low": null,
+          "ci_high": null,
+          "mu_left": null,
+          "mu_right": null
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.17,
+          "gap": -0.006877617110298271,
+          "ci_low": -0.011502363010717045,
+          "ci_high": -0.005525288545252673,
+          "mu_left": -0.014990686484674108,
+          "mu_right": -0.02186830359497238
+        }
+      }
+    },
+    "64": {
+      "d": 64,
+      "O-H": {
+        "m_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.25,
+          "gap": -0.3622428447008133,
+          "ci_low": -0.3696098533024391,
+          "ci_high": -0.3561679551998774,
+          "mu_left": 0.8350314885377884,
+          "mu_right": 0.4727886438369751
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.4,
+          "gap": -0.0035661824229651223,
+          "ci_low": -0.004900131942836287,
+          "ci_high": -0.0015270727959866906,
+          "mu_left": -0.018244396708913983,
+          "mu_right": -0.021810579131879105
+        }
+      },
+      "O-M": {
+        "m_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.12000000000000001,
+          "gap": -0.3940433771163225,
+          "ci_low": -0.4921391870826483,
+          "ci_high": -0.2703186823427677,
+          "mu_left": 0.5097771853208541,
+          "mu_right": 0.11573380820453168
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.4,
+          "gap": -0.00692074540419603,
+          "ci_low": -0.00920196188758626,
+          "ci_high": -0.004001414304644964,
+          "mu_left": -0.018356000220785908,
+          "mu_right": -0.025276745624981937
+        }
+      },
+      "D": {
+        "m_cp": {
+          "critical": false,
+          "reason": "m_undefined_for_D",
+          "alpha_c": null,
+          "gap": null,
+          "ci_low": null,
+          "ci_high": null,
+          "mu_left": null,
+          "mu_right": null
+        },
+        "U_cp": {
+          "critical": true,
+          "reason": "ok",
+          "alpha_c": 0.4,
+          "gap": -0.007099426484402014,
+          "ci_low": -0.009126174853892565,
+          "ci_high": -0.004361911118817674,
+          "mu_left": -0.01861064257517086,
+          "mu_right": -0.025710069059572873
+        }
+      }
+    }
+  },
+  "spread_m": 0.46153846153846156,
+  "spread_u": 0.8070175438596491,
+  "m_coincide_20pct": false,
+  "u_coincide_20pct": false,
+  "gap_signs_consistent": true,
+  "oh_vs_om_same_per_d": [
+    true,
+    true,
+    true
+  ],
+  "oh_vs_d_same_per_d": [
+    true,
+    true,
+    true
+  ],
+  "has_OMD_difference": false,
+  "hopfield_only": true,
+  "falsifiers": {
+    "alpha_drift_beyond_20pct": true,
+    "only_m_stable_U_drifts": false,
+    "K_Hopfield_only_OMD_no_diff": true
+  },
+  "return_sentence": "嵌套地址在 α-面上无独立协变 → 知音主张收缩为：本探针不支持『分层组织带来可返回的共址边界』；资源回 L2 最小主干定位／coverage／作者确认。"
+}

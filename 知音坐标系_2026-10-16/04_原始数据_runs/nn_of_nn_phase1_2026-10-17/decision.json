@@ -1,0 +1,106 @@
+{
+  "slice": "eta=low, pad=none",
+  "per_d": {
+    "16": {
+      "oh_m_critical": true,
+      "oh_U_critical": true,
+      "oh_m_alpha_c": 0.4,
+      "oh_U_alpha_c": 0.4,
+      "oh_m_gap": -0.19120989322662363,
+      "oh_U_gap": -0.000897035677836193,
+      "om_U_critical": true,
+      "om_m_critical": false,
+      "om_U_alpha_c": 0.4,
+      "d_U_critical": true,
+      "d_U_alpha_c": 0.4,
+      "same_morph_om": false,
+      "same_morph_d": false,
+      "armB_gone_or_shifted": true,
+      "pad_redeemed": false,
+      "oh_B_m_critical": false,
+      "oh_B_U_critical": false,
+      "oh_pad_m_critical": true,
+      "oh_pad_U_critical": true
+    },
+    "32": {
+      "oh_m_critical": true,
+      "oh_U_critical": true,
+      "oh_m_alpha_c": 0.4,
+      "oh_U_alpha_c": 0.4,
+      "oh_m_gap": -0.29173099994659424,
+      "oh_U_gap": -0.0015790481866044875,
+      "om_U_critical": true,
+      "om_m_critical": true,
+      "om_U_alpha_c": 0.4,
+      "d_U_critical": true,
+      "d_U_alpha_c": 0.4,
+      "same_morph_om": false,
+      "same_morph_d": false,
+      "armB_gone_or_shifted": true,
+      "pad_redeemed": false,
+      "oh_B_m_critical": true,
+      "oh_B_U_critical": false,
+      "oh_pad_m_critical": true,
+      "oh_pad_U_critical": true
+    },
+    "64": {
+      "oh_m_critical": true,
+      "oh_U_critical": true,
+      "oh_m_alpha_c": 0.4,
+      "oh_U_alpha_c": 0.4,
+      "oh_m_gap": -0.33808713853359224,
+      "oh_U_gap": -0.002767305778031218,
+      "om_U_critical": true,
+      "om_m_critical": true,
+      "om_U_alpha_c": 0.4,
+      "d_U_critical": true,
+      "d_U_alpha_c": 0.4,
+      "same_morph_om": false,
+      "same_morph_d": false,
+      "armB_gone_or_shifted": true,
+      "pad_redeemed": false,
+      "oh_B_m_critical": true,
+      "oh_B_U_critical": false,
+      "oh_pad_m_critical": true,
+      "oh_pad_U_critical": true
+    }
+  },
+  "_B_levels": {
+    "16": {
+      "u_main": -0.00041199348156171264,
+      "u_b": -0.05938700770117518,
+      "m_main": 0.8749897548130581,
+      "m_b": 0.038279280279363906,
+      "level_collapse": true
+    },
+    "32": {
+      "u_main": -0.0007106818676175907,
+      "u_b": -0.061769335673512164,
+      "m_main": 0.8209422520228795,
+      "m_b": 0.022010911641908545,
+      "level_collapse": true
+    },
+    "64": {
+      "u_main": -0.0013928922319920091,
+      "u_b": -0.06393508630055797,
+      "m_main": 0.7255850783416203,
+      "m_b": 0.01776587896581207,
+      "level_collapse": true
+    }
+  },
+  "decision_code": "E-pass",
+  "allowed_wording": "本装置上分层 NN 组织相对对照多出共址式临界，机制层弱通过。",
+  "rationale": [
+    "O-H m&U critical on 3/3 d; morph distinct; B ok; pad ok"
+  ],
+  "R1_U_m_corr": {
+    "corr": 0.9537161668700901,
+    "n": 105
+  },
+  "oh_pass_count": 3,
+  "oh_m_only_count": 3,
+  "any_same_morph_om": false,
+  "any_same_morph_d": false,
+  "all_armB_ok": true,
+  "any_pad_redeem": false
+}
