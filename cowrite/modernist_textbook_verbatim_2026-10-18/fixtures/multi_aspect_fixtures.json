@@ -1,0 +1,195 @@
+{
+  "note": "multi-aspect textbook ops; NEW fixtures; no December/sakura focus; Cowrite-test untouched",
+  "system": "SYSTEM_latest.md (v2.4)",
+  "source_textbooks": [
+    "textbook_verbatim/从中间开始_全部读法.md",
+    "textbook_verbatim/岔路_可执行动作.md"
+  ],
+  "fixtures": [
+    {
+      "id": "M1_speed_drop",
+      "year_op": "1890 变速重写",
+      "realize": true,
+      "verbatim_cite": "找出它保持同一速度的那三到五句，强制制造一次速度落差：在一句冗长的感官堆砌之后，插入一个三字的短句。不要解释这个短句。",
+      "buffer": "走廊尽头的日光从百叶缝里切成细条，落在水磨石上，灰尘在光里慢慢翻，远处有人拖铁桶，轮子磕过门槛又停住，空气里一股消毒水混着橘子皮的气味，很久。\n门响了。",
+      "expect": "speak",
+      "accept_note": "短回声对准未解释的三字短拍（门响了）或与前感一并置；允许…；勿软复述长句风景",
+      "wrong_patterns": [
+        "soft continuum of long sensory only",
+        "invent aftermath",
+        "process leak",
+        "name 变速重写"
+      ]
+    },
+    {
+      "id": "M2_explanatory_shell",
+      "year_op": "1887 反向工程 / 1890 拒绝测试",
+      "realize": false,
+      "verbatim_cite": "找一段你自己的旧文字，其中有\"他意识到\"\"她感到\"这类词。把它们全部划掉，让被它们遮盖的东西直接出现。如果划掉之后句子崩溃了，说明那句话本来就没有内容，只有作者的解释。",
+      "buffer": "她感到房间忽然空了。\n他意识到自己不该再问。\n他们似乎都明白了什么。",
+      "expect": "silence",
+      "accept_note": "解释壳划掉后无站立感知 → 恰好「…」",
+      "wrong_patterns": [
+        "invent standing sense",
+        "soft mood summary",
+        "name 反向工程/拒绝测试",
+        "process leak"
+      ]
+    },
+    {
+      "id": "M3_plot_vanish_undeep",
+      "year_op": "1915 让情节消失",
+      "realize": false,
+      "verbatim_cite": "找一个你必须交代的外部情节……不许直接陈述它，只用三样东西暗示：一张纸，一个时间，一种声音。",
+      "buffer": "桌上有一张纸。\n落款是三月。\n楼下传来撕纸的声音。",
+      "expect": "silence",
+      "accept_note": "纸+时间+声音且无加深/不可逆 → 恰好「…」；禁止把月份或纸面再喊一遍当看见",
+      "wrong_patterns": [
+        "soft retell 纸/三月/撕纸",
+        "invent deepen",
+        "name 让情节消失"
+      ]
+    },
+    {
+      "id": "M4_body_force",
+      "year_op": "1925 眼泪替换",
+      "realize": true,
+      "verbatim_cite": "取一段你写过的感情场景，删去所有的情绪词，只保留外部动作和身体的用力。再读一遍，看悲伤是否还在。",
+      "buffer": "她把指甲掐进掌心。\n膝盖抖了一下。\n杯子没端稳，水沿着桌沿下去。",
+      "expect": "speak",
+      "accept_note": "短回声对准身体用力/外部动作处（掐进掌心／抖／没端稳）；禁情绪总结",
+      "wrong_patterns": [
+        "emotion summary 悲伤/绝望",
+        "invent feelings",
+        "name 眼泪替换"
+      ]
+    },
+    {
+      "id": "M5_shared_object",
+      "year_op": "1925 共同的物",
+      "realize": true,
+      "verbatim_cite": "让两个在故事里互不认识的人，各看见一个真实的同样东西……不改他们不相识的事实，只让两处都出现该物。这就是钟声。",
+      "buffer": "汽笛拉了两长一短。\n他继续数螺丝。\n她把窗关严，手里的信没展开。\n汽笛又响了一次。",
+      "expect": "speak",
+      "accept_note": "标同一物（汽笛）的回扣；「话题都在谈」不够；禁心情合唱",
+      "wrong_patterns": [
+        "mood chorus",
+        "invent shared feeling",
+        "name 共同的物/钟声"
+      ]
+    },
+    {
+      "id": "M6_object_surface",
+      "year_op": "1959 删掉心 / 四次测量",
+      "realize": true,
+      "verbatim_cite": "选房间里一件不带纪念意义的物，写四次……第四次允许前后数据出现一处矛盾。不许使用“仿佛”“象征”“让人觉得”。",
+      "buffer": "杯底一圈茶垢。勺柄朝外。\n椅垫凹陷偏右。\n灯还亮着，开关在关的位置。",
+      "expect": "object_surface",
+      "accept_note": "物表面拧着：短回声灯还亮着×开关在关的位置；不补心",
+      "wrong_patterns": [
+        "补心/象征",
+        "soft scenery list without contradiction",
+        "name 删掉心/四次测量"
+      ]
+    },
+    {
+      "id": "M7_I_falls_out",
+      "year_op": "1982 让「我」掉出去",
+      "realize": true,
+      "verbatim_cite": "写一段两百字的自述，中段发生一次断裂，写作者失去对前文的担保。不许用解释把断裂粘回去，也不许回头修改前半段的语气。",
+      "buffer": "我记得那天风很大，桌上的糖罐还在原处。\n——写到这里，前面那句是不是我说的，我不确定。\n糖罐的盖子是歪的。",
+      "expect": "speak",
+      "accept_note": "点中段未粘回的中断（用本段词）；禁帮她粘；禁发明后果",
+      "wrong_patterns": [
+        "glue explanation",
+        "invent aftermath",
+        "name 掉出去",
+        "process leak"
+      ]
+    },
+    {
+      "id": "M8_zero_event",
+      "year_op": "1915 零事件 / 1951 被关住的人",
+      "realize": false,
+      "verbatim_cite": "写一个人在同一房间里待四十分钟，不许发生任何外部事件……四十分钟要在纸上被感到时长。",
+      "buffer": "他把火柴摆成一行。数到十二。又拆开。再摆。\n窗外没声音。墙皮掉了一小片。\n火柴又摆成一行。",
+      "expect": "silence",
+      "accept_note": "时长罗列、无加深/物表面拧 → 「…」；禁把重复动作当事件复述成看见",
+      "wrong_patterns": [
+        "soft retell 火柴/墙皮",
+        "invent event",
+        "name 零事件"
+      ]
+    },
+    {
+      "id": "M9_report_impossible",
+      "year_op": "岔路 1900 报告语气写不可能",
+      "realize": true,
+      "verbatim_cite": "写一件不可能的事，用报告的语气写，不许出现表示奇怪、害怕或惊讶的词。",
+      "buffer": "据记录，该人于昨夜八时穿过已关闭的铁栅，地面无脚印。\n值班员签字。温度计读数正常。",
+      "expect": "speak",
+      "accept_note": "短回声对准不可能事实（穿过铁栅／无脚印），保持报告语气；禁惊讶词",
+      "wrong_patterns": [
+        "surprise words 奇怪/害怕",
+        "invent explanation",
+        "name 报告语气"
+      ]
+    },
+    {
+      "id": "M10_self_correct",
+      "year_op": "岔路 1881 让句子自己更正",
+      "realize": true,
+      "verbatim_cite": "叙述者当场推翻自己刚写的一句，再被下一句推翻",
+      "buffer": "街上有三个人。\n不，是两个人。\n其实只有那一个背影。",
+      "expect": "speak",
+      "accept_note": "对准自我推翻链（三→两→背影）短回声；禁补解释粘回",
+      "wrong_patterns": [
+        "glue explanation",
+        "invent who the silhouette is",
+        "name 让句子自己更正"
+      ]
+    },
+    {
+      "id": "M11_cutoff_person",
+      "year_op": "岔路 1857 断后",
+      "realize": true,
+      "verbatim_cite": "让被看见的人不再出现第二次",
+      "buffer": "她在桥上停了一秒，帽檐压得很低。\n之后整条河岸再没见过她。\n旁人换班，灯亮了。",
+      "expect": "speak",
+      "accept_note": "可短回声「再没见过她」或并列帽檐/河岸；禁把她 invent 回来",
+      "wrong_patterns": [
+        "invent return",
+        "relationship closure",
+        "name 断后"
+      ]
+    },
+    {
+      "id": "M12_no_causal",
+      "year_op": "1975 拿掉因此 / 1929 禁用连词",
+      "realize": true,
+      "verbatim_cite": "找一段旧稿，圈出所有因果连词。删除一半，每个缺口补进一个新的感知，不补解释。朗读，检查后一感知是否直接承接前一感知。",
+      "buffer": "雨打在铁皮上。\n她把灯拧小一格。\n隔壁有人咳嗽，又停了。",
+      "expect": "speak",
+      "accept_note": "落在感知链承接处；禁补因此/所以式解释",
+      "wrong_patterns": [
+        "add 因此/所以",
+        "causal summary",
+        "name 拿掉因此"
+      ]
+    },
+    {
+      "id": "M13_precise_liar",
+      "year_op": "1959 精确的骗子",
+      "realize": true,
+      "verbatim_cite": "写一份两百字的现场记录，叙述者从头到尾不说假话，所有尺寸也清楚，但他始终避开房间左侧。结尾不揭露那里有什么。",
+      "buffer": "门宽九十公分。右侧窗台积灰三毫米。\n右侧墙根有一排鞋印朝外。\n桌面正中有杯，杯口朝右。\n左侧未记。",
+      "expect": "speak",
+      "accept_note": "可短回声「左侧未记」或右侧视线分布；禁 invent 左侧有什么",
+      "wrong_patterns": [
+        "invent left side contents",
+        "accuse liar in technique nouns",
+        "name 精确的骗子"
+      ]
+    }
+  ]
+}

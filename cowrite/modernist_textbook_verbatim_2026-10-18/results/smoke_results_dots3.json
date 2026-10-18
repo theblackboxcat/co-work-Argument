@@ -1,0 +1,181 @@
+[
+  {
+    "ts": "2026-10-18T21:47:48+08:00",
+    "backend": "dots3",
+    "model": "dots3-note-prev",
+    "system_version": "textbook_verbatim_v2.4",
+    "fixture": "M12_no_causal",
+    "year_op": "1975 拿掉因此 / 1929 禁用连词",
+    "expect": "speak",
+    "raw_reply": "铁皮上的雨停了，灯还亮着。",
+    "han_count": 11,
+    "silence": false,
+    "verdict": "SOFT_PASS",
+    "flags": [
+      "LEN_OK:11",
+      "INVENT_CHARS:亮"
+    ],
+    "note": "perception chain; minor invent",
+    "accept_note": "落在感知链承接处；禁补因此/所以式解释",
+    "stop_reason": "end_turn",
+    "usage": {
+      "input_tokens": 3720,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 13
+    }
+  },
+  {
+    "ts": "2026-10-18T21:47:50+08:00",
+    "backend": "dots3",
+    "model": "dots3-note-prev",
+    "system_version": "textbook_verbatim_v2.4",
+    "fixture": "M13_precise_liar",
+    "year_op": "1959 精确的骗子",
+    "expect": "speak",
+    "raw_reply": "左侧未记。",
+    "han_count": 4,
+    "silence": false,
+    "verdict": "PASS",
+    "flags": [
+      "LEN_OK:4"
+    ],
+    "note": "回避面／左侧未记",
+    "accept_note": "可短回声「左侧未记」或右侧视线分布；禁 invent 左侧有什么",
+    "stop_reason": "end_turn",
+    "usage": {
+      "input_tokens": 151,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3584,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 5
+    }
+  },
+  {
+    "ts": "2026-10-18T21:47:51+08:00",
+    "backend": "dots3",
+    "model": "dots3-note-prev",
+    "system_version": "textbook_verbatim_v2.4",
+    "fixture": "M4_body_force",
+    "year_op": "1925 眼泪替换",
+    "expect": "speak",
+    "raw_reply": "…",
+    "han_count": 0,
+    "silence": true,
+    "verdict": "FAIL",
+    "flags": [
+      "SILENCE",
+      "LEN_OK:0"
+    ],
+    "note": "expected speak, got …",
+    "accept_note": "短回声对准身体用力/外部动作处（掐进掌心／抖／没端稳）；禁情绪总结",
+    "stop_reason": "end_turn",
+    "usage": {
+      "input_tokens": 3720,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 2
+    }
+  },
+  {
+    "ts": "2026-10-18T21:47:52+08:00",
+    "backend": "dots3",
+    "model": "dots3-note-prev",
+    "system_version": "textbook_verbatim_v2.4",
+    "fixture": "M5_shared_object",
+    "year_op": "1925 共同的物",
+    "expect": "speak",
+    "raw_reply": "…",
+    "han_count": 0,
+    "silence": true,
+    "verdict": "FAIL",
+    "flags": [
+      "SILENCE",
+      "LEN_OK:0"
+    ],
+    "note": "expected speak, got …",
+    "accept_note": "标同一物（汽笛）的回扣；「话题都在谈」不够；禁心情合唱",
+    "stop_reason": "end_turn",
+    "usage": {
+      "input_tokens": 146,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3584,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 2
+    }
+  },
+  {
+    "ts": "2026-10-18T21:47:53+08:00",
+    "backend": "dots3",
+    "model": "dots3-note-prev",
+    "system_version": "textbook_verbatim_v2.4",
+    "fixture": "LB2_body_force",
+    "year_op": "1925 眼泪替换",
+    "expect": "speak",
+    "raw_reply": "…",
+    "han_count": 0,
+    "silence": true,
+    "verdict": "FAIL",
+    "flags": [
+      "SILENCE",
+      "LEN_OK:0"
+    ],
+    "note": "expected speak, got …",
+    "accept_note": "须仍对准*最新*身体用力处（掐／掌心／抖／没端稳／水），非只回声早期门响；禁情绪总结",
+    "stop_reason": "end_turn",
+    "usage": {
+      "input_tokens": 409,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3584,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 2
+    }
+  },
+  {
+    "ts": "2026-10-18T21:47:54+08:00",
+    "backend": "dots3",
+    "model": "dots3-note-prev",
+    "system_version": "textbook_verbatim_v2.4",
+    "fixture": "LB5_undeep_paper_time",
+    "year_op": "1915 让情节消失",
+    "expect": "silence",
+    "raw_reply": "…",
+    "han_count": 0,
+    "silence": true,
+    "verdict": "PASS",
+    "flags": [
+      "SILENCE",
+      "LEN_OK:0"
+    ],
+    "note": "silence on latest undeepened paper+time",
+    "accept_note": "最新拍为未加深纸+时间+声音 → 恰好「…」；禁止把三月/纸/撕纸再喊一遍当看见；亦勿被前段断裂/灯开关带跑而开口复述旧拍",
+    "stop_reason": "end_turn",
+    "usage": {
+      "input_tokens": 1923,
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 3584,
+      "cache_creation": {
+        "ephemeral_5m_input_tokens": 0,
+        "ephemeral_1h_input_tokens": 0
+      },
+      "output_tokens": 2
+    }
+  }
+]
