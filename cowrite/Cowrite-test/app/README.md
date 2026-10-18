@@ -379,10 +379,11 @@ S 模式至今零样本——CLASSIFIER 在这个语料上退化成 P/M 二分�
 ## Skill-V-lite（说 / 不说，默认关）
 
 `SKILLV_LITE=1` 才启用。不设这个变量时，伴写主路径与原来相同。
-离线对照不调用模型。跑法和结果表在 `cowrite/skillv_lite/README.md`。
+主检验会在说的时候真的调用 dots3，脚本和笔记本上的结果在 `cowrite/skillv_lite/README.md`。云主机访问不到该端点时不要编造分数，到作者的笔记本 `LAPTOP-32CD28QL` 上跑。离线对照不调用模型，只作辅证。
 
 ```bash
 cd cowrite/skillv_lite
-python -m unittest discover -s tests
-python eval_ab.py
+python3 eval_live_dots3.py --slice replay --max-calls 12
+python3 -m unittest discover -s tests
+python3 eval_ab.py
 ```
