@@ -9,10 +9,10 @@ path	bytes	sha256
 ./cowrite/Cowrite-test/app/config.example.json	1306	e940ccc0e447ad197d4ebbc768516586833214799aef0bbaa951b385c6950947
 ./cowrite/Cowrite-test/app/lit_tools.py	41245	f6bfc9f33ed48fe07e3801ccb88ecbf595acba8b8357f84e4a1a716e487b52dc
 ./cowrite/Cowrite-test/app/ov_memory.py	21144	5f6a585b45f9a5240495451c2477e728bb99ef2b0df6ecf3fccd571654a77aa0
-./cowrite/Cowrite-test/app/providers.py	21480	ab5476518ae409f586f252b578e1f1fd195a27bfbd90105a23039ff2db4f4d33
-./cowrite/Cowrite-test/app/server.py	219971	128b1b41aa6159e9c9740205eca42bc4cc0b10de7d6b8b6b20e7a3ea2bd3a631
+./cowrite/Cowrite-test/app/providers.py	21743	1b7d388cb78d7ec5362105dc2e6dee249f7eaa59f7d6456bdd67feb3f8439d60
+./cowrite/Cowrite-test/app/server.py	221396	64a7c6641e9baffdb7435c66ba592cd44fa7bf465dfc7abf94af0ec91c52e1f3
 ./cowrite/Cowrite-test/app/tts_read.py	13338	2b8cf681e5d55cda13346d21bc34abfde202d67cd60f9406c9ddc9e72780fdd8
-./cowrite/Cowrite-test/app/v3/SKILL_v3.md	12203	5a6caa6711a1269d6492ed4bd528a374f6657eeadebc6f5ddb79234aab9db59c
+./cowrite/Cowrite-test/app/v3/SKILL_v3.md	18872	64a8d296051ffbeb66fb57eee97dc8b422daa0bf08966ac08820031ad11dc5bd
 ./cowrite/Cowrite-test/app/v3/SKILL_v3_delegate.md	2376	0a8579e4a56b94f9e5dbf70d64da31076199b208eb1f4941d42f20ee12861acd
 ./cowrite/Cowrite-test/app/v3/analyze_feedback.py	20129	ed51b23c79079c3966789b13aeb9dff0b0c2075b341d0c98789bdd03ace11fa2
 ./cowrite/Cowrite-test/app/v3/attention.py	25826	2aa1d765b492b0e8481c89d1618abcbc54f06126fc4d1c1b3ecc90623bf50b05
@@ -1336,6 +1336,7 @@ path	bytes	sha256
 ./cowrite/modernist_textbook_verbatim_2026-10-18/fixtures/long_buffer_fixtures.json	17724	434e50a013e2311587e9cd58ccf0a48b7775d363988cc08f1fb706983fbbfe80
 ./cowrite/modernist_textbook_verbatim_2026-10-18/fixtures/multi_aspect_fixtures.json	9349	4a38e28e17613f3488e3a0c7e3812821ba92d28c2d1951e887249d18763ed901
 ./cowrite/modernist_textbook_verbatim_2026-10-18/notes/chalu_reverse_audit.md	8152	a83d5858903a008e8955a4c76a2fc6da11a719bf1fff0f4e07815f244d1a7b95
+./cowrite/modernist_textbook_verbatim_2026-10-18/notes/cowrite_live_patches_2026-10-18.md	929	3da7b076961f839133dbaf180561264c41276ab4b9ca88a1c56f62e1aa032bce
 ./cowrite/modernist_textbook_verbatim_2026-10-18/notes/textbook_verbatim_README_local.md	1479	b5d144c17a304f1ff39fd9b10f09aea28f02b1d0ebab9666ab7b081081deb316
 ./cowrite/modernist_textbook_verbatim_2026-10-18/results/report.md	2113	109c06e02de2258118b76e3c843770a722f879abaeddf36818ddda1ee81ab43b
 ./cowrite/modernist_textbook_verbatim_2026-10-18/results/report_longcat_official.md	2198	4914c51fc7b71fa2babca8eb9201648668df72ae279ba72639e6d0ad6a28696c
