@@ -1,0 +1,11 @@
+{
+  "round": 1,
+  "experiment": "E2",
+  "source": "Round-1 verdict. Laptop bundle path was not readable on this VM.",
+  "verdict": "unstable",
+  "hold_out_2026_10_09": "fail",
+  "detail_disc_from_laptop_paste": null,
+  "not_zhiyin": true,
+  "not_content_quality_proof": true,
+  "round2": "freeze LOSO; still running on the laptop; not invented here"
+}

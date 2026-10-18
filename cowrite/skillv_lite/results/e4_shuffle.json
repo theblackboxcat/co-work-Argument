@@ -1,0 +1,15 @@
+{
+  "round": 1,
+  "experiment": "E4",
+  "source": "Round-1 verdict. Laptop bundle path was not readable on this VM.",
+  "shuffle_null_p": 0.38,
+  "p_approximate": true,
+  "statistical_crown": false,
+  "not_zhiyin": true,
+  "not_content_quality_proof": true,
+  "round2": {
+    "status": "running_on_laptop",
+    "plan": "200 shuffles",
+    "numbers_included": false
+  }
+}

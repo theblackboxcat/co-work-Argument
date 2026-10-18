@@ -758,16 +758,14 @@ def run_suite(path, n_score, n_refit, out_dir, live_run=False, caller=None, pref
     }
     if live_run:
         report['e1'] = _run_live_expand(e1, episodes, caller, preflight_fn, out_dir)
-    failed = [item for item in (e2, e3, e4, e5) if item['verdict'] == 'system_fail']
-    proposal_path = os.path.join(out_dir, 'principle_revision_proposal.md')
-    if failed:
+    # Stop rule: a principle proposal is written only when the iteration
+    # verdict is stop. Round-1 is a conditional keep, which is not a stop.
+    # A cloud-harness system_fail does not by itself create that file.
+    if offline == 'stop':
+        failed = [item for item in (e2, e3, e4, e5) if item['verdict'] == 'system_fail']
+        proposal_path = os.path.join(out_dir, 'principle_revision_proposal.md')
         write_proposal(proposal_path, failed, report)
         report['principle_proposal'] = 'principle_revision_proposal.md'
-    elif os.path.exists(proposal_path) and out_dir == os.path.join(HERE, 'results'):
-        # A previous failure proposal should not linger after a pass.
-        # Only the official results dir is cleaned, and only when this run
-        # itself finds no system failure. Tests use a temp dir.
-        pass
     manifest_path = os.path.join(out_dir, 'e1_live_expand_manifest.json')
     with open(manifest_path, 'w', encoding='utf-8') as handle:
         json.dump(e1, handle, ensure_ascii=False, indent=2)

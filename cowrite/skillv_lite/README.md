@@ -36,9 +36,9 @@ python3 eval_exp_suite.py
 python3 eval_live_dots3.py --slice replay --max-calls 12
 ```
 
-The preregistered bar and the latest offline run are in `results/exp_matrix.md`. That run's offline verdict is `system_fail`: leave-one-session-out regresses on the 2026-10-09 session when the gate never sees it, and the evidence gate accepts as many coordinate steps on shuffled labels as on the real ones (median 2). Ablation of the two shipped edits does not regress on the held replay (`require_not_mid` is the load-bearing one; `planning_ms` is not). The withhold autopsy is enriched for turns the author wanted silent (11/13). phi was not edited. The principle change is proposed only in `results/principle_revision_proposal.md`, pending an executor verdict.
+Round-1 verdict is a **conditional keep**. `stuck_speak.require_not_mid` carries the held-replay gain. `planning_ms=1250` is weak on that held set. Live deduped E1 (n=32) has revised label agreement 22/32 against seed 19/32, with `dots3_fail=0`. Leave-one-session-out re-fit is unstable (holding out 2026-10-09 fails). The shuffle null is p≈0.38, which is not a statistical crown. This is not a 知音 result and not content-quality proof. The stop rule was not met, so there is no principle-revision proposal. Round-2 (frozen LOSO, 200 shuffles) is still running on the laptop and may land in a later commit. Files: `results/iteration_verdict.md` and `results/exp_suite_index.json`.
 
-E1, the live expansion, is a hook until the laptop writes `results/e1_live_expand_report.json`. It calls dots3 only where the four arms disagree, cap 16 unique prompts.
+If this VM cannot reach `http://note3-prev-api.askdiandian.com`, do not invent scores. Run the live commands on `LAPTOP-32CD28QL`, where `server.py` already loads the key.
 
 ```bash
 python3 eval_exp_suite.py --live --only e1
@@ -121,8 +121,7 @@ From `cowrite/Cowrite-test/app` or `cowrite/transplant_src/app`:
 # seed contracts, withhold only, no prompt changes
 SKILLV_LITE=1 COWRITE_V3=1 python server.py
 
-# exploratory bounds. The experiment suite does not treat this file as the
-# skill to ship until results/principle_revision_proposal.md is accepted.
+# exploratory bounds. Round-1 keeps require_not_mid; planning_ms=1250 is weak on held.
 SKILLV_LITE=1 SKILLV_LIBRARY=revised COWRITE_V3=1 python server.py
 
 # replace the speak bit instead of only withholding
@@ -143,7 +142,7 @@ python3 eval_exp_suite.py
 python3 eval_exp_suite.py --live --only e1
 ```
 
-离线实验组的预注册标准和这一次的结论在 `results/exp_matrix.md`。这次离线结论是系统未过线（E2、E4）。契约没有改。原则层的修改只写在 `results/principle_revision_proposal.md`，等执行者点头再动。
+Round-1 是有条件保留：`require_not_mid` 承担留出集上的收益，`planning_ms=1250` 在留出集上弱。直播去重 n=32 时，修订门 label 一致 22/32，高于种子门 19/32，`dots3_fail=0`。留一会话重拟合不稳（拿掉 2026-10-09 就失败）。打乱标签的零分布 p≈0.38，没有统计上的桂冠。这不是知音，也不是内容质量证明。停机规则没触发，所以没有原则修订提案。Round-2（冻住 LOSO、200 次打乱）还在笔记本上跑，可能另一次提交再落地。云主机够不到 `note3-prev-api.askdiandian.com` 时不要编造分数，回到 `LAPTOP-32CD28QL`。
 
 ```bash
 cd cowrite/skillv_lite
