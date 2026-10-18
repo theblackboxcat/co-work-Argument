@@ -7,8 +7,8 @@ E2–E5 run offline on the same probe log as eval_ab.py.
 The success bar is the string PREREG below. It is written into
 results/exp_matrix.md before the measured table. Do not edit it to fit a run.
 
-phi is locked. A failed bar writes results/principle_revision_proposal.md
-and does not change a contract.
+phi is locked. A principle proposal is written only when the iteration
+verdict is stop. Round-1 is a conditional keep, which does not meet that rule.
 
     python3 eval_exp_suite.py
     python3 eval_exp_suite.py --live --only e1
