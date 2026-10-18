@@ -445,12 +445,16 @@ def _chat_anthropic(c, messages, system, temperature, max_tokens, timeout, think
 def _chat_openai(c, messages, system, temperature, max_tokens, timeout):
     payload = {
         'model': c.get('model'),
-        # system 在这里是 messages 的第一条，不是顶层字段
+        # system goes into first message, not a separate field
         'messages': ([{'role': 'system', 'content': system}] if system else []) + messages,
         'temperature': temperature,
     }
     if max_tokens:
         payload['max_tokens'] = int(max_tokens)
+    # LongCat official API: default thinking fills reasoning_content and leaves
+    # content empty. Companion feel needs content, so disable thinking.
+    if 'longcat.chat' in (c.get('base_url') or ''):
+        payload['thinking'] = {'type': 'disabled'}
     data = _post(c['base_url'].rstrip('/') + '/chat/completions', payload, {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + c.get('api_key', ''),
@@ -460,12 +464,15 @@ def _chat_openai(c, messages, system, temperature, max_tokens, timeout):
     except Exception:
         raise ProviderError('返回里没有 choices[0].message.content：%s'
                             % json.dumps(data, ensure_ascii=False)[:200])
-    # OpenAI 系的停因是 `length`（不是 anthropic 的 `max_tokens`）——
-    # 两边叫法不同，在各自的分支里归一成同一个词，调用方只看这一个。
+    # OpenAI stop reason length maps to anthropic max_tokens.
     _LAST_STOP['reason'] = ('max_tokens' if ch.get('finish_reason') == 'length'
                             else (ch.get('finish_reason') or ''))
     try:
-        return ch['message']['content'] or ''
+        msg = ch.get('message') or {}
+        content = msg.get('content') or ''
+        if not content:
+            content = msg.get('reasoning_content') or ''
+        return content
     except Exception:
         raise ProviderError('返回里没有 choices[0].message.content：%s'
                             % json.dumps(data, ensure_ascii=False)[:200])
