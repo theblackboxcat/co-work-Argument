@@ -26,7 +26,25 @@ Before a contract is allowed to decide, the applicability filter drops it only w
 
 `SKILLV_MODE` defaults to `gate`: if the selected contract says silence, the turn is withheld; a contract that says speak does not force speech. `SKILLV_MODE=cascade` replaces the speak bit. Neither mode injects prompt text.
 
-## Live dots3 eval (primary)
+## Validation (primary)
+
+The primary path is the live dots3 harness plus `eval_exp_suite.py`. `eval_ab.py` stays as the offline disagreement table and does not replace this path.
+
+```bash
+cd cowrite/skillv_lite
+python3 eval_exp_suite.py
+python3 eval_live_dots3.py --slice replay --max-calls 12
+```
+
+The preregistered bar and the latest offline run are in `results/exp_matrix.md`. That run's offline verdict is `system_fail`: leave-one-session-out regresses on the 2026-10-09 session when the gate never sees it, and the evidence gate accepts as many coordinate steps on shuffled labels as on the real ones (median 2). Ablation of the two shipped edits does not regress on the held replay (`require_not_mid` is the load-bearing one; `planning_ms` is not). The withhold autopsy is enriched for turns the author wanted silent (11/13). phi was not edited. The principle change is proposed only in `results/principle_revision_proposal.md`, pending an executor verdict.
+
+E1, the live expansion, is a hook until the laptop writes `results/e1_live_expand_report.json`. It calls dots3 only where the four arms disagree, cap 16 unique prompts.
+
+```bash
+python3 eval_exp_suite.py --live --only e1
+```
+
+## Live dots3 eval
 
 This is the check that actually calls dots3. For each arm the harness decides speak or silence, then calls the model only when the arm says speak. Silence does not open a socket. Arms share one cache, so the same prompt is sent once. The call is Anthropic `/v1/messages` with thinking disabled, through `providers.chat`, the same path `server.py` uses.
 
@@ -103,7 +121,8 @@ From `cowrite/Cowrite-test/app` or `cowrite/transplant_src/app`:
 # seed contracts, withhold only, no prompt changes
 SKILLV_LITE=1 COWRITE_V3=1 python server.py
 
-# boundaries accepted by the last offline run
+# exploratory bounds. The experiment suite does not treat this file as the
+# skill to ship until results/principle_revision_proposal.md is accepted.
 SKILLV_LITE=1 SKILLV_LIBRARY=revised COWRITE_V3=1 python server.py
 
 # replace the speak bit instead of only withholding
@@ -116,7 +135,15 @@ SKILLV_LITE=1 SKILLV_MODE=cascade COWRITE_V3=1 python server.py
 
 ## 跑法
 
-主检验是真的去调 dots3。在作者的笔记本 `LAPTOP-32CD28QL` 上跑。这台云主机没有密钥，预检打到同一 URL 得到 HTTP 401（Missing API key），不是一次计分。超时同样不能编造分数。密钥用 `server.py` 已经在读的 `config.json`，或 `COWRITE_CONFIG` / `DOTS3_API_KEY`。不要把密钥写进仓库。
+主检验是真的去调 dots3，再加上实验组。在作者的笔记本 `LAPTOP-32CD28QL` 上跑直播扩展。这台云主机没有密钥，预检打到同一 URL 得到 HTTP 401（Missing API key），不是一次计分。超时同样不能编造分数。密钥用 `server.py` 已经在读的 `config.json`，或 `COWRITE_CONFIG` / `DOTS3_API_KEY`。不要把密钥写进仓库。
+
+```bash
+cd cowrite/skillv_lite
+python3 eval_exp_suite.py
+python3 eval_exp_suite.py --live --only e1
+```
+
+离线实验组的预注册标准和这一次的结论在 `results/exp_matrix.md`。这次离线结论是系统未过线（E2、E4）。契约没有改。原则层的修改只写在 `results/principle_revision_proposal.md`，等执行者点头再动。
 
 ```bash
 cd cowrite/skillv_lite
