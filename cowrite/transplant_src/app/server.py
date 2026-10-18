@@ -137,6 +137,26 @@ def load_skill():
         return ''
 
 
+def _maybe_skillv(info, signals, mode=None, text_len=None):
+    """Skill-V-lite 旁路。SKILLV_LITE 不是 1 时原样返回，主路径不变。
+
+    失败也原样返回：这一层是试点，不许把注意力推断拖垮。
+    不往系统提示词加条款。默认 gate 只拦住契约判为沉默的回合。
+    """
+    if os.environ.get('SKILLV_LITE', '') != '1' or not isinstance(info, dict):
+        return info
+    try:
+        import sys as _sv_sys
+        root = os.path.abspath(os.path.join(BASE, '..', '..', 'skillv_lite'))
+        if root not in _sv_sys.path:
+            _sv_sys.path.insert(0, root)
+        from skillv.runtime import maybe_apply
+        return maybe_apply(info, signals, mode=mode, text_len=text_len)
+    except Exception as _sv_e:
+        print('[skillv] 未介入（主路径保持原样）：%s' % _sv_e)
+        return info
+
+
 def initiative_mode():
     """主导权档位：jia（甲·规则）/ yi（乙·半放权）/ bing（丙·放权）。
 
@@ -3245,6 +3265,10 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                                       delegate=bool(req.get('delegate')))
             except Exception as _pe:
                 print('[probe] 探针埋点失败（不影响推断）：%s' % _pe)
+        # 探针先记下规则版 speak。Skill-V 只改返回给前端的那一位，且默认关。
+        info = _maybe_skillv(
+            info, req.get('signals') or req, mode=req.get('mode'),
+            text_len=req.get('text_len'))
         return self._json(info)
 
     # ---------------------------------------------------------------- 文学模式
@@ -3982,6 +4006,9 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                 # 甲乙丙的差别在**上下文形态**（连续窗口 / 整篇）和
                 # **说话权**（规则 / 模型），不在给不给事实。
                 attn_desc = _v3[2].describe(_sig, attn)
+                # 事实句已经写完。Skill-V 只许改 speak 位，不许改这段事实。
+                attn = _maybe_skillv(
+                    attn, _sig, mode=req.get('mode'), text_len=len(text or ''))
             except Exception as e:
                 print('[attention] 推断失败，按常规处理：%s' % e)
                 attn = None

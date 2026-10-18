@@ -375,3 +375,14 @@ S 模式至今零样本——CLASSIFIER 在这个语料上退化成 P/M 二分�
 
 因此“界面按章显示”和“模型读过全文”是两件事：编辑区只装当前章，但全文
 阅读记忆覆盖全文。全文翻译仍按语义片执行，避免单次上下文被挤爆。
+
+## Skill-V-lite（说 / 不说，默认关）
+
+`SKILLV_LITE=1` 才启用。不设这个变量时，伴写主路径与原来相同。
+离线对照不调用模型。跑法和结果表在 `cowrite/skillv_lite/README.md`。
+
+```bash
+cd cowrite/skillv_lite
+python -m unittest discover -s tests
+python eval_ab.py
+```

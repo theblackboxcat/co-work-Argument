@@ -1,0 +1,502 @@
+{
+  "schema": "skillv-lite/1",
+  "library_version": 1,
+  "source": "Frozen from cowrite attention.STATES and _infer_rules. phi is protected; only bounds may be revised.",
+  "probe_note": "The 8s probe is a timing fact (probe_ms), not an extra prompt clause.",
+  "shared_bounds": {
+    "doc_chars_lt": 40,
+    "cursor_lt": 40,
+    "review_hold_ms": 8000,
+    "revision_dense": 3,
+    "jump_dense": 2,
+    "edits_with_jump": 1,
+    "stuck_ms": 15000,
+    "planning_ms": 2000,
+    "probe_ms": 8000
+  },
+  "phi_lock": {
+    "not_started_silence": "0ac3d490795f61f655bbb5f43f4ac90a814cb7efbe913d491de4d51338f4b054",
+    "reviewing_silence": "5e1d1d9208dbb68ba4bbc0a17cdbfc318760c6881fc9e2ef09b2582c9842ac53",
+    "polishing_speak": "a9959b7a6eac077548aca3295ed63a40ed406894525b1a95f95aacfbaa98bd2b",
+    "stuck_speak": "a808b838a1f26f50956334c2f6f4fd83d25b660db3df951d72366f3e89d5d3d6",
+    "coding_silence": "a0eb415bdce3b1cf0164891ca6f7bcd6e4604bfc4b8c8f60befdaaaac59a7127",
+    "reprobe_mid_silence": "9f51ac35b45afc7512ef20eb9769024b4e78a209f13023635807191871f43374",
+    "planning_speak": "f539915428557c848aebd33169e2c5e37a382e7baeb92c4c751793e458d716e2",
+    "recontext_speak": "841a00dab4b5488762db120884193c5776c377f3dbbe14e172e5a0f5a2897af4",
+    "residual_silence": "249baa093947220970d5bb2f28cb2893336004f03222ce2725cd2e48bfc2283c"
+  },
+  "contracts": [
+    {
+      "id": "not_started_silence",
+      "version": 1,
+      "priority": 10,
+      "decision": "silence",
+      "phi": "文档开头、几乎没有内容时不说话。这时候说什么都是凭空。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "op": "not_started"
+      },
+      "rubric": {
+        "expect": "silence",
+        "criteria": [
+          {
+            "id": "C_not_started",
+            "op": "not_started"
+          }
+        ]
+      },
+      "bounds": {}
+    },
+    {
+      "id": "reviewing_silence",
+      "version": 1,
+      "priority": 20,
+      "decision": "silence",
+      "phi": "光标往上走、没有新输入时不说话。她在读，不打断阅读。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "field": "moved_up",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "chars_recent",
+            "op": "le",
+            "value": 0
+          },
+          {
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "review_hold_ms"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "silence",
+        "criteria": [
+          {
+            "id": "C_moved_up",
+            "field": "moved_up",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "id": "C_no_new_chars",
+            "field": "chars_recent",
+            "op": "le",
+            "value": 0
+          },
+          {
+            "id": "C_hold",
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "review_hold_ms"
+          }
+        ]
+      },
+      "bounds": {}
+    },
+    {
+      "id": "polishing_speak",
+      "version": 1,
+      "priority": 30,
+      "decision": "speak",
+      "phi": "最近有密集删改，或光标回跳并且伴随删改时，她在做自己的评价。可以出声，但不把她的判断换成我们的。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "any": [
+              {
+                "field": "edits_recent",
+                "op": "ge_bound",
+                "bound": "revision_dense"
+              },
+              {
+                "all": [
+                  {
+                    "field": "jumps_recent",
+                    "op": "ge_bound",
+                    "bound": "jump_dense"
+                  },
+                  {
+                    "field": "edits_recent",
+                    "op": "ge_bound",
+                    "bound": "edits_with_jump"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "field": "text_len",
+            "op": "ge_bound_or_vacuous_zero",
+            "bound": "content_min"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "speak",
+        "criteria": [
+          {
+            "id": "C_revision",
+            "any": [
+              {
+                "field": "edits_recent",
+                "op": "ge_bound",
+                "bound": "revision_dense"
+              },
+              {
+                "all": [
+                  {
+                    "field": "jumps_recent",
+                    "op": "ge_bound",
+                    "bound": "jump_dense"
+                  },
+                  {
+                    "field": "edits_recent",
+                    "op": "ge_bound",
+                    "bound": "edits_with_jump"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "bounds": {
+        "content_min": 0
+      }
+    },
+    {
+      "id": "stuck_speak",
+      "version": 1,
+      "priority": 40,
+      "decision": "speak",
+      "phi": "停得很久且没有新字时，她是卡住。可以出声去接住，不给方案。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "stuck_ms"
+          },
+          {
+            "field": "chars_recent",
+            "op": "le",
+            "value": 0
+          },
+          {
+            "op": "blocked_when",
+            "bound": "require_not_mid",
+            "field": "mid_only",
+            "equals": true
+          },
+          {
+            "field": "text_len",
+            "op": "ge_bound_or_vacuous_zero",
+            "bound": "content_min"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "speak",
+        "criteria": [
+          {
+            "id": "C_long_pause",
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "stuck_ms"
+          },
+          {
+            "id": "C_no_new_chars",
+            "field": "chars_recent",
+            "op": "le",
+            "value": 0
+          },
+          {
+            "id": "C_mid_guard",
+            "op": "blocked_when",
+            "bound": "require_not_mid",
+            "field": "mid_only",
+            "equals": true
+          }
+        ]
+      },
+      "bounds": {
+        "require_not_mid": false,
+        "content_min": 0
+      }
+    },
+    {
+      "id": "coding_silence",
+      "version": 1,
+      "priority": 50,
+      "decision": "silence",
+      "phi": "光标停在句子中间时不说话。这是低层语言编码，探针到点也不打断。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "field": "mid_only",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "op": "lt_bound_or_skip",
+            "bound": "release_after_ms",
+            "field": "pause_ms"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "silence",
+        "criteria": [
+          {
+            "id": "C_mid_only",
+            "field": "mid_only",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "id": "C_within_cap",
+            "op": "lt_bound_or_skip",
+            "bound": "release_after_ms",
+            "field": "pause_ms"
+          }
+        ]
+      },
+      "bounds": {
+        "release_after_ms": null
+      }
+    },
+    {
+      "id": "reprobe_mid_silence",
+      "version": 1,
+      "priority": 55,
+      "decision": "silence",
+      "phi": "句中停顿已经超过探针间隔时仍然不说话，除非边界修订把这段超长停顿移出本契约。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "field": "mid_only",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "probe_ms"
+          },
+          {
+            "op": "lt_bound_or_skip",
+            "bound": "release_after_ms",
+            "field": "pause_ms"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "silence",
+        "criteria": [
+          {
+            "id": "C_mid_only",
+            "field": "mid_only",
+            "op": "eq",
+            "value": true
+          },
+          {
+            "id": "C_probe_elapsed",
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "probe_ms"
+          }
+        ]
+      },
+      "bounds": {
+        "release_after_ms": null
+      }
+    },
+    {
+      "id": "planning_speak",
+      "version": 1,
+      "priority": 60,
+      "decision": "speak",
+      "phi": "停在句末或段末、停顿已经够长、而且光标在文末时，可以出声。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "planning_ms"
+          },
+          {
+            "any": [
+              {
+                "field": "at_boundary",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "mid_sentence",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          {
+            "field": "position",
+            "op": "eq",
+            "value": "append"
+          },
+          {
+            "field": "text_len",
+            "op": "ge_bound_or_vacuous_zero",
+            "bound": "content_min"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "speak",
+        "criteria": [
+          {
+            "id": "C_pause",
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "planning_ms"
+          },
+          {
+            "id": "C_boundary_or_not_mid",
+            "any": [
+              {
+                "field": "at_boundary",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "mid_sentence",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          {
+            "id": "C_append",
+            "field": "position",
+            "op": "eq",
+            "value": "append"
+          }
+        ]
+      },
+      "bounds": {
+        "content_min": 0
+      }
+    },
+    {
+      "id": "recontext_speak",
+      "version": 1,
+      "priority": 70,
+      "decision": "speak",
+      "phi": "停在单位边界、但光标后面已经有正文时，可以出声，而且只谈这一处。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": [
+          {
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "planning_ms"
+          },
+          {
+            "any": [
+              {
+                "field": "at_boundary",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "mid_sentence",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          {
+            "field": "position",
+            "op": "ne",
+            "value": "append"
+          },
+          {
+            "field": "text_len",
+            "op": "ge_bound_or_vacuous_zero",
+            "bound": "content_min"
+          }
+        ]
+      },
+      "rubric": {
+        "expect": "speak",
+        "criteria": [
+          {
+            "id": "C_pause",
+            "field": "pause_ms",
+            "op": "ge_bound",
+            "bound": "planning_ms"
+          },
+          {
+            "id": "C_boundary_or_not_mid",
+            "any": [
+              {
+                "field": "at_boundary",
+                "op": "eq",
+                "value": true
+              },
+              {
+                "field": "mid_sentence",
+                "op": "eq",
+                "value": false
+              }
+            ]
+          },
+          {
+            "id": "C_not_append",
+            "field": "position",
+            "op": "ne",
+            "value": "append"
+          }
+        ]
+      },
+      "bounds": {
+        "content_min": 0
+      }
+    },
+    {
+      "id": "residual_silence",
+      "version": 1,
+      "priority": 90,
+      "decision": "silence",
+      "phi": "其余停顿还不够构成高层规划时不说话。",
+      "procedure": "若本契约适用，只决定这一次说还是不说。不往系统提示词追加条款。",
+      "protected_phi": true,
+      "applicability": {
+        "all": []
+      },
+      "rubric": {
+        "expect": "silence",
+        "criteria": []
+      },
+      "bounds": {}
+    }
+  ],
+  "history": []
+}
