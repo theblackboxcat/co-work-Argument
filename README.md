@@ -73,3 +73,9 @@ Public increment under the existing `知音坐标系_2026-10-16/` tree. `csh/`, 
 - Paper: `paper/李逾凡_从词表不可分到门控结构中的目标维持_学术重写版v4_2026-10-17.docx` (v4; the 懂人／知音共址 question is now the starting proposition, with a new Study 4 on behavioral-layer co-addressing) and deck `paper/答辩_2026-10-17_v2.pptx`. All earlier docx/pptx under `paper/` were removed so the paper lives as one copy; `paper/主要结果表.csv` and `paper/研究二数据对齐说明_2026-10-14.md` stay.
 - Runners: `02_脚本/e05b_*/` and `02_脚本/stance_coldread/`. The key comes only from `DOTS3_API_KEY`.
 - Not shipped: the author's private group-chat corpus (transcripts, rendered prompts, raw readings, quoted screens), the E05b/E05a/X01 anchor JSON (placeholder `*.不入库.txt` only), and raw `*.jsonl` for today's E05b runs and Arm-C. Stance-layer results ship only as a quote-free count summary.
+
+## Added 2026-10-18 (Cowrite modernist content-stance)
+
+Pointer only. `csh/`, `sdia/`, and the preregistered SDIA/CSH numbers above are unchanged. This pack is content-stance smoke, not speak-gate, and not a 知音 claim.
+
+- `cowrite/modernist_textbook_verbatim_2026-10-18/` — 2026-10-18 modernist companion repro. SYSTEM frozen at `textbook_verbatim_v2.5b`. Shipped smoke: LongCat official PASS+ 5/6, dots3 PASS+ 3/6, LB5 residual FAIL. Textbook EPUB chapter dumps and the full 【读法】 library are omitted.

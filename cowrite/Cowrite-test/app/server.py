@@ -2627,6 +2627,38 @@ def _lit_has_url(*chunks):
 TOOL_FENCE = r'```[ \t]*(?:tool|json)?[ \t]*\r?\n'
 
 
+def _loads_tool_json(raw):
+    """解析工具围栏里的 JSON。
+
+    LongCat（及其他 openai-compat 模型）有时会把花括号写成
+    {{"call": ...}} 或整段每个 {{ / }} 都翻倍——那不是合法 JSON，
+    json.loads 直接失败。旧实现失败后 strip_tool_blocks 仍把围栏剥掉，
+    文学栏就交一张白卷（tools_used 空、text 空）。这里多试几次把成对的
+    双花括号收成单层再解析；解不开就返回 None，交给上层当"没用工具"。
+    """
+    raw = (raw or '').strip()
+    if not raw:
+        return None
+    candidates = [raw]
+    fixed = raw
+    for _ in range(3):
+        if '{{' not in fixed and '}}' not in fixed:
+            break
+        nxt = fixed.replace('{{', '{').replace('}}', '}')
+        if nxt == fixed:
+            break
+        fixed = nxt
+        candidates.append(fixed)
+    for cand in candidates:
+        try:
+            obj = json.loads(cand)
+        except Exception:
+            continue
+        if isinstance(obj, dict):
+            return obj
+    return None
+
+
 def parse_tool_call(text):
     """从一段模型输出里认出一次工具调用。认不出来就返回 None——
     那不是错误，是"它这次没打算用工具"。
@@ -2642,10 +2674,7 @@ def parse_tool_call(text):
         raw = (m.group(1) or '').strip()
         if not raw.startswith('{'):
             continue
-        try:
-            obj = json.loads(raw)
-        except Exception:
-            continue
+        obj = _loads_tool_json(raw)
         if not isinstance(obj, dict):
             continue
         name = (obj.get('call') or obj.get('tool') or obj.get('name') or '').strip()
@@ -3592,6 +3621,11 @@ class Handler(http.server.SimpleHTTPRequestHandler):
                       + '\n\n'.join('【%s】\n%s' % (n, (r or '')[:1200])
                                     for n, r in tool_results))
             print('[lit] 正文为空，已用工具结果兜底', flush=True)
+        elif not answer.strip() and (out or '').strip() and not tools_used:
+            # 另一类白卷：模型写了疑似工具围栏，但 JSON 解不开，
+            # strip 把围栏剥光后正文也空了。把原文交回去，别吞成空白页。
+            answer = out
+            print('[lit] 正文为空且未识别工具调用，已回退原文', flush=True)
 
         # 记一条进**本区**的日文件：append-only，同内容不重复写。
         saved = False

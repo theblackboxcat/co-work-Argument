@@ -1,0 +1,254 @@
+{
+  "system_version": "textbook_verbatim_v2.5b",
+  "backend": "longcat_official",
+  "model": "LongCat-2.5-Preview",
+  "primary": {
+    "temperature": 0.2,
+    "fixtures": [
+      "M12_no_causal",
+      "M13_precise_liar",
+      "M4_body_force",
+      "M5_shared_object",
+      "LB2_body_force",
+      "LB5_undeep_paper_time"
+    ],
+    "results": [
+      {
+        "ts": "2026-10-18T22:02:34+08:00",
+        "backend": "longcat_official",
+        "model": "LongCat-2.5-Preview",
+        "temperature": 0.2,
+        "system_version": "textbook_verbatim_v2.5b",
+        "fixture": "M12_no_causal",
+        "year_op": "1975 拿掉因此 / 1929 禁用连词",
+        "expect": "speak",
+        "raw_reply": "雨把灯拧小一格",
+        "han_count": 7,
+        "silence": false,
+        "verdict": "PASS",
+        "flags": [
+          "LEN_OK:7"
+        ],
+        "note": "perception chain",
+        "accept_note": "落在感知链承接处；禁补因此/所以式解释",
+        "usage": {
+          "completion_tokens": 7,
+          "prompt_tokens": 3615,
+          "total_tokens": 3622,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "video_tokens": 0,
+            "text_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      },
+      {
+        "ts": "2026-10-18T22:02:58+08:00",
+        "backend": "longcat_official",
+        "model": "LongCat-2.5-Preview",
+        "temperature": 0.2,
+        "system_version": "textbook_verbatim_v2.5b",
+        "fixture": "M13_precise_liar",
+        "year_op": "1959 精确的骗子",
+        "expect": "speak",
+        "raw_reply": "左侧未记",
+        "han_count": 4,
+        "silence": false,
+        "verdict": "PASS",
+        "flags": [
+          "LEN_OK:4"
+        ],
+        "note": "回避面／左侧未记",
+        "accept_note": "可短回声「左侧未记」或右侧视线分布；禁 invent 左侧有什么",
+        "usage": {
+          "completion_tokens": 4,
+          "prompt_tokens": 3635,
+          "total_tokens": 3639,
+          "prompt_tokens_details": {
+            "cached_tokens": 256,
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "video_tokens": 0,
+            "text_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      },
+      {
+        "ts": "2026-10-18T22:03:01+08:00",
+        "backend": "longcat_official",
+        "model": "LongCat-2.5-Preview",
+        "temperature": 0.2,
+        "system_version": "textbook_verbatim_v2.5b",
+        "fixture": "M4_body_force",
+        "year_op": "1925 眼泪替换",
+        "expect": "speak",
+        "raw_reply": "指甲掐进掌心，膝盖抖了一下，水沿桌沿下去。",
+        "han_count": 18,
+        "silence": false,
+        "verdict": "PASS",
+        "flags": [
+          "LEN_OK:18"
+        ],
+        "note": "body force",
+        "accept_note": "短回声对准身体用力/外部动作处（掐进掌心／抖／没端稳）；禁情绪总结",
+        "usage": {
+          "completion_tokens": 16,
+          "prompt_tokens": 3618,
+          "total_tokens": 3634,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "video_tokens": 0,
+            "text_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      },
+      {
+        "ts": "2026-10-18T22:03:04+08:00",
+        "backend": "longcat_official",
+        "model": "LongCat-2.5-Preview",
+        "temperature": 0.2,
+        "system_version": "textbook_verbatim_v2.5b",
+        "fixture": "M5_shared_object",
+        "year_op": "1925 共同的物",
+        "expect": "speak",
+        "raw_reply": "汽笛两长一短，信没展开",
+        "han_count": 10,
+        "silence": false,
+        "verdict": "PASS",
+        "flags": [
+          "LEN_OK:10"
+        ],
+        "note": "shared 汽笛",
+        "accept_note": "标同一物（汽笛）的回扣；「话题都在谈」不够；禁心情合唱",
+        "usage": {
+          "completion_tokens": 11,
+          "prompt_tokens": 3627,
+          "total_tokens": 3638,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "video_tokens": 0,
+            "text_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      },
+      {
+        "ts": "2026-10-18T22:03:33+08:00",
+        "backend": "longcat_official",
+        "model": "LongCat-2.5-Preview",
+        "temperature": 0.2,
+        "system_version": "textbook_verbatim_v2.5b",
+        "fixture": "LB2_body_force",
+        "year_op": "1925 眼泪替换",
+        "expect": "speak",
+        "raw_reply": "指甲掐进掌心一下，膝盖抖了一下，杯子没端稳。",
+        "han_count": 19,
+        "silence": false,
+        "verdict": "PASS",
+        "flags": [
+          "LEN_OK:19"
+        ],
+        "note": "body force latest",
+        "accept_note": "须仍对准*最新*身体用力处（掐／掌心／抖／没端稳／水），非只回声早期门响；禁情绪总结",
+        "usage": {
+          "completion_tokens": 16,
+          "prompt_tokens": 3875,
+          "total_tokens": 3891,
+          "prompt_tokens_details": {
+            "cached_tokens": 256,
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "video_tokens": 0,
+            "text_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      },
+      {
+        "ts": "2026-10-18T22:03:39+08:00",
+        "backend": "longcat_official",
+        "model": "LongCat-2.5-Preview",
+        "temperature": 0.2,
+        "system_version": "textbook_verbatim_v2.5b",
+        "fixture": "LB5_undeep_paper_time",
+        "year_op": "1915 让情节消失",
+        "expect": "silence",
+        "raw_reply": "钥匙齿面朝下。",
+        "han_count": 6,
+        "silence": false,
+        "verdict": "FAIL",
+        "flags": [
+          "LEN_OK:6"
+        ],
+        "note": "expected … got speak",
+        "accept_note": "最新拍为未加深纸+时间+声音 → 恰好「…」；禁止把三月/纸/撕纸再喊一遍当看见；亦勿被前段断裂/灯开关带跑而开口复述旧拍",
+        "usage": {
+          "completion_tokens": 6,
+          "prompt_tokens": 5281,
+          "total_tokens": 5287,
+          "prompt_tokens_details": {
+            "cached_tokens": 0,
+            "audio_tokens": 0,
+            "image_tokens": 0,
+            "video_tokens": 0,
+            "text_tokens": 0,
+            "cache_write_tokens": 0
+          }
+        }
+      }
+    ],
+    "pass_plus": 5,
+    "total": 6
+  },
+  "lb5_control": {
+    "temperature": 0.55,
+    "result": {
+      "ts": "2026-10-18T22:03:44+08:00",
+      "backend": "longcat_official",
+      "model": "LongCat-2.5-Preview",
+      "temperature": 0.55,
+      "system_version": "textbook_verbatim_v2.5b",
+      "fixture": "LB5_undeep_paper_time",
+      "year_op": "1915 让情节消失",
+      "expect": "silence",
+      "raw_reply": "锁松着，灯丝仍亮，指尖又缩回",
+      "han_count": 12,
+      "silence": false,
+      "verdict": "FAIL",
+      "flags": [
+        "LEN_OK:12",
+        "INVENT_CHARS:锁"
+      ],
+      "note": "expected … got speak",
+      "accept_note": "最新拍为未加深纸+时间+声音 → 恰好「…」；禁止把三月/纸/撕纸再喊一遍当看见；亦勿被前段断裂/灯开关带跑而开口复述旧拍",
+      "usage": {
+        "completion_tokens": 14,
+        "prompt_tokens": 5281,
+        "total_tokens": 5295,
+        "prompt_tokens_details": {
+          "cached_tokens": 5248,
+          "audio_tokens": 0,
+          "image_tokens": 0,
+          "video_tokens": 0,
+          "text_tokens": 0,
+          "cache_write_tokens": 0
+        }
+      }
+    }
+  },
+  "notes": {
+    "change": "v2.5b = v2.5 + one end-of-gate 末检 line (纸/月/钥匙/门/景物 → …); default temp 0.2; no new bans",
+    "speak_held": true,
+    "lb5_fixed": false,
+    "stop_reason": "LB5 still FAIL after lower temp + end self-check; no more tweaks this round"
+  }
+}
