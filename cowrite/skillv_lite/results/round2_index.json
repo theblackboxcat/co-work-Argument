@@ -1,0 +1,97 @@
+{
+  "round": 2,
+  "e2b": {
+    "n_pass": 2,
+    "n_sessions": 2,
+    "all_pass": true,
+    "per_session": [
+      {
+        "held": "S-20261006-234611",
+        "pass": true,
+        "seed_disc": 0.4211,
+        "rev_disc": 0.3158,
+        "seed_agree": [
+          11,
+          19
+        ],
+        "rev_agree": [
+          13,
+          19
+        ]
+      },
+      {
+        "held": "S-20261009-103650",
+        "pass": true,
+        "seed_disc": 0.3846,
+        "rev_disc": 0.3077,
+        "seed_agree": [
+          8,
+          13
+        ],
+        "rev_agree": [
+          9,
+          13
+        ]
+      }
+    ]
+  },
+  "e4b": {
+    "observed_delta": -0.09375,
+    "p_two": 0.39303482587064675,
+    "p_one": 0.31840796019900497,
+    "percentile": 5.0,
+    "null_pass_p05": false,
+    "n_shuffle": 200
+  },
+  "chrono": [
+    {
+      "cut": "protocol_replay_2026-10-09",
+      "pass": true,
+      "disc_lower": true,
+      "agree_higher": true,
+      "seed_disc": 0.3846,
+      "rev_disc": 0.3077,
+      "seed_agree": [
+        8,
+        13
+      ],
+      "rev_agree": [
+        9,
+        13
+      ]
+    },
+    {
+      "cut": "chrono_70_30",
+      "pass": false,
+      "disc_lower": false,
+      "agree_higher": false,
+      "seed_disc": 0.4,
+      "rev_disc": 0.4,
+      "seed_agree": [
+        6,
+        10
+      ],
+      "rev_agree": [
+        6,
+        10
+      ]
+    },
+    {
+      "cut": "all_10-06_then_10-09",
+      "pass": true,
+      "disc_lower": true,
+      "agree_higher": true,
+      "seed_disc": 0.3846,
+      "rev_disc": 0.3077,
+      "seed_agree": [
+        8,
+        13
+      ],
+      "rev_agree": [
+        9,
+        13
+      ]
+    }
+  ],
+  "e2c_third_found": false
+}

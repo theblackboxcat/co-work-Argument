@@ -15,9 +15,13 @@
     "Not a 知音 result. Not content-quality proof."
   ],
   "round2": {
-    "status": "running_on_laptop",
-    "plan": "freeze LOSO, 200 shuffles",
-    "note": "Round-2 may follow in a later commit. This index does not invent those numbers."
+    "status": "landed",
+    "e2b_freeze_loso": "2/2 PASS",
+    "e4b_shuffle200": "not extreme; no statistical crown",
+    "release_gate_session": "S-20261018-174656",
+    "release_gate_note": "not a new Skill-V measurement",
+    "index": "round2_index.json",
+    "verdict": "strengthens conditional keep; not a strong claim; not 知音"
   },
   "files": [
     "iteration_verdict.md",
@@ -32,6 +36,15 @@
     "e4_shuffle.json",
     "e5_withhold_autopsy.md",
     "e5_withhold_autopsy.json",
-    "exp_suite_index.json"
+    "exp_suite_index.json",
+    "e2b_freeze_loso.md",
+    "e2b_freeze_loso.json",
+    "e4b_shuffle200.md",
+    "e4b_shuffle200.json",
+    "e2chrono_freeze.md",
+    "e2chrono_freeze.json",
+    "e2c_need_third_session.md",
+    "e2c_need_third_session.json",
+    "round2_index.json"
   ]
 }

@@ -8,4 +8,4 @@ The check is speak/silence disagreement under shuffled author labels. It is not 
 
 ## Round-2
 
-A 200-shuffle run is still going on the laptop, together with a frozen LOSO. This commit does not invent that run.
+The 200-shuffle null is in `e4b_shuffle200.md`. Observed Δ=−0.09375, two-sided p≈0.393, not extreme, no statistical crown. This Round-1 file keeps p≈0.38.

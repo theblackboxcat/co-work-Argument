@@ -16,4 +16,4 @@ Revised label agreement is higher than the seed gate on this live set (22/32 > 1
 
 Endpoint used by the harness: `http://note3-prev-api.askdiandian.com/v1/messages`, Anthropic messages, thinking disabled. The key stays where `server.py` loads it.
 
-Round-2 is a different run and is not included here.
+Round-2 is a different run and is not included here. It has landed in `e2b_freeze_loso`, `e4b_shuffle200`, and `round2_index.json`.

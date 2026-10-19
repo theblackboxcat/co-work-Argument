@@ -19,8 +19,11 @@
     "E5": {"autopsy_rate": null, "note": "not in the Round-1 verdict paste"}
   },
   "round2": {
-    "status": "running_on_laptop",
-    "plan": "freeze LOSO, 200 shuffles",
-    "numbers_included": false
+    "status": "landed",
+    "e2b_freeze_loso": "2/2 PASS",
+    "e4b_shuffle200": "not extreme; no statistical crown",
+    "release_gate_session": "S-20261018-174656",
+    "release_gate_note": "not a new Skill-V measurement",
+    "index": "round2_index.json"
   }
 }

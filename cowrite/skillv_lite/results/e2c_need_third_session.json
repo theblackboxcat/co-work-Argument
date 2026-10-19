@@ -1,0 +1,115 @@
+{
+  "experiment": "E2c",
+  "third_session_found": false,
+  "known_real_sessions": [
+    "S-20261006-234611",
+    "S-20261009-103650"
+  ],
+  "smoke_session": "S-20261006-231325",
+  "searched": [
+    {
+      "path": "../logs/probe.jsonl",
+      "exists": true,
+      "labeled_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-234611": 23,
+        "S-20261009-103650": 17
+      },
+      "extra_labeled_beyond_two": {},
+      "unlabeled_speak_silence_sessions": {
+        "S-20261009-103650": 2,
+        "S-20261009-112609": 1
+      },
+      "all_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-231622": 8,
+        "S-20261006-234611": 33,
+        "S-20261006-235323": 8,
+        "S-20261008-162616": 2,
+        "S-20261008-163223": 1,
+        "S-20261009-103650": 21,
+        "S-20261009-112609": 1
+      }
+    },
+    {
+      "path": "/workspace/repro_repo_candidate/cowrite/Cowrite-test/app/v3/logs/probe.jsonl",
+      "exists": true,
+      "labeled_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-234611": 23,
+        "S-20261009-103650": 17
+      },
+      "extra_labeled_beyond_two": {},
+      "unlabeled_speak_silence_sessions": {
+        "S-20261009-103650": 2,
+        "S-20261009-112609": 1
+      },
+      "all_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-231622": 8,
+        "S-20261006-234611": 33,
+        "S-20261006-235323": 8,
+        "S-20261008-162616": 2,
+        "S-20261008-163223": 1,
+        "S-20261009-103650": 21,
+        "S-20261009-112609": 1
+      }
+    },
+    {
+      "path": "/workspace/uploads/pc/cowtest/app/v3/logs/probe.jsonl",
+      "exists": true,
+      "labeled_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-234611": 23,
+        "S-20261009-103650": 17
+      },
+      "extra_labeled_beyond_two": {},
+      "unlabeled_speak_silence_sessions": {
+        "S-20261009-103650": 2,
+        "S-20261009-112609": 1
+      },
+      "all_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-231622": 8,
+        "S-20261006-234611": 33,
+        "S-20261006-235323": 8,
+        "S-20261008-162616": 2,
+        "S-20261008-163223": 1,
+        "S-20261009-103650": 21,
+        "S-20261009-112609": 1
+      }
+    },
+    {
+      "path": "/workspace/uploads/cowrite_tree/app/v3/logs/probe.jsonl",
+      "exists": true,
+      "labeled_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-234611": 23,
+        "S-20261009-103650": 17
+      },
+      "extra_labeled_beyond_two": {},
+      "unlabeled_speak_silence_sessions": {
+        "S-20261009-103650": 2,
+        "S-20261009-112609": 1
+      },
+      "all_sessions": {
+        "S-20261006-231325": 10,
+        "S-20261006-231622": 8,
+        "S-20261006-234611": 33,
+        "S-20261006-235323": 8,
+        "S-20261008-162616": 2,
+        "S-20261008-163223": 1,
+        "S-20261009-103650": 21,
+        "S-20261009-112609": 1
+      }
+    },
+    {
+      "path": "/workspace/agent-tools/skillv_live_bundle/skillv_lite/../../repro_repo_candidate/cowrite/Cowrite-test/app/v3/logs/probe.jsonl",
+      "exists": false
+    },
+    {
+      "path": "C:\\Users\\lenovo\\AppData\\Local\\Temp\\skillv_live\\skillv_live_bundle\\logs\\probe.jsonl",
+      "exists": false
+    }
+  ]
+}

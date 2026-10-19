@@ -36,7 +36,9 @@ python3 eval_exp_suite.py
 python3 eval_live_dots3.py --slice replay --max-calls 12
 ```
 
-Round-1 verdict is a **conditional keep**. `stuck_speak.require_not_mid` carries the held-replay gain. `planning_ms=1250` is weak on that held set. Live deduped E1 (n=32) has revised label agreement 22/32 against seed 19/32, with `dots3_fail=0`. Leave-one-session-out re-fit is unstable (holding out 2026-10-09 fails). The shuffle null is p≈0.38, which is not a statistical crown. This is not a 知音 result and not content-quality proof. The stop rule was not met, so there is no principle-revision proposal. Round-2 (frozen LOSO, 200 shuffles) is still running on the laptop and may land in a later commit. Files: `results/iteration_verdict.md` and `results/exp_suite_index.json`.
+Round-1 verdict is a **conditional keep**. `stuck_speak.require_not_mid` carries the held-replay gain. `planning_ms=1250` is weak on that held set. Live deduped E1 (n=32) has revised label agreement 22/32 against seed 19/32, with `dots3_fail=0`. Leave-one-session-out re-fit is unstable (holding out 2026-10-09 fails). The Round-1 shuffle null is p≈0.38, which is not a statistical crown. This is not a 知音 result and not content-quality proof. The stop rule was not met, so there is no principle-revision proposal.
+
+Round-2 has landed. Freeze-bounds LOSO (E2b) is **2/2 PASS**. The 200-shuffle null (E4b) is still not extreme (two-sided p≈0.393); there is no statistical crown. Round-2 strengthens the conditional keep and does not upgrade it. `S-20261018-174656` was the release gate, not a new Skill-V measurement, so a third labeled Skill-V session is still missing. Files: `results/iteration_verdict.md`, `results/round2_index.json`, `eval_round2.py`.
 
 If this VM cannot reach `http://note3-prev-api.askdiandian.com`, do not invent scores. Run the live commands on `LAPTOP-32CD28QL`, where `server.py` already loads the key.
 
@@ -142,7 +144,7 @@ python3 eval_exp_suite.py
 python3 eval_exp_suite.py --live --only e1
 ```
 
-Round-1 是有条件保留：`require_not_mid` 承担留出集上的收益，`planning_ms=1250` 在留出集上弱。直播去重 n=32 时，修订门 label 一致 22/32，高于种子门 19/32，`dots3_fail=0`。留一会话重拟合不稳（拿掉 2026-10-09 就失败）。打乱标签的零分布 p≈0.38，没有统计上的桂冠。这不是知音，也不是内容质量证明。停机规则没触发，所以没有原则修订提案。Round-2（冻住 LOSO、200 次打乱）还在笔记本上跑，可能另一次提交再落地。云主机够不到 `note3-prev-api.askdiandian.com` 时不要编造分数，回到 `LAPTOP-32CD28QL`。
+Round-1 是有条件保留：`require_not_mid` 承担留出集上的收益，`planning_ms=1250` 在留出集上弱。直播去重 n=32 时，修订门 label 一致 22/32，高于种子门 19/32，`dots3_fail=0`。留一会话重拟合不稳（拿掉 2026-10-09 就失败）。打乱标签的零分布 p≈0.38，没有统计上的桂冠。这不是知音，也不是内容质量证明。停机规则没触发，所以没有原则修订提案。Round-2 已落地：冻住界的 LOSO（E2b）**2/2 通过**；200 次打乱（E4b）仍不极端（双侧 p≈0.393），没有统计上的桂冠。有条件保留因此更稳，但没有升级成强结论。`S-20261018-174656` 是放行关，不是新的 Skill-V 测量，所以仍缺第三个带标签的 Skill-V 会话。云主机够不到 `note3-prev-api.askdiandian.com` 时不要编造分数，回到 `LAPTOP-32CD28QL`。
 
 ```bash
 cd cowrite/skillv_lite

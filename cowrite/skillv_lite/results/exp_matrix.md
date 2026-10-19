@@ -31,6 +31,6 @@ Held session 2026-10-09, n=13, gate mode.
 
 ## Round-2
 
-Still running on `LAPTOP-32CD28QL`: freeze the LOSO fit, and 200 shuffles. A later commit may land that run. This matrix does not preview it.
+Landed. Freeze-bounds LOSO (E2b) is 2/2 PASS. The 200-shuffle null (E4b) is still not extreme (two-sided p≈0.393); no statistical crown. Round-1 stays a conditional keep. `S-20261018-174656` was the release gate, not a new Skill-V measurement. Not a 知音 result. Detail: `e2b_freeze_loso.md`, `e4b_shuffle200.md`, `e2chrono_freeze.md`, `e2c_need_third_session.md`, `round2_index.json`, `iteration_verdict.md`.
 
 Detail files: `iteration_verdict.md`, `e1_live_deduped.md`, `e2_holdout.md`, `e3_ablation.md`, `e4_shuffle.md`, `e5_withhold_autopsy.md`, `exp_suite_index.json`.

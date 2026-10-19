@@ -6,4 +6,4 @@ Reconstructed from the Round-1 verdict. No disc figures are added here as if the
 
 This is a speak/silence check on author labels already in the probe log. It is not a 知音 result and not content-quality proof.
 
-Round-2 freezes this LOSO and is still running on the laptop. Those numbers are not in this file.
+Round-2 freeze-bounds LOSO is in `e2b_freeze_loso.md` (2/2 PASS). Those numbers are not in this file. Re-fit stays the Round-1 footnote.
