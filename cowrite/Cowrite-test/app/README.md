@@ -375,3 +375,17 @@ S 模式至今零样本——CLASSIFIER 在这个语料上退化成 P/M 二分�
 
 因此“界面按章显示”和“模型读过全文”是两件事：编辑区只装当前章，但全文
 阅读记忆覆盖全文。全文翻译仍按语义片执行，避免单次上下文被挤爆。
+
+## Skill-V-lite（说 / 不说，默认关）
+
+`SKILLV_LITE=1` 才启用。不设这个变量时，伴写主路径与原来相同。
+主检验是直播 dots3 加上实验组，说明在 `cowrite/skillv_lite/README.md`。云主机没有密钥时不要编造分数，直播扩展到作者的笔记本 `LAPTOP-32CD28QL` 上跑。`eval_ab.py` 仍是离线对照，不代替实验组。
+
+```bash
+cd cowrite/skillv_lite
+python3 eval_exp_suite.py
+python3 eval_live_dots3.py --slice replay --max-calls 12
+python3 eval_exp_suite.py --live --only e1
+python3 -m unittest discover -s tests
+python3 eval_ab.py
+```

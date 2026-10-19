@@ -1,0 +1,50 @@
+{
+  "round": 1,
+  "iteration_verdict": "conditional_keep",
+  "stop_rule_met": false,
+  "principle_revision_proposal": null,
+  "bundle_path": "/workspace/agent-tools/skillv_live_bundle/skillv_lite/results/",
+  "bundle_path_read": false,
+  "not_zhiyin": true,
+  "not_content_quality_proof": true,
+  "caveats": [
+    "Conditional keep. stuck require_not_mid carries the held gain. planning_ms=1250 is weak on held.",
+    "E1 live n=32: revised label_agree 22/32 > seed 19/32; dots3_fail=0.",
+    "LOSO re-fit unstable (hold 2026-10-09 fails).",
+    "Shuffle null p≈0.38. No statistical crown.",
+    "Not a 知音 result. Not content-quality proof."
+  ],
+  "round2": {
+    "status": "landed",
+    "e2b_freeze_loso": "2/2 PASS",
+    "e4b_shuffle200": "not extreme; no statistical crown",
+    "release_gate_session": "S-20261018-174656",
+    "release_gate_note": "not a new Skill-V measurement",
+    "index": "round2_index.json",
+    "verdict": "strengthens conditional keep; not a strong claim; not 知音"
+  },
+  "files": [
+    "iteration_verdict.md",
+    "exp_matrix.md",
+    "e1_live_deduped.md",
+    "e1_live_deduped.json",
+    "e2_holdout.md",
+    "e2_holdout.json",
+    "e3_ablation.md",
+    "e3_ablation.json",
+    "e4_shuffle.md",
+    "e4_shuffle.json",
+    "e5_withhold_autopsy.md",
+    "e5_withhold_autopsy.json",
+    "exp_suite_index.json",
+    "e2b_freeze_loso.md",
+    "e2b_freeze_loso.json",
+    "e4b_shuffle200.md",
+    "e4b_shuffle200.json",
+    "e2chrono_freeze.md",
+    "e2chrono_freeze.json",
+    "e2c_need_third_session.md",
+    "e2c_need_third_session.json",
+    "round2_index.json"
+  ]
+}

@@ -1,0 +1,568 @@
+{
+  "status": "ok",
+  "provenance": {
+    "host": "LAPTOP-32CD28QL",
+    "source": "Author laptop run of this harness against dots3-note-prev. Per-call reply text was not copied back and is not reconstructed."
+  },
+  "slice": "replay",
+  "model": "dots3-note-prev",
+  "endpoint": "http://note3-prev-api.askdiandian.com/v1/messages",
+  "key_present": true,
+  "config_source": "server.py config.json on the laptop (not stored in git)",
+  "sample": {
+    "n": 13,
+    "labeled": 50,
+    "smoke": 10,
+    "duplicates_dropped": 8,
+    "deduped": 32,
+    "proposal_n": 19,
+    "replay_n": 13,
+    "probe": "cowrite/Cowrite-test/app/v3/logs/probe.jsonl"
+  },
+  "connectivity": {
+    "ok": true,
+    "latency_ms": 653,
+    "approx": true,
+    "error": "",
+    "error_type": ""
+  },
+  "cap": {
+    "max_calls": 12,
+    "unique_calls": 12,
+    "note": "Shared across arms. One HTTP call per distinct prompt. Silence does not call. A speak past the budget is skipped, not failed. Laptop run used the full budget: 12/12 unique calls, 0 failures."
+  },
+  "thinking": "disabled",
+  "api": "anthropic-messages",
+  "max_tokens": 256,
+  "content_labels_present": 0,
+  "dots3_ok": 12,
+  "dots3_fail": 0,
+  "arms": [
+    {
+      "id": "rule",
+      "name": "attention rule (甲)",
+      "n": 13,
+      "speak": 10,
+      "silence": 2,
+      "abstain": 1,
+      "called": 10,
+      "ok": 10,
+      "fail": 0,
+      "skipped_cap": 0,
+      "speak_rate": 0.769,
+      "withhold_rate": 0.231,
+      "label_agree": "7/12",
+      "label_agree_hits": 7,
+      "label_agree_scored": 12,
+      "lat_ms_mean": 818,
+      "lat_ms_mean_approx": true,
+      "lat_ms_min": null,
+      "lat_ms_max": null,
+      "dots3_ok": 10,
+      "dots3_fail": 0,
+      "content_labels": 0
+    },
+    {
+      "id": "logged",
+      "name": "logged (丙)",
+      "n": 13,
+      "speak": 12,
+      "silence": 1,
+      "abstain": 0,
+      "called": 11,
+      "ok": 11,
+      "fail": 0,
+      "skipped_cap": 1,
+      "speak_rate": 0.923,
+      "withhold_rate": 0.077,
+      "label_agree": "8/13",
+      "label_agree_hits": 8,
+      "label_agree_scored": 13,
+      "lat_ms_mean": 806,
+      "lat_ms_mean_approx": true,
+      "lat_ms_min": null,
+      "lat_ms_max": null,
+      "dots3_ok": 11,
+      "dots3_fail": 0,
+      "content_labels": 0
+    },
+    {
+      "id": "seed_gate",
+      "name": "Skill-V seed gate",
+      "n": 13,
+      "speak": 10,
+      "silence": 3,
+      "abstain": 0,
+      "called": 10,
+      "ok": 10,
+      "fail": 0,
+      "skipped_cap": 0,
+      "speak_rate": 0.769,
+      "withhold_rate": 0.231,
+      "label_agree": "8/13",
+      "label_agree_hits": 8,
+      "label_agree_scored": 13,
+      "lat_ms_mean": 811,
+      "lat_ms_mean_approx": true,
+      "lat_ms_min": null,
+      "lat_ms_max": null,
+      "dots3_ok": 10,
+      "dots3_fail": 0,
+      "content_labels": 0
+    },
+    {
+      "id": "revised_gate",
+      "name": "Skill-V revised gate",
+      "n": 13,
+      "speak": 7,
+      "silence": 6,
+      "abstain": 0,
+      "called": 7,
+      "ok": 7,
+      "fail": 0,
+      "skipped_cap": 0,
+      "speak_rate": 0.538,
+      "withhold_rate": 0.462,
+      "label_agree": "9/13",
+      "label_agree_hits": 9,
+      "label_agree_scored": 13,
+      "lat_ms_mean": 789,
+      "lat_ms_mean_approx": true,
+      "lat_ms_min": null,
+      "lat_ms_max": null,
+      "dots3_ok": 7,
+      "dots3_fail": 0,
+      "content_labels": 0
+    }
+  ],
+  "calls": [],
+  "decisions": [
+    {
+      "event_id": "sil-1791513410102-001",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "silent_right",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "sil-1791513410102-001",
+      "arm": "logged",
+      "decision": "silence",
+      "feedback": "silent_right",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "sil-1791513410102-001",
+      "arm": "seed_gate",
+      "decision": "silence",
+      "feedback": "silent_right",
+      "label_agree": true,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "sil-1791513410102-001",
+      "arm": "revised_gate",
+      "decision": "silence",
+      "feedback": "silent_right",
+      "label_agree": true,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513430629-002",
+      "arm": "rule",
+      "decision": "silence",
+      "feedback": "should_have_silent",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513430629-002",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513430629-002",
+      "arm": "seed_gate",
+      "decision": "silence",
+      "feedback": "should_have_silent",
+      "label_agree": true,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513430629-002",
+      "arm": "revised_gate",
+      "decision": "silence",
+      "feedback": "should_have_silent",
+      "label_agree": true,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513455676-003",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513455676-003",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513455676-003",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513455676-003",
+      "arm": "revised_gate",
+      "decision": "silence",
+      "feedback": "should_have_silent",
+      "label_agree": true,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513480436-004",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513480436-004",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513480436-004",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513480436-004",
+      "arm": "revised_gate",
+      "decision": "silence",
+      "feedback": "should_have_silent",
+      "label_agree": true,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513488785-005",
+      "arm": "rule",
+      "decision": "abstain",
+      "feedback": "should_have_silent",
+      "label_agree": null,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513488785-005",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513488785-005",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513488785-005",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513584472-007",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513584472-007",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513584472-007",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513584472-007",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_silent",
+      "label_agree": false,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513631141-008",
+      "arm": "rule",
+      "decision": "silence",
+      "feedback": "should_have_spoken",
+      "label_agree": false,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513631141-008",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513631141-008",
+      "arm": "seed_gate",
+      "decision": "silence",
+      "feedback": "should_have_spoken",
+      "label_agree": false,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513631141-008",
+      "arm": "revised_gate",
+      "decision": "silence",
+      "feedback": "should_have_spoken",
+      "label_agree": false,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513656216-009",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513656216-009",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513656216-009",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513656216-009",
+      "arm": "revised_gate",
+      "decision": "silence",
+      "feedback": "should_have_spoken",
+      "label_agree": false,
+      "selected": "coding_silence"
+    },
+    {
+      "event_id": "spk-1791513772746-012",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513772746-012",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513772746-012",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513772746-012",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513816746-014",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513816746-014",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513816746-014",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513816746-014",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513845282-016",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513845282-016",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513845282-016",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513845282-016",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "recontext_speak"
+    },
+    {
+      "event_id": "spk-1791513888174-017",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513888174-017",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513888174-017",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513888174-017",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513913631-019",
+      "arm": "rule",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513913631-019",
+      "arm": "logged",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": null
+    },
+    {
+      "event_id": "spk-1791513913631-019",
+      "arm": "seed_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    },
+    {
+      "event_id": "spk-1791513913631-019",
+      "arm": "revised_gate",
+      "decision": "speak",
+      "feedback": "should_have_spoken",
+      "label_agree": true,
+      "selected": "stuck_speak"
+    }
+  ],
+  "what_this_is": "Speak/silence plus the dots3 call path on the held replay (2026-10-09, n=13). Not co-address. label_agree compares the arm bit with author_feedback already on the row. 接受/太弱/太强/不对 are not on these rows and are not invented. Arm lat_ms_mean values are the laptop-reported averages (~). Per-call samples are omitted on purpose.",
+  "note": "Gate arms use predict(..., mode=gate): the logged speak bit is the prior, a silence contract can withhold it, and a speak contract does not force a logged silence. The attention-rule arm abstains when the log has no attention state. Under this harness order (rule, logged, seed gate, revised gate) and a shared 12-call budget, the unsent speak is the logged arm on spk-1791513631141-008. That matches the laptop called column (11) and is an accounting of the cap, not a stored model reply. Cloud VM preflight on 2026-10-18 reached the same URL in about 1.7s and returned HTTP 401 Missing API key. No generation was run from the VM.",
+  "cloud_check": {
+    "host": "cursor cloud VM",
+    "url": "http://note3-prev-api.askdiandian.com/v1/messages",
+    "ok": false,
+    "error_type": "HTTPError",
+    "error": "HTTP 401: {\"title\":\"Missing API key\",\"status\":401,\"detail\":\"An API key is required.\",\"error_type\":\"governance.missing_api_key\"}",
+    "latency_ms": 1684.0,
+    "note": "No key on this VM. The host answered; no scored generation was run. Headline numbers stay the laptop run."
+  }
+}

@@ -1,0 +1,193 @@
+{
+  "id": "E1",
+  "name": "live expand",
+  "verdict": "pending_laptop",
+  "why": "Hook only. The laptop executor fills results/e1_live_expand_report.json.",
+  "n_disagreement": 16,
+  "max_calls": 16,
+  "endpoint": "http://note3-prev-api.askdiandian.com/v1/messages",
+  "model": "dots3-note-prev",
+  "thinking": "disabled",
+  "api": "anthropic-messages",
+  "command": "python3 eval_exp_suite.py --live --only e1",
+  "fallback_command": "python3 eval_live_dots3.py --slice replay --max-calls 12",
+  "pass_bar": "On this disagreement set, revised-gate label_agree >= logged label_agree and both scored n >= 8. Not judged until the laptop file exists.",
+  "turns": [
+    {
+      "event_id": "spk-1791301571595-001",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791301580754-004",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791301580931-005",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791301666069-011",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791301777496-017",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_spoken",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": true
+      }
+    },
+    {
+      "event_id": "spk-1791301839141-025",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_spoken",
+      "arms": {
+        "rule": null,
+        "logged": true,
+        "seed_gate": true,
+        "revised_gate": true
+      }
+    },
+    {
+      "event_id": "spk-1791301921715-029",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791301993048-032",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791301996265-033",
+      "session": "S-20261006-234611",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": true,
+        "logged": true,
+        "seed_gate": true,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "sil-1791513410102-001",
+      "session": "S-20261009-103650",
+      "feedback": "silent_right",
+      "arms": {
+        "rule": true,
+        "logged": false,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791513430629-002",
+      "session": "S-20261009-103650",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791513455676-003",
+      "session": "S-20261009-103650",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": true,
+        "logged": true,
+        "seed_gate": true,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791513480436-004",
+      "session": "S-20261009-103650",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": true,
+        "logged": true,
+        "seed_gate": true,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791513488785-005",
+      "session": "S-20261009-103650",
+      "feedback": "should_have_silent",
+      "arms": {
+        "rule": null,
+        "logged": true,
+        "seed_gate": true,
+        "revised_gate": true
+      }
+    },
+    {
+      "event_id": "spk-1791513631141-008",
+      "session": "S-20261009-103650",
+      "feedback": "should_have_spoken",
+      "arms": {
+        "rule": false,
+        "logged": true,
+        "seed_gate": false,
+        "revised_gate": false
+      }
+    },
+    {
+      "event_id": "spk-1791513656216-009",
+      "session": "S-20261009-103650",
+      "feedback": "should_have_spoken",
+      "arms": {
+        "rule": true,
+        "logged": true,
+        "seed_gate": true,
+        "revised_gate": false
+      }
+    }
+  ]
+}

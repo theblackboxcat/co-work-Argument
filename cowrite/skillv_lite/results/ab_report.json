@@ -1,0 +1,1224 @@
+{
+  "probe": "/workspace/cowrite/Cowrite-test/app/v3/logs/probe.jsonl",
+  "dots3": "not used; replay does not call a model",
+  "smoke_session": "S-20261006-231325",
+  "library_size": 9,
+  "seed_version": 1,
+  "revised_version": 3,
+  "phi_ok": true,
+  "sample": {
+    "labeled": 50,
+    "smoke": 10,
+    "duplicates_dropped": 8,
+    "deduped": 32,
+    "evolve": 19,
+    "replay": 13,
+    "signals_missing": 2,
+    "skipped_kind": 31,
+    "skipped_unlabeled": 3
+  },
+  "seed_agreement": {
+    "compared": 30,
+    "state_and_speak_matched": 29,
+    "speak_bit_matched": 30,
+    "mismatches": [
+      {
+        "event_id": "spk-1791301921715-029",
+        "attn_state": "CODING",
+        "skillv_state": "NOT_STARTED",
+        "speak_match": true
+      }
+    ]
+  },
+  "arms_all": [
+    {
+      "arm": "logged (丙, as recorded)",
+      "metrics": {
+        "n": 32,
+        "tp": 2,
+        "fp": 0,
+        "fn": 18,
+        "tn": 12,
+        "precision": 1.0,
+        "recall": 0.1,
+        "fnr": 0.9,
+        "bacc": 0.55,
+        "disc": 0.5625,
+        "precision_wilson95": [
+          0.3424,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.0279,
+          0.301
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "logged"
+      }
+    },
+    {
+      "arm": "attention rule (甲 speak bit)",
+      "metrics": {
+        "n": 30,
+        "tp": 8,
+        "fp": 2,
+        "fn": 11,
+        "tn": 9,
+        "precision": 0.8,
+        "recall": 0.4211,
+        "fnr": 0.5789,
+        "bacc": 0.6196,
+        "disc": 0.4333,
+        "precision_wilson95": [
+          0.4902,
+          0.9433
+        ],
+        "recall_wilson95": [
+          0.2314,
+          0.6372
+        ],
+        "abstain": 2,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "rule"
+      }
+    },
+    {
+      "arm": "Skill-V seed cascade",
+      "metrics": {
+        "n": 30,
+        "tp": 8,
+        "fp": 2,
+        "fn": 11,
+        "tn": 9,
+        "precision": 0.8,
+        "recall": 0.4211,
+        "fnr": 0.5789,
+        "bacc": 0.6196,
+        "disc": 0.4333,
+        "precision_wilson95": [
+          0.4902,
+          0.9433
+        ],
+        "recall_wilson95": [
+          0.2314,
+          0.6372
+        ],
+        "abstain": 2,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 5,
+          "recontext_speak": 7,
+          "residual_silence": 2,
+          "stuck_speak": 10,
+          "planning_speak": 3,
+          "coding_silence": 3
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V seed gate",
+      "metrics": {
+        "n": 32,
+        "tp": 9,
+        "fp": 2,
+        "fn": 11,
+        "tn": 10,
+        "precision": 0.8182,
+        "recall": 0.45,
+        "fnr": 0.55,
+        "bacc": 0.6417,
+        "disc": 0.4062,
+        "precision_wilson95": [
+          0.523,
+          0.9486
+        ],
+        "recall_wilson95": [
+          0.2582,
+          0.6579
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 2,
+          "coding_silence": 3
+        },
+        "mode": "gate"
+      }
+    },
+    {
+      "arm": "Skill-V revised cascade",
+      "metrics": {
+        "n": 30,
+        "tp": 11,
+        "fp": 2,
+        "fn": 8,
+        "tn": 9,
+        "precision": 0.8462,
+        "recall": 0.5789,
+        "fnr": 0.4211,
+        "bacc": 0.6986,
+        "disc": 0.3333,
+        "precision_wilson95": [
+          0.5776,
+          0.9567
+        ],
+        "recall_wilson95": [
+          0.3628,
+          0.7686
+        ],
+        "abstain": 2,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 5,
+          "recontext_speak": 7,
+          "residual_silence": 1,
+          "stuck_speak": 6,
+          "planning_speak": 4,
+          "coding_silence": 7
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V revised gate",
+      "metrics": {
+        "n": 32,
+        "tp": 12,
+        "fp": 2,
+        "fn": 8,
+        "tn": 10,
+        "precision": 0.8571,
+        "recall": 0.6,
+        "fnr": 0.4,
+        "bacc": 0.7167,
+        "disc": 0.3125,
+        "precision_wilson95": [
+          0.6006,
+          0.9599
+        ],
+        "recall_wilson95": [
+          0.3866,
+          0.7812
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 1,
+          "coding_silence": 7
+        },
+        "mode": "gate"
+      }
+    }
+  ],
+  "arms_replay": [
+    {
+      "arm": "logged (丙, as recorded)",
+      "metrics": {
+        "n": 13,
+        "tp": 1,
+        "fp": 0,
+        "fn": 5,
+        "tn": 7,
+        "precision": 1.0,
+        "recall": 0.1667,
+        "fnr": 0.8333,
+        "bacc": 0.5833,
+        "disc": 0.3846,
+        "precision_wilson95": [
+          0.2065,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.0301,
+          0.5635
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "logged"
+      }
+    },
+    {
+      "arm": "attention rule (甲 speak bit)",
+      "metrics": {
+        "n": 12,
+        "tp": 1,
+        "fp": 1,
+        "fn": 4,
+        "tn": 6,
+        "precision": 0.5,
+        "recall": 0.2,
+        "fnr": 0.8,
+        "bacc": 0.5286,
+        "disc": 0.4167,
+        "precision_wilson95": [
+          0.0945,
+          0.9055
+        ],
+        "recall_wilson95": [
+          0.0362,
+          0.6245
+        ],
+        "abstain": 1,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "rule"
+      }
+    },
+    {
+      "arm": "Skill-V seed cascade",
+      "metrics": {
+        "n": 12,
+        "tp": 1,
+        "fp": 1,
+        "fn": 4,
+        "tn": 6,
+        "precision": 0.5,
+        "recall": 0.2,
+        "fnr": 0.8,
+        "bacc": 0.5286,
+        "disc": 0.4167,
+        "precision_wilson95": [
+          0.0945,
+          0.9055
+        ],
+        "recall_wilson95": [
+          0.0362,
+          0.6245
+        ],
+        "abstain": 1,
+        "missing_label": 0,
+        "selected_counts": {
+          "recontext_speak": 4,
+          "coding_silence": 2,
+          "stuck_speak": 6
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V seed gate",
+      "metrics": {
+        "n": 13,
+        "tp": 2,
+        "fp": 1,
+        "fn": 4,
+        "tn": 6,
+        "precision": 0.6667,
+        "recall": 0.3333,
+        "fnr": 0.6667,
+        "bacc": 0.5952,
+        "disc": 0.3846,
+        "precision_wilson95": [
+          0.2077,
+          0.9385
+        ],
+        "recall_wilson95": [
+          0.0968,
+          0.7
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      }
+    },
+    {
+      "arm": "Skill-V revised cascade",
+      "metrics": {
+        "n": 12,
+        "tp": 3,
+        "fp": 2,
+        "fn": 2,
+        "tn": 5,
+        "precision": 0.6,
+        "recall": 0.6,
+        "fnr": 0.4,
+        "bacc": 0.6571,
+        "disc": 0.3333,
+        "precision_wilson95": [
+          0.2307,
+          0.8824
+        ],
+        "recall_wilson95": [
+          0.2307,
+          0.8824
+        ],
+        "abstain": 1,
+        "missing_label": 0,
+        "selected_counts": {
+          "recontext_speak": 4,
+          "coding_silence": 5,
+          "stuck_speak": 3
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V revised gate",
+      "metrics": {
+        "n": 13,
+        "tp": 4,
+        "fp": 2,
+        "fn": 2,
+        "tn": 5,
+        "precision": 0.6667,
+        "recall": 0.6667,
+        "fnr": 0.3333,
+        "bacc": 0.6905,
+        "disc": 0.3077,
+        "precision_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "recall_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 5
+        },
+        "mode": "gate"
+      }
+    }
+  ],
+  "arms_evolve": [
+    {
+      "arm": "logged (丙, as recorded)",
+      "metrics": {
+        "n": 19,
+        "tp": 1,
+        "fp": 0,
+        "fn": 13,
+        "tn": 5,
+        "precision": 1.0,
+        "recall": 0.0714,
+        "fnr": 0.9286,
+        "bacc": 0.5357,
+        "disc": 0.6842,
+        "precision_wilson95": [
+          0.2065,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.0127,
+          0.3147
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "logged"
+      }
+    },
+    {
+      "arm": "attention rule (甲 speak bit)",
+      "metrics": {
+        "n": 18,
+        "tp": 7,
+        "fp": 1,
+        "fn": 7,
+        "tn": 3,
+        "precision": 0.875,
+        "recall": 0.5,
+        "fnr": 0.5,
+        "bacc": 0.625,
+        "disc": 0.4444,
+        "precision_wilson95": [
+          0.5291,
+          0.9776
+        ],
+        "recall_wilson95": [
+          0.268,
+          0.732
+        ],
+        "abstain": 1,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "rule"
+      }
+    },
+    {
+      "arm": "Skill-V seed cascade",
+      "metrics": {
+        "n": 18,
+        "tp": 7,
+        "fp": 1,
+        "fn": 7,
+        "tn": 3,
+        "precision": 0.875,
+        "recall": 0.5,
+        "fnr": 0.5,
+        "bacc": 0.625,
+        "disc": 0.4444,
+        "precision_wilson95": [
+          0.5291,
+          0.9776
+        ],
+        "recall_wilson95": [
+          0.268,
+          0.732
+        ],
+        "abstain": 1,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 5,
+          "recontext_speak": 3,
+          "residual_silence": 2,
+          "stuck_speak": 4,
+          "planning_speak": 3,
+          "coding_silence": 1
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V seed gate",
+      "metrics": {
+        "n": 19,
+        "tp": 7,
+        "fp": 1,
+        "fn": 7,
+        "tn": 4,
+        "precision": 0.875,
+        "recall": 0.5,
+        "fnr": 0.5,
+        "bacc": 0.65,
+        "disc": 0.4211,
+        "precision_wilson95": [
+          0.5291,
+          0.9776
+        ],
+        "recall_wilson95": [
+          0.268,
+          0.732
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 2,
+          "coding_silence": 1
+        },
+        "mode": "gate"
+      }
+    },
+    {
+      "arm": "Skill-V revised cascade",
+      "metrics": {
+        "n": 18,
+        "tp": 8,
+        "fp": 0,
+        "fn": 6,
+        "tn": 4,
+        "precision": 1.0,
+        "recall": 0.5714,
+        "fnr": 0.4286,
+        "bacc": 0.7857,
+        "disc": 0.3333,
+        "precision_wilson95": [
+          0.6756,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.3259,
+          0.7862
+        ],
+        "abstain": 1,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 5,
+          "recontext_speak": 3,
+          "residual_silence": 1,
+          "stuck_speak": 3,
+          "planning_speak": 4,
+          "coding_silence": 2
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V revised gate",
+      "metrics": {
+        "n": 19,
+        "tp": 8,
+        "fp": 0,
+        "fn": 6,
+        "tn": 5,
+        "precision": 1.0,
+        "recall": 0.5714,
+        "fnr": 0.4286,
+        "bacc": 0.7857,
+        "disc": 0.3158,
+        "precision_wilson95": [
+          0.6756,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.3259,
+          0.7862
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 1,
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      }
+    }
+  ],
+  "arms_raw": [
+    {
+      "arm": "logged (丙, as recorded)",
+      "metrics": {
+        "n": 40,
+        "tp": 2,
+        "fp": 0,
+        "fn": 19,
+        "tn": 19,
+        "precision": 1.0,
+        "recall": 0.0952,
+        "fnr": 0.9048,
+        "bacc": 0.5476,
+        "disc": 0.475,
+        "precision_wilson95": [
+          0.3424,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.0265,
+          0.2891
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "logged"
+      }
+    },
+    {
+      "arm": "attention rule (甲 speak bit)",
+      "metrics": {
+        "n": 37,
+        "tp": 8,
+        "fp": 2,
+        "fn": 12,
+        "tn": 15,
+        "precision": 0.8,
+        "recall": 0.4,
+        "fnr": 0.6,
+        "bacc": 0.6412,
+        "disc": 0.3784,
+        "precision_wilson95": [
+          0.4902,
+          0.9433
+        ],
+        "recall_wilson95": [
+          0.2188,
+          0.6134
+        ],
+        "abstain": 3,
+        "missing_label": 0,
+        "selected_counts": {},
+        "mode": "rule"
+      }
+    },
+    {
+      "arm": "Skill-V seed cascade",
+      "metrics": {
+        "n": 37,
+        "tp": 8,
+        "fp": 2,
+        "fn": 12,
+        "tn": 15,
+        "precision": 0.8,
+        "recall": 0.4,
+        "fnr": 0.6,
+        "bacc": 0.6412,
+        "disc": 0.3784,
+        "precision_wilson95": [
+          0.4902,
+          0.9433
+        ],
+        "recall_wilson95": [
+          0.2188,
+          0.6134
+        ],
+        "abstain": 3,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 5,
+          "recontext_speak": 8,
+          "residual_silence": 2,
+          "stuck_speak": 14,
+          "planning_speak": 5,
+          "coding_silence": 3
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V seed gate",
+      "metrics": {
+        "n": 40,
+        "tp": 9,
+        "fp": 2,
+        "fn": 12,
+        "tn": 17,
+        "precision": 0.8182,
+        "recall": 0.4286,
+        "fnr": 0.5714,
+        "bacc": 0.6617,
+        "disc": 0.35,
+        "precision_wilson95": [
+          0.523,
+          0.9486
+        ],
+        "recall_wilson95": [
+          0.2447,
+          0.6345
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 2,
+          "coding_silence": 3
+        },
+        "mode": "gate"
+      }
+    },
+    {
+      "arm": "Skill-V revised cascade",
+      "metrics": {
+        "n": 37,
+        "tp": 11,
+        "fp": 3,
+        "fn": 9,
+        "tn": 14,
+        "precision": 0.7857,
+        "recall": 0.55,
+        "fnr": 0.45,
+        "bacc": 0.6868,
+        "disc": 0.3243,
+        "precision_wilson95": [
+          0.5241,
+          0.9243
+        ],
+        "recall_wilson95": [
+          0.3421,
+          0.7418
+        ],
+        "abstain": 3,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 5,
+          "recontext_speak": 8,
+          "residual_silence": 1,
+          "stuck_speak": 9,
+          "planning_speak": 6,
+          "coding_silence": 8
+        },
+        "mode": "cascade"
+      }
+    },
+    {
+      "arm": "Skill-V revised gate",
+      "metrics": {
+        "n": 40,
+        "tp": 12,
+        "fp": 3,
+        "fn": 9,
+        "tn": 16,
+        "precision": 0.8,
+        "recall": 0.5714,
+        "fnr": 0.4286,
+        "bacc": 0.7068,
+        "disc": 0.3,
+        "precision_wilson95": [
+          0.5481,
+          0.9295
+        ],
+        "recall_wilson95": [
+          0.3655,
+          0.7553
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 1,
+          "coding_silence": 8
+        },
+        "mode": "gate"
+      }
+    }
+  ],
+  "accepted": [
+    {
+      "contract_id": "stuck_speak",
+      "bound": "require_not_mid",
+      "from": false,
+      "to": true,
+      "evolve": {
+        "n": 19,
+        "tp": 8,
+        "fp": 1,
+        "fn": 6,
+        "tn": 4,
+        "precision": 0.8889,
+        "recall": 0.5714,
+        "fnr": 0.4286,
+        "bacc": 0.6857,
+        "disc": 0.3684,
+        "precision_wilson95": [
+          0.565,
+          0.9801
+        ],
+        "recall_wilson95": [
+          0.3259,
+          0.7862
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 2,
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      },
+      "replay": {
+        "n": 13,
+        "tp": 4,
+        "fp": 2,
+        "fn": 2,
+        "tn": 5,
+        "precision": 0.6667,
+        "recall": 0.6667,
+        "fnr": 0.3333,
+        "bacc": 0.6905,
+        "disc": 0.3077,
+        "precision_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "recall_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 5
+        },
+        "mode": "gate"
+      },
+      "reason": "passes gate"
+    },
+    {
+      "contract_id": "*shared*",
+      "bound": "planning_ms",
+      "from": 2000,
+      "to": 1250,
+      "evolve": {
+        "n": 19,
+        "tp": 8,
+        "fp": 0,
+        "fn": 6,
+        "tn": 5,
+        "precision": 1.0,
+        "recall": 0.5714,
+        "fnr": 0.4286,
+        "bacc": 0.7857,
+        "disc": 0.3158,
+        "precision_wilson95": [
+          0.6756,
+          1.0
+        ],
+        "recall_wilson95": [
+          0.3259,
+          0.7862
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 1,
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      },
+      "replay": {
+        "n": 13,
+        "tp": 4,
+        "fp": 2,
+        "fn": 2,
+        "tn": 5,
+        "precision": 0.6667,
+        "recall": 0.6667,
+        "fnr": 0.3333,
+        "bacc": 0.6905,
+        "disc": 0.3077,
+        "precision_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "recall_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 5
+        },
+        "mode": "gate"
+      },
+      "reason": "passes gate"
+    }
+  ],
+  "rejected": [
+    {
+      "contract_id": "recontext_speak",
+      "bound": "content_min",
+      "from": 0,
+      "to": 40,
+      "evolve": {
+        "n": 19,
+        "tp": 10,
+        "fp": 1,
+        "fn": 4,
+        "tn": 4,
+        "precision": 0.9091,
+        "recall": 0.7143,
+        "fnr": 0.2857,
+        "bacc": 0.7571,
+        "disc": 0.2632,
+        "precision_wilson95": [
+          0.6226,
+          0.9838
+        ],
+        "recall_wilson95": [
+          0.4535,
+          0.8828
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 4,
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      },
+      "replay": {
+        "n": 13,
+        "tp": 4,
+        "fp": 3,
+        "fn": 2,
+        "tn": 4,
+        "precision": 0.5714,
+        "recall": 0.6667,
+        "fnr": 0.3333,
+        "bacc": 0.619,
+        "disc": 0.3846,
+        "precision_wilson95": [
+          0.2505,
+          0.8418
+        ],
+        "recall_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 5,
+          "residual_silence": 1
+        },
+        "mode": "gate"
+      },
+      "reason": "disc worsened (0.3077 -> 0.3846)"
+    },
+    {
+      "contract_id": "recontext_speak",
+      "bound": "content_min",
+      "from": 0,
+      "to": 60,
+      "evolve": {
+        "n": 19,
+        "tp": 11,
+        "fp": 1,
+        "fn": 3,
+        "tn": 4,
+        "precision": 0.9167,
+        "recall": 0.7857,
+        "fnr": 0.2143,
+        "bacc": 0.7929,
+        "disc": 0.2105,
+        "precision_wilson95": [
+          0.6461,
+          0.9851
+        ],
+        "recall_wilson95": [
+          0.5241,
+          0.9243
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 5,
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      },
+      "replay": {
+        "n": 13,
+        "tp": 4,
+        "fp": 3,
+        "fn": 2,
+        "tn": 4,
+        "precision": 0.5714,
+        "recall": 0.6667,
+        "fnr": 0.3333,
+        "bacc": 0.619,
+        "disc": 0.3846,
+        "precision_wilson95": [
+          0.2505,
+          0.8418
+        ],
+        "recall_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 5,
+          "residual_silence": 1
+        },
+        "mode": "gate"
+      },
+      "reason": "disc worsened (0.3077 -> 0.3846)"
+    },
+    {
+      "contract_id": "recontext_speak",
+      "bound": "content_min",
+      "from": 0,
+      "to": 80,
+      "evolve": {
+        "n": 19,
+        "tp": 11,
+        "fp": 1,
+        "fn": 3,
+        "tn": 4,
+        "precision": 0.9167,
+        "recall": 0.7857,
+        "fnr": 0.2143,
+        "bacc": 0.7929,
+        "disc": 0.2105,
+        "precision_wilson95": [
+          0.6461,
+          0.9851
+        ],
+        "recall_wilson95": [
+          0.5241,
+          0.9243
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "not_started_silence": 4,
+          "residual_silence": 5,
+          "coding_silence": 2
+        },
+        "mode": "gate"
+      },
+      "replay": {
+        "n": 13,
+        "tp": 4,
+        "fp": 4,
+        "fn": 2,
+        "tn": 3,
+        "precision": 0.5,
+        "recall": 0.6667,
+        "fnr": 0.3333,
+        "bacc": 0.5476,
+        "disc": 0.4615,
+        "precision_wilson95": [
+          0.2152,
+          0.7848
+        ],
+        "recall_wilson95": [
+          0.3,
+          0.9032
+        ],
+        "abstain": 0,
+        "missing_label": 0,
+        "selected_counts": {
+          "coding_silence": 5,
+          "residual_silence": 2
+        },
+        "mode": "gate"
+      },
+      "reason": "disc worsened (0.3077 -> 0.4615)"
+    }
+  ],
+  "considered": 36,
+  "rubric_disagreements_seed": 12,
+  "rubric_disagreements_after": 10,
+  "project_logged": {
+    "n": 32,
+    "tp": 1,
+    "fp": 1,
+    "fn": 18,
+    "tn": 12,
+    "precision": 0.5,
+    "recall": 0.0526,
+    "fnr": 0.9474,
+    "bacc": 0.4879,
+    "disc": 0.5938,
+    "precision_wilson95": [
+      0.0945,
+      0.9055
+    ],
+    "recall_wilson95": [
+      0.0094,
+      0.2464
+    ],
+    "unlabeled_or_unmapped": 0,
+    "note": "Project cells on logged actions only. silent_had_nothing is FP in this table and a desired silence in the semantic counterfactual table."
+  },
+  "failure_modes": [
+    "Labels are sparse and were produced by one author on one test build.",
+    "Several probe rows are double-fires of the same pause; the primary table de-duplicates them.",
+    "The packed signal does not store doc_chars. NOT_STARTED on those rows uses passage length and after_chars as a proxy. One 32-character mid-document passage (spk-1791301921715-029) is therefore named NOT_STARTED instead of CODING; both decisions are silence, so the speak bit still matches.",
+    "Rows with a null signal pack abstain. The gate keeps the logged action there.",
+    "silent_had_nothing is a desired silence in the counterfactual table and an FP in the project table.",
+    "Content-quality labels (接受/太弱/太强/不对) answer a different question and are not used as speak outcomes.",
+    "Gate mode cannot repair a logged silence. It only withholds logged speech.",
+    "The residual silence contract has no positive rubric, so some misses are not attributed to a named speak heuristic.",
+    "Accepted revisions are fit on the earlier session. The held session is the non-regression check, not a large confirmation sample."
+  ],
+  "reading": "Disagreement counts (FP+FN): deduped logged 18/32, seed gate 13/32, revised gate 10/32. Held 2026-10-09 buffer: logged 5/13, seed gate 5/13, revised gate 4/13. The seed gate matches the frozen 甲 speak bit on every row that has a logged state. On the held buffer the seed gate does not lower disc; it ties the logged action. The revised gate's held-set drop is a small count, and the silence-recall Wilson intervals on the pooled set overlap. No system-prompt clause was added. This is a cowrite speak/silence metric, not a co-address result.",
+  "headline": {
+    "logged": {
+      "n": 32,
+      "tp": 2,
+      "fp": 0,
+      "fn": 18,
+      "tn": 12,
+      "precision": 1.0,
+      "recall": 0.1,
+      "fnr": 0.9,
+      "bacc": 0.55,
+      "disc": 0.5625,
+      "precision_wilson95": [
+        0.3424,
+        1.0
+      ],
+      "recall_wilson95": [
+        0.0279,
+        0.301
+      ],
+      "abstain": 0,
+      "missing_label": 0,
+      "selected_counts": {},
+      "mode": "logged"
+    },
+    "rule": {
+      "n": 30,
+      "tp": 8,
+      "fp": 2,
+      "fn": 11,
+      "tn": 9,
+      "precision": 0.8,
+      "recall": 0.4211,
+      "fnr": 0.5789,
+      "bacc": 0.6196,
+      "disc": 0.4333,
+      "precision_wilson95": [
+        0.4902,
+        0.9433
+      ],
+      "recall_wilson95": [
+        0.2314,
+        0.6372
+      ],
+      "abstain": 2,
+      "missing_label": 0,
+      "selected_counts": {},
+      "mode": "rule"
+    },
+    "seed_gate": {
+      "n": 32,
+      "tp": 9,
+      "fp": 2,
+      "fn": 11,
+      "tn": 10,
+      "precision": 0.8182,
+      "recall": 0.45,
+      "fnr": 0.55,
+      "bacc": 0.6417,
+      "disc": 0.4062,
+      "precision_wilson95": [
+        0.523,
+        0.9486
+      ],
+      "recall_wilson95": [
+        0.2582,
+        0.6579
+      ],
+      "abstain": 0,
+      "missing_label": 0,
+      "selected_counts": {
+        "not_started_silence": 4,
+        "residual_silence": 2,
+        "coding_silence": 3
+      },
+      "mode": "gate"
+    },
+    "revised_gate": {
+      "n": 32,
+      "tp": 12,
+      "fp": 2,
+      "fn": 8,
+      "tn": 10,
+      "precision": 0.8571,
+      "recall": 0.6,
+      "fnr": 0.4,
+      "bacc": 0.7167,
+      "disc": 0.3125,
+      "precision_wilson95": [
+        0.6006,
+        0.9599
+      ],
+      "recall_wilson95": [
+        0.3866,
+        0.7812
+      ],
+      "abstain": 0,
+      "missing_label": 0,
+      "selected_counts": {
+        "not_started_silence": 4,
+        "residual_silence": 1,
+        "coding_silence": 7
+      },
+      "mode": "gate"
+    },
+    "accepted": 2,
+    "rejected": 3
+  }
+}
