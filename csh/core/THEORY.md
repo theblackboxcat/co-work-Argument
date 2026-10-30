@@ -1,4 +1,4 @@
-# 认知基底假说的可证伪实验
+﻿# 认知基底假说的可证伪实验
 
 ## 0. 猜想的操作化陈述
 
@@ -342,3 +342,98 @@ THEORY.md           本文档
 results/            原始数据(jsonl)
 figures/            图
 ```
+
+
+---
+
+## 10. 文献对照补记（2026-10-30）：变量绑定发育阶段与「启发式叠加而非替换」
+
+> **地位**：理论/表述对照 · **不重跑**任何 CSH 实验 · 不改 `frozen/` · 不把下列文献数字写成我们的新结果。  
+> **动机**：把 CSH 的 depth-3 关系链 / residual-as-register 直觉，与变量绑定的发育轨迹文献对齐，供论文与 THEORY 引用。
+
+### 10.1 文献
+
+Wu, Geiger & Millière (2025/2026). *How Do Transformers Learn Variable Binding in Symbolic Programs?* arXiv:[2505.20896](https://arxiv.org/abs/2505.20896)（已核验摘要页存在）。
+
+任务形态与本仓库的对照（**只谈结构相似性，不作同构声明**）：
+
+| 维度 | arXiv:2505.20896 | 本仓库 CSH（既有） |
+|------|------------------|-------------------|
+| 核心运算 | 变量解引用（assignment chain → 数值） | 关系链末端实体（depth-3 复合） |
+| 干扰 | distractor chains / 无关赋值 | 每题 5 条干扰事实（解唯一） |
+| 记忆隐喻 | residual stream 作可寻址读写记忆 | 小型 Transformer residual；SB2 测「符号↔类型转移」绑定 |
+| 发育视角 | 训练过程三相 | 本包既有结果是阈值/精度曲线，**尚未**做同构的阶段性电路追踪 |
+
+### 10.2 三相发育（文献结论摘要，非本仓库新跑）
+
+文献报告训练过程中的三相（行为 + 因果干预）：
+
+1. **Phase 1**：接近随机；学会「答案应是数值常量」而非变量名。  
+2. **Phase 2**：浅层启发式（优先早期行的常量，如 line-1 / line-2 heuristic）。  
+3. **Phase 3**：系统的链式解引用；attention 在 RHS 与 query 位点间路由绑定信息。
+
+**关键对照句（可进论文）**：最终系统解是在早期启发式之上**叠加**出来的——启发式在简单情形持续可用，系统机制只在启发式失败时覆盖；这挑战「grokking = 丢弃浅层策略、整体替换」的叙事。中文口号锁定为：
+
+> **「启发式叠加而非替换」**（heuristic superposition / augmentation, not replacement）。
+
+对本仓库的含义（表述层，非新数字）：
+
+- 讨论涌现阈值时，避免默认「过阈值后旧策略消失」；应区分 **行为过线** 与 **策略是否被替换**。  
+- 若未来做发育/电路分析（**未 prereg、未授权前不跑**），优先检验：早期表面/位置启发式是否在高 n 仍可被因果探针唤起，系统解是否仅在需要时覆盖。  
+- 与 §8「不能」条目兼容：本对照**不**外推到真实 LLM 参数规模，也**不**宣称已在 CSH 上复现三相。
+
+### 10.3 与 VSA / SB2 的交叉指针
+
+变量绑定的「role–filler」语言与 §11（VSA-likeness）及 `csh/revision` 的 SB2／collision 指标语言对齐；见同日文件：
+
+- `csh/revision/CSH_补充包/机器7/results/METRIC_VSA_likeness_prereg_2026-10-30.md`（措辞 + prereg 草案；**未跑**）
+
+*执笔：docs plan B · 2026-10-30 Asia/Shanghai · 纸面 only*
+
+
+---
+
+## 11. 指标语言草案（2026-10-30）：VSA-likeness 与 SB2／collision 对齐
+
+> **地位**：措辞 + **prereg 草案** · **声明：本轮未跑任何新数** · 不得把草案中的假想曲线写成实测。  
+> **文献**：Dhayalkar. *Attention as Binding: A Vector-Symbolic Perspective on Transformer Reasoning.* arXiv:[2512.14709](https://arxiv.org/abs/2512.14709)（已核验）。
+
+### 11.1 为什么要改指标语言
+
+既有 SB2（`symbol_binding.py` / `SB2_ANALYSIS.md`）判决的是：类型转移被置换后，熟悉 token 串上的准确率落差是否表明「符号级绑定」还是「可重对齐结构」。  
+既有 collision（`collision_geometry.py` / `COLLISION.md`）认证的是：各表面 token 碰撞图几何（度、密度、谱范数、着色）与 null 臂是否同几何，避免「语义 null」与词法池混淆。
+
+arXiv:2512.14709 把 attention / residual 读成近似 VSA：query–key ≈ role、value ≈ filler、attention ≈ soft unbinding、residual ≈ superposition。其提出的 **VSA-likeness** 议程（role–filler recoverability、superposition interference、与已知绑定算子的对齐度）可用来**改写我们如何叙述 SB2／collision**，而不必立刻新跑。
+
+### 11.2 术语对照表（表述用）
+
+| VSA-likeness 用语（文献） | 本仓库既有对象 | 对齐读法（谨慎） |
+|---------------------------|----------------|------------------|
+| role–filler recoverability | SB2：同一 token 串、置换后的类型转移 | 「role」≈ 类型槽／链上位置角色；「filler」≈ 实体／终点；recoverability ≈ remap 后仍能沿链取回正确终点 |
+| superposition interference | collision：多 token 共享位置角色 → 边；密度／谱范数 | 碰撞图越密 ≈ 角色空间干扰越大；与 VSA「叠加干扰」同族，**几何代理 ≠ 激活空间 superposition** |
+| soft unbinding | 测试时用熟悉 token 查被置换的结构 | remap 臂上的落差 ≈ unbinding 失败代价；shuffle 臂 ≈ 破坏可寻址性的上界对照 |
+| VSA-like vs non–VSA-like | SB2 判决文案 | 「可重对齐结构」≈ 更 VSA-like；「符号级死绑定」≈ role–filler 纠缠／不可解绑 |
+
+**禁止越界**：不得声称 residual 激活已通过 VSA 算子拟合；不得把 collision 的图谱范数直接叫做「VSA capacity」。
+
+### 11.3 Prereg 草案（纸面；开跑前须作者「开」+ 单独冻结）
+
+**目的**：在**不改**既有 SB2／collision 主判据的前提下，增加一层 VSA-likeness **叙述与可选辅指标**，使论文能同时对连接主义绑定文献与本仓库符号实验说话。
+
+**RQ（草稿）**
+
+1. SB2 的 remap 落差是否可改述为 role–filler recoverability 的行为代理？  
+2. collision 几何失衡／密度是否与表面间阈值差异同向（既有 `corr_with_acc` 已提示弱相关；辅指标不得推翻主判决）？  
+3. 若未来加入激活探针（**本草案不授权跑**），recoverability 是否与 remap 落差同向？
+
+**主指标（沿用，已有数）**：SB2 相对 `same` 的配对落差；collision 合法性表（null vs 真实表面几何是否全等）。  
+**辅指标（仅定义，未跑）**：
+
+- **RF-proxy**：`1 - gap_remap / gap_shuffle`（落差相对 shuffle 上界的可恢复比例；既有 `gap_vs_shuffle` 的互补叙述）。  
+- **Interference-proxy**：collision `density` 或 `spectral_norm` 的跨表面极差（只作文档内几何干扰指数，不作新因果声明）。
+
+**分析纪律**：辅指标不得单独改写 SB2 主判决；若与主判决冲突，记 INC 并回到主判决。  
+**明确非目标**：本轮不重跑 SB2／collision；不改 `frozen/`；不把 arXiv 论文中的合成程序准确率粘贴为本仓库结果。
+
+*详见完整草案文件（同日）：`METRIC_VSA_likeness_prereg_2026-10-30.md`。*
+
