@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cowrite/provenance/decision_event.schema.json",
+  "title": "AcceptRejectDecisionEvent",
+  "description": "One explicit accept/reject at the point of decision (Who Owns the Text, Pattern 5). Process evidence only: hashes and offsets, never corpus text. Not an author verdict, not a 知音 result, and not a close of E05b or E7.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "ts_iso",
+    "session_id",
+    "suggestion_id",
+    "action",
+    "source"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable id for this decision point."
+    },
+    "ts_iso": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of the explicit accept, reject, edit-then-accept, or dismiss."
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "suggestion_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Id of the suggestion being decided. Generation is not commit."
+    },
+    "action": {
+      "type": "string",
+      "enum": ["accept", "reject", "edit_then_accept", "dismiss"]
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Model or skill id that produced the suggestion. Not an author identity and not a verdict."
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional offsets plus sha256 of the before/after spans, or empty strings. Do not put raw text here. If both start and end are set, end must be >= start.",
+      "properties": {
+        "before_sha256": {
+          "type": "string",
+          "pattern": "^$|^[0-9a-fA-F]{64}$"
+        },
+        "after_sha256": {
+          "type": "string",
+          "pattern": "^$|^[0-9a-fA-F]{64}$"
+        },
+        "start": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "end": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "load_bearing_flag": {
+      "type": "boolean",
+      "description": "Optional author mark, not a model score. true: this suggestion touches a 承重句, so an accept stays auditable. false: author marked it as not load-bearing, so commodity fluency stays distinguishable at decision time. Omitted: unmarked, not a verdict."
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "Optional short note. Do not paste corpus text. A note is not an author verdict and does not close an arm."
+    }
+  }
+}
