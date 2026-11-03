@@ -1,0 +1,4 @@
+# Local decision logs. Process dumps stay off the tree.
+runs/
+__pycache__/
+*.pyc
