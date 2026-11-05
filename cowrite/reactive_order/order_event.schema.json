@@ -1,0 +1,83 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "cowrite/reactive_order/order_event.schema.json",
+  "title": "ReactiveOrderEvent",
+  "description": "One order check for Reactive Writing: a human load-bearing draft before any suggestion (先承重再建议). Process evidence only: hashes, never corpus text. Not an author verdict, not a 知音 result, and not a close of E05b or E7. gate_result is block when load_bearing_present is false and allow when it is true. phase must match that pair plus suggestion_attempted: await_load_bearing (false, false), suggest_blocked (false, true), load_bearing_ready (true, false), suggest_allowed (true, true). reason_code is missing_load_bearing on block and ok_after_human_draft on allow.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "event_id",
+    "ts_iso",
+    "session_id",
+    "phase",
+    "load_bearing_present",
+    "suggestion_attempted",
+    "gate_result",
+    "reason_code"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Stable id for this order check."
+    },
+    "ts_iso": {
+      "type": "string",
+      "minLength": 1,
+      "format": "date-time",
+      "description": "ISO-8601 timestamp of the order check."
+    },
+    "session_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "phase": {
+      "type": "string",
+      "enum": [
+        "await_load_bearing",
+        "load_bearing_ready",
+        "suggest_allowed",
+        "suggest_blocked"
+      ],
+      "description": "Where the session is in the order. Suggestions are not a phase that can precede the human draft."
+    },
+    "load_bearing_present": {
+      "type": "boolean",
+      "description": "Whether a human load-bearing draft is already present. Not a model score. false keeps the gate shut."
+    },
+    "suggestion_attempted": {
+      "type": "boolean",
+      "description": "Whether a suggestion was attempted at this check. An attempt with no load-bearing draft is recorded as blocked, not dropped."
+    },
+    "gate_result": {
+      "type": "string",
+      "enum": ["allow", "block"],
+      "description": "Must be block when load_bearing_present is false, and allow when it is true."
+    },
+    "reason_code": {
+      "type": "string",
+      "enum": ["missing_load_bearing", "ok_after_human_draft"],
+      "description": "missing_load_bearing pairs with block. ok_after_human_draft pairs with allow. A reason code is not an author verdict."
+    },
+    "span": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional sha256 of the before/after spans, or empty strings. Hashes only. Do not put raw text or offsets here.",
+      "properties": {
+        "before_sha256": {
+          "type": "string",
+          "pattern": "^$|^[0-9a-fA-F]{64}$"
+        },
+        "after_sha256": {
+          "type": "string",
+          "pattern": "^$|^[0-9a-fA-F]{64}$"
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 280,
+      "description": "Optional short note. Do not paste corpus text. A note is not an author verdict and does not close an arm."
+    }
+  }
+}
